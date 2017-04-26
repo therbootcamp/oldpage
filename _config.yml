@@ -5,9 +5,9 @@ description: A blog about lorem ipsum dolor sit amet
 # url: "localhost:3000" # the base hostname & protocol for your site e.g. http://willianjusten.com.br
 
 # User settings
-username: TheRBootCamp^
-user_description: The world famous RBootCamp
-user_title: The world famous RBootCamp
+username: TheRBootcamp
+user_description: The world famous RBootcamp
+user_title: The world famous RBootcamp
 email: therbootcamp@gmail.com
 twitter_username: therbootcamp
 github_username:  therbootcamp
