@@ -1,13 +1,13 @@
 # Site settings
-title: The motherfucking RBootcamp
-description: The motherfucking RBootcamp
+title: The motherf... RBootcamp
+description: The motherf... RBootcamp
 # baseurl: "/particle" # the subpath of your site, e.g. /blog
 # url: "localhost:3000" # the base hostname & protocol for your site e.g. http://willianjusten.com.br
 
 # User settings
 username: TheRBootcamp
-user_description: The motherfucking RBootcamp
-user_title: The motherfucking RBootcamp
+user_description: The motherf... RBootcamp
+user_title: The motherf... RBootcamp
 email: therbootcamp@gmail.com
 twitter_username: therbootcamp
 github_username:  therbootcamp
