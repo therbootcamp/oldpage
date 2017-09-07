@@ -12,10 +12,10 @@ email: therbootcamp@gmail.com
 twitter_username: therbootcamp
 github_username:  therbootcamp
 
+include: ['_slides', '_tutorials']
+
 # Google-analytics
 google-analytics:
   id: "UA-98354683-1"
 
 exclude: ['package.json', 'src' , 'node_modules']
-
-include: ['_slides']
