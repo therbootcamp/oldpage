@@ -1,0 +1,301 @@
+---
+title: "What is R?"
+subtitle: ""
+author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "September 2017"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my-theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+```
+
+# R
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Statistical_model) (emphasis added):
+
+> R is an **open source programming language** and software environment for **statistical computing and graphics** that is supported by the R Foundation for Statistical Computing. The R language is **widely used among statisticians and data miners** for developing statistical software and data analysis. Polls, surveys of data miners, and studies of scholarly literature databases show that **R's popularity has increased substantially in recent years**.
+
+> R is a GNU package. The source code for the R software environment is written primarily in **C, Fortran, and R**. R is freely available under the GNU General Public License, and pre-compiled binary versions are provided for various operating systems. While R has a command line interface, there are several **graphical front-ends available**.
+
+---
+
+# Programming language
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Statistical_model) (emphasis added):
+
+> A programming language is a **formal language** that specifies a set of instructions that can be used to produce various kinds of output. Programming languages generally consist of **instructions for a computer**. Programming languages can be used to create programs that **implement specific algorithms**.
+
+.pull-left4[
+### Algorithm
+1. Load data
+2. Extract variables
+3. Run analysis
+4. Print result
+]
+
+.pull-right4[
+### Implementation in R
+```{r, results='hide'}
+data <- read.table('my_data.txt')
+variables <- data[,c('group','variable')]
+analysis <- lm(variable ~ group, data = variables)
+summary(analysis)
+```
+]
+
+<!--  ---
+
+# A short history on R
+
+From [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language) (emphasis added):
+
+.pull-left6[
+> R is an implementation of the **S programming language** combined with **lexical scoping** semantics [environments] inspired by Scheme. [...] There are some important differences, but much of the code written for S runs unaltered.
+
+>R was created by **Ross Ihaka and Robert Gentleman** [...] and is currently developed by the **R Development Core Team** [...]. R is named partly after the first names of the first two R authors and partly as a play on the name of S. The project was conceived in 1992, with an initial version released in 1995 and a **stable beta version in 2000**.
+]
+
+.pull-right6[
+```{r, out.height = "350px", echo = F, fig.align='center'}
+knitr::include_graphics("http://www.estatisticacomr.uff.br/wp-content/uploads/2014/11/Criadores.jpg")
+```
+<p style="font-size:20px" align="center">
+Robert Gentleman and Ross Ihaka<br>
+<font size="2" color="#F52D70">source: https://i0.wp.com/r4stats.com/</font>
+</p>
+]
+-->
+---
+
+# R is purpose specific
+
+R has been build for **statistical computing and graphics** and that is basically it:
+
+.pull-left4[
+### Use R for...
+1. Loading and handling data
+2. Run statistical analyses
+3. Run analyses
+4. Prepare reproducible reports
+]
+
+.pull-right4[
+### Don't use R for...
+1. OS programs
+2. Server-side programs
+3. Database handling
+4. (Behvioral experiments)
+]
+
+---
+
+# R is widely used
+
+R steadily grows in popularity. Today, R is one of the most popular languages for data science and overall. In terms of the number of data science jobs, R beats SAS and Matlab, and is on par with Python:
+<br><br><br>
+```{r, out.height = "400px", echo = F, fig.align='center'}
+knitr::include_graphics("https://i0.wp.com/r4stats.com/wp-content/uploads/2017/02/Fig-1a-IndeedJobs-2017.png")
+```
+<p style="font-size:10px" align="center">source: https://i0.wp.com/r4stats.com/<p>
+
+---
+
+# R is so popular because
+
+R has been implemented in **C, Fortran, and R**. This means that R can be fast and efficient, however, often it is not. R's strengths lie in its flexibility, cutting-edge development, and producitivity tools. 
+
+.pull-left5[
+### Pro
+1. **It's free**
+2. Relatively easy
+3. Extensibility ([CRAN](https://cran.r-project.org/), packages)
+4. User base (e.g., [stackoverflow](https://stackoverflow.com/))
+5. [Tidyverse](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
+6. [RStudio](https://www.rstudio.com/)
+7. Producitivity options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
+]
+
+.pull-right5[
+### Con
+1. Slow and wordy
+2. Limited (no iterators, pointers, etc.)
+
+$\rightarrow$ [Rcpp](http://www.rcpp.org/), [rPython](http://rpython.r-forge.r-project.org/)
+]
+
+
+---
+
+# RStudio: R's favorite environment
+
+Next to many useful packages, R users greatly benefit from R's integrated development environment [RStudio](https://www.rstudio.com/). Rstudio is a graphical user interface that allows you to (a) edit code, (b) run code, (c) access files and progress, and (d) create plots. In addition RStudio helps you with version control via [Github](https://github.com/), to write reports using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), and with integrating C++ into R.<br><br>  
+
+
+```{r, out.width = "800px", echo = F, fig.align='center'}
+knitr::include_graphics("rstudio_plus.png")
+```
+
+---
+
+# The workflow of R
+
+```{r, out.width = "800px", echo = F, fig.align='center'}
+knitr::include_graphics("rstudio_workings.png")
+```
+
+---
+
+# Project management
+
+RStudio facilitate project management via the use of *projects*. Projects support:
+
+.pull-left5[
+1. **File management** by automatically setting the working directory (see `setwd()`)
+<br><br>
+2. **Project transitioning** by saving re-opening scripts, history, and workspace.
+<br><br>
+3. **Customization** by enabling project specific settings.
+<br><br>
+4. **Version control** by linking projects to repositories (e.g., using [GitHub](https://github.com/))
+]
+.pull-right5[
+```{r, out.width = "550px", echo = F, fig.align='center'}
+knitr::include_graphics("Projects.png")
+```
+]
+
+---
+
+# The almighty **tidyverse**
+
+Among its many packages, R contains a collection of high-performance, easy-to-use packages (libraries) designed specifically for handling data know as the [tidyverse](https://www.tidyverse.org/). The tidyverse includes:
+1. `ggplot2` -- creating graphics.
+2. `dplyr` -- data manipulation.
+3. `tidyr` -- tidying data.
+4. `readr` -- read wild data.
+5. `purrr` -- functional programming.
+6. `tibble` -- modern data frame.
+<br><br>
+
+```{r, out.height = "200px", echo = F}
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/0ab849ed51b0b866ef6895c253d3899f4926d397/dbf0f/images/hex-ggplot2.png")
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png")
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/5f8c22ec53a1ac61684f3e8d59c623d09227d6b9/b15de/images/hex-tidyr.png")
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png")
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/9221ddead578362bd17bafae5b85935334984429/37a68/images/hex-purrr.png")
+knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b985e2547fe868e5e2b3f9621/720bb/images/hex-tibble.png")
+```
+
+---
+
+# Essentials of the R language
+
+
+
+.pull-left7[
+>"To understand computations in R, two slogans are helpful:
+>###(1) Everything that exists is an object and 
+>###(2) everything that happens is a function call."
+]
+
+.pull-right7[
+<p align="center"><img src="https://statweb.stanford.edu/~jmc4/CopyPhoto.jpg" width="350" align="center"></p>
+<p align="center">John Chambers<br> <font size=2> Author of S and developer of R</font></p>
+]
+
+---
+
+# Calls and assignments
+
+In R every action is a function call. Specifically R scripts advances by **passing on data and arguments to functions**, calling the function, and receiving its output. However, functions may however not always look like functions. The output is then stored in a new object using assignment. 
+
+.pull-left5[
+#### The `mean` function
+
+# 
+my_vector <- c(1, 5, 2)
+print(class(my_vector))
+
+# testing the class (aka object type) of an object
+print(my_vector)
+
+# Sorting 
+sort(my_vector)  
+print(my_vector) # still unsorted
+
+]
+
+.pull-right5[
+```{r}
+# creating a vector and testing its class (type of object)
+my_vector <- c(1, 5, 2)
+print(class(my_vector))
+
+# testing the class (aka object type) of an object
+print(my_vector)
+
+# Sorting 
+sort(my_vector)  
+print(my_vector) # still unsorted
+```
+
+---
+
+# Object-orientation
+
+R is an object-oriented language. In the case of R this means that: 
+
+.pull-left5[
+1. Everything is an object. Objects have inherent attributes.
+<br><br>
+2. Some functions are generic (S3-methods).
+<br><br>
+3. R always copies (deep). (Almost) every code element is an assignment.
+<br><br>
+]
+
+.pull-right5[
+```{r}
+# creating a vector and testing its class (type of object)
+my_vector <- c(1, 5, 2)
+print(class(my_vector))
+
+# testing the class (aka object type) of an object
+print(my_vector)
+
+# Sorting 
+sort(my_vector)  
+print(my_vector) # still unsorted
+
+```
+]
+
+
+---
+### References Statistical Modeling:
+- John Fox and Sanford Weisberg (2011). *An R Companion to Applied Regression, Second Edition.* Thousand Oaks CA: Sage. URL: http://socserv.socsci.mcmaster.ca/jfox/Books/Companion
+- Russell V. Lenth (2016). Least-Squares Means: The R Package lsmeans. *Journal of Statistical
+  Software*, 69(1), 1-33. https://doi.org/10.18637/jss.v069.i01
+- Cohen, J., Cohen, P., West, S. G., & Aiken, L. S. (2002). *Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences.* New York: Routledge Academic.
+
+### References Example Data:
+- Revelle, William, Wilt, Joshua, and Rosenthal, Allen (2009) Personality and Cognition: The Personality-Cognition Link. In Gruszka, Alexandra and Matthews, Gerald and Szymura, Blazej (Eds.) _Handbook of Individual Differences in Cognition: Attention, Memory and Executive Control_, Springer.
+- Skovgaard-Olsen, N., Singmann, H., & Klauer, K. C. (2016). The relevance effect and conditionals. *Cognition*, 150, 26-36. https://doi.org/10.1016/j.cognition.2015.12.017
