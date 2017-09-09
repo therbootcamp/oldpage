@@ -275,12 +275,12 @@ glm(formula = y ~.,     # Formula
     family, ...)        # Optional arguments
 
 # Train glm model
-loan_glm_model &lt;- glm(formula = risk ~ ., 
-                      data = data_train)
+glm_mod &lt;- glm(formula = risk ~ ., 
+               data = data_train)
 
 # Predict new data with glm model
-loan_glm_pred &lt;- predict(loan_glm_model,
-                         newdata = data_test)
+glm_pred &lt;- predict(glm_mod,
+                    newdata = data_test)
 ```
 
 
@@ -289,7 +289,7 @@ loan_glm_pred &lt;- predict(loan_glm_model,
 
 
 ---
-# Decision Trees with `rpart::rpart()`
+# Fast-and-Frugal Trees with `FFTrees()`
 
 .pull-left3[
 
@@ -297,33 +297,35 @@ In decision trees, the criterion is modeled as a sequence of logical Yes or No q
 
 ### Example: Default on a loan
 
-&lt;img src="images/defaulttree.png" width="1064" /&gt;
+&lt;img src="images/defaultfft.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ]
 
 .pull-right3[
 
-Create decision trees using the `rpart` package
+Create decision trees using the `FFTrees` package
 
 
 ```r
-# Load the rpart package
-library(rpart)
+# Load the FFTrees package
+library(FFTrees)
 
-# Calculating a decision tree in R
-rpart(formula = y ~.,       # Formula 
-      data = data_train,    # Training data
-      method, parms, cost)  # Optional arguments
+# Main Function
+FFTrees(formula = y ~ .,
+        data, ...)
 
-# Train rpart model
-loan_rpart_model &lt;- rpart(formula = risk ~ ., 
-                          data = loan_data,
-                          method = "anova")
+# Train FFTrees model
+FFTrees_mod &lt;- FFTrees(formula = default ~ ., 
+                       data = loan_data,
+                       main = "Default Risk")
 
-# Predict new data with rpart model
-loan_rpart_pred &lt;- predict(loan_rpart_model,
-                          newdata = data_test)
+# Plot the tree
+plot(FFTrees_mod)
+
+# Predict new data with FFTrees model
+FFTrees_loan_pred &lt;- predict(FFTrees_mod,
+                        data = data_test)
 ```
 
 
@@ -344,9 +346,10 @@ loan_rpart_pred &lt;- predict(loan_rpart_model,
 # Creating support vector machine model
 library(e1071)
 
-svm_model &lt;- svm(formula = risk ~ .,
-                 data = loan_data,
-                 ...)
+svm_mod &lt;- svm(formula = risk ~ .,
+               data = loan_data,
+               kernel, degree, gamma, 
+               ...)
 ```
 
 
@@ -366,9 +369,10 @@ svm_model &lt;- svm(formula = risk ~ .,
 # Creating random forest model
 library(randomForest)
 
-rf_model &lt;- randomForest(formula = risk ~ .,
-                         data = loan_data,
-                         ...)
+rf_mod &lt;- randomForest(formula = risk ~ .,
+                       data = loan_data,
+                       mtry, cutoff, sampsize, 
+                       ...)
 ```
 
 ]
