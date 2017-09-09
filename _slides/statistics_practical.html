@@ -207,10 +207,6 @@ Source: <a href="https://www.slideshare.net/hakeemrehman/8-testing-of-hypothesis
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># Install all packages necessary for the practical
-#  Only necessary if you don't already have them
-
-install.packages(c(&quot;e1071&quot;, &quot;rpart&quot;, &quot;randomForest&quot;, &quot;tidyverse&quot;, &quot;yarrr&quot;, &quot;FFTrees&quot;))</code></pre>
 </div>
 <div id="examples" class="section level3">
 <h3>Examples</h3>
@@ -413,18 +409,21 @@ library(speff2trial)</code></pre>
 <div id="extras-and-challenges" class="section level2">
 <h2>Extras and Challenges</h2>
 <ol start="19" style="list-style-type: decimal">
-<li>Conduct a two-way ANOVA testing the effects of <em>both</em> hemophilia (<code>hemo</code>) and drug use (<code>drugs</code>) on the number of days until a major negative event.</li>
+<li><p>You can easily generate random samples from statistical distributions in R. For example, to generate samples from the well known Normal distribution, you can use <code>rnorm()</code>. Look at the help menu for <code>rnorm()</code> to see its arguments. Then, create a new object <code>samp_10</code> which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results?</p></li>
+<li><p>Evalaute your code for the previous question <em>exactly</em> as it is – that is, don’t change <em>anything</em>. What are the new values in <code>samp_10</code> and the new mean, standard deviation, and t-test result. Why are the new results different?</p></li>
+<li><p>Now, create a new object called <code>samp_1000</code> which is 1,000 samples from a Normal distribution (again with mean 12 and standard deviation 5). Print this object to see what it looks like. What should the mean and standard deviation of this sample be? Do the same hypothesis test as you did in the previous question. What is your new p-value?</p></li>
+<li><p>Conduct a two-way ANOVA testing the effects of <em>both</em> hemophilia (<code>hemo</code>) and drug use (<code>drugs</code>) on the number of days until a major negative event.</p></li>
 </ol>
 <ul>
 <li>To include multiple factors in an anova, just include both in the formula such as: <code>formula = dv ~ factor(x) + factor(y) + ...</code>. See <a href="https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova" class="uri">https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova</a> for an example</li>
 </ul>
-<ol start="20" style="list-style-type: decimal">
+<ol start="23" style="list-style-type: decimal">
 <li>Repeat the previous ANOVA, but now test if there is an <em>interaction</em> between hemophilia and drugs on the number of days until a major negative event.</li>
 </ol>
 <ul>
 <li>To include interactions in an ANOVA, just include both in the formula using the <code>*</code> operator: <code>formula = dv ~ factor(x) * factor(y)</code>. See <a href="https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova" class="uri">https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova</a> for an example</li>
 </ul>
-<ol start="21" style="list-style-type: decimal">
+<ol start="24" style="list-style-type: decimal">
 <li><p>Is there a difference in the CD4 T cell count at baseline between whites and non-whites? Answer this by conducting the appropriate hypothesis test.</p></li>
 <li><p>A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.</p></li>
 <li><p>A researcher wants to know if the relationship between CD4 T cell count at baseline and age is the same for whites and non-whites. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?</p></li>
