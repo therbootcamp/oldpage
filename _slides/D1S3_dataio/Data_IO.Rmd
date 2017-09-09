@@ -29,7 +29,7 @@ options(digits = 4)
 
 # Importing and Exporting Data
 
-In this tutorial you will learn...
+In this introduction you will learn...
 
 .pull-left9[
 1. How to import data data from **delimeter separated files** (e.g., .csv)?
@@ -57,7 +57,7 @@ In this tutorial you will learn...
 
 # readr
 
-`readr` is a `tidyverse` package that provides convenient functions to turn *flat* data files into data frames (`tibble`s to be precise):
+`readr` is a `tidyverse` package that provides convenient functions to turn *flat* (non-nested) data files into data frames (`tibble`s to be precise):
 
 
 .pull-left6[
@@ -87,7 +87,7 @@ knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b
 
 # An example
 
-Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. To read in such data use `read_csv()`, which will automatically identify (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
+Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will automatically identify (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
 
 .pull-left[
 ```{r, eval = F}
@@ -128,7 +128,7 @@ read_csv(data)
 
 # Parsing 
 
-Behind the magic of `readr` functions such as `read_csv` are a set of really flexible at parsing functions `parse_*()` that transform the input into the apprpriate format and type. 
+Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that transform the input into the apprpriate format and type. 
 
 ###Examples
 
@@ -156,7 +156,7 @@ parse_number(c("1.23","$123.209"))
 
 # Locale
 
-How the text input is parsed can usually be controlled using function arguments. If no function arguments are provided the parsing behavior is controlled by `locale()`. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
+How the text input is parsed can largely be controlled using  arguments of the respective functions. Otherwise the parsing behavior will be controlled by settings `locale()`. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
 
 .pull-left8[
 ```{r, tidy = T, tidy.opts=list(width.cutoff=60)}
@@ -168,7 +168,7 @@ str(locale())
 
 # Error handling
 
-When reading in a file using, e.g., `read_csv`, with no specific arguments provided, `readr` infers the type of each column using a heuristic process base on the first 1,000 rows (see `guess_parser`). However, that may not always work. In that case consider ...  
+When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` infers the type of each column using a heuristic process base on the first 1,000 rows (see `guess_parser`). However, that may not always work. In that case consider ...  
 
 
 ```{r, eval = F}
@@ -190,7 +190,7 @@ type_convert()
 
 # Other read in options
 
-The `tidyverse` together with other package offers a variety of build-in, automated read functions for almost any data format. For an overview see [rio](https://cran.r-project.org/web/packages/rio/vignettes/rio.html).
+The `tidyverse` together with other package offers a variety of built-in, automated read functions for almost any data format. For an overview see [rio](https://cran.r-project.org/web/packages/rio/vignettes/rio.html).
 .pull-left8[
 ### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
 ```{r, eval = F}
@@ -237,7 +237,7 @@ read_json()
 
 # Writing data
 
-Most read-in functions have complementary write functions to save the specific data format to disk. They usually require as arguments the data frame and a file path on the disk.
+Most read-in functions have **complementary write** functions to save the specific data format to disk. They usually require as arguments the data frame and a file path on the disk.
 
 .pull-left8[
 ### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
@@ -277,11 +277,11 @@ write_json()
 
 # R's data formats
 
-R also has a couple of own data files that can be used to store and retrieve data. The benefits of these data files are that you can store data as R objects, as well as substantial compression (depending on repetitions/patterns in the data up to about 1% of the original size). 
+R also has a couple of own data files that can be used to store and retrieve data. The benefits of these data files are that you can store **data as R objects**, as well as substantial **compression** (depending on repetitions/patterns in the data up to about 1% of the original size). 
 
 .pull-left8[
 ### `.RData`  
-+ Stores bundle several independent R objects.
++ Bundles several R objects.
 + Loads objects directly to workspace.
 + Relatively slow.
 ```{r, eval = F}
@@ -310,7 +310,7 @@ my_data <- readRDS("my_data.RData")
 
 # File connections
 
-Under the hood practically all reading and writing functions rely on R's file connection architecture, which is very similar to most other programming languages. To the savvy programmer represent a flexible option access and manipulate files on any accessible location (harddrive, server, www) is file connections. 
+Under the hood, practically all reading and writing functions rely on R's **file connection** architecture, which is very similar to most other programming languages. To the experienced programmer file connections represent a flexible option to access and manipulate files on any accessible location (harddrive, server, www). 
 
 
 .pull-left8[
@@ -358,7 +358,7 @@ The output from most `tidyverse` read functions such as `read_csv` and the prefe
 <br2>
 + never change column names
 <br2>
-+ have look better in `print` 
++ look better in `print` 
 <br2>
 + are accessed more consistently
 ]
@@ -391,14 +391,8 @@ read_csv(data)
 
 ---
 
-# Recommendations
-
-
----
-
 # Practical
 
----
 
 
 <!--- Tibble notes

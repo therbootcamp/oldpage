@@ -168,7 +168,7 @@ typeof(my_vec) ; is.character(my_vec)
 
 # Coercion
 
-R allows you to **flexibly change types** into another using `as.*()`, which however lead to a **loss of information**! Often **coercion occurs automatically**. Mathematical functions (+, log, abs, etc.) will coerce to a double or integer, logical operations (&amp;, |, any, etc) will coerce to a logical.  
+R allows you to **flexibly change types** into another using `as.*()`, which cam however lead to a **loss of information!** Often **coercion occurs automatically**. Mathematical functions (+, log, abs, etc.) will coerce to a double or integer, logical operations (&amp;, |, any, etc) will coerce to a logical.  
 
 .pull-left8[
 
@@ -236,7 +236,7 @@ as.character(c(TRUE, FALSE, 0))
 
 # Factors
 
-Factors are a special case of vector that can contain only predifined values defined in the attribute `levels`. Factors are rarely useful and sometimes dangerous, yet several R functions will coerce `character` vectors to `factor`.  
+Factors are a special case of vector that can contain only **predifined values** defined in the attribute `levels`. Factors are rarely useful and sometimes **dangerous**, yet several R functions will coerce `character` vectors to `factor`.  
 
 .pull-left8[
 
@@ -295,7 +295,7 @@ as.double(my_fact) # ranks
 
 # Matrices &amp; Arrays
 
-Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix) or *n* dimensions. Both are **atomic** (carry only one type), have names (col-, row-, and dimnames) and dimensions arguments. Compared to vectors, lists, and data frames, **they usually play a lesser role in most applications**.
+Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix) or *n* dimensions. Both are **atomic** (carry only one type), have names (col-, row-, and dimnames) and dimension attributes Compared to vectors, lists, and data frames, **they usually play a lesser role in most applications**.
 
 
 &lt;p align="center"&gt;&lt;br&gt;&lt;img src="matrix and array.png" width="682px" height="381px"&gt;&lt;/p&gt;
@@ -307,7 +307,7 @@ Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix
 
 .pull-left10[
 
-+ Lists are R's swiss army knife. They often are used for outputs of statistical functions e.g., `lm()`.
++ Lists are **R's swiss army knife**. They often are used for outputs of statistical functions e.g., `lm()`.
 
 + Lists have **non-flat** structures that take **any object type**, inluding lists, which renders lists **recursive**.
 
@@ -332,7 +332,7 @@ Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix
 
   + Every element must be a vector.
 
-  + The lengths of the vectors must be equal of multiples of another.  
+  + The lengths of the vectors must be equal or multiples of another.  
 
 * To create a data frame use `data.frame()` and `as.data.frame`.
 ]
@@ -412,7 +412,7 @@ my_mat[2, ] ; my_mat[2, 1]
 
 # Accessing &amp; changing **atomic** objects pt. 2 
 
-Provided the object is equipped with an name attribute, indexing can also be accomplished using the elements name. 
+Provided the object is equipped with a name attribute, indexing can also be accomplished using the element's name. 
 
 .pull-left8[
 
@@ -468,7 +468,7 @@ my_mat['c_1', ] ; my_mat['c_1', 'v_2']
 
 # Accessing &amp; changing **complex** objects pt. 1
 
-To access and change complex objects the added organizational `list` layer needs to be taken into account. This means that single brackets `[` will select an element within the list, not the object behind that element. To select the element use **double brackets** '[['. Additional, complex objects can be conveniently accessed using the dollor operator `$`. In order to further descend into the objects structur repeat the select operators, e.g., `my_list[[1]][[2]]`. 
+In accessing and changing complex objects the additional `list`-layer needs to be taken into account. Single brackets `[` will select elements within the list, not the object behind those elements. To select the object behind the element use **double brackets** '[['. Additionaly, complex objects can be conveniently accessed using the dollor operator `$`. In order to further descend into the `list`'s structur append multiple select operators, e.g., `my_list[[1]][[2]]`. 
 
 .pull-left8[
 
