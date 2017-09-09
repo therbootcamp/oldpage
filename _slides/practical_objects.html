@@ -188,7 +188,37 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p>Here are the main functions for object selection. | Function| Description| |:——|:——–| | <code>[ ]</code>| Single brackets: Select individual elements from <code>vector</code>| | <code>[,]</code>| Single brackets 2d: Select rows, columns, or elements from <code>matrix</code> or <code>data.frame</code> | | <code>[[ ]]</code>| Double brackets: Select element/variable in list or data.frame| | <code>[[$]]</code>| Dollar: Select named element/variable from list or data.frame|</p>
+<p>Here are the main functions for object selection.</p>
+<table style="width:25%;">
+<colgroup>
+<col width="11%"></col>
+<col width="13%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>[ ]</code></td>
+<td align="left">Single brackets: Select individual elements from <code>vector</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>[,]</code></td>
+<td align="left">Single brackets 2d: Select rows, columns, or elements from <code>matrix</code> or <code>data.frame</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[[ ]]</code></td>
+<td align="left">Double brackets: Select element/variable in list or data.frame</td>
+</tr>
+<tr class="even">
+<td align="left"><code>[[$]]</code></td>
+<td align="left">Dollar: Select named element/variable from list or data.frame</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
@@ -197,15 +227,15 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li><p>Create a numeric (double), a character, and a logical vector each with 10 elements using <code>c()</code> and store them as <code>dbl_vec</code>, <code>log_vec</code>, and <code>chr_vec</code> (using the assignment operator, i.e., <code>name &lt;- c())</code>.</p></li>
 <li><p>Ensure the type and length of the vectors using <code>typeof()</code> and <code>length()</code>. Simply place the name of the vectors into the parenthesis and execute.</p></li>
-<li><p>Expand each of the vectors using <code>rep()</code> to twice their length. <code>rep()</code> is a general purpose repeat function for vectors. It takes at least two arguments: <code>x</code> the vector and <code>times</code>, which can be a single integer, e.g., <code>2</code>. Two expand the vectors use the repeat function and reassign the output to the object á la <code>object &lt;- function(object, arguments)</code>.</p></li>
+<li><p>Expand each of the vectors using <code>rep()</code> to two times their length. <code>rep()</code> is a general purpose repeat function for vectors. It takes at least two arguments: <code>x</code> the vector and <code>times</code>, which can be a single integer, e.g., <code>2</code>. Two expand the vectors use the repeat function and reassign the output to the object á la <code>object &lt;- function(object, arguments)</code>.</p></li>
 </ol>
 </div>
 <div id="matrices-data-frames" class="section level3">
 <h3>Matrices &amp; Data frames</h3>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Use the 3 vectors to create a 3xN <code>matrix</code> where X is the length of the vectors. Matrices are usually created in on of two different ways. First, a matrix can be created using the <code>matrix()</code> function. The easier way, however, is, second, via the column bind function <code>cbind()</code>. <code>cbind</code> simply takes vectors (of equal length) as input and binds them together. For instance, consider <code>example &lt;- cbind(c(1,2),c(1,2))</code>. Try this using your three vectors and call the resulting matrix <code>my_mat</code>. Then look at the matrix using <code>head()</code>, and test its type (<code>typeof</code>) and dimension (<code>dim()</code>). Why is the type what it is?</p></li>
-<li><p>Use the 3 vectors to create a 3xN <code>data.frame</code>. To create a data frame use the <code>data.frame()</code> function. It works just like <code>cbind</code>. Call the data frame <code>my_df</code>. For instance, consider <code>example &lt;- cbind(c(1,2),c(1,2))</code>. Now, look at the data frame using <code>head()</code>, and test its type (<code>typeof</code>) and dimension (<code>dim()</code>). Why is the type what it is?</p></li>
-<li><p>Inspect the types of the columns of <code>my_df</code>. To do this try for each column one of the five possible ways: (1) Using double brackets and index, e.g., <code>[[index]]</code>, (2) using double brackets and name <code>[['column_name']]</code>, (3) using 2d single brackets and index, e.g., <code>[,index]</code>, (4) using using 2d single brackets and name, e.g., <code>[,'column_name']</code>, using the dollor operator <code>$</code>, e.g., <code>$column_name</code>. To see the names of the columns use <code>names()</code>. Finally, use <code>str(my_df)</code> to verify the types of the columns.</p></li>
+<li><p>Use the 3 vectors to create a 3xN <code>matrix</code> where X is the length of the vectors. Matrices are usually created in one of two ways. First, a matrix can be created using the <code>matrix()</code> function. The easier way, however, is, second, via the column bind function <code>cbind()</code>. <code>cbind</code> simply takes vectors (of equal length) as input and binds them together. For instance, consider <code>example &lt;- cbind(c(1,2),c(1,2))</code>. Try this using your three vectors and call the resulting matrix <code>my_mat</code>. Then look at the matrix using <code>head()</code>, and test its type (<code>typeof()</code>) and dimension (<code>dim()</code>). Why is the type what it is?</p></li>
+<li><p>Use the 3 vectors to create a 3xN <code>data.frame</code>. To create a data frame use the <code>data.frame()</code> function. It works just like <code>cbind</code>. Call the data frame <code>my_df</code>. Now, look at the data frame using <code>head()</code>, and test its type (<code>typeof</code>) and dimension (<code>dim()</code>). Why is the type what it is?</p></li>
+<li><p>Inspect the types of the columns of <code>my_df</code>. To do this try several of the different options to access columns: (1) Using double brackets and index, e.g., <code>[[index]]</code>, (2) using double brackets and name <code>[['column_name']]</code>, (3) using 2d single brackets and index, e.g., <code>[,index]</code>, (4) using using 2d single brackets and name, e.g., <code>[,'column_name']</code>, using the dollor operator <code>$</code>, e.g., <code>$column_name</code>. To see the names of the columns use <code>names()</code>. Finally, use <code>str(my_df)</code> to verify the types of the columns.</p></li>
 <li><p>Transform <code>my_mat</code> into a data frame using <code>as.data.frame()</code>. Call it <code>my_df_2</code> and valuate its contents using <code>str()</code>. Now change the columns to their appropriate type using <code>as.double()</code> and <code>as.logical()</code>. To do this you need to select the appropriate column on both sides of the assignment. E.g., <code>mat[,1] &lt;- as.numeric(mat[,1])</code>. Of course, you can also use the other ways of selecting a column. Afterwards reevaluate the types using <code>str()</code>.</p></li>
 </ol>
 </div>
@@ -213,15 +243,15 @@ $(document).ready(function () {
 <h3>Lists</h3>
 <ol start="8" style="list-style-type: decimal">
 <li><p>Use the 3 vectors to create a list of length 3 using <code>list()</code>. <code>list()</code> works exactly as <code>c()</code> (or <code>data.frame</code> and <code>cbind</code>). Call the object <code>my_list</code> and inspect it using <code>str()</code>. Compare the output of <code>str()</code> to the output for <code>my_df</code>. What is different, and why?</p></li>
-<li><p>Transform <code>my_list</code> into a data frame again using <code>as.data.frame()</code>. Call the object <code>my_df_3</code>. Inspect again using <code>str()</code>. Rename the columns to the original names of the vectors. To do this assign to <code>names(my_df_3)</code> a character vector of length 3 containing those names. Inspect and compare names to those of <code>my_df</code> and <code>my_df2</code></p></li>
+<li><p>Transform <code>my_list</code> into a data frame using <code>as.data.frame()</code>. Call the object <code>my_df_3</code>. Inspect again using <code>str()</code>. Rename the columns to the original names of the vectors. To do this assign to <code>names(my_df_3)</code> a character vector of length 3 containing those names. Inspect and compare names to those of <code>my_df</code> and <code>my_df2</code></p></li>
 </ol>
 </div>
 <div id="logical-comparisons" class="section level3">
 <h3>Logical comparisons</h3>
 <ol start="10" style="list-style-type: decimal">
-<li><p>An important tool of working with data are logical comparisons. Logical comparisons can be used to conveniently select parts of the data. They can also be used to make checks throughout script. For instance, we could use logical comparisons to compare whether the names of, e.g., <code>my_df</code> and <code>my_3</code> are now equal. To do this the two name vectors need to be compared using the is-equal-to operator <code>==</code>, e.g., <code>vec_a == vec_b</code>. Such logical operators will go throuh every index in the two involved vectors (beginning with 1) and compare whether the elements at that location are equal. The result is thus a logical vector of the same length as the other two vectors. To evaluate whether all are equal one can conveniently use simple arithmetic functions such as <code>sum()</code> or <code>mean()</code>. Try now to check whether the names of these to data frames are indeed equal now. Remember <code>TRUE</code> is coerced to 1 and <code>False</code> to 0.</p></li>
-<li><p>A second important use for logicals is subsetting. All object accessing using brackets, e.g., <code>[]</code>, can be used with logical vectors (provided that the dimensions match). E.g., <code>c(1, 2, 3)[c(TRUE, FALSE, TRUE)]</code> returns the first and the third element of the vector. The logic is thus that the program goes through every index and returns those elements for which the logical vector is <code>TRUE</code>. Try to use this now on the three vectors. Use <code>log_vec</code> to subset the elements in <code>dbl_vec</code> and <code>chr_vec</code>.</p></li>
-<li><p>Logical vectors become really useful, when they are used to conditionalize the subsetting. For instance, we may be interested to retrieve all values in <code>chr_vec</code> for which <code>dbl_vec</code> is larger than some value. This can be easily accomplished by coercing <code>dbl_vec</code> to a logical vector using <code>&gt;</code>. Consider <code>c(1, 4, 7, 2) &gt; 3</code>. Try this for <code>chr_vec</code> and <code>dbl_vec</code> with an appropriate cut-off value.</p></li>
+<li><p>An important tool of working with data are logical comparisons. Logical comparisons can be used to conveniently select parts of the data. They can also be used to make checks throughout script. For instance, we could use logical comparisons to compare whether the names of, e.g., <code>my_df</code> and <code>my_3</code> are now equal. To do this the two name vectors need to be compared using the is-equal-to operator <code>==</code>, e.g., <code>vec_a == vec_b</code>. Such logical operators will iterate throuh every index in the two involved vectors (beginning with 1) and compare whether the elements at the present location are equal. The result is a logical vector of the same length as the other two vectors. To evaluate whether all elements are equal one can conveniently use simple arithmetic functions such as <code>sum()</code> or <code>mean()</code>. Try now to check whether the names of these to data frames are indeed equal now. Remember <code>TRUE</code> is coerced to 1 and <code>False</code> to 0.</p></li>
+<li><p>A second important use for logicals is subsetting. All object accessing using brackets, e.g., <code>[]</code>, can be used with logical vectors (provided that the dimensions match). E.g., <code>c(1, 2, 3)[c(TRUE, FALSE, TRUE)]</code> returns the first and the third element of the vector. The program thus iterates through every index and returns those elements for which the logical vector is <code>TRUE</code>. Try to use this now on the three vectors. Use <code>log_vec</code> to subset the elements in <code>dbl_vec</code> and <code>chr_vec</code>.</p></li>
+<li><p>Logical vectors become especially useful, when they are used to subset based on specific conditions. For instance, we may be interested in retrieving all values in <code>chr_vec</code> for which <code>dbl_vec</code> is larger than some value. This can be easily accomplished by coercing <code>dbl_vec</code> to a logical vector using <code>&gt;</code>. Consider <code>c(1, 4, 7, 2) &gt; 3</code>. Try this for <code>chr_vec</code> and <code>dbl_vec</code> with an appropriate cut-off value.</p></li>
 <li><p>Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator <code>&amp;</code> and the logical <code>OR</code> operator <code>|</code>. Consider <code>c(1, 4, 7, 2) &gt; 3 &amp; c(1, 4, 7, 2) &lt; 6</code> and <code>c(1, 4, 7, 2) &gt; 3 | c(1, 4, 7, 2) &lt; 6</code>. Try now combining the logical vector coerced from <code>dbl_vec</code> with <code>log_vec</code> to subset <code>chr_vec</code>.</p></li>
 </ol>
 </div>
