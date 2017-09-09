@@ -239,6 +239,21 @@ $(document).ready(function () {
 <ol start="11" style="list-style-type: decimal">
 <li>Finally on to something rather different. Connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Speicifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient <code>rvest</code> package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R’s Wikipedia page.</li>
 </ol>
+<pre class="r"><code># load package
+install.packages('rvest')
+library(rvest) 
+library(magrittr)
+
+# get html
+url = 'https://en.wikipedia.org/wiki/R_(programming_language)' 
+page = read_html(url)
+
+# get table
+# use XPath from inspect page (e.g., in Chrome)
+table = page %&gt;% html_node(xpath = '//*[@id=&quot;mw-content-text&quot;]/div/table[2]') %&gt;% html_table()
+
+# create tibble
+as.tibble(table)</code></pre>
 </div>
 </div>
 <div id="additional-reading" class="section level1">
