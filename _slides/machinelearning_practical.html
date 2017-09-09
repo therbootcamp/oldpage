@@ -131,7 +131,7 @@ Source: <a href="https://www.toptal.com/machine-learning/machine-learning-theory
 <div id="slides" class="section level3">
 <h3>Slides</h3>
 <ul>
-<li><a href="https://therbootcamp.github.io/_slides/D2S3_MachineLearning/machinelearning_lecture.html">Here are the introduction slides for this practical!</a></li>
+<li><a href="https://therbootcamp.github.io/_slides/D2S3_MachineLearning/machinelearning_lecture.html">Here are the introduction slides for this practical on machine learning!</a></li>
 </ul>
 </div>
 <div id="overview" class="section level3">
@@ -170,18 +170,24 @@ Source: <a href="https://www.toptal.com/machine-learning/machine-learning-theory
 <td align="left"><a href="https://bookdown.org/ndphillips/YaRrr/regression.html#the-linear-model" class="uri">https://bookdown.org/ndphillips/YaRrr/regression.html#the-linear-model</a></td>
 </tr>
 <tr class="even">
+<td align="left">Fast-and-Frugal trees</td>
+<td align="left"><code>FFTrees()</code></td>
+<td align="left">FFTrees</td>
+<td align="left"><a href="https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html" class="uri">https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html</a></td>
+</tr>
+<tr class="odd">
 <td align="left">Support Vector Machines</td>
 <td align="left"><code>svm()</code></td>
 <td align="left"><code>e1071</code></td>
 <td align="left"><a href="https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html" class="uri">https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Decision Trees</td>
 <td align="left"><code>rpart()</code></td>
 <td align="left"><code>rpart</code></td>
 <td align="left"><a href="https://statweb.stanford.edu/~lpekelis/talks/13_datafest_cart_talk.pdf" class="uri">https://statweb.stanford.edu/~lpekelis/talks/13_datafest_cart_talk.pdf</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Random Forests</td>
 <td align="left"><code>randomForest()</code></td>
 <td align="left"><code>randomForest</code></td>
@@ -189,16 +195,6 @@ Source: <a href="https://www.toptal.com/machine-learning/machine-learning-theory
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># Install all packages necessary for the practical
-#  Only necessary if you don't already have them
-
-install.packages(
-  c(&quot;e1071&quot;, 
-    &quot;rpart&quot;, 
-    &quot;randomForest&quot;, 
-    &quot;tidyverse&quot;, 
-    &quot;yarrr&quot;, 
-    &quot;FFTrees&quot;))</code></pre>
 </div>
 <div id="examples" class="section level3">
 <h3>Examples</h3>
@@ -207,6 +203,8 @@ install.packages(
 </ul>
 <pre class="r"><code># -----------------------------------------------
 # A step-by-step tutorial for conducting machine learning
+# In this tutorial, we'll see how well 3 different models can
+#  predict medical data
 # ------------------------------------------------
 
 # -----------------------
@@ -222,244 +220,190 @@ library(tidyverse)      # for datawrangling and ggplot2
 library(FFTrees)        # for the heartdisease data
 
 # -----------------------
-# Part B:
-# Create heart a dataset containing all data
+# Part B: Create datasets
+#  heart_train, heart_test
+#  heart_train_fac, heart_test_fac
 # -----------------------
 
 heart &lt;- heartdisease   # Save a copy of the heartdisease data as heart
 
-for(i in 1:ncol(heart)) {  # Convert character columns and diagnosis to factor
+set.seed(101)   # To fix the training / test randomization
+
+# Randomly sort rows
+heart &lt;- heart %&gt;%
+  arrange(rnorm(nrow(heart)))
+
+# Savew first 125 rows as heart_train and remaining as heart_test
+heart_train &lt;- heart %&gt;% slice(1:100)
+heart_test &lt;- heart %&gt;% slice(101:nrow(heart))
+
+
+# Create heart_train_fact, heart_test_fact
+#  Just heart_train and hear_test with factors
+#  We're only doing this because the randomForest() function
+#   requires factors!!!!
+
+heart_train_fac &lt;- heart_train
+heart_test_fac &lt;- heart_test
+
+for(i in 1:ncol(heart_train_fac)) {  # Convert character columns and diagnosis to factor
   
-  if(class(heart[,i]) == &quot;character&quot; | names(heart)[i] == &quot;diagnosis&quot;) {
+  if(class(heart_train_fac[[i]]) == &quot;character&quot;) {
     
-    heart[,i] &lt;- factor(heart[,i])}
-  
-}
+    heart_train_fac[[i]] &lt;- factor(heart_train_fac[[i]])
+    heart_test_fac[[i]] &lt;- factor(heart_test_fac[[i]])
 
-# -----------------------
-# Part C: Create separate training and test data 
-#  heart_train, heart_test
-# -----------------------
-
-set.seed(100)   # To fix the randomization
-train_samples &lt;- sample(nrow(heart), size = 125)
-test_samples &lt;- setdiff(1:nrow(heart), train_samples)
-
-heart_train &lt;- heart[train_samples, ]
-heart_test &lt;- heart[test_samples, ]
-
-# ------------------------------
-# Part I: Create models from training data
-# ------------------------------
-
-glm_model &lt;- glm(formula = chol ~ ., data = heart_train)
-rpart_model &lt;- rpart(formula = chol ~ ., data = heart_train)
-randomforest_model &lt;- randomForest(formula = chol ~ ., data = as.data.frame(heart_train))
-
-# ------------------------------
-# Part II: Calculate fits for each model for heart_train
-#  predict(model, heart_train)
-# ------------------------------
-
-glm_fit &lt;- predict(glm_model, heart_train)
-rpart_fit &lt;- predict(rpart_model, heart_train)
-randomforest_fit &lt;- predict(randomforest_model, heart_train)
-
-# Calculate fitting absolute errors and put in a dataframe
-
-fit_mae_df &lt;- data_frame(index = 1:nrow(heart_train),
-                         glm = abs(glm_fit - heart_train$chol),
-                         rpart = abs(rpart_fit - heart_train$chol),
-                         randomforest = abs(randomforest_fit - heart_train$chol))
+  }}
 
 
 # ------------------------------
-# Part III: Plot fitting results
+# Part I: Build Models
 # ------------------------------
 
-# Create a second reshaped dataframe for ggplot
+# Build FFTrees_model
+FFTrees_model &lt;- FFTrees(formula = sex ~ ., 
+                         data = heart_train)
 
-fit_mae_df2 &lt;- fit_mae_df %&gt;% 
-  gather(model, mae, -index)
+# Build glm_model
+glm_model &lt;- glm(formula = factor(sex) ~ ., 
+                 data = heart_train, 
+                 family = &quot;binomial&quot;)  # For predicting a binary variable
 
-# Create violin plot with ggplot
+# Build randomForest model
+randomForest_model &lt;- randomForest(formula = factor(sex) ~ ., 
+                                   data = heart_train_fac)
 
-ggplot(fit_mae_df2, 
-       aes(model, mae)) + 
-       geom_boxplot(aes(fill = factor(model))) +
-       labs(title = &quot;Cholestorol Fitting Performance&quot;, 
-            y = &quot;Mean Absolute Error (MAE)&quot;)
-
-# Or a pirateplot (using the yarrr package)
-pirateplot(data = as.data.frame(select(fit_mae_df, -index)), 
-           main = &quot;Cholesterol Fitting Accuracy&quot;)
 
 # ------------------------------
-# Part IV: Calculate predictions for each model for heart_test
-# predict(model, heart_test)
+# Part II: Explore Models
+# ------------------------------
+
+print(FFTrees_model)
+summary(FFTrees_model)
+
+print(glm_model)
+summary(glm_model)
+
+print(randomForest_model)
+summary(randomForest_model)
+
+# ------------------------------
+# Part III: Training Accuracy
+# ------------------------------
+
+# FFTrees training decisions
+FFTrees_fit &lt;- predict(FFTrees_model, heart_train)
+
+# Regression training decisions
+#  Positive values are predicted to be 1, negative values are 0
+glm_fit &lt;- predict(glm_model, heart_train) &gt; 0
+
+# randomForest training decisions
+randomForest_fit &lt;- predict(randomForest_model, heart_train_fac)
+
+# Now calculate fitting accuracies and put in dataframe
+
+# Truth value for training data is heart_train$sex
+train_truth &lt;- heart_train$sex
+
+# Put training results together
+training_results &lt;- data_frame(FFTrees = mean(FFTrees_fit == train_truth),
+                              glm = mean(glm_fit == train_truth),
+                              randomForest = mean(randomForest_fit == train_truth))
+
+# Plot training results
+barplot(height = unlist(training_results), 
+        main = &quot;Training Results&quot;, 
+        ylim = c(0, 1), 
+        col = c(&quot;palegreen3&quot;, &quot;wheat2&quot;, &quot;orchid3&quot;))
+
+# ------------------------------
+# Part IV: Prediction Accuacy!
 # ------------------------------
 
 # Calculate predictions for each model for heart_test
 
-glm_pred &lt;- predict(glm_model, heart_test)
-rpart_pred &lt;- predict(rpart_model, heart_test)
-randomforest_pred &lt;- predict(randomforest_model, heart_test)
+# FFTrees testing decisions
+FFTrees_pred &lt;- predict(FFTrees_model, heart_test)
 
-# Calculate prediction ae (mean absolute error)
+# Regression testing decisions
+#  Positive values are predicted to be 1, negative values are 0
+glm_pred &lt;- predict(glm_model, heart_test) &gt;= 0
 
-truth_test &lt;- heart_test$chol
+# randomForest testing decisions
+randomForest_pred &lt;- predict(randomForest_model, heart_test_fac)
 
-glm_pred_ae &lt;- abs(glm_pred - truth_test)
-rpart_pred_ae &lt;- abs(rpart_pred - truth_test)
-randomforest_pred_ae &lt;- abs(randomforest_pred - truth_test)
+# Now calculate testing accuracies and put in dataframe
 
+# Truth value for test data is heart_test$sex
+test_truth &lt;- heart_test$sex
 
-pred_mae_df &lt;- data_frame(index = 1:nrow(heart_test),
-                          glm = glm_pred_ae,
-                          rpart = rpart_pred_ae,
-                          randomforest = randomforest_pred_ae)
+testing_results &lt;- data_frame(FFTrees = mean(FFTrees_pred == test_truth),
+                              glm = mean(glm_pred == test_truth),
+                              randomForest = mean(randomForest_pred == test_truth))
 
-# ------------------------------
-# Part V: Plot prediction results
-# ------------------------------
-
-# Create a second reshaped dataframe for ggplot
-pred_mae_df2 &lt;- pred_mae_df %&gt;% 
-              gather(model, mae, -index)
-
-# Create violin plot
-
-ggplot(pred_mae_df2, 
-       aes(model, mae)) + 
-       geom_boxplot(aes(fill = factor(model))) +
-       labs(title = &quot;Cholestorol Prediction Performance&quot;, 
-            y = &quot;Mean Absolute Error (MAE)&quot;)
-
-# Or a pirateplot
-pirateplot(data = as.data.frame(select(pred_mae_df, -index)), 
-           main = &quot;Cholesterol Fitting Accuracy&quot;)</code></pre>
+# Plot testing results
+barplot(height = unlist(testing_results), 
+        main = &quot;Testing Results&quot;, 
+        ylim = c(0, 1),
+        col = c(&quot;palegreen3&quot;, &quot;wheat2&quot;, &quot;orchid3&quot;))</code></pre>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
 <ul>
 <li>Note, most of this practical will be copying and pasting code from the Examples and only making small changes.</li>
 <li>You should start by copying and pasting all of the code in the examples into a new .R file.</li>
-<li>Try running pieces of the code line by line and understand what it’s doing.</li>
+<li>Try running pieces of the code line by line and understand what it’s doing!</li>
 </ul>
-<div id="part-a" class="section level4">
-<h4>Part A</h4>
-<p>A. Run the code in part A to load all of the necessary pakages. For this practical, we’ll use the <code>heartdisease</code> dataframe from the <code>FFTrees</code> package, we’ll also use the <code>e1071</code>, <code>randomForest</code>, <code>rpart</code>, <code>ggplot2</code>, and <code>yarrr</code> pacakges.</p>
+<div id="part-a-load-packages" class="section level4">
+<h4>Part A: Load packages</h4>
+<p>A. Load all of the necessary packages. For this practical, we’ll need <code>FFTrees</code>, <code>e1071</code>, <code>randomForest</code>, <code>rpart</code>, and <code>tidyverse</code>.</p>
 </div>
-<div id="part-b-create-heart" class="section level4">
-<h4>Part B: Create heart</h4>
-<p>B. Now run the code in Part B to save a copy of the data as a tibble called <code>heart</code>.</p>
-<p>C. Take a look at the data by printing the first few rows with <code>head()</code>. It should look like this:</p>
-<pre><code>  age sex cp trestbps chol fbs     restecg thalach exang oldpeak slope ca
-1  63   1 ta      145  233   1 hypertrophy     150     0     2.3  down  0
-2  67   1  a      160  286   0 hypertrophy     108     1     1.5  flat  3
-3  67   1  a      120  229   0 hypertrophy     129     1     2.6  flat  2
-4  37   1 np      130  250   0      normal     187     0     3.5  down  0
-5  41   0 aa      130  204   0 hypertrophy     172     0     1.4    up  0
-6  56   1 aa      120  236   0      normal     178     0     0.8    up  0
-    thal diagnosis
-1     fd         0
-2 normal         1
-3     rd         1
-4 normal         0
-5 normal         0
-6 normal         0</code></pre>
+<div id="part-b-create-training-and-test-data" class="section level4">
+<h4>Part B: Create training and test data</h4>
+<p>B. Now run the code in Part B to save a copy of the data as a tibble called <code>heart</code>. Afterwards, print it to make sure it looks ok.</p>
+<p>C. Create separate training dataframes <code>heart_train</code> (and <code>heart_train_fac</code>) for model training and <code>heart_test</code> (and <code>heart_test_fac</code>) for model testing. Print each of these dataframes to make sure they look ok.</p>
 </div>
-<div id="part-c-create-training-and-test-data" class="section level4">
-<h4>Part C: Create training and test data</h4>
+<div id="part-i-train-models-on-diagnosis" class="section level4">
+<h4>Part I: Train models on <code>diagnosis</code></h4>
 <ol style="list-style-type: decimal">
-<li>Run the code in Part C to create separate dataframes <code>heart_train</code> for model training and <code>heart_test</code>. Print each of these dataframes to make sure they look ok.</li>
-</ol>
-</div>
-<div id="part-i-train-models-on-trestbps" class="section level4">
-<h4>Part I: Train models on <code>trestbps</code></h4>
-<ol start="2" style="list-style-type: decimal">
-<li>In our analyses, we will try to predict each patient’s value of <code>trestbps</code> – their resting blood pressure, as a function of all other variables in the data. Following Part I, create four new objects <code>glm_trestbps_train</code>, <code>svm_trestbps_train</code>, <code>rpart_trestbps_train</code>, and <code>randomforest_trestbps_train</code> predicting <code>trestbps</code>.</li>
+<li>In our analyses, we will try to predict each patient’s diagnosis <code>diagnosis</code>. Look at the help menu for <code>heartdisease</code> to swee what this, and the other variables, mean. Then, Create three new model objects <code>FFTrees_model</code>, <code>glm_model</code>, and <code>randomForest_model</code>, each predicting <code>diagnosis</code>.</li>
 </ol>
 </div>
 <div id="part-ii-calculate-fits-for-training-data" class="section level4">
 <h4>Part II: Calculate fits for training data</h4>
-<ol start="3" style="list-style-type: decimal">
-<li>Following Part II, calculate fits for each model with <code>predict(model, heart_train)</code>, then create <code>fit_mae_df</code> containing the absolute fitting errors for each model. The code will be almost identical to what is in the Example. All you need to do is change the value of <code>truth_train</code> to the correct column in <code>heart_train</code>.</li>
+<ol start="2" style="list-style-type: decimal">
+<li>Calculate fits for each model with <code>predict()</code>, then create <code>training_results</code> containing the fitting accuracy of each model in a dataframe. The code will be almost identical to what is in the Example. All you need to do is change the value of <code>truth_train</code> to the correct column in <code>heart_train</code>. Afterwards, plot the results using <code>barplot()</code>. Which model had the best training accuracy?</li>
 </ol>
 </div>
-<div id="part-iii-plot-fitting-results" class="section level4">
-<h4>Part III: Plot fitting results</h4>
-<ol start="4" style="list-style-type: decimal">
-<li>Following Part III, restructure the data into a format ready for plotting, and then plot the training results. Don’t forget to change the labels to reflect that we are predicting trestbps, not cholesterol!</li>
+<div id="part-iii-explore-models" class="section level4">
+<h4>Part III: Explore models</h4>
+<ol start="3" style="list-style-type: decimal">
+<li>Explore each of the three models by applying <code>print()</code> and <code>summary()</code>. Can you interpret any of them?</li>
 </ol>
 </div>
 <div id="part-iv-calculate-predictions-for-test-data" class="section level4">
 <h4>Part IV: Calculate predictions for test data</h4>
-<ol start="5" style="list-style-type: decimal">
-<li>Following Part IV, calculate predictions for each model based on <code>heart_test</code>, and then calculate the prediction error as the difference between the truth and the model predictions. Don’t forget to change the value of <code>truth_test</code> to reflect the true value for the current analysis!</li>
-</ol>
-</div>
-<div id="part-v-plot-prediction-results" class="section level4">
-<h4>Part V: Plot prediction results</h4>
-<ol start="6" style="list-style-type: decimal">
-<li>Following Part V, plot the prediction results! Which model was the best in predicting resting heart rate in the test set? Don’t forget to change the names of the labels to reflect that we’re predicting trestbps!</li>
+<ol start="4" style="list-style-type: decimal">
+<li>Calculate predictions for each model based on <code>heart_test</code>, and then calculate the prediction accuracies. Don’t forget to change the value of <code>truth_test</code> to reflect the true value for the current analysis! Then plot the results. Which model predicted each patient’s diagnosis the best?</li>
 </ol>
 </div>
 </div>
 <div id="extras-and-challenges" class="section level2">
 <h2>Extras and Challenges</h2>
-<ol start="7" style="list-style-type: decimal">
-<li><p>A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the <code>svm()</code> function from the <code>e1071</code> package in all of your analyses. Was she right?</p></li>
-<li><p>We have fitted many models and made predictions, but we haven’t seen much about what is in them and what they contain. Try printing each of the model objects and applying the <code>summary()</code> function to them to see what information they print. For example, run <code>glm_model</code>, and <code>summary(glm_model)</code> to look at the glm model (do the same for the other models). Do these outputs make sense? Try looking at the help menu for each model (e.g.; <code>?randomForest</code>) to see if you can find any help!</p></li>
-<li><p>Of all the models we’ve used, the only one you can easily visualize is a decision tree created from <code>rpart</code>. Try visualizing the trees you created by running <code>plot(rpart_model)</code> and then <code>text(rpart_model)</code>. What does the rpart model tell you about the data?</p></li>
-<li><p>The randomForest model is difficult to visualize, but you can see which variables are deemed to be important in the dataset by accessing the result <code>importance()</code>. Try visualising the importance of the variables by running the following code. What do the results tell you? Do you see connections between the randomForest model and the regression (<code>glm()</code>) and decision tree (<code>rpart()</code>) models?</p></li>
-</ol>
-<pre class="r"><code># Create a dataframe of the importance results
-importance_results &lt;- as.data.frame(importance(randomforest_model))
-importance_results$feature &lt;- rownames(importance_results)
-
-# Plot the result as a barplot
-ggplot(importance_results, aes(feature, IncNodePurity, fill = feature)) + 
-  geom_col()</code></pre>
-<ol start="11" style="list-style-type: decimal">
+<ol start="5" style="list-style-type: decimal">
+<li><p>A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the <code>svm()</code> function from the <code>e1071</code> package in all of your analyses. You’ll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?</p></li>
 <li><p>You’ll notice in Part C that we trained the models on 125 cases (out of the 303) in the full dataset. In other words, we trained the data on about half of the total cases. Try repeating the same machine learning process as above (for either cholesterol or resting heart rate), but instead of training the models on 125 cases, try training it on only 50 cases (about 15% of the data). How do you think having fewer cases in the training data will affect accuracy in fitting and prediction? When you are done, try training the models based on 250 cases (over 80% of the data) and then making predictions on the remaining cases.</p></li>
-<li><p>In all of our machine learning, we have allowed all models to use all data in the <code>heartdisease</code> dataset. What do you think would happen if we only let the models use a single predictor like <code>age</code>? Test your prediction by replicating the machine learning process, but <em>only</em> allow the models to make predictions based on <code>age</code>. Does one model substantially outperform the others? What happens if you include three variables such as <code>age</code>, <code>cp</code> and <code>slope</code>?</p></li>
+<li><p>In all of our machine learning, we have allowed all models to use all data in the <code>heartdisease</code> dataset. What do you think would happen if we only let the models use a single predictor like <code>age</code>? Test your prediction by replicating the machine learning process, but <em>only</em> allow the models to make predictions based on <code>age</code>. Does one model substantially outperform the others? For example, what happens if you include three variables such as <code>age</code>, <code>cp</code> and <code>slope</code>? (Hint: You can easily tell a model what specific variables to include using the <code>formula</code> argument. For example, <code>formula = y ~ a + b</code> will tell a model to model a variable y, but <em>only</em> using variables a and b.)</p></li>
 <li><p>How do you think these algorithms would perform on a randomly generated dataset? Let’s test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called <code>random</code> to <code>heart_train</code> and <code>heart_test</code>. Then, run your machine learning analysis, but now train and test the models on the new random data column. How well do the models do in training and testing?</p></li>
 </ol>
 <pre class="r"><code># Add a new column random to heart_train and heart_test
 
-heart_train$random &lt;- rnorm(n = nrow(heart_train),
-                            mean = 100,
-                            sd = 10)
+heart_train$random &lt;- sample(c(0, 1), size = nrow(heart_train), replace = TRUE)
 
-heart_test$random &lt;- rnorm(n = nrow(heart_test),
-                            mean = 100,
-                            sd = 10)</code></pre>
-<ol start="14" style="list-style-type: decimal">
-<li>So far we have only predicted continuous variables (<code>chol</code> and <code>trestbps</code>). However, all the machine learning models we have covered can also predict categorical values – like whether patient’s have a diagnosis value of 0 or 1. Try replicating your previous analyses, but now predict <code>diagnosis</code>. Here are some hints to help you:</li>
-</ol>
-<ul>
-<li><p>In order to tell R that diagnosis is a factor (that is, a categorical variable), you need to convert it to a factor when running <code>formula()</code> each time you fit a model. For example, to run the support vector machines model, you’d run <code>svm_model &lt;- svm(formula = factor(diagnosis) ~., data = heart_train)</code>. For the <code>glm()</code> model, you will additionally need to include the argument <code>family = 'binomial'</code> to tell the algorithm to run a logistic regression. See the help menu for <code>?glm()</code> for examples.</p></li>
-<li><p>You will need to change the fitting and prediction accuracy code in parts II and IV. Specifically, you can measure model error as the <em>disagreement</em> between model predictions and the true values.</p></li>
-</ul>
-<pre class="r"><code># When modelling categorical values, then calculate model DISAGREEMENT 
-#  as the percentage of cases where the model predictions 
-#  are different from the true values
-
-glm_pred_d &lt;- mean(glm_pred != truth_test)     # Percent of cases where glm model is incorrect
-svm_pred_d &lt;- mean(svm_pred != truth_test)     # Percent of cases where svm model is incorrect 
-rpart_pred_d &lt;- mean(rpart_pred != truth_test) # [...]
-randomforest_pred_d &lt;- mean(randomforest_pred != truth_test) # [...]
-
-# Combine model prediction errors just like in the Example
-
-pred_d_df &lt;- data_frame(index = 1:nrow(heart_test),
-                          glm = glm_pred_d,
-                          svm = svm_pred_d,
-                          rpart = rpart_pred_d,
-                          randomforest = randomforest_pred_d)</code></pre>
-<ol start="15" style="list-style-type: decimal">
-<li>So far we’ve only looked at the <code>heartdisease</code> data. Try conducting a similar analysis on the <code>ACTG175</code> data from the <code>speff2trial</code> package. For example, you could try to predict the number of days until each patient experiences a major negative event (<code>days</code>). Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren’t present in the <code>heartdisease</code> data?</li>
+heart_test$random &lt;- sample(c(0, 1), size = nrow(heart_test), replace = TRUE)</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>So far we’ve only looked at the <code>heartdisease</code> data. Try conducting a similar analysis on the <code>ACTG175</code> data from the <code>speff2trial</code> package. For example, you could try to predict whether or not a patient was a intravenous drug user. Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren’t present in the <code>heartdisease</code> data?</li>
 </ol>
 </div>
 <div id="additional-reading" class="section level1">
