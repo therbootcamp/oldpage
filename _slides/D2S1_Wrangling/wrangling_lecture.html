@@ -101,6 +101,50 @@ data %&gt;%           # Start with data, and THEN
 ]
 
 
+---
+### ChickWeight dataframe
+
+.pull-left3[
+
+&lt;img src="images/cutechicken.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+
+
+
+```r
+# Show me the first few rows
+head(ChickWeight)
+```
+
+```
+##   weight Time Chick Diet
+## 1     42    0     1    1
+## 2     51    2     1    1
+## 3     59    4     1    1
+## 4     64    6     1    1
+## 5     76    8     1    1
+## 6     93   10     1    1
+```
+
+```r
+#What are the column names again?
+names(ChickWeight)
+```
+
+```
+## [1] "weight" "Time"   "Chick"  "Diet"
+```
+
+
+]
+
+
+
+
 
 ---
 
@@ -170,8 +214,7 @@ x
 
 
 ---
-
-#### Ex: Chick 1
+### To add a column to a dataframe, used `mutate()`
 
 *Add a column called `weight_d_time` that is weight divided by time*
 
@@ -200,8 +243,7 @@ head(x)   # Print the result
 
 
 ---
-
-#### Ex: Chick 2
+### You can create many new columns sequentially
 
 *Add a column called `weight_d_time` that is weight divided by time AND `time_d` that is time in days*
 
@@ -227,12 +269,9 @@ head(x)   # Print the result
 ```
 
 ---
-
-
-### Recoding values with case_when()
+### To recode values, use `case_when()`
 
 .pull-left3[
-Recoding values is a common data wrangling task. You can easily do this with `case_when()`:
 
 
 ```r
@@ -244,13 +283,11 @@ data %&gt;%
   )
 ```
 
-
-
 For example, in a dataset, the column `sex` might be coded with 1s and 0s.
 
 You might want to create a new column `sex_new` where 1 = "female" and 0 = "male":
 
-| sex| sex_new|
+| sex_car| sex_new|
 |------:|----:|
 |    1|   "female"|
 |    0|   "male"|
@@ -270,7 +307,7 @@ To change the value of 1 to `"female"`, and 0 to `"male"`, you can use `case_whe
 
 data &lt;- data %&gt;% 
   mutate(
-        sex_new = case_when(
+        sex_char = case_when(
           sex == 1 ~ "female",
           sex == 0 ~ "male"
         )
@@ -280,7 +317,7 @@ data &lt;- data %&gt;%
 
 You can think about the code above as follows:
 
-- Create a new column `sex_new` where
+- Create a new column `sex_char` where
     - If `sex == 1`, then set the value to `"female"`
     - If `sex == 0`, then set the value to `"male"`
 
@@ -290,7 +327,21 @@ You can think about the code above as follows:
 ---
 
 .pull-left3[
-#### Ex: Chick 3
+### More `case_when()` examples
+
+
+**`ChickWeight`**
+
+```
+##     weight Time Chick Diet
+## 211     54    4    20    1
+## 446    214   18    39    3
+## 424    178   21    37    3
+## 560    128   10    49    4
+## 425     41    0    38    3
+## 116    101   16    10    1
+```
+
 
 *Create a new variable Diet_name which shows Diet in text format. Here is a table of the values*
 
@@ -318,17 +369,17 @@ ChickWeight &lt;- ChickWeight %&gt;%           # Start with the ChickWeight data
    
  )
 
-head(ChickWeight)
+head(ChickWeight)   # Print final result!
 ```
 
 ```
 ##   weight Time Chick Diet Diet_name
-## 1     42    0     1    1     fruit
-## 2     51    2     1    1     fruit
-## 3     59    4     1    1     fruit
-## 4     64    6     1    1     fruit
-## 5     76    8     1    1     fruit
-## 6     93   10     1    1     fruit
+## 1     54    4    20    1     fruit
+## 2    214   18    39    3      meat
+## 3    178   21    37    3      meat
+## 4    128   10    49    4    grains
+## 5     41    0    38    3      meat
+## 6    101   16    10    1     fruit
 ```
 
 
@@ -338,6 +389,46 @@ head(ChickWeight)
 
 
 
+---
+### group_by(), summarise()
+
+.pull-left3[
+
+Two of the most powerful dplyr verbs are `group_by()` and `summarise()`.
+
+When you combine these two, you can easily calculate summary statistics across groups of data
+
+&gt; Q1: What is the average beard length of pirates on the Jolly Roger and the Slippery Seal?
+
+&gt; Q2: How many patients were on each treatment arm, and for each arm, what was the mean success rate for the primary measure `full_recovery` and the secondary measure `feelbetter`? 
+
+]
+
+
+.pull-right3[
+
+
+
+```r
+q1 &lt;- pirates %&gt;%
+  group_by(ship) %&gt;%
+  summarise(
+    beard_mean = mean(beardlength)
+  )
+
+
+q2 &lt;- pirates %&gt;%
+  group_by(arm) %&gt;%
+  summarise(
+    N = n(),
+    primary_success = mean(full_recovery),
+    secondary_success = mean(feelbetter)
+  )
+```
+
+
+
+]
 
 ---
 
@@ -365,12 +456,8 @@ ChickWeight %&gt;%           # Start with the ChickWeight data
 ```
 
 
-
-
-
 ---
-
-#### Ex: Chick 4
+### You can easily filter data before grouping and summarising
 
 *For each time period less than 10, calculate the mean weight*
 
@@ -400,7 +487,7 @@ ChickWeight %&gt;%                # Start with the ChickWeight data
 
 
 ---
-#### Ex: Chick 5:
+### You can calculate as many summary columns as you want!
 
 *For each Diet, calculate the mean weight, maximum time, and the number of chicks on each diet*:
 
@@ -429,8 +516,6 @@ ChickWeight %&gt;%           # Start with the ChickWeight data
 
 
 ---
-
-
 # Other dplyr verbs
 
 
@@ -440,11 +525,8 @@ ChickWeight %&gt;%           # Start with the ChickWeight data
 |     `sample_frac()`|    Select a random fraction of rows| `sample_frac(.20)`|
 |     `first(), last()`|    Give the first (or last) observation| `first(), last()`|
 
-
-
 ---
-
-#### Ex: Chick 6:
+### Getting random values from a dataframe with `sample_n()`
 
 *Give me a random sample of 10 rows from the ChickWeight dataframe, but only show me the values for Chick and weight*
 
@@ -459,16 +541,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 239    22    108
-## 184    17     51
-## 179    16     51
-## 99      9     68
-## 362    32    263
-## 201    19     65
-## 162    14    164
-## 462    41     51
-## 332    30     72
-## 200    19     62
+## 247    20     47
+## 375    46    238
+## 12     22    148
+## 108     6    155
+## 294    45     61
+## 272    40    154
+## 164    48     50
+## 358    38    128
+## 199    17     98
+## 333    18     35
 ```
 
 
@@ -480,7 +562,7 @@ ChickWeight %&gt;%
 dplyr operations (almost) always return a dataframe which you can assign to a new object:
 
 
-&gt; *Create a dataframe with the average weight for each time period and nothing else!!*
+&gt; *Send me a text file with the average weight for each time period and nothing else!!*
 
 ]
 
@@ -496,7 +578,7 @@ time_agg &lt;- ChickWeight %&gt;%
     weight.mean = mean(weight)
   )
 
-head(time_agg)
+head(time_agg) # Make sure it looks good
 ```
 
 ```
@@ -509,6 +591,11 @@ head(time_agg)
 ## 4     6       74.31
 ## 5     8       91.24
 ## 6    10      107.84
+```
+
+```r
+# save the aggregated data as a .csv file for my colleague
+#write_csv(time_agg, path = "data/time_agg.csv")
 ```
 
 
