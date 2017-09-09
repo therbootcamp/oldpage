@@ -130,7 +130,9 @@ Source: <a href="https://www.toptal.com/machine-learning/machine-learning-theory
 </div>
 <div id="slides" class="section level3">
 <h3>Slides</h3>
-<p>Here a link to the lecture slides for this session: LINK</p>
+<ul>
+<li><a href="https://therbootcamp.github.io/_slides/D2S3_MachineLearning/machinelearning_lecture.html">Here are the introduction slides for this practical!</a></li>
+</ul>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -253,7 +255,6 @@ heart_test &lt;- heart[test_samples, ]
 glm_model &lt;- glm(formula = chol ~ ., data = heart_train)
 rpart_model &lt;- rpart(formula = chol ~ ., data = heart_train)
 randomforest_model &lt;- randomForest(formula = chol ~ ., data = as.data.frame(heart_train))
-svm_model &lt;- svm(formula = chol ~ ., data = heart_train)
 
 # ------------------------------
 # Part II: Calculate fits for each model for heart_train
@@ -263,16 +264,14 @@ svm_model &lt;- svm(formula = chol ~ ., data = heart_train)
 glm_fit &lt;- predict(glm_model, heart_train)
 rpart_fit &lt;- predict(rpart_model, heart_train)
 randomforest_fit &lt;- predict(randomforest_model, heart_train)
-svm_fit &lt;- predict(svm_model, heart_train)
 
 # Calculate fitting absolute errors and put in a dataframe
 
 fit_mae_df &lt;- data_frame(index = 1:nrow(heart_train),
                          glm = abs(glm_fit - heart_train$chol),
                          rpart = abs(rpart_fit - heart_train$chol),
-                         randomforest = abs(randomforest_fit - heart_train$chol),
-                         svm = abs(svm_fit - heart_train$chol))
-)
+                         randomforest = abs(randomforest_fit - heart_train$chol))
+
 
 # ------------------------------
 # Part III: Plot fitting results
@@ -292,7 +291,7 @@ ggplot(fit_mae_df2,
             y = &quot;Mean Absolute Error (MAE)&quot;)
 
 # Or a pirateplot (using the yarrr package)
-pirateplot(data = as.data.frame(fit_mae_df[,2:5]), 
+pirateplot(data = as.data.frame(select(fit_mae_df, -index)), 
            main = &quot;Cholesterol Fitting Accuracy&quot;)
 
 # ------------------------------
@@ -305,7 +304,6 @@ pirateplot(data = as.data.frame(fit_mae_df[,2:5]),
 glm_pred &lt;- predict(glm_model, heart_test)
 rpart_pred &lt;- predict(rpart_model, heart_test)
 randomforest_pred &lt;- predict(randomforest_model, heart_test)
-svm_pred &lt;- predict(svm_model, heart_test)
 
 # Calculate prediction ae (mean absolute error)
 
@@ -314,14 +312,12 @@ truth_test &lt;- heart_test$chol
 glm_pred_ae &lt;- abs(glm_pred - truth_test)
 rpart_pred_ae &lt;- abs(rpart_pred - truth_test)
 randomforest_pred_ae &lt;- abs(randomforest_pred - truth_test)
-svm_pred_ae &lt;- abs(svm_pred - truth_test)
 
 
 pred_mae_df &lt;- data_frame(index = 1:nrow(heart_test),
                           glm = glm_pred_ae,
                           rpart = rpart_pred_ae,
-                          randomforest = randomforest_pred_ae,
-                          svm = svm_pred_ae)
+                          randomforest = randomforest_pred_ae)
 
 # ------------------------------
 # Part V: Plot prediction results
@@ -340,8 +336,8 @@ ggplot(pred_mae_df2,
             y = &quot;Mean Absolute Error (MAE)&quot;)
 
 # Or a pirateplot
-pirateplot(data = as.data.frame(pred_mae_df[,2:5]), 
-           main = &quot;Cholesterol Prediction Accuracy&quot;)</code></pre>
+pirateplot(data = as.data.frame(select(pred_mae_df, -index)), 
+           main = &quot;Cholesterol Fitting Accuracy&quot;)</code></pre>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
@@ -413,6 +409,7 @@ pirateplot(data = as.data.frame(pred_mae_df[,2:5]),
 <div id="extras-and-challenges" class="section level2">
 <h2>Extras and Challenges</h2>
 <ol start="7" style="list-style-type: decimal">
+<li><p>A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the <code>svm()</code> function from the <code>e1071</code> package in all of your analyses. Was she right?</p></li>
 <li><p>We have fitted many models and made predictions, but we haven’t seen much about what is in them and what they contain. Try printing each of the model objects and applying the <code>summary()</code> function to them to see what information they print. For example, run <code>glm_model</code>, and <code>summary(glm_model)</code> to look at the glm model (do the same for the other models). Do these outputs make sense? Try looking at the help menu for each model (e.g.; <code>?randomForest</code>) to see if you can find any help!</p></li>
 <li><p>Of all the models we’ve used, the only one you can easily visualize is a decision tree created from <code>rpart</code>. Try visualizing the trees you created by running <code>plot(rpart_model)</code> and then <code>text(rpart_model)</code>. What does the rpart model tell you about the data?</p></li>
 <li><p>The randomForest model is difficult to visualize, but you can see which variables are deemed to be important in the dataset by accessing the result <code>importance()</code>. Try visualising the importance of the variables by running the following code. What do the results tell you? Do you see connections between the randomForest model and the regression (<code>glm()</code>) and decision tree (<code>rpart()</code>) models?</p></li>
@@ -424,10 +421,22 @@ importance_results$feature &lt;- rownames(importance_results)
 # Plot the result as a barplot
 ggplot(importance_results, aes(feature, IncNodePurity, fill = feature)) + 
   geom_col()</code></pre>
-<ol start="10" style="list-style-type: decimal">
+<ol start="11" style="list-style-type: decimal">
 <li><p>You’ll notice in Part C that we trained the models on 125 cases (out of the 303) in the full dataset. In other words, we trained the data on about half of the total cases. Try repeating the same machine learning process as above (for either cholesterol or resting heart rate), but instead of training the models on 125 cases, try training it on only 50 cases (about 15% of the data). How do you think having fewer cases in the training data will affect accuracy in fitting and prediction? When you are done, try training the models based on 250 cases (over 80% of the data) and then making predictions on the remaining cases.</p></li>
 <li><p>In all of our machine learning, we have allowed all models to use all data in the <code>heartdisease</code> dataset. What do you think would happen if we only let the models use a single predictor like <code>age</code>? Test your prediction by replicating the machine learning process, but <em>only</em> allow the models to make predictions based on <code>age</code>. Does one model substantially outperform the others? What happens if you include three variables such as <code>age</code>, <code>cp</code> and <code>slope</code>?</p></li>
-<li><p>So far we have only predicted continuous variables (<code>chol</code> and <code>trestbps</code>). However, all the machine learning models we have covered can also predict categorical values – like whether patient’s have a diagnosis value of 0 or 1. Try replicating your previous analyses, but now predict <code>diagnosis</code>. Here are some hints to help you:</p></li>
+<li><p>How do you think these algorithms would perform on a randomly generated dataset? Let’s test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called <code>random</code> to <code>heart_train</code> and <code>heart_test</code>. Then, run your machine learning analysis, but now train and test the models on the new random data column. How well do the models do in training and testing?</p></li>
+</ol>
+<pre class="r"><code># Add a new column random to heart_train and heart_test
+
+heart_train$random &lt;- rnorm(n = nrow(heart_train),
+                            mean = 100,
+                            sd = 10)
+
+heart_test$random &lt;- rnorm(n = nrow(heart_test),
+                            mean = 100,
+                            sd = 10)</code></pre>
+<ol start="14" style="list-style-type: decimal">
+<li>So far we have only predicted continuous variables (<code>chol</code> and <code>trestbps</code>). However, all the machine learning models we have covered can also predict categorical values – like whether patient’s have a diagnosis value of 0 or 1. Try replicating your previous analyses, but now predict <code>diagnosis</code>. Here are some hints to help you:</li>
 </ol>
 <ul>
 <li><p>In order to tell R that diagnosis is a factor (that is, a categorical variable), you need to convert it to a factor when running <code>formula()</code> each time you fit a model. For example, to run the support vector machines model, you’d run <code>svm_model &lt;- svm(formula = factor(diagnosis) ~., data = heart_train)</code>. For the <code>glm()</code> model, you will additionally need to include the argument <code>family = 'binomial'</code> to tell the algorithm to run a logistic regression. See the help menu for <code>?glm()</code> for examples.</p></li>
@@ -449,7 +458,7 @@ pred_d_df &lt;- data_frame(index = 1:nrow(heart_test),
                           svm = svm_pred_d,
                           rpart = rpart_pred_d,
                           randomforest = randomforest_pred_d)</code></pre>
-<ol start="13" style="list-style-type: decimal">
+<ol start="15" style="list-style-type: decimal">
 <li>So far we’ve only looked at the <code>heartdisease</code> data. Try conducting a similar analysis on the <code>ACTG175</code> data from the <code>speff2trial</code> package. For example, you could try to predict the number of days until each patient experiences a major negative event (<code>days</code>). Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren’t present in the <code>heartdisease</code> data?</li>
 </ol>
 </div>

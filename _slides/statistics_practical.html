@@ -143,7 +143,7 @@ Source: <a href="https://www.slideshare.net/hakeemrehman/8-testing-of-hypothesis
 </div>
 <div id="glossary-and-packages" class="section level3">
 <h3>Glossary and Packages</h3>
-<p>Here are the main descriptive statistics functions in R.</p>
+<p>Here are the main descriptive statistics functions we will be covering.</p>
 <table>
 <thead>
 <tr class="header">
@@ -153,24 +153,28 @@ Source: <a href="https://www.slideshare.net/hakeemrehman/8-testing-of-hypothesis
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left"><code>table()</code></td>
+<td align="left">Frequency table</td>
+</tr>
+<tr class="even">
 <td align="left"><code>mean(), median(), mode()</code></td>
 <td align="left">Measures of central tendency</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>sd(), range(), iqr(), var()</code></td>
 <td align="left">Measures of variability</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>max(), min()</code></td>
 <td align="left">Extreme values</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>summary()</code></td>
 <td align="left">Several summary statistics</td>
 </tr>
 </tbody>
 </table>
-<p>Here are the main hypothesis test functions in R.</p>
+<p>Here are the main hypothesis test functions we will be covering.</p>
 <table style="width:33%;">
 <colgroup>
 <col width="11%"></col>
@@ -227,6 +231,7 @@ chick &lt;- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as a 
 mean(chick$weight)   # What is the mean weight?
 median(chick$Time)   # What is the median time?
 max(Chick$weight)    # What is the maximum weight?
+table(Chick$Diet)    # How many observations for each diet?
 
 # -----
 # 1-sample hypothesis test
@@ -313,11 +318,11 @@ TukeyHSD(Diet_aov)      # Conduct post-hoc tests
 <h2>Tasks</h2>
 <div id="gettting-started" class="section level3">
 <h3>Gettting started</h3>
-<p>A. For this practical, we’ll use the <code>trialact</code> dataframe from the <code>speff2trial</code> package, load the package with the <code>library()</code> function. Also load the <code>tidyverse</code> as always!</p>
+<p>A. For this practical, we’ll use the <code>ACTG175</code> dataframe from the <code>speff2trial</code> package, load the package with the <code>library()</code> function. Also load the <code>tidyverse</code> as always!</p>
 <pre class="r"><code>library(tidyverse)
 library(speff2trial)</code></pre>
-<p>B. Now save a copy of the data as a tibble called <code>trialact</code></p>
-<pre class="r"><code>trialact &lt;- as_tibble(ACTG175)</code></pre>
+<p>B. Convert the data to a tibble (Hint, use assignment and <code>as_tibble()</code>)</p>
+<pre class="r"><code>ACTG175 &lt;- as_tibble(ACTG175)</code></pre>
 <p>C. First thing’s first, take a look at the data by printing it. It should look like this</p>
 <pre><code># A tibble: 2,139 x 27
    pidnum   age    wtkg  hemo  homo drugs karnof oprior   z30 zprior
@@ -339,13 +344,17 @@ library(speff2trial)</code></pre>
 </div>
 <div id="descriptive-statistics" class="section level3">
 <h3>Descriptive statistics</h3>
+<p>D. What was the mean age of all patients?</p>
+<p>E. What was the median weight of all patients?</p>
+<p>F. What was the mean CD4 T cell count at baseline? What was it at 20 weeks?</p>
+<p>G. How many patients have a history of intraveneous drug use and how many do not? (Hint: use <code>table()</code>)</p>
 </div>
 <div id="t-tests-with-t.test" class="section level3">
 <h3>T tests with t.test()</h3>
 <ol style="list-style-type: decimal">
-<li><p>Conduct a one-sample t-test comparing the age of the patients versus a null hypothesis of 40 years. What is the p-value? Do you accept or reject the hull hypothesis?</p></li>
+<li><p>Conduct a one-sample t-test comparing the age of the patients versus a null hypothesis of 40 years. What is the test statistic? What is the p-value? Do you accept or reject the hull hypothesis?</p></li>
 <li><p>Now, compare the mean age to a null hypothesis of 35 years. What has changed?</p></li>
-<li><p>Conduct a two-sample t-test comparing the age of men versus women</p></li>
+<li><p>A researcher wants to make sure that men and women in the clinical study are similar in terms of age. Conduct a two-sample t-test comparing the age of men versus women to test if they are indeed similar or not.</p></li>
 </ol>
 <ul>
 <li>Women are coded as 0 in <code>gender</code>, and men are coded as 1.</li>
@@ -376,7 +385,7 @@ library(speff2trial)</code></pre>
 <li>Do men and women (<code>gender</code>) have different distributions of race (<code>race</code>)? That is, is the percentage of women who are white differ from the percentage of men who are white?</li>
 </ol>
 <ul>
-<li>Be sure to create a table of gender and race values with <code>table(trialact$gender, trialact$race)</code></li>
+<li>Be sure to create a table of gender and race values with <code>table(ACTG175$gender, ACTG175$race)</code></li>
 </ul>
 <ol start="11" style="list-style-type: decimal">
 <li><p>Is there a relationship between a history of intravenous drug use (<code>drugs</code>) and hemophilia (<code>hemo</code>)?</p></li>
@@ -384,13 +393,13 @@ library(speff2trial)</code></pre>
 <li><p>Only for patients older than 40, is there a relationship between antiretroviral history (<code>str2</code>) and race (<code>race</code>)?</p></li>
 </ol>
 <ul>
-<li>Create a new dataframe called <code>trialact.o40 &lt;- subset(trialact, age &gt; 40)</code> and then do your analysis on this new dataframe.</li>
+<li>Create a new dataframe called <code>ACTG175.o40 &lt;- subset(ACTG175, age &gt; 40)</code> and then do your analysis on this new dataframe.</li>
 </ul>
 <ol start="14" style="list-style-type: decimal">
 <li>Now repeat the previous analysis, but only for male patients</li>
 </ol>
 <ul>
-<li>Create a new dataframe called <code>trialact.male &lt;- subset(trialact, gender == 0)</code> and then do your analysis on this new dataframe.</li>
+<li>Create a new dataframe called <code>ACTG175.male &lt;- subset(ACTG175, gender == 0)</code> and then do your analysis on this new dataframe.</li>
 </ul>
 </div>
 <div id="anova-with-aov" class="section level3">
@@ -402,33 +411,45 @@ library(speff2trial)</code></pre>
 <li><p>Does the previous result hold if you only consider patients with a history of intravenous drug use (<code>drugs</code>)? Answer this by conducting the same ANOVA <em>only</em> on these patients.</p></li>
 </ol>
 <ul>
-<li>Create a new dataframe called <code>trialact_drugs = subset(trialact, drugs == 1)</code> and run your analysis on this dataframe</li>
+<li>Create a new dataframe called <code>ACTG175_drugs = subset(ACTG175, drugs == 1)</code> and run your analysis on this dataframe</li>
 </ul>
 </div>
 </div>
 <div id="extras-and-challenges" class="section level2">
 <h2>Extras and Challenges</h2>
+<div id="generating-random-samples-from-distributions" class="section level3">
+<h3>Generating random samples from distributions</h3>
 <ol start="19" style="list-style-type: decimal">
-<li><p>You can easily generate random samples from statistical distributions in R. For example, to generate samples from the well known Normal distribution, you can use <code>rnorm()</code>. Look at the help menu for <code>rnorm()</code> to see its arguments. Then, create a new object <code>samp_10</code> which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results?</p></li>
+<li><p>You can easily generate random samples from statistical distributions in R. To see all of them, run <code>?distributions</code>. For example, to generate samples from the well known Normal distribution, you can use <code>rnorm()</code>. Look at the help menu for <code>rnorm()</code> to see its arguments.</p></li>
+<li><p>Using <code>rnorm()</code>, create a new object <code>samp_10</code> which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results?</p></li>
 <li><p>Evalaute your code for the previous question <em>exactly</em> as it is – that is, don’t change <em>anything</em>. What are the new values in <code>samp_10</code> and the new mean, standard deviation, and t-test result. Why are the new results different?</p></li>
 <li><p>Now, create a new object called <code>samp_1000</code> which is 1,000 samples from a Normal distribution (again with mean 12 and standard deviation 5). Print this object to see what it looks like. What should the mean and standard deviation of this sample be? Do the same hypothesis test as you did in the previous question. What is your new p-value?</p></li>
-<li><p>Conduct a two-way ANOVA testing the effects of <em>both</em> hemophilia (<code>hemo</code>) and drug use (<code>drugs</code>) on the number of days until a major negative event.</p></li>
+</ol>
+</div>
+<div id="way-anova" class="section level3">
+<h3>2 - Way ANOVA</h3>
+<ol start="23" style="list-style-type: decimal">
+<li>Conduct a two-way ANOVA testing the effects of <em>both</em> hemophilia (<code>hemo</code>) and drug use (<code>drugs</code>) on the number of days until a major negative event.</li>
 </ol>
 <ul>
 <li>To include multiple factors in an anova, just include both in the formula such as: <code>formula = dv ~ factor(x) + factor(y) + ...</code>. See <a href="https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova" class="uri">https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova</a> for an example</li>
 </ul>
-<ol start="23" style="list-style-type: decimal">
+<ol start="24" style="list-style-type: decimal">
 <li>Repeat the previous ANOVA, but now test if there is an <em>interaction</em> between hemophilia and drugs on the number of days until a major negative event.</li>
 </ol>
 <ul>
 <li>To include interactions in an ANOVA, just include both in the formula using the <code>*</code> operator: <code>formula = dv ~ factor(x) * factor(y)</code>. See <a href="https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova" class="uri">https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova</a> for an example</li>
 </ul>
-<ol start="24" style="list-style-type: decimal">
+</div>
+<div id="you-choose-the-test" class="section level3">
+<h3>You choose the test!</h3>
+<ol start="25" style="list-style-type: decimal">
 <li><p>Is there a difference in the CD4 T cell count at baseline between whites and non-whites? Answer this by conducting the appropriate hypothesis test.</p></li>
 <li><p>A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.</p></li>
-<li><p>A researcher wants to know if the relationship between CD4 T cell count at baseline and age is the same for whites and non-whites. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?</p></li>
+<li><p>A researcher wants to know if the relationship between CD4 T cell count at baseline and age is similar for whites and non-whites. Specifically, she wants to know if both correlations are significant (and in the same direction!) or not. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?</p></li>
 <li><p>A researcher is concerned that patients were not properly randomly assigned to the different treatment arms. Using the appropriate test(s), see if there is a significant imbalance between treatment arms in terms of gender, drug use, race, and homosexual activity. Do you find evidence for a significant imbalance in any of these domains?</p></li>
 </ol>
+</div>
 </div>
 <div id="additional-reading" class="section level1">
 <h1>Additional reading</h1>
