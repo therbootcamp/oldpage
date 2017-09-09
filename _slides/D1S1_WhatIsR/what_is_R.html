@@ -13,7 +13,7 @@ class: center, middle, inverse, title-slide
 
 # What is R?
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
-### June 2017
+### September 2017
 
 ---
 
@@ -57,6 +57,26 @@ summary(analysis)
 ```
 ]
 
+&lt;!--  ---
+
+# A short history on R
+
+From [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language) (emphasis added):
+
+.pull-left6[
+&gt; R is an implementation of the **S programming language** combined with **lexical scoping** semantics [environments] inspired by Scheme. [...] There are some important differences, but much of the code written for S runs unaltered.
+
+&gt;R was created by **Ross Ihaka and Robert Gentleman** [...] and is currently developed by the **R Development Core Team** [...]. R is named partly after the first names of the first two R authors and partly as a play on the name of S. The project was conceived in 1992, with an initial version released in 1995 and a **stable beta version in 2000**.
+]
+
+.pull-right6[
+&lt;img src="http://www.estatisticacomr.uff.br/wp-content/uploads/2014/11/Criadores.jpg" height="350px" style="display: block; margin: auto;" /&gt;
+&lt;p style="font-size:20px" align="center"&gt;
+Robert Gentleman and Ross Ihaka&lt;br&gt;
+&lt;font size="2" color="#F52D70"&gt;source: https://i0.wp.com/r4stats.com/&lt;/font&gt;
+&lt;/p&gt;
+]
+--&gt;
 ---
 
 # R is purpose specific
@@ -90,31 +110,69 @@ R steadily grows in popularity. Today, R is one of the most popular languages fo
 
 ---
 
-# R has strengths and weaknesses
+# R is so popular because
 
-R has been implemented in **C, Fortran, and R**. This means that R can be fast and efficient, however, often it is not. R's strengths rather lie in its flexibility and cutting-edge development. 
+R has been implemented in **C, Fortran, and R**. This means that R can be fast and efficient, however, often it is not. R's strengths lie in its flexibility, cutting-edge development, and producitivity tools. 
 
 .pull-left5[
-### Strengths
-1. Extensibility ([CRAN](https://cran.r-project.org/), packages)
-2. User base (e.g., [stackoverflow](https://stackoverflow.com/))
-3. [Tidyverse](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
-4. [RStudio](https://www.rstudio.com/)
+### Pro
+1. **It's free**
+2. Relatively easy
+3. Extensibility ([CRAN](https://cran.r-project.org/), packages)
+4. User base (e.g., [stackoverflow](https://stackoverflow.com/))
+5. [Tidyverse](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
+6. [RStudio](https://www.rstudio.com/)
+7. Producitivity options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
 ]
 
 .pull-right5[
-### Weaknesses
+### Con
 1. Slow and wordy
 2. Limited (no iterators, pointers, etc.)
 
 `\(\rightarrow\)` [Rcpp](http://www.rcpp.org/), [rPython](http://rpython.r-forge.r-project.org/)
 ]
 
+
 ---
 
-# The omnipotent **tidyverse**
+# RStudio: R's favorite environment
 
-Modern R contains a collection of high-performance, easy-to-use packages (libraries) for data handling know as the [tidyverse](https://www.tidyverse.org/). The tidyverse includes:
+Next to many useful packages, R users greatly benefit from R's integrated development environment [RStudio](https://www.rstudio.com/). Rstudio is a graphical user interface that allows you to (a) edit code, (b) run code, (c) access files and progress, and (d) create plots. In addition RStudio helps you with version control via [Github](https://github.com/), to write reports using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), integrating C++ into R, writing clean code, and to debug code.&lt;br&gt;&lt;br&gt;  
+
+
+&lt;img src="rstudio_plus.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# The workflow of R
+
+&lt;img src="rstudio_workings.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Project management
+
+RStudio facilitate project management via the use of *projects*. Projects support:
+
+.pull-left5[
+1. **File management** by automatically setting the working directory (see `setwd()`)
+&lt;br&gt;&lt;br&gt;
+2. **Project transitioning** by saving re-opening scripts, history, and workspace.
+&lt;br&gt;&lt;br&gt;
+3. **Customization** by enabling project specific settings.
+&lt;br&gt;&lt;br&gt;
+4. **Version control** by linking projects to repositories (e.g., using [GitHub](https://github.com/))
+]
+.pull-right5[
+&lt;img src="Projects.png" width="550px" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# The almighty **tidyverse**
+
+Among its many packages, R contains a collection of high-performance, easy-to-use packages (libraries) designed specifically for handling data know as the [tidyverse](https://www.tidyverse.org/). The tidyverse includes:
 1. `ggplot2` -- creating graphics.
 2. `dplyr` -- data manipulation.
 3. `tidyr` -- tidying data.
@@ -127,977 +185,203 @@ Modern R contains a collection of high-performance, easy-to-use packages (librar
 
 ---
 
-# RStudio: R's favorite working place  
+# Essentials of the R language
 
-Next to many useful packages, R users greatly benefit from R's integrated development environment [RStudio](https://www.rstudio.com/). Rstudio is a graphical user interface that allows you to (a) edit code, (b) run code, (c) access files and progress, and (d) create plots. In addition RStudio helps you with version control via [Github](https://github.com/), to write reports using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), and with integrating C++ into R.&lt;br&gt;&lt;br&gt;  
 
 
-&lt;img src="rstudio_plus.png" width="800px" style="display: block; margin: auto;" /&gt;
-
----
-
-# RStudio's structure
-
-Next ...&lt;br&gt;&lt;br&gt;  
-
-
-&lt;img src="rstudio_workings.png" width="800px" style="display: block; margin: auto;" /&gt;
-
-
-
-
-
-
----
-
-class: small
-
-# Some Example Data
-
-Data from Revelle, Wilt and Rosenthal (2009). `?sat.act`:
-&gt; Items were collected as part of the SAPA project (http://sapa-project.org) to develop online measures of ability (Revelle, Wilt and Rosenthal, 2009). The score means are higher than national norms suggesting both self selection for people taking on line personality and ability tests and a self reporting bias in scores.
-
-
-```r
-require(psych)
-data(sat.act)
-sat.act$gender &lt;- factor(sat.act$gender, 1:2, labels = c("male", "female"))
-sat.act$education &lt;- factor(sat.act$education)
-summary(sat.act) # alternatively: psych::describe(sat.act)
-```
-
-```
-##     gender    education      age            ACT            SATV          SATQ    
-##  male  :247   0: 57     Min.   :13.0   Min.   : 3.0   Min.   :200   Min.   :200  
-##  female:453   1: 45     1st Qu.:19.0   1st Qu.:25.0   1st Qu.:550   1st Qu.:530  
-##               2: 44     Median :22.0   Median :29.0   Median :620   Median :620  
-##               3:275     Mean   :25.6   Mean   :28.6   Mean   :612   Mean   :610  
-##               4:138     3rd Qu.:29.0   3rd Qu.:32.0   3rd Qu.:700   3rd Qu.:700  
-##               5:141     Max.   :65.0   Max.   :36.0   Max.   :800   Max.   :800  
-##                                                                     NA's   :13
-```
-
-```r
-sat.act &lt;- na.omit(sat.act)
-```
-
----
-# Some Example Data
-
-
-
-```r
-par(mfrow=c(1,2))
-plot(sat.act$SATV, sat.act$ACT)
-plot(sat.act$SATQ, sat.act$ACT)
-```
-
-![](what_is_R_files/figure-html/unnamed-chunk-7-1.svg)&lt;!-- --&gt;
-
----
-# Linear Regression Model
-
-- `\(\bf{y}\)` = vector of ACT scores of length `\(n\)` (*dependent variable*)
-- `\(\bf{x_{\mbox{SATV}}}\)` = vector of SATV scores of length `\(n\)` (*independent variable* or *covariate*)
-
-`$$y_i = \beta_0x_{0,i}+\beta_{\mbox{SATV}}x_{\mbox{SATV},i}+\epsilon_i, \ \ i = 1, ..., n, \\
-\bf{\epsilon} \sim \mathcal{N}(0, \sigma^2_{\epsilon}),$$`
-where `\(\bf{x_0}\)` is a vector of 1s of length `\(n\)`.
-
-- Errors `\(\bf{\epsilon}\)` are assumed to come from a normal distribution (i.e., uncorrelated).
-
-- `\(\beta_0\)` and  `\(\beta_{\mbox{SATV}}\)` are scalars (i.e., of length 1) and called *regression coefficients* or *parameters* ( `\(\sigma^2_{\epsilon}\)` is also a parameter). `\(\beta_0\)` is also known as the *intercept*.
-
-******
-
-In matrix form this model can be expressed as:
-`$$\bf{y} = \bf{X}\bf{\beta}+\bf{\epsilon}$$`
-
----
-class: small
-
-# Linear Model in R
-
-.pull-left2[
-
-```r
-m1 &lt;- lm(ACT ~ SATQ, sat.act)
-summary(m1)
-```
-
-```
-## 
-## Call:
-## lm(formula = ACT ~ SATQ, data = sat.act)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -20.394  -2.573   0.267   2.267  16.511 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 13.58325    0.80249    16.9   &lt;2e-16 ***
-## SATQ         0.02453    0.00129    19.0   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.91 on 685 degrees of freedom
-## Multiple R-squared:  0.345,	Adjusted R-squared:  0.344 
-## F-statistic:  360 on 1 and 685 DF,  p-value: &lt;2e-16
-```
-
-]
-.pull-right2[
-
-```r
-coef(m1)
-```
-
-```
-## (Intercept)        SATQ 
-##    13.58325     0.02453
-```
-
-
-```r
-plot(sat.act$SATV, sat.act$ACT)
-abline(m1)
-```
-
-![](what_is_R_files/figure-html/unnamed-chunk-10-1.svg)&lt;!-- --&gt;
-]
----
-class: small
-
-# Linear Model in R (Centered)
-
-.pull-left2[
-
-```r
-sat.act$SATQ_c &lt;- sat.act$SATQ - mean(sat.act$SATQ, na.rm = TRUE)
-sat.act$SATV_c &lt;- sat.act$SATV - mean(sat.act$SATV)
-m2 &lt;- lm(ACT ~ SATQ_c, sat.act)
-summary(m2)
-```
-
-```
-## 
-## Call:
-## lm(formula = ACT ~ SATQ_c, data = sat.act)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -20.394  -2.573   0.267   2.267  16.511 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 28.55022    0.14931     191   &lt;2e-16 ***
-## SATQ_c       0.02453    0.00129      19   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.91 on 685 degrees of freedom
-## Multiple R-squared:  0.345,	Adjusted R-squared:  0.344 
-## F-statistic:  360 on 1 and 685 DF,  p-value: &lt;2e-16
-```
-
-]
-.pull-right2[
-
-```r
-coef(m2)
-```
-
-```
-## (Intercept)      SATQ_c 
-##    28.55022     0.02453
-```
-
-
-```r
-plot(sat.act$SATV_c, sat.act$ACT)
-abline(m2)
-```
-
-![](what_is_R_files/figure-html/unnamed-chunk-13-1.svg)&lt;!-- --&gt;
-]
----
-
-class: inline-grey
-# Formula Interface for Statistical Models: `~`
-
-Allows symbolic specification of statistical model, e.g. linear models: `lm(ACT ~ SATQ, sat.act)`
-
-Everything to the left of `~` is the dependent variable:
-```r
-y ~ x # univariate model
-cbind(y1, y2, y3) ~ x # multivariate model
-~ x # one sided formula
-```
-
-Independent variables are to the right of the `~`:
-
-| Formula | &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; | Interpretation  |
-| ------------------------|---|----------------------------------|
-| `~ x` or `~1+x`         || Intercept and main effect of `x` | 
-| ` ~ x-1` or `~0 + x`    || Only main effect of `x` and no intercept (questionable) |
-| `~ x+y`                 || Main effects of `x` and `y`|
-| `~ x:y`                 || Interaction between `x` and `y` (and no main effect) |
-| `~ x*y` or `~ x+y+x:y`  || Main effects and interaction between `x` and `y` |
-
----
-class: small
-
-# How many Parameters in each Model?
-
-
-```r
-lm(ACT ~ SATQ_c + SATV_c, sat.act)   # a
-lm(ACT ~ SATQ_c : SATV_c, sat.act)   # b
-lm(ACT ~ 0 + SATQ_c:SATV_c, sat.act) # c
-lm(ACT ~ SATQ_c*SATV_c, sat.act)     # d
-lm(ACT ~ 0+SATQ_c*SATV_c, sat.act)   # e
-```
-
---
-.pull-left[
-
-```r
-coef(lm(ACT ~ SATQ_c + SATV_c, sat.act))   # a
-```
-
-```
-## (Intercept)      SATQ_c      SATV_c 
-##    28.55022     0.01614     0.01328
-```
-
-```r
-coef(lm(ACT ~ SATQ_c : SATV_c, sat.act))   # b
-```
-
-```
-##   (Intercept) SATQ_c:SATV_c 
-##     2.895e+01    -4.757e-05
-```
-
-```r
-coef(lm(ACT ~ 0 + SATQ_c:SATV_c, sat.act)) # c
-```
-
-```
-## SATQ_c:SATV_c 
-##     0.0006005
-```
-
-
+.pull-left7[
+&gt;"To understand computations in R, two slogans are helpful:
+&gt;###(1) Everything that exists is an object and 
+&gt;###(2) everything that happens is a function call."
 ]
 
-.pull-right[
+.pull-right7[
+&lt;p align="center"&gt;&lt;img src="https://statweb.stanford.edu/~jmc4/CopyPhoto.jpg" width="350" align="center"&gt;&lt;/p&gt;
+&lt;p align="center"&gt;John Chambers&lt;br&gt; &lt;font size=2&gt; Author of S and developer of R&lt;/font&gt;&lt;/p&gt;
+]
+
+---
+
+# Calls, assignments, and expressions
+
+In R every action is a function call. Specifically R scripts advances by **passing on data and arguments to functions**, calling the function, and receiving its output. However, functions may however not always look like functions. The output is then stored in a new object using assignment. 
+
+.pull-left9[
 
 ```r
-coef(lm(ACT ~ SATQ_c*SATV_c, sat.act))     # d
+# defining a function - arithm. mean
+my_fun &lt;- function(x, b){ x * b }
+
+# define some data
+my_data &lt;- c(1, 5, 7, 3) 
+
+# pass on arguments and call function
+my_fun(my_data, 5) 
 ```
 
 ```
-##   (Intercept)        SATQ_c        SATV_c SATQ_c:SATV_c 
-##     2.832e+01     1.701e-02     1.432e-02     2.780e-05
+## [1]  5 25 35 15
 ```
 
 ```r
-coef(lm(ACT ~ 0+SATQ_c*SATV_c, sat.act))   # e
-```
-
-```
-##        SATQ_c        SATV_c SATQ_c:SATV_c 
-##     0.0397598     0.0416544     0.0007596
+# store output by assignment
+my_out &lt;- my_fun(my_data, 5)
 ```
 
 ]
 
-
-
-
----
-class: center, middle, inverse
-
-# Categorical Covariates
-
----
-class: small
-# Categorical Covariates
-
-`R` modeling functions behave differently for numerical and categorical covariates. 
-
-It is important to always know of what type variables are. Use `str()` on a `data.frame` to obtain information regarding the structure, including variable types: 
-
+.pull-right9[
 
 ```r
-str(sat.act)
+# a basic expression
+2 + 2
 ```
 
 ```
-## 'data.frame':	687 obs. of  8 variables:
-##  $ gender   : Factor w/ 2 levels "male","female": 2 2 2 1 1 1 2 1 2 2 ...
-##  $ education: Factor w/ 6 levels "0","1","2","3",..: 4 4 4 5 3 6 6 4 5 6 ...
-##  $ age      : int  19 23 20 27 33 26 30 19 23 40 ...
-##  $ ACT      : int  24 35 21 26 31 28 36 22 22 35 ...
-##  $ SATV     : int  500 600 480 550 600 640 610 520 400 730 ...
-##  $ SATQ     : int  500 500 470 520 550 640 500 560 600 800 ...
-##  $ SATQ_c   : num  -110.2 -110.2 -140.2 -90.2 -60.2 ...
-##  $ SATV_c   : num  -112.3 -12.3 -132.3 -62.3 -12.3 ...
-##  - attr(*, "na.action")=Class 'omit'  Named int [1:13] 130 197 248 364 376 419 498 515 523 581 ...
-##   .. ..- attr(*, "names")= chr [1:13] "31294" "32448" "33259" "35106" ...
-```
-
-- Numerical covariates are `int` or `num`.
-- Categorical covariates are `Factor` (or `character`).
-
-**Make sure all categorical variables are factors before adding them to a statistical model!**
-
----
-class: small
-
-# Models with Categorical Covariates
-
-We might be interested in testing whether ACT differs between men and women. 
-.pull-left2[
-
-```r
-m3 &lt;- lm(ACT ~ gender, sat.act)
-summary(m3)
-```
-
-```
-## 
-## Call:
-## lm(formula = ACT ~ gender, data = sat.act)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-##  -25.8   -3.4    0.6    3.6    7.6 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    28.820      0.309   93.39   &lt;2e-16 ***
-## genderfemale   -0.420      0.385   -1.09     0.28    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.83 on 685 degrees of freedom
-## Multiple R-squared:  0.00174,	Adjusted R-squared:  0.000279 
-## F-statistic: 1.19 on 1 and 685 DF,  p-value: 0.275
-```
-
-]
---
-
-
-
-.pull-right2[
-
-```r
-mean(sat.act$ACT)
-```
-
-```
-## [1] 28.55
+## [1] 4
 ```
 
 ```r
-sat.act %&gt;% group_by(gender) %&gt;%
-  summarise(m = mean(ACT))
+# is also a function
+'+'(2,2)
 ```
 
 ```
-## # A tibble: 2 x 2
-##   gender     m
-##   &lt;fctr&gt; &lt;dbl&gt;
-## 1   male 28.82
-## 2 female 28.40
-```
-
-
-```r
-sat.act %&gt;% group_by(gender) %&gt;%
-  summarise(m = mean(ACT)) %&gt;%
-  {.$m[2] - .$m[1]}
-```
-
-```
-## [1] -0.42
-```
-]
-
-
-
----
-class: small
-
-# R and Categorical Covariates
-`model.matrix()` transforms categorical covariates into numerical variables that can be used for fitting using a specific contrast function (see `?contr.sum`).
-
-.pull-left[
-
-```r
-model.matrix(ACT ~ gender, sat.act[1:5,])
-```
-
-```
-##       (Intercept) genderfemale
-## 29442           1            1
-## 29457           1            1
-## 29498           1            1
-## 29503           1            0
-## 29504           1            0
-## attr(,"assign")
-## [1] 0 1
-## attr(,"contrasts")
-## attr(,"contrasts")$gender
-## [1] "contr.treatment"
+## [1] 4
 ```
 ]
 
 ---
-class: small
-# R and Categorical Covariates
 
-`model.matrix()` transforms categorical covariates into numerical variables that can be used for fitting using a specific contrast function (see `?contr.sum`).
+# Object-orientation
 
-.pull-left[
-
-```r
-model.matrix(ACT ~ gender, sat.act[1:5,])
-```
-
-```
-##       (Intercept) genderfemale
-## 29442           1            1
-## 29457           1            1
-## 29498           1            1
-## 29503           1            0
-## 29504           1            0
-## attr(,"assign")
-## [1] 0 1
-## attr(,"contrasts")
-## attr(,"contrasts")$gender
-## [1] "contr.treatment"
-```
-
-
-```r
-afex::set_sum_contrasts()
-```
-
-```
-## setting contr.sum globally: options(contrasts=c('contr.sum', 'contr.poly'))
-```
-
-]
-
-.pull-right[
-
-```r
-model.matrix(ACT ~ gender, sat.act[1:5,])
-```
-
-```
-##       (Intercept) gender1
-## 29442           1      -1
-## 29457           1      -1
-## 29498           1      -1
-## 29503           1       1
-## 29504           1       1
-## attr(,"assign")
-## [1] 0 1
-## attr(,"contrasts")
-## attr(,"contrasts")$gender
-## [1] "contr.sum"
-```
-]
-
----
-class: small
-
-# Models with Categorical Covariates II 
-
-Same model as before, but with sum/effects contrasts.
-
-.pull-left2[
-
-```r
-m4 &lt;- lm(ACT ~ gender, sat.act)
-summary(m4)
-```
-
-```
-## 
-## Call:
-## lm(formula = ACT ~ gender, data = sat.act)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-##  -25.8   -3.4    0.6    3.6    7.6 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   28.610      0.192  148.73   &lt;2e-16 ***
-## gender1        0.210      0.192    1.09     0.28    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.83 on 685 degrees of freedom
-## Multiple R-squared:  0.00174,	Adjusted R-squared:  0.000279 
-## F-statistic: 1.19 on 1 and 685 DF,  p-value: 0.275
-```
-
-]
-
-
-
-.pull-right2[
-
-```r
-mean(sat.act$ACT)
-```
-
-```
-## [1] 28.55
-```
-
-```r
-sat.act %&gt;% group_by(gender) %&gt;%
-  summarise(m = mean(ACT))
-```
-
-```
-## # A tibble: 2 x 2
-##   gender     m
-##   &lt;fctr&gt; &lt;dbl&gt;
-## 1   male 28.82
-## 2 female 28.40
-```
-
-```r
-sat.act %&gt;% group_by(gender) %&gt;%
-  summarise(m = mean(ACT)) %&gt;% 
-  summarise(mean(m))
-```
-
-```
-## # A tibble: 1 x 1
-##   `mean(m)`
-##       &lt;dbl&gt;
-## 1     28.61
-```
-
-]
-
-
-
----
-class: small
-# Models with Categorical Covariates and Interactions
-
-
-```r
-afex::set_default_contrasts() # or set_treatment_contrasts()
-```
-
-```
-## setting contr.treatment globally: options(contrasts=c('contr.treatment', 'contr.poly'))
-```
-
-
-
-
-.pull-left2[
-
-```r
-m5 &lt;- lm(ACT ~ gender*education, sat.act)
-coef(m5)
-```
-
-```
-##             (Intercept)            genderfemale 
-##                29.03704                -2.96807 
-##              education1              education2 
-##                -2.45809                -2.38486 
-##              education3              education4 
-##                -0.36615                -0.09586 
-##              education5 genderfemale:education1 
-##                 1.78905                 4.22246 
-## genderfemale:education2 genderfemale:education3 
-##                 3.51590                 2.46034 
-## genderfemale:education4 genderfemale:education5 
-##                 3.39899                 1.26026
-```
-
-]
-
-.pull-right2[
-
-```r
-sat.act %&gt;% 
-  group_by(gender,education) %&gt;%
-  summarise(mean(ACT))
-```
-
-```
-## # A tibble: 12 x 3
-## # Groups:   gender [?]
-##    gender education `mean(ACT)`
-##    &lt;fctr&gt;    &lt;fctr&gt;       &lt;dbl&gt;
-##  1   male         0       29.04
-##  2   male         1       26.58
-##  3   male         2       26.65
-##  4   male         3       28.67
-##  5   male         4       28.94
-##  6   male         5       30.83
-##  7 female         0       26.07
-##  8 female         1       27.83
-##  9 female         2       27.20
-## 10 female         3       28.16
-## 11 female         4       29.37
-## 12 female         5       29.12
-```
-]
-
-
-
----
-class: small
-# Models with Categorical Covariates and Interactions II
-
-
-```r
-afex::set_sum_contrasts() # or set_effects_contrasts() or set_deviation_contrasts()
-```
-
-```
-## setting contr.sum globally: options(contrasts=c('contr.sum', 'contr.poly'))
-```
-
-
-
-
-.pull-left2[
-
-```r
-m6 &lt;- lm(ACT ~ gender*education, sat.act)
-coef(m6)
-```
-
-```
-##        (Intercept)            gender1         education1 
-##          28.205178           0.245873          -0.652177 
-##         education2         education3         education4 
-##          -0.999038          -1.279091           0.211844 
-##         education5 gender1:education1 gender1:education2 
-##           0.951457           1.238163          -0.873066 
-## gender1:education3 gender1:education4 gender1:education5 
-##          -0.519786           0.007991          -0.461331
-```
-
-]
-
-.pull-right2[
-
-```r
-sat.act %&gt;% 
-  group_by(gender,education) %&gt;%
-  summarise(m = mean(ACT)) %&gt;% 
-  ungroup() %&gt;% 
-  summarise(mean(m))
-```
-
-```
-## # A tibble: 1 x 1
-##   `mean(m)`
-##       &lt;dbl&gt;
-## 1     28.21
-```
-]
-
-
-
----
-# Categorical Covariates and Model Matrices
-
-.pull-left3[
-
-```r
-lm(ACT ~ SATQ + SATV, sat.act)   # a: 3
-lm(ACT ~ SATQ : SATV, sat.act)   # b: 2
-lm(ACT ~ 0 + SATQ:SATV, sat.act) # c: 1
-lm(ACT ~ SATQ*SATV, sat.act)     # d: 4
-lm(ACT ~ 0+SATQ*SATV, sat.act)   # e: 3
-
-lm(ACT ~ SATQ, sat.act)          # f: 2
-lm(ACT ~ 0 + SATQ, sat.act)      # g: 1
-```
-
-]
-
---
-.pull-right3[
-
-```r
-lm(ACT ~ gender, sat.act)                  # a
-lm(ACT ~ 0+gender, sat.act)                # b
-lm(ACT ~ gender+education, sat.act)        # c
-lm(ACT ~ 0+gender+education, sat.act)      # d
-lm(ACT ~ gender:education, sat.act)        # e
-lm(ACT ~ 0+gender:education, sat.act)      # f
-lm(ACT ~ gender*education, sat.act)        # g
-lm(ACT ~ 0+gender*education, sat.act)      # h
-lm(ACT ~ gender+gender:education, sat.act) # i
-```
-
-
-```r
-levels(sat.act$gender)
-```
-
-```
-## [1] "male"   "female"
-```
-
-```r
-levels(sat.act$education)
-```
-
-```
-## [1] "0" "1" "2" "3" "4" "5"
-```
-
-
-]
-
-
----
-class: small
-
-# Beware of Formulas with Categorical Variables
+R is an object-oriented language. This means that for R that **everything is an object** (including functions). This also means that there are several generic functions that respond to the **object's class**. Another important feature of R regarding objects is that R **always copies deep**. This is why practically everything in R is an assignment. 
 
 
 
 ```r
-coef(lm(ACT ~ gender, sat.act))                  # a: 2
+# creating a vector and testing its class (type of object)
+my_vector &lt;- c(1, 5, 2)
+print(class(my_vector))
 ```
 
 ```
-## (Intercept)     gender1 
-##       28.61        0.21
-```
-
-```r
-coef(lm(ACT ~ 0+gender, sat.act))                # b: 2
-```
-
-```
-##   gendermale genderfemale 
-##        28.82        28.40
+## [1] "numeric"
 ```
 
 ```r
-coef(lm(ACT ~ gender+education, sat.act))        # c: 7
+# testing the class (aka object type) of an object
+print(my_vector)
 ```
 
 ```
-## (Intercept)     gender1  education1  education2  education3  education4  education5 
-##     28.2016      0.2906     -0.6912     -0.8888     -1.3149      0.2306      1.0843
-```
-
-```r
-coef(lm(ACT ~ 0+gender+education, sat.act))      # d: 7
-```
-
-```
-##   gendermale genderfemale   education1   education2   education3   education4   education5 
-##      28.4922      27.9110      -0.6912      -0.8888      -1.3149       0.2306       1.0843
-```
-
----
-class: small
-
-
-
-```r
-coef(lm(ACT ~ gender:education, sat.act))        # e: 13
-```
-
-```
-##             (Intercept)   gendermale:education0 genderfemale:education0   gendermale:education1 
-##                29.11828                -0.08124                -3.04931                -2.53933 
-## genderfemale:education1   gendermale:education2 genderfemale:education2   gendermale:education3 
-##                -1.28495                -2.46611                -1.91828                -0.44739 
-## genderfemale:education3   gendermale:education4 genderfemale:education4   gendermale:education5 
-##                -0.95512                -0.17710                 0.25381                 1.70781 
-## genderfemale:education5 
-##                      NA
+## [1] 1 5 2
 ```
 
 ```r
-coef(lm(ACT ~ 0+gender:education, sat.act))      # f: 12
+# Sorting 
+sort(my_vector)  
 ```
 
 ```
-##   gendermale:education0 genderfemale:education0   gendermale:education1 genderfemale:education1 
-##                   29.04                   26.07                   26.58                   27.83 
-##   gendermale:education2 genderfemale:education2   gendermale:education3 genderfemale:education3 
-##                   26.65                   27.20                   28.67                   28.16 
-##   gendermale:education4 genderfemale:education4   gendermale:education5 genderfemale:education5 
-##                   28.94                   29.37                   30.83                   29.12
+## [1] 1 2 5
 ```
-
 
 ```r
-coef(lm(ACT ~ gender*education, sat.act))        # g: 12
-coef(lm(ACT ~ 0+gender*education, sat.act))      # h: 12
-coef(lm(ACT ~ gender+gender:education, sat.act)) # i: 12
-```
-
-
-
----
-class: inline-grey
-# Interim Summary
-
-- The `R` `formula` interface allows symbolic specification of statistical models.
-  - `+` = main effects
-  - `:` = interaction
-  - `*` = main effects plus interaction
-  - `0+`/`-1` = no intercept
-
-- Categorical variables are transformed into numerical variables using contrast functions (via `model.matrix()`; see Cohen et al., 2002)
-  - If models include interactions, orthogonal contrasts (e.g., `contr.sum`) in which the intercept corresponds to the (unweighted) grand mean should be used: `afex::set_sum_contrasts()`
-  - Dummy/treatment contrasts (`R` default) lead to simple effects for lower order effects.
-  - **Coding only affects interpretation of parameters/tests not overall model fit.**
-
-- For models with only numerical covariates, suppressing intercept works as expected.
-- For models with categorical covariates, suppressing intercept or other lower-order effects often leads to very surprising results (and should generally be avoided).
-
----
-class: center, middle, inverse
-
-# Tests of Terms/Effects
-
----
-class: small
-
-
-
-.pull-left2[
-
-```r
-afex::set_sum_contrasts()
-m6 &lt;- lm(ACT ~ gender*education, sat.act)
-summary(m6)
+print(my_vector) # still unsorted
 ```
 
 ```
-## 
-## Call:
-## lm(formula = ACT ~ gender * education, data = sat.act)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -23.652  -3.118   0.329   3.837   9.931 
-## 
-## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)        28.20518    0.23133  121.93   &lt;2e-16 ***
-## gender1             0.24587    0.23133    1.06    0.288    
-## education1         -0.65218    0.56826   -1.15    0.252    
-## education2         -0.99904    0.63931   -1.56    0.119    
-## education3         -1.27909    0.63689   -2.01    0.045 *  
-## education4          0.21184    0.34788    0.61    0.543    
-## education5          0.95146    0.41373    2.30    0.022 *  
-## gender1:education1  1.23816    0.56826    2.18    0.030 *  
-## gender1:education2 -0.87307    0.63931   -1.37    0.173    
-## gender1:education3 -0.51979    0.63689   -0.82    0.415    
-## gender1:education4  0.00799    0.34788    0.02    0.982    
-## gender1:education5 -0.46133    0.41373   -1.12    0.265    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.75 on 675 degrees of freedom
-## Multiple R-squared:  0.0471,	Adjusted R-squared:  0.0316 
-## F-statistic: 3.03 on 11 and 675 DF,  p-value: 0.00057
+## [1] 1 5 2
 ```
-
-]
-
-.pull-right2[
-
-```r
-sat.act %&gt;% 
-  group_by(gender, education) %&gt;%
-  summarise(m = mean(ACT)) %&gt;% 
-  ungroup() %&gt;% 
-  summarise(mean(m))
-```
-
-```
-## # A tibble: 1 x 1
-##   `mean(m)`
-##       &lt;dbl&gt;
-## 1     28.21
-```
-]
-
 
 
 ---
 
-# `car::Anova()` is the Solution
+# Syntax
+
+Every language has specific expressive style. R is characterized by the following elements.
+
+.pull-left9[
++ Comment symbol `#`
+&lt;br2&gt;
++ Quotations with either `""` or ''
+&lt;br2&gt;
++ Curly brackets `{}` enclose expressions explicitly
+&lt;br2&gt;
++ Parentheses `()` call functions
+&lt;br2&gt;
++ Semicolon `;` separates expressions
+&lt;br2&gt;
++ `&lt;`,`&gt;`,`|`,`&amp;`,`==`, `!=` define logical statements
+]
 
 
 ```r
-require(car) # Companion to Applied Regression (Fox &amp; Weisberg, 2011)
+# This is a comment
+
+# Quotes are used to define strings
+"a" == 'a'
+
+# Expression and calls
+my_fun(x,y){ x  + y }
+
+# two expression in one line
+2 + 2 ; 3 + 3
+
+# are these equal/different
+2 == 2 ; 2 != 2
 ```
 
-```
-## Warning: package 'car' was built under R version 3.4.1
-```
-
-```r
-Anova(m6, type = 3)
-```
-
-```
-## Anova Table (Type III tests)
-## 
-## Response: ACT
-##                  Sum Sq  Df  F value  Pr(&gt;F)    
-## (Intercept)      335997   1 14866.33 &lt; 2e-16 ***
-## gender               26   1     1.13 0.28822    
-## education           542   5     4.80 0.00026 ***
-## gender:education    201   5     1.78 0.11466    
-## Residuals         15256 675                     
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
---
-
-- Type II and III tests equivalent for balanced designs (i.e., equal group sizes) and highest-order effect.
-- Type III tests require orthogonal contrasts (e.g.,`contr.sum`); recommended:
-  - For experimental designs in which imbalance is completely random and not structural,
-  - Complete cross-over interactions (i.e., main effects in presence of interaction) possible.
-- Type II are more appropriate if imbalance is structural (i.e., observational data; maybe here).
-
-
+]
 
 ---
-### References Statistical Modeling:
-- John Fox and Sanford Weisberg (2011). *An R Companion to Applied Regression, Second Edition.* Thousand Oaks CA: Sage. URL: http://socserv.socsci.mcmaster.ca/jfox/Books/Companion
-- Russell V. Lenth (2016). Least-Squares Means: The R Package lsmeans. *Journal of Statistical
-  Software*, 69(1), 1-33. https://doi.org/10.18637/jss.v069.i01
-- Cohen, J., Cohen, P., West, S. G., &amp; Aiken, L. S. (2002). *Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences.* New York: Routledge Academic.
 
-### References Example Data:
-- Revelle, William, Wilt, Joshua, and Rosenthal, Allen (2009) Personality and Cognition: The Personality-Cognition Link. In Gruszka, Alexandra and Matthews, Gerald and Szymura, Blazej (Eds.) _Handbook of Individual Differences in Cognition: Attention, Memory and Executive Control_, Springer.
-- Skovgaard-Olsen, N., Singmann, H., &amp; Klauer, K. C. (2016). The relevance effect and conditionals. *Cognition*, 150, 26-36. https://doi.org/10.1016/j.cognition.2015.12.017
+.pull-left9[
+# Help
+
+An important part of using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). In the beginning the help files may appear cryptical, however, over time you will realise that they are exceptionally helpful. Vignettes are longer tutorials sometimes provided by the authors of a package.     
+
+
+```r
+# To access help files
+help("name_of_function")
+?name_of_function
+
+# find help files
+??name_of_function
+
+# To list and access vignettes
+vignette(package="name_of_package")
+vignette(package="name_of_vignette")
+```
+
+]
+
+.pull-right9[
+&lt;br&gt;&lt;br&gt;&lt;iframe src="R_ Arithmetic Mean.htm" height="540" width="800" align="center"&gt;&lt;/iframe&gt;
+]
+
+---
+
+# Packages
+
+One of the huge benefits of R is its vast and cutting-edge collection of packages. Responsible for this is the larger and active user base, but also the [**CRAN**](https://cran.r-project.org/), who examine every package, apply a rigorous quality control, and eventually host the packages on various mirrors throughout the world. When downloading one of the many packages never forget that the package must also be loaded.        
+
+
+```r
+# To install a package
+install.packages('package_name')
+
+# load a package
+library(package_name)
+```
+
+]
+
+---
+
+# Interactive sessions
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
