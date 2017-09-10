@@ -243,7 +243,7 @@ Most read-in functions have **complementary write** functions to save the specif
 ### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
 ```{r, eval = F}
 # read fixed width files (can be fast)
-write_csv(my_data_frame,"./my_data.csv")
+write_csv(my_data_frame,"my_data.csv")
 write_delim(...)
 
 ```
@@ -371,7 +371,7 @@ my_data <- tibble(id, var_1, var_2)
 
 # convert to and from data.frame
 as_tibble(my_data_frame)
-as_data.frame(my_tibble)
+as.data.frame(my_tibble)
 ```
 
 ```{r, echo = F}
