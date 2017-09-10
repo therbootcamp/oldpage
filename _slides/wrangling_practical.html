@@ -241,7 +241,7 @@ chick %&gt;%
   summarise(
     weight.mean = mean(weight),
     weight.max = max(weight),
-    time.mean = mean(Time)
+    time.mean = mean(Time),
     N = n()
   ) %&gt;%
   arrange(weight.mean)
@@ -265,7 +265,7 @@ chick %&gt;%
 <ol style="list-style-type: decimal">
 <li><p>Open an R project (or create a new one). In the main directory where that project is located, create two new empty folders: one called <code>data</code> and one called <code>R</code>. (Hint: You can create, and them rename, new empty folders in the <code>Files</code> pane of RStudio.)</p></li>
 <li><p>Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>datawrangling.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> packages with <code>library()</code></p></li>
-<li><p>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at “<a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>”. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>run_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</p></li>
+<li><p>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at “<a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>”. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>read_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</p></li>
 <li><p>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created (Hint: the main arguments to <code>write_csv()</code> are <code>x</code>, the object you are writing, and <code>path</code>, the directory and file name you’re saving the object to.)</p></li>
 <li><p>Now that you have a local copy of the data saved, we try loading the data back into R from that file. But first, delete the object <code>ACTG175</code> from your workspace by running <code>rm(ACTG175)</code>.</p></li>
 <li><p>Now it’s time to get the data back from the local file! To do this, use <code>read_csv()</code> to load the <code>ACTG175.csv</code> file data back into your R session and again store it as the object <code>ACTG175</code>. Now, your code should be able to access your local copy of the data, even when you are not online.</p></li>
