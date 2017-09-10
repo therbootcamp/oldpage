@@ -232,8 +232,8 @@ chick &lt;- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as a 
 
 mean(chick$weight)   # What is the mean weight?
 median(chick$Time)   # What is the median time?
-max(Chick$weight)    # What is the maximum weight?
-table(Chick$Diet)    # How many observations for each diet?
+max(chick$weight)    # What is the maximum weight?
+table(chick$Diet)    # How many observations for each diet?
 
 # -----
 # 1-sample hypothesis test
@@ -241,7 +241,7 @@ table(Chick$Diet)    # How many observations for each diet?
 
 # Q: Is the mean weight of chickens different from 110?
 
-htest_A &lt;- t.test(x = ChickWeight$weight,     # The data
+htest_A &lt;- t.test(x = chick$weight,     # The data
                    alternative = &quot;two.sided&quot;,  # Two-sided test
                    mu = 110)                   # The null hyopthesis
 
@@ -259,7 +259,7 @@ htest_A$conf.int   # Get a confidence interval
 
 htest_B &lt;- t.test(formula = weight ~ Diet,     # DV ~ IV
                    alternative = &quot;two.sided&quot;,  # Two-sided test
-                   data = ChickWeight,         # The data
+                   data = chick,         # The data
                    subset = Diet %in% c(1, 2)) # Compare Diet 1 and Diet 2
 
 htest_B  # Print result
@@ -271,7 +271,7 @@ htest_B  # Print result
 # Q: Is there a correlation between Time and weight?
 
 htest_C &lt;- cor.test(formula = ~ weight + Time,
-                    data = ChickWeight)
+                    data = chick)
 
 htest_C
 
@@ -281,7 +281,7 @@ htest_C
 # Q: Does the result hold when ONLY considering Diets 1 and 2?
 
 htest_D &lt;- cor.test(formula = ~ weight + Time,
-                    data = ChickWeight,
+                    data = chick,
                     subset = Diet %in% c(1, 2))     # Only take data where Diet is 1 or 2
 
 htest_D
@@ -295,7 +295,7 @@ htest_D
 
 # Q: Are there more observations from chicks on one diet versus another?
 
-htest_E &lt;- chisq.test(x = table(ChickWeight$Diet))  # Input is a table of values
+htest_E &lt;- chisq.test(x = table(chick$Diet))  # Input is a table of values
 
 htest_E
 
@@ -308,7 +308,7 @@ htest_E
 # Q: Is there an overall effect of diet on weight?
 
 Diet_aov &lt;- aov(formula = weight ~ factor(Diet),   # Run the anova
-                data = ChickWeight)
+                data = chick)
 
 summary(Diet_aov)       # Look at summary for overall test results
 TukeyHSD(Diet_aov)      # Conduct post-hoc tests
