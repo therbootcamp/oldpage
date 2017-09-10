@@ -1,0 +1,387 @@
+---
+title: "Recap Day 1"
+subtitle: ""
+author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "September 2017"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my-theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+```
+
+
+---
+
+# Essentials of the R language
+
+.pull-left7[
+>"To understand computations in R, two slogans are helpful:
+>###(1) Everything that exists is an object and 
+>###(2) everything that happens is a function call."
+]
+
+.pull-right7[
+<p align="center"><img src="https://statweb.stanford.edu/~jmc4/CopyPhoto.jpg" width="350" align="center"></p>
+<p align="center">John Chambers<br> <font size=2> Author of S and developer of R</font></p>
+]
+
+---
+
+---
+
+# Calls, assignments, and expressions
+
+In R every action is a function call. Specifically, R programs advance by **passing on arguments to functions**, **calling the function**, and **receiving and storing its output**. And this goes deep, many operations are functions in disguise.
+
+.pull-left9[
+```{r}
+# defining a function - arithm. mean
+my_fun <- function(x, b){ x * b }
+
+# define some data
+my_data <- c(1, 5, 7, 3) 
+
+# pass on arguments and call function
+my_fun(my_data, 5) 
+
+# store output by assignment
+my_out <- my_fun(my_data, 5)
+```
+
+]
+
+.pull-right9[
+```{r}
+# a basic expression
+2 + 2
+
+# is also a function
+'+'(2,2)
+
+```
+]
+
+---
+
+.pull-left9[
+# Help
+
+An facilitator for using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). Don't worry if help files may appear cryptical, however, over time you will realise how helpful they are. Vignettes are longer tutorials sometimes provided by the authors of a package.     
+
+```{r, eval = F}
+# To access help files
+help("name_of_function")
+?name_of_function
+
+# find help files
+??name_of_function
+
+# To list and access vignettes
+vignette(package="name_of_package")
+vignette(package="name_of_vignette")
+```
+
+]
+
+.pull-right9[
+<br><br><iframe src="R_ Arithmetic Mean.htm" height="520" width="800" align="center"></iframe>
+]
+
+---
+
+.pull-left8[
+# Objects
+>###"Everything in R is an object"<br> 
+><p align="right">*John Chambers*<p>
+
+<br><br>
++ R's objects are have content and attributes.
+<br2>
++ The content can be anything from numbers or strings to functions or complex data structures. 
+<br2>
++ Attributes often encompass names, dimensions, and the class or type of the object, but other attributes are possible. 
+<br2>
++ Practically all data objects are equipped with those three essential attributes.
+
+]
+.pull-right8[
+<br><br>
+<img src="objects.png" align="center" width="579" height="560">
+]
+
+---
+
+
+.pull-left10[
+# Data objects
+<br>
++ Objects either contain elements of the **same type** (homogeneous) or **different types** (heterogeneous). 
+<br2>
++ Homogeneous objects are always **flat**, i.e., contain no nested structure.
+<br2>
++ Lists can contain anything, even lists (**recursive**), whereas data frames underly certain restrictions in terms of type and dimensions.  
+
+]
+
+
+.pull-right10[
+<br><br><br><br><br>
+<img src="objects_types.png" align="left" width="629" height="374">
+]
+
+
+---
+
+# Vectors
+
+R's most basic (and smallest) data format - even single values are implmented as vectors. 
+
+.pull-left11[
+```{r, eval = F}
+# creating a vector (incl. names)
+my_vec <- c(t_1 = 1.343, t_2 = 5.232)
+
+# vectors are always flat
+my_vec <- c(1.343, c(5.232, 2.762))
+
+# naming vectors
+my_vec <- c(t_1 = 1.343, t_2 = 5.232)
+names(my_vec) = c("t_1","t_2")
+
+# evaluting inherent attributes
+names(my_vec)
+length(my_vec)
+typeof(my_vec)
+
+```
+]
+
+.pull-right11[
+<p align="left"><img src="vector.png" width="628px" height="190px"></p>
+]
+
+
+---
+
+# Types
+
+A vector contains elements of one of four basic types: `integer`, `double`, `numeric`, and `character`. You can test the type using `typeof()` or the type-specific `is.*()`, e.g., `is.integer()`.
+
+
+.pull-left8[
+```{r}
+# numeric vectors
+my_vec <- c(1.343, 5.232)
+typeof(my_vec) ; is.integer(my_vec)
+
+# integer vectors (overruled by R)
+my_vec <- c(1, 7, 2)
+typeof(my_vec) ; is.integer(my_vec)
+
+```
+]
+
+.pull-right8[
+```{r}
+# logical vectors
+my_vec <- c(TRUE, FALSE)
+typeof(my_vec) ; is.logical(my_vec)
+```
+
+```{r}
+# character vectors
+my_vec <- c('a', 'hello', 'world')
+typeof(my_vec) ; is.character(my_vec)
+```
+]
+
+---
+
+# `list`s
+
+.pull-left10[
+
++ Lists are **R's swiss army knife**. They often are used for outputs of statistical functions e.g., `lm()`.
+
++ Lists have **non-flat** structures that take **any object type**, inluding lists, which renders lists **recursive**.
+
++ Intuitively lists can be understood as a meta-vector that on top of its content contains an overarching **organizational layer**. 
+
++ To create a list use `list()` or `as.list()`
+]
+
+.pull-right10[
+<p align="center"><img src="list.png" width="581px" height="307px"></p>
+]
+
+---
+
+# `data.frame`s
+
+.pull-left11[
+
+* Data frames have been **R's main data format** for data representation. 
+
+* **Data frames are lists** with specific **requirements**:
+
+  + Every element must be a vector.
+
+  + The lengths of the vectors must be equal or multiples of another.  
+
+* To create a data frame use `data.frame()` and `as.data.frame`.
+]
+
+.pull-right11[
+<p align="center"><img src="data.frame.png" width="409px" height="266px"></p>
+]
+
+---
+
+# Accessing & changing **atomic** objects pt. 1 
+
+To access and change atomic data objects use **brackets** `[` or **names**. When using `[` be sure to use as many indices as there are dimensions, e.g., `[3]` for vectors and `[1,3]` for matrices. Omittence of an index means for all elements. 
+
+.pull-left8[
+```{r}
+# retrieve second element from vector
+my_vec <- c('A','B','C')
+my_vec[2] 
+
+# change the second element 
+my_vec[2] <- 'D' ; my_vec
+  
+# change beyond length(my_vec) 
+my_vec[7] <- 1 ; my_vec
+
+```
+
+]
+
+.pull-right8[
+```{r}
+# create matrix
+my_mat <- matrix(c(1:6), nrow=2)
+my_mat
+
+# retrieve second row from matrix
+my_mat[2, ] ; my_mat[2, 1]
+
+```
+]
+
+---
+
+# Accessing & changing **complex** objects pt. 1
+
+In accessing and changing complex objects the additional `list`-layer needs to be taken into account. Single brackets `[` will select elements within the list, not the object behind those elements. To select the object behind the element use **double brackets** '[['. Additionaly, complex objects can be conveniently accessed using the dollor operator `$`. In order to further descend into the `list`'s structur append multiple select operators, e.g., `my_list[[1]][[2]]`. 
+
+.pull-left8[
+```{r}
+# retrieve elements from list
+my_list <- list('A'=c('A','B'), 
+                'B'=list(c(1,2,3),
+                         c(TRUE,FALSE,TRUE)))
+my_list[1] ; my_list[[1]] ; my_list[['A']]
+```
+
+]
+
+.pull-right8[
+```{r}
+# retrieve deep elements in list
+my_list <- list('A'=c('A','B'), 
+                'B'=list(c(1,2,3),
+                         c(TRUE,FALSE,TRUE)))
+my_list[[2]][1] ; my_list[[2]][[1]] ;my_list[['B']][[1]]
+```
+]
+
+---
+
+# Importing and Exporting Data
+
+In this introduction you will learn...
+
+.pull-left9[
+1. How to import data data from **delimeter separated files** (e.g., .csv)?
+<br2>
+2. How to import data data from **proprietory file formats** (e.g., .sav)?
+<br2>
+3. How to save/export data to various formats, including **R's own files types**?
+<br2>
+4. About a new data format called **tibble**.
+<br2>
+5. How to use **file connections** to read data in its rawest possible way? 
+]
+
+.pull-right9[
+<img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="150">
+<img src="http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b985e2547fe868e5e2b3f9621/720bb/images/hex-tibble.png" width="150">
+<br>
+<img src="http://haven.tidyverse.org/logo.png" width="150">
+<img src="https://www.rstudio.com/wp-content/uploads/2017/05/readxl-259x300.png" width="150">
+
+
+]
+
+---
+
+# An example
+
+Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will automatically identify (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
+
+.pull-left[
+```{r, eval = F}
+# define simple data set
+data <- 
+   "id, var_1, var_2\n
+  DCDL,  .287,  .048\n
+  FEFK,  .894,  .383\n
+  ZEWE, 1.374,  .623\n
+  OJEE,  .631,  .826"
+```
+]
+
+.pull-right8[
+```{r, eval = F}
+# read in data
+require(readr)
+read_csv(data)
+```
+
+```{r, echo = F}
+# define simple data set
+data <- 
+   "id, var_1, var_2\n
+  DCDL,  .287,  .048\n
+  FEFK,  .894,  .383\n
+  ZEWE, 1.374,  .623\n
+  OJEE,  .631,  .826"
+
+# read in data
+require(readr)
+read_csv(data)
+```
+]
+
+---
+
+
