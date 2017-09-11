@@ -124,7 +124,7 @@ $(document).ready(function () {
 
 <div id="slides" class="section level3">
 <h3>Slides</h3>
-<p>Here a link to the lecture slides for this session: LINK</p>
+<p>Here a link to the lecture slides for this session: <a href="therbootcamp.github.io/_slides/D1S2_Objects/Working_with_objects.html">Link</a><br></p>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -188,7 +188,37 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p>Here are the main functions for object selection. | Function| Description| |:——|:——–| | <code>[ ]</code>| Single brackets: Select individual elements from <code>vector</code>| | <code>[,]</code>| Single brackets 2d: Select rows, columns, or elements from <code>matrix</code> or <code>data.frame</code> | | <code>[[ ]]</code>| Double brackets: Select element/variable in list or data.frame| | <code>[[$]]</code>| Dollar: Select named element/variable from list or data.frame|</p>
+<p>Here are the main functions for object selection.</p>
+<table>
+<colgroup>
+<col width="9%"></col>
+<col width="90%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Function</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>[ ]</code></td>
+<td align="left">Single brackets: Select individual elements from <code>vector</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>[,]</code></td>
+<td align="left">Single brackets 2d: Select rows, columns, or elements from <code>matrix</code> or <code>data.frame</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[[ ]]</code></td>
+<td align="left">Double brackets: Select element/variable in list or data.frame</td>
+</tr>
+<tr class="even">
+<td align="left"><code>[[$]]</code></td>
+<td align="left">Dollar: Select named element/variable from list or data.frame</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
@@ -197,19 +227,28 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Create a numeric (double), a character, and a logical vector each with 10 elements using <code>c()</code> and store them as <code>dbl_vec</code>, <code>log_vec</code>, and <code>chr_vec</code> (using the assignment operator, i.e., <code>name &lt;- c())</code>.</li>
 </ol>
-<pre class="r"><code>dbl_vec &lt;- c(1,2,3,4,5,6,7,8,9,10)
+<pre class="r"><code># create vectors
+dbl_vec &lt;- c(1,2,3,4,5,6,7,8,9,10)
 chr_vec &lt;- c('a','b','c','d','e','f','g','h','i','j')
 log_vec &lt;- c(TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Ensure the type and length of the vectors using <code>typeof()</code> and <code>length()</code>. Simply place the name of the vectors into the parenthesis and execute.</li>
 </ol>
-<pre class="r"><code>typeof(dbl_vec) ; length(dbl_vec) 
-typeof(chr_vec) ; length(chr_vec) 
-typeof(log_vec) ; length(log_vec) </code></pre>
+<pre class="r"><code># test type and length
+typeof(dbl_vec) ; length(dbl_vec) </code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre><code>[1] 10</code></pre>
+<pre class="r"><code>typeof(chr_vec) ; length(chr_vec) </code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre><code>[1] 10</code></pre>
+<pre class="r"><code>typeof(log_vec) ; length(log_vec) </code></pre>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre><code>[1] 10</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Expand each of the vectors using <code>rep()</code> to two times their length. <code>rep()</code> is a general purpose repeat function for vectors. It takes at least two arguments: <code>x</code> the vector and <code>times</code>, which can be a single integer, e.g., <code>2</code>. Two expand the vectors use the repeat function and reassign the output to the object á la <code>object &lt;- function(object, arguments)</code>.</li>
 </ol>
-<pre class="r"><code>dbl_vec &lt;- rep(dbl_vec, 2)
+<pre class="r"><code># double the length of vectors 
+dbl_vec &lt;- rep(dbl_vec, 2)
 chr_vec &lt;- rep(chr_vec, 2) 
 log_vec &lt;- rep(log_vec, 2)</code></pre>
 </div>
@@ -218,80 +257,157 @@ log_vec &lt;- rep(log_vec, 2)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Use the 3 vectors to create a 3xN <code>matrix</code> where X is the length of the vectors. Matrices are usually created in one of two ways. First, a matrix can be created using the <code>matrix()</code> function. The easier way, however, is, second, via the column bind function <code>cbind()</code>. <code>cbind</code> simply takes vectors (of equal length) as input and binds them together. For instance, consider <code>example &lt;- cbind(c(1,2),c(1,2))</code>. Try this using your three vectors and call the resulting matrix <code>my_mat</code>. Then look at the matrix using <code>head()</code>, and test its type (<code>typeof()</code>) and dimension (<code>dim()</code>). Why is the type what it is?</li>
 </ol>
-<pre class="r"><code>my_mat &lt;- cbind(dbl_vec,chr_vec,log_vec)
-head(my_matrix)
-typeof(my_matrix)
-dim(my_matrix)</code></pre>
+<pre class="r"><code># create matrix from vectors
+my_mat &lt;- cbind(dbl_vec,chr_vec,log_vec)
+
+# inspect matrix
+head(my_mat)</code></pre>
+<pre><code>     dbl_vec chr_vec log_vec
+[1,] &quot;1&quot;     &quot;a&quot;     &quot;TRUE&quot; 
+[2,] &quot;2&quot;     &quot;b&quot;     &quot;TRUE&quot; 
+[3,] &quot;3&quot;     &quot;c&quot;     &quot;FALSE&quot;
+[4,] &quot;4&quot;     &quot;d&quot;     &quot;TRUE&quot; 
+[5,] &quot;5&quot;     &quot;e&quot;     &quot;FALSE&quot;
+[6,] &quot;6&quot;     &quot;f&quot;     &quot;FALSE&quot;</code></pre>
+<pre class="r"><code>typeof(my_mat)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code>dim(my_mat)</code></pre>
+<pre><code>[1] 20  3</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>Use the 3 vectors to create a 3xN <code>data.frame</code>. To create a data frame use the <code>data.frame()</code> function. It works just like <code>cbind</code>. Call the data frame <code>my_df</code>. Now, look at the data frame using <code>head()</code>, and test its type (<code>typeof</code>) and dimension (<code>dim()</code>). Why is the type what it is?</li>
 </ol>
-<pre class="r"><code>my_df &lt;- data.frame(dbl_vec,chr_vec,log_vec)
-head(my_df)
-typeof(my_df)
-dim(my_df)</code></pre>
+<pre class="r"><code># create data frame from vectors
+my_df &lt;- data.frame(dbl_vec,chr_vec,log_vec)
+
+# inspect
+head(my_df)</code></pre>
+<pre><code>  dbl_vec chr_vec log_vec
+1       1       a    TRUE
+2       2       b    TRUE
+3       3       c   FALSE
+4       4       d    TRUE
+5       5       e   FALSE
+6       6       f   FALSE</code></pre>
+<pre class="r"><code>typeof(my_df)</code></pre>
+<pre><code>[1] &quot;list&quot;</code></pre>
+<pre class="r"><code>dim(my_df)</code></pre>
+<pre><code>[1] 20  3</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>Inspect the types of the columns of <code>my_df</code>. To do this try several of the different options to access columns: (1) Using double brackets and index, e.g., <code>[[index]]</code>, (2) using double brackets and name <code>[['column_name']]</code>, (3) using 2d single brackets and index, e.g., <code>[,index]</code>, (4) using using 2d single brackets and name, e.g., <code>[,'column_name']</code>, using the dollor operator <code>$</code>, e.g., <code>$column_name</code>. To see the names of the columns use <code>names()</code>. Finally, use <code>str(my_df)</code> to verify the types of the columns.</li>
 </ol>
-<pre class="r"><code>typeof(my_df[[1]])
-typeof(my_df[['chr_vec']])
-typeof(my_df[,'log_vec'])
-str(my_df)</code></pre>
+<pre class="r"><code># inspect variable in data frame
+typeof(my_df[[1]])</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre class="r"><code>typeof(my_df[['chr_vec']])</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>typeof(my_df[,'log_vec'])</code></pre>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<pre class="r"><code>str(my_df)</code></pre>
+<pre><code>'data.frame':   20 obs. of  3 variables:
+ $ dbl_vec: num  1 2 3 4 5 6 7 8 9 10 ...
+ $ chr_vec: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ log_vec: logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Transform <code>my_mat</code> into a data frame using <code>as.data.frame()</code>. Call it <code>my_df_2</code> and valuate its contents using <code>str()</code>. Now change the columns to their appropriate type using <code>as.double()</code> and <code>as.logical()</code>. To do this you need to select the appropriate column on both sides of the assignment. E.g., <code>mat[,1] &lt;- as.numeric(mat[,1])</code>. Of course, you can also use the other ways of selecting a column. Afterwards reevaluate the types using <code>str()</code>.</li>
 </ol>
-<pre class="r"><code>my_df_2 &lt;- as.data.frame(my_mat)
-str(my_df_2)
+<pre class="r"><code># coerce matrix to data frame and inspect
+my_df_2 &lt;- as.data.frame(my_mat)
+str(my_df_2)</code></pre>
+<pre><code>'data.frame':   20 obs. of  3 variables:
+ $ dbl_vec: Factor w/ 10 levels &quot;1&quot;,&quot;10&quot;,&quot;2&quot;,&quot;3&quot;,..: 1 3 4 5 6 7 8 9 10 2 ...
+ $ chr_vec: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ log_vec: Factor w/ 2 levels &quot;FALSE&quot;,&quot;TRUE&quot;: 2 2 1 2 1 1 2 2 2 2 ...</code></pre>
+<pre class="r"><code># coercing variables to appropriate type and inspect
 my_df_2$log_vec &lt;- as.logical(my_df_2$log_vec)
 my_df_2$dbl_vec &lt;- as.double(my_df_2$dbl_vec)
 str(my_df_2)</code></pre>
+<pre><code>'data.frame':   20 obs. of  3 variables:
+ $ dbl_vec: num  1 3 4 5 6 7 8 9 10 2 ...
+ $ chr_vec: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ log_vec: logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
 <ol start="8" style="list-style-type: decimal">
 <li>Use the 3 vectors to create a list of length 3 using <code>list()</code>. <code>list()</code> works exactly as <code>c()</code> (or <code>data.frame</code> and <code>cbind</code>). Call the object <code>my_list</code> and inspect it using <code>str()</code>. Compare the output of <code>str()</code> to the output for <code>my_df</code>. What is different, and why?</li>
 </ol>
-<pre class="r"><code>my_list &lt;- list(dbl_vec,chr_vec,log_vec)
-str(my_list)
-str(my_df)</code></pre>
+<pre class="r"><code># create a list from vectors and inspect
+my_list &lt;- list(dbl_vec,chr_vec,log_vec)
+str(my_list)</code></pre>
+<pre><code>List of 3
+ $ : num [1:20] 1 2 3 4 5 6 7 8 9 10 ...
+ $ : chr [1:20] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
+ $ : logi [1:20] TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
+<pre class="r"><code>str(my_df)</code></pre>
+<pre><code>'data.frame':   20 obs. of  3 variables:
+ $ dbl_vec: num  1 2 3 4 5 6 7 8 9 10 ...
+ $ chr_vec: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ log_vec: logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Transform <code>my_list</code> into a data frame using <code>as.data.frame()</code>. Call the object <code>my_df_3</code>. Inspect again using <code>str()</code>. Rename the columns to the original names of the vectors. To do this assign to <code>names(my_df_3)</code> a character vector of length 3 containing those names. Inspect and compare names to those of <code>my_df</code> and <code>my_df2</code></li>
 </ol>
-<pre class="r"><code>my_df_3 &lt;- as.data.frame(my_list)
-str(my_df_3)
+<pre class="r"><code># coerce list to data frame and inspect
+my_df_3 &lt;- as.data.frame(my_list)
+str(my_df_3)</code></pre>
+<pre><code>'data.frame':   20 obs. of  3 variables:
+ $ c.1..2..3..4..5..6..7..8..9..10..1..2..3..4..5..6..7..8..9..10   : num  1 2 3 4 5 6 7 8 9 10 ...
+ $ c..a....b....c....d....e....f....g....h....i....j....a....b...   : Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ c.TRUE..TRUE..FALSE..TRUE..FALSE..FALSE..TRUE..TRUE..TRUE..TRUE..: logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
+<pre class="r"><code># change names of new data frame and compare to other objects
 names(my_df_3) &lt;- c('dbl_vec','chr_vec','log_vec') 
-names(my_df_3)
-names(my_df)
-names(my_df_2)</code></pre>
+names(my_df_3)</code></pre>
+<pre><code>[1] &quot;dbl_vec&quot; &quot;chr_vec&quot; &quot;log_vec&quot;</code></pre>
+<pre class="r"><code>names(my_df)</code></pre>
+<pre><code>[1] &quot;dbl_vec&quot; &quot;chr_vec&quot; &quot;log_vec&quot;</code></pre>
+<pre class="r"><code>names(my_df_2)</code></pre>
+<pre><code>[1] &quot;dbl_vec&quot; &quot;chr_vec&quot; &quot;log_vec&quot;</code></pre>
 </div>
 <div id="logical-comparisons" class="section level3">
 <h3>Logical comparisons</h3>
 <ol start="10" style="list-style-type: decimal">
 <li>An important tool of working with data are logical comparisons. Logical comparisons can be used to conveniently select parts of the data. They can also be used to make checks throughout script. For instance, we could use logical comparisons to compare whether the names of, e.g., <code>my_df</code> and <code>my_3</code> are now equal. To do this the two name vectors need to be compared using the is-equal-to operator <code>==</code>, e.g., <code>vec_a == vec_b</code>. Such logical operators will iterate throuh every index in the two involved vectors (beginning with 1) and compare whether the elements at the present location are equal. The result is a logical vector of the same length as the other two vectors. To evaluate whether all elements are equal one can conveniently use simple arithmetic functions such as <code>sum()</code> or <code>mean()</code>. Try now to check whether the names of these to data frames are indeed equal now. Remember <code>TRUE</code> is coerced to 1 and <code>False</code> to 0.</li>
 </ol>
-<pre class="r"><code>mean(names(my_df) == names(my_df_3)) == 1</code></pre>
+<pre class="r"><code># test equality in names
+mean(names(my_df) == names(my_df_3)) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li>A second important use for logicals is subsetting. All object accessing using brackets, e.g., <code>[]</code>, can be used with logical vectors (provided that the dimensions match). E.g., <code>c(1, 2, 3)[c(TRUE, FALSE, TRUE)]</code> returns the first and the third element of the vector. The program thus iterates through every index and returns those elements for which the logical vector is <code>TRUE</code>. Try to use this now on the three vectors. Use <code>log_vec</code> to subset the elements in <code>dbl_vec</code> and <code>chr_vec</code>.</li>
 </ol>
-<pre class="r"><code>dbl_vec[log_vec]
-chr_vec[log_vec]</code></pre>
+<pre class="r"><code># use logical vector to subset other vectors
+dbl_vec[log_vec]</code></pre>
+<pre><code> [1]  1  2  4  7  8  9 10  1  2  4  7  8  9 10</code></pre>
+<pre class="r"><code>chr_vec[log_vec]</code></pre>
+<pre><code> [1] &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
 <ol start="12" style="list-style-type: decimal">
-<li>Logical vectors become especially useful, when they are used to subset based on specific conditions. For instance, we may be interested in retrieving all values in <code>chr_vec</code> for which <code>dbl_vec</code> is larger than some value. This can be easily accomplished by coercing <code>dbl_vec</code> to a logical vector using <code>&gt;</code>. Consider <code>c(1, 4, 7, 2) &gt; 3</code>. Try this for <code>chr_vec</code> and <code>dbl_vec</code> with an appropriate cut-off value.</li>
+<li>Logical vectors become especially useful when they are used to subset based on specific conditions. For instance, we may be interested in retrieving all values in <code>chr_vec</code> for which <code>dbl_vec</code> is larger than some value. This can be easily accomplished by coercing <code>dbl_vec</code> to a logical vector using <code>&gt;</code>. Consider <code>c(1, 4, 7, 2) &gt; 3</code>. Try this for <code>chr_vec</code> and <code>dbl_vec</code> with an appropriate cut-off value.</li>
 </ol>
-<pre class="r"><code>chr_vec[dbl_vec &gt; 2]</code></pre>
+<pre class="r"><code># subset character vector via logical comparison 
+# on numeric vector 
+chr_vec[dbl_vec &gt; 2]</code></pre>
+<pre><code> [1] &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
 <ol start="13" style="list-style-type: decimal">
 <li>Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator <code>&amp;</code> and the logical <code>OR</code> operator <code>|</code>. Consider <code>c(1, 4, 7, 2) &gt; 3 &amp; c(1, 4, 7, 2) &lt; 6</code> and <code>c(1, 4, 7, 2) &gt; 3 | c(1, 4, 7, 2) &lt; 6</code>. Try now combining the logical vector coerced from <code>dbl_vec</code> with <code>log_vec</code> to subset <code>chr_vec</code>.</li>
 </ol>
-<pre class="r"><code>chr_vec[dbl_vec &gt; 2 &amp; log_vec]</code></pre>
+<pre class="r"><code># subset character vector via logical comparison 
+# on numeric vector and logical vector
+chr_vec[dbl_vec &gt; 2 &amp; log_vec]</code></pre>
+<pre><code> [1] &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
 </div>
 <div id="non-flat-objects" class="section level3">
 <h3>Non-flat objects</h3>
 <ol start="14" style="list-style-type: decimal">
 <li>Create a list containing <code>my_df</code> and the three vectors. Try to verify (using the list structure) that each of the columns of <code>my_df</code> is equal the respective vector. To access the columns in <code>my_df</code> you have to combine selectors. Can be any of <code>my_list[[index]][[index]]</code>, <code>my_list[[index]]$name</code>, <code>my_list$name$name</code>, etc.</li>
 </ol>
-<pre class="r"><code>my_list_2 &lt;- list(my_df, dbl_vec, chr_vec, log_vec)
-mean(my_list_2[[1]]$dbl_vec == dbl_vec) == 1
-mean(my_list_2[[1]]$chr_vec == chr_vec) == 1
-mean(my_list_2[[1]]$log_vec == log_vec) == 1</code></pre>
+<pre class="r"><code># create a non-flat, nested list from data frame and vectors
+my_list_2 &lt;- list(my_df, dbl_vec, chr_vec, log_vec)
+
+# select vectors from list and compare to vectors
+mean(my_list_2[[1]]$dbl_vec == dbl_vec) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>mean(my_list_2[[1]]$chr_vec == chr_vec) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>mean(my_list_2[[1]]$log_vec == log_vec) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <div id="additional-reading" class="section level1">
