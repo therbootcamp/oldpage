@@ -124,7 +124,7 @@ $(document).ready(function () {
 
 <div id="slides" class="section level3">
 <h3>Slides</h3>
-<p>Here a link to the lecture slides for this session: LINK</p>
+<p>Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_slides/D1S3_dataio/Data_IO.html">Link</a><br></p>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -157,7 +157,7 @@ $(document).ready(function () {
 <td align="left">Read SAS file</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>read_sac()</code></td>
+<td align="left"><code>read_sav()</code></td>
 <td align="left">Read SPSS file</td>
 </tr>
 <tr class="even">
@@ -188,7 +188,7 @@ $(document).ready(function () {
 <td align="left">Write SAS file</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>write_sac()</code></td>
+<td align="left"><code>write_sav()</code></td>
 <td align="left">Write SPSS file</td>
 </tr>
 <tr class="even">
@@ -207,7 +207,7 @@ $(document).ready(function () {
 <p>The tutorial begins with the titanic data set, which contains records of 1313 passengers on their name (<code>Name</code>), their passenger class (<code>PClass</code>), their age (<code>Age</code>), their sex (<code>Sex</code>), whether they survived (<code>Survived</code>), and finally a numeric coding of their sex (<code>SexCode</code>).</p>
 <p>Later you will be working with a randomly generated artificial data set of mine, which will help demonstrate differences in speed and file size.</p>
 <p>Please download the following data files and save them to an appropriate location on the disc:</p>
-<p><a href="{{site.url}}/_materials/data_sets/titanic.csv">titanic.csv</a><br> <a href="{{site.url}}/_materials/data_sets/titanic.sav">titanic.sav</a><br> <a href="{{site.url}}/_materials/data_sets/titanic.sas7bdat">titanic.sas7bdat</a><br> <a href="{{site.url}}/_materials/data_sets/my_data.csv">my_data.csv</a></p>
+<p><a href="https://therbootcamp.github.io/_slides/data/titanic.csv">titanic.csv</a><br> <a href="https://therbootcamp.github.io/_slides/data/titanic.sav">titanic.sav</a><br> <a href="https://therbootcamp.github.io/_slides/data/titanic.sas7bdat">titanic.sas7bdat</a><br> <a href="https://therbootcamp.github.io/_slides/data/my_data.csv">my_data.csv</a></p>
 <p>If you can, please verify whether the <code>.sav</code> and <code>sas7bdat</code> are appropriate SPSS and SAS files, respectively.</p>
 <div id="read-to-tibble" class="section level3">
 <h3>Read to <code>tibble</code></h3>
@@ -216,61 +216,258 @@ $(document).ready(function () {
 <li><p>Identify the filepath (incl. filename) for each of the three data files. RStudio makes it really easy. Simply write quotation marks in your script editor, e.g., <code>&quot;&quot;</code>, move the (text) curser between the marks, and press the tab key. This opens a file menu that allows you to conveniently select the path to the file. The result is a character string that exactly defines the location of the file relative to the current working directory. Oftentimes, it is convenient to do this directly within the read function, e.g., <code>read_csv(&quot;&quot;)</code>.</p></li>
 <li><p>Load the packages <code>readr</code> and <code>haven</code> using <code>library()</code>, and read in the three titanic data files usig <code>read_csv()</code>, <code>read_sas()</code>, and <code>read_sav()</code>. Call them <code>df_csv</code>, <code>df_sas</code>, and <code>df_sav</code>, respectively. Inspect each of the imported objects using <code>print()</code> and <code>str()</code>. What kind of object are they?</p></li>
 </ol>
-<pre class="r"><code>df_csv &lt;- read_csv('data_files/titanic.csv')
-df_sas &lt;- read_sas('data_files/titanic.sas7bdat')
-df_sav &lt;- read_sav('data_files/titanic.sav')
-df_csv ; df_sas ; df_sav
-str(df_csv) ; str(df_sas) ; str(df_sav)</code></pre>
+<pre class="r"><code># load readr
+library(readr)
+library(haven)</code></pre>
+<pre><code>Warning: package 'haven' was built under R version 3.4.1</code></pre>
+<pre class="r"><code># read data files
+df_csv &lt;- read_csv('data/titanic.csv')</code></pre>
+<pre><code>Warning: Missing column names filled in: 'X1' [1]</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  X1 = col_integer(),
+  Name = col_character(),
+  PClass = col_character(),
+  Age = col_double(),
+  Sex = col_character(),
+  Survived = col_integer(),
+  SexCode = col_integer()
+)</code></pre>
+<pre class="r"><code>df_sas &lt;- read_sas('data/titanic.sas7bdat')
+df_sav &lt;- read_sav('data/titanic.sav')
+
+# inspect data
+df_csv ; df_sas ; df_sav</code></pre>
+<pre><code># A tibble: 1,313 x 7
+      X1                                          Name PClass   Age    Sex
+   &lt;int&gt;                                         &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;  &lt;chr&gt;
+ 1     1                  Allen, Miss Elisabeth Walton    1st 29.00 female
+ 2     2                   Allison, Miss Helen Loraine    1st  2.00 female
+ 3     3           Allison, Mr Hudson Joshua Creighton    1st 30.00   male
+ 4     4 Allison, Mrs Hudson JC (Bessie Waldo Daniels)    1st 25.00 female
+ 5     5                 Allison, Master Hudson Trevor    1st  0.92   male
+ 6     6                            Anderson, Mr Harry    1st 47.00   male
+ 7     7              Andrews, Miss Kornelia Theodosia    1st 63.00 female
+ 8     8                        Andrews, Mr Thomas, jr    1st 39.00   male
+ 9     9  Appleton, Mrs Edward Dale (Charlotte Lamson)    1st 58.00 female
+10    10                        Artagaveytia, Mr Ramon    1st 71.00   male
+# ... with 1,303 more rows, and 2 more variables: Survived &lt;int&gt;,
+#   SexCode &lt;int&gt;</code></pre>
+<pre><code># A tibble: 1,313 x 7
+      X1                                          Name PClass   Age    Sex
+   &lt;dbl&gt;                                         &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;  &lt;chr&gt;
+ 1     1                  Allen, Miss Elisabeth Walton    1st 29.00 female
+ 2     2                   Allison, Miss Helen Loraine    1st  2.00 female
+ 3     3           Allison, Mr Hudson Joshua Creighton    1st 30.00   male
+ 4     4 Allison, Mrs Hudson JC (Bessie Waldo Daniels)    1st 25.00 female
+ 5     5                 Allison, Master Hudson Trevor    1st  0.92   male
+ 6     6                            Anderson, Mr Harry    1st 47.00   male
+ 7     7              Andrews, Miss Kornelia Theodosia    1st 63.00 female
+ 8     8                        Andrews, Mr Thomas, jr    1st 39.00   male
+ 9     9  Appleton, Mrs Edward Dale (Charlotte Lamson)    1st 58.00 female
+10    10                        Artagaveytia, Mr Ramon    1st 71.00   male
+# ... with 1,303 more rows, and 2 more variables: Survived &lt;dbl&gt;,
+#   SexCode &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 1,313 x 7
+      X1                                          Name PClass   Age    Sex
+   &lt;dbl&gt;                                         &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;  &lt;chr&gt;
+ 1     1                  Allen, Miss Elisabeth Walton    1st 29.00 female
+ 2     2                   Allison, Miss Helen Loraine    1st  2.00 female
+ 3     3           Allison, Mr Hudson Joshua Creighton    1st 30.00   male
+ 4     4 Allison, Mrs Hudson JC (Bessie Waldo Daniels)    1st 25.00 female
+ 5     5                 Allison, Master Hudson Trevor    1st  0.92   male
+ 6     6                            Anderson, Mr Harry    1st 47.00   male
+ 7     7              Andrews, Miss Kornelia Theodosia    1st 63.00 female
+ 8     8                        Andrews, Mr Thomas, jr    1st 39.00   male
+ 9     9  Appleton, Mrs Edward Dale (Charlotte Lamson)    1st 58.00 female
+10    10                        Artagaveytia, Mr Ramon    1st 71.00   male
+# ... with 1,303 more rows, and 2 more variables: Survived &lt;dbl&gt;,
+#   SexCode &lt;dbl&gt;</code></pre>
+<pre class="r"><code>str(df_csv) ; str(df_sas) ; str(df_sav)</code></pre>
+<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   1313 obs. of  7 variables:
+ $ X1      : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ Name    : chr  &quot;Allen, Miss Elisabeth Walton&quot; &quot;Allison, Miss Helen Loraine&quot; &quot;Allison, Mr Hudson Joshua Creighton&quot; &quot;Allison, Mrs Hudson JC (Bessie Waldo Daniels)&quot; ...
+ $ PClass  : chr  &quot;1st&quot; &quot;1st&quot; &quot;1st&quot; &quot;1st&quot; ...
+ $ Age     : num  29 2 30 25 0.92 47 63 39 58 71 ...
+ $ Sex     : chr  &quot;female&quot; &quot;female&quot; &quot;male&quot; &quot;female&quot; ...
+ $ Survived: int  1 0 0 0 1 1 1 0 1 0 ...
+ $ SexCode : int  1 1 0 1 0 0 1 0 1 0 ...
+ - attr(*, &quot;spec&quot;)=List of 2
+  ..$ cols   :List of 7
+  .. ..$ X1      : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+  .. ..$ Name    : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+  .. ..$ PClass  : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+  .. ..$ Age     : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
+  .. ..$ Sex     : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+  .. ..$ Survived: list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+  .. ..$ SexCode : list()
+  .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+  ..$ default: list()
+  .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
+  ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   1313 obs. of  7 variables:
+ $ X1      : num  1 2 3 4 5 6 7 8 9 10 ...
+ $ Name    : chr  &quot;Allen, Miss Elisabeth Walton&quot; &quot;Allison, Miss Helen Loraine&quot; &quot;Allison, Mr Hudson Joshua Creighton&quot; &quot;Allison, Mrs Hudson JC (Bessie Waldo Daniels)&quot; ...
+ $ PClass  : chr  &quot;1st&quot; &quot;1st&quot; &quot;1st&quot; &quot;1st&quot; ...
+ $ Age     : num  29 2 30 25 0.92 47 63 39 58 71 ...
+ $ Sex     : chr  &quot;female&quot; &quot;female&quot; &quot;male&quot; &quot;female&quot; ...
+ $ Survived: num  1 0 0 0 1 1 1 0 1 0 ...
+ $ SexCode : num  1 1 0 1 0 0 1 0 1 0 ...</code></pre>
+<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   1313 obs. of  7 variables:
+ $ X1      : atomic  1 2 3 4 5 6 7 8 9 10 ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;F8.0&quot;
+ $ Name    : atomic  Allen, Miss Elisabeth Walton Allison, Miss Helen Loraine Allison, Mr Hudson Joshua Creighton Allison, Mrs Hudson | __truncated__ ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;A62&quot;
+ $ PClass  : atomic  1st 1st 1st 1st ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;A3&quot;
+ $ Age     : atomic  29 2 30 25 0.92 47 63 39 58 71 ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;F8.2&quot;
+ $ Sex     : atomic  female female male female ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;A6&quot;
+ $ Survived: atomic  1 0 0 0 1 1 1 0 1 0 ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;F8.0&quot;
+ $ SexCode : atomic  1 1 0 1 0 0 1 0 1 0 ...
+  ..- attr(*, &quot;format.spss&quot;)= chr &quot;F8.0&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Try to verify that the three data sets are identical. To do this use the <em>is-equal-to</em> operator <code>==</code> introduced in the last tutorial and the arithmetic mean function <code>mean()</code>. Remember, that logical values can be coerced to 0 and 1. Note, that the data sets contain NA’s, that is missing values. One way to see this is via the summary function <code>summary()</code>. Specifically, the variable <code>Age</code> conains missing values. Use the help file <code>?mean</code> to find out how to compute the mean while ignoring missing values and then use <code>==</code> to verify the equality between the three data sets.</li>
 </ol>
-<pre class="r"><code>mean(df_csv == df_sas, na.rm=T) == 1
-mean(df_csv == df_sav, na.rm=T) == 1
-mean(df_sas == df_sav, na.rm=T) == 1</code></pre>
+<pre class="r"><code># check equality between data sets
+mean(df_csv == df_sas, na.rm=T) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>mean(df_csv == df_sav, na.rm=T) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>mean(df_sas == df_sav, na.rm=T) == 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 <div id="write-to-disk" class="section level3">
 <h3>Write to disk</h3>
 <ol start="5" style="list-style-type: decimal">
 <li>The first column in the titanic set contains row numbers. Older read and write functions in R would by default add a row number column to the data, when writing to disk. Newer functions, however, do not show this behavior. ELiminate the first column from <code>df_csv</code> using a negative index. Negtive indices mean <em>omit</em> rather than <em>select</em>. E.g., c(1, 2, 3)[-2] returns the vector without the second value. Then write the reduced data frame to disk using <code>write_csv()</code>. Use the exact same file path. Observe whether R gives you a warning before (over-)writing the data?</li>
 </ol>
-<pre class="r"><code>df_csv = df_csv[,-1]
-write_csv(df_csv,&quot;data_files/titanic.csv&quot;)</code></pre>
+<pre class="r"><code># remove first column using negative index
+df_csv = df_csv[,-1]
+
+# write data to disk - please remove commment symbol
+# write_csv(df_csv,&quot;data/titanic.csv&quot;)</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>Determine the file path to <code>my_data.csv</code> and read it in using <code>read_csv()</code>. Now write the data back to disk using <code>write_sas</code>, <code>write_sav</code>, and also <code>saveRDS</code>. Each of these functions take as the first argument the data frame and as the second argumen the file path. To obtain the latter adapt the filepath of <code>my_data.csv</code> by hand to make sure that the file path has the correct file ending, i.e., <code>.sas7bdat</code>, <code>.sav</code>, and <code>.RDS</code>, respectively. While you write the individual data sets pay attention to the speed of execution.</li>
 </ol>
-<pre class="r"><code>my_data = read_csv(&quot;data_files/my_data.csv&quot;)
-write_sas(my_data,&quot;data_files/my_data.sas7bdat&quot;)
-write_sav(my_data,&quot;data_files/my_data.sav&quot;)
-saveRDS(my_data,&quot;data_files/my_data.RDS&quot;)</code></pre>
+<pre class="r"><code># read data from disk
+my_data = read_csv(&quot;data/my_data.csv&quot;)</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  id = col_character(),
+  var_1 = col_double(),
+  var_2 = col_double()
+)</code></pre>
+<pre class="r"><code># use haven to export data to other formats
+write_sas(my_data,&quot;data/my_data.sas7bdat&quot;)
+write_sav(my_data,&quot;data/my_data.sav&quot;)
+saveRDS(my_data,&quot;data/my_data.RDS&quot;)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>You may have noticed that the <code>saveRDS</code> function was the slowest. This is because <code>.RDS</code> generally leads to the highest degree of compression, i.e., the smalles data files. To verify this use the <code>file.info()</code> on each of the four files, <code>my_data.csv</code>, <code>my_data.sas7bdat</code>, <code>my_data.sav</code>, and <code>my_data.RDS</code> (using the correct path). Look out for the <code>size</code> element, which gives the size in <code>bytes</code>.</li>
 </ol>
-<pre class="r"><code>file.info(&quot;data_files/my_data.csv&quot;)
-file.info(&quot;data_files/my_data.sas7bdat&quot;)
-file.info(&quot;data_files/my_data.sav&quot;)
-file.info(&quot;data_files/my_data.RDS&quot;)</code></pre>
+<pre class="r"><code># examine file properties of saved data 
+file.info(&quot;data/my_data.csv&quot;)</code></pre>
+<pre><code>                     size isdir mode               mtime
+data/my_data.csv 86932096 FALSE  644 2017-09-09 02:55:14
+                               ctime               atime uid gid  uname
+data/my_data.csv 2017-09-11 22:40:25 2017-09-11 22:42:01 502  20 dwulff
+                 grname
+data/my_data.csv  staff</code></pre>
+<pre class="r"><code>file.info(&quot;data/my_data.sas7bdat&quot;)</code></pre>
+<pre><code>                          size isdir mode               mtime
+data/my_data.sas7bdat 40559616 FALSE  644 2017-09-11 22:41:59
+                                    ctime               atime uid gid
+data/my_data.sas7bdat 2017-09-11 22:41:59 2017-09-11 22:42:03 502  20
+                       uname grname
+data/my_data.sas7bdat dwulff  staff</code></pre>
+<pre class="r"><code>file.info(&quot;data/my_data.sav&quot;)</code></pre>
+<pre><code>                     size isdir mode               mtime
+data/my_data.sav 48000465 FALSE  644 2017-09-11 22:42:00
+                               ctime               atime uid gid  uname
+data/my_data.sav 2017-09-11 22:42:00 2017-09-11 22:42:03 502  20 dwulff
+                 grname
+data/my_data.sav  staff</code></pre>
+<pre class="r"><code>file.info(&quot;data/my_data.RDS&quot;)</code></pre>
+<pre><code>                     size isdir mode               mtime
+data/my_data.RDS 37462140 FALSE  644 2017-09-11 22:42:03
+                               ctime               atime uid gid  uname
+data/my_data.RDS 2017-09-11 22:42:03 2017-09-11 22:42:02 502  20 dwulff
+                 grname
+data/my_data.RDS  staff</code></pre>
 </div>
 <div id="file-connections" class="section level3">
 <h3>File connections</h3>
 <ol start="8" style="list-style-type: decimal">
 <li>The most basic way to handle files is via file connections. The first step of working with file connections is to establish a file connections using, e.g., <code>file()</code>. The main arguments to <code>file</code> are a location (a file path, url, etc.) and a mode indicator, e.g., <code>r</code> for <code>Open for reading in text mode</code>. Try opening a connection to the <code>titanic.csv</code> dataset. To do this, you must assign the output of <code>file()</code> to an object, which then is the connection, e.g., <code>con = file(&quot;my_path&quot;,&quot;r&quot;)</code>.</li>
 </ol>
-<pre class="r"><code>con = file('data_files/titanic.csv','r')</code></pre>
+<pre class="r"><code># define a file connection with mode read
+con = file('data/titanic.csv','r')</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Now that the connection is open, you can read the file using, e.g., <code>readLines</code>. <code>readLines</code> iterates through the file line by line and returns each line as a character string. Store the output in an object. Try reading the file. When done close the connection using <code>close(my_con)</code> and inspect the data.</li>
 </ol>
-<pre class="r"><code>lin = readLines(con)
+<pre class="r"><code># read all lines from connection
+lin = readLines(con)</code></pre>
+<pre><code>Warning in readLines(con): incomplete final line found on 'data/
+titanic.csv'</code></pre>
+<pre class="r"><code># close connection
 close(con)</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>As you can see the read in data looks much messier than with using <code>read_csv()</code>. If you’re up for the challenge you can try to nonetheless parse this data. A good way is to split each line using the <code>stri_split_fixed</code> function using the comma <code>,</code> (from the <code>stringi</code> package). This will return a list of vectors, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using <code>do.call(rbind,my_list)</code>. What’s then left is transform the matrix to a data frame and to take care of column types and names.</li>
 </ol>
-<pre class="r"><code>lin &lt;- readLines(con)
-close(con)
-require(stringi)
+<pre class="r"><code># load stringi package
+require(stringi)</code></pre>
+<pre><code>Loading required package: stringi</code></pre>
+<pre class="r"><code>library(tibble)</code></pre>
+<pre><code>Warning: package 'tibble' was built under R version 3.4.1</code></pre>
+<pre class="r"><code># split lines to yield list of data rows
 spl &lt;- stri_split_fixed(lin,',')
-mat &lt;- do.call(rbind,spl)
-df  &lt;- as.tibble(mat)
-# take care of types</code></pre>
+
+# combine bind rows to matrix
+mat &lt;- do.call(rbind,spl)</code></pre>
+<pre><code>Warning in (function (..., deparse.level = 1) : number of columns of result
+is not a multiple of vector length (arg 1)</code></pre>
+<pre class="r"><code># create tibble from matrix
+df &lt;- as.tibble(mat)
+
+# take care of types
+df &lt;- type_convert(df)</code></pre>
+<pre><code>Parsed with column specification:
+cols(
+  V1 = col_character(),
+  V2 = col_character(),
+  V3 = col_character(),
+  V4 = col_character(),
+  V5 = col_character(),
+  V6 = col_character(),
+  V7 = col_character(),
+  V8 = col_character(),
+  V9 = col_character()
+)</code></pre>
+<pre class="r"><code># inspect
+df</code></pre>
+<pre><code># A tibble: 1,314 x 9
+        V1           V2                                       V3        V4
+     &lt;chr&gt;        &lt;chr&gt;                                    &lt;chr&gt;     &lt;chr&gt;
+ 1  &quot;\&quot;\&quot;&quot;   &quot;\&quot;Name\&quot;&quot;                             &quot;\&quot;PClass\&quot;&quot; &quot;\&quot;Age\&quot;&quot;
+ 2 &quot;\&quot;1\&quot;&quot;    &quot;\&quot;Allen&quot;                &quot;Miss Elisabeth Walton\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 3 &quot;\&quot;2\&quot;&quot;  &quot;\&quot;Allison&quot;                   &quot;Miss Helen Loraine\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 4 &quot;\&quot;3\&quot;&quot;  &quot;\&quot;Allison&quot;           &quot;Mr Hudson Joshua Creighton\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 5 &quot;\&quot;4\&quot;&quot;  &quot;\&quot;Allison&quot; &quot;Mrs Hudson JC (Bessie Waldo Daniels)\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 6 &quot;\&quot;5\&quot;&quot;  &quot;\&quot;Allison&quot;                 &quot;Master Hudson Trevor\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 7 &quot;\&quot;6\&quot;&quot; &quot;\&quot;Anderson&quot;                             &quot;Mr Harry\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 8 &quot;\&quot;7\&quot;&quot;  &quot;\&quot;Andrews&quot;              &quot;Miss Kornelia Theodosia\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+ 9 &quot;\&quot;8\&quot;&quot;  &quot;\&quot;Andrews&quot;                                Mr Thomas    &quot;jr\&quot;&quot;
+10 &quot;\&quot;9\&quot;&quot; &quot;\&quot;Appleton&quot;   &quot;Mrs Edward Dale (Charlotte Lamson)\&quot;&quot; &quot;\&quot;1st\&quot;&quot;
+# ... with 1,304 more rows, and 5 more variables: V5 &lt;chr&gt;, V6 &lt;chr&gt;,
+#   V7 &lt;chr&gt;, V8 &lt;chr&gt;, V9 &lt;chr&gt;</code></pre>
 </div>
 <div id="scraping-the-internet" class="section level3">
 <h3>Scraping the internet</h3>
@@ -278,9 +475,15 @@ df  &lt;- as.tibble(mat)
 <li>Finally on to something rather different. Connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Speicifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient <code>rvest</code> package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R’s Wikipedia page.</li>
 </ol>
 <pre class="r"><code># load package
-install.packages('rvest')
-library(rvest) 
-library(magrittr)
+# install.packages('rvest')
+library(rvest) </code></pre>
+<pre><code>Loading required package: xml2</code></pre>
+<pre><code>
+Attaching package: 'rvest'</code></pre>
+<pre><code>The following object is masked from 'package:readr':
+
+    guess_encoding</code></pre>
+<pre class="r"><code>library(magrittr)
 
 # get html
 url = 'https://en.wikipedia.org/wiki/R_(programming_language)' 
@@ -292,6 +495,23 @@ table = page %&gt;% html_node(xpath = '//*[@id=&quot;mw-content-text&quot;]/div/
 
 # create tibble
 as.tibble(table)</code></pre>
+<pre><code># A tibble: 13 x 3
+   Release       Date
+     &lt;chr&gt;      &lt;chr&gt;
+ 1    0.16           
+ 2    0.49 1997-04-23
+ 3    0.60 1997-12-05
+ 4  0.65.1 1999-10-07
+ 5     1.0 2000-02-29
+ 6     1.4 2001-12-19
+ 7     2.0 2004-10-04
+ 8     2.1 2005-04-18
+ 9    2.11 2010-04-22
+10    2.13 2011-04-14
+11    2.14 2011-10-31
+12    2.15 2012-03-30
+13     3.0 2013-04-03
+# ... with 1 more variables: Description &lt;chr&gt;</code></pre>
 </div>
 </div>
 <div id="additional-reading" class="section level1">
