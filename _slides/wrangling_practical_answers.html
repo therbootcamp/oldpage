@@ -241,7 +241,7 @@ chick %&gt;%
   summarise(
     weight.mean = mean(weight),
     weight.max = max(weight),
-    time.mean = mean(Time)
+    time.mean = mean(Time),
     N = n()
   ) %&gt;%
   arrange(weight.mean)
@@ -268,18 +268,18 @@ chick %&gt;%
 </ol>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at “<a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>”“. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Look at the help menu for <code>read_csv()</code> and pay particular attention to the <code>file</code> argument and the examples for tips)</li>
+<li>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at “<a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>”. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>read_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</li>
 </ol>
 <pre class="r"><code>ACTG175 &lt;- read_csv(file = &quot;https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv&quot;)</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre class="r"><code>library(speff2trial)
 write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created.</p></li>
+<li><p>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created (Hint: the main arguments to <code>write_csv()</code> are <code>x</code>, the object you are writing, and <code>path</code>, the directory and file name you’re saving the object to.)</p></li>
 <li><p>Now that you have a local copy of the data saved, we try loading the data back into R from that file. But first, delete the object <code>ACTG175</code> from your workspace by running <code>rm(ACTG175)</code>.</p></li>
-<li><p>Now it’s time to get the data back from the local file! To do this, load the <code>ACTG175.csv</code> file data back into your R session and again store it as the object <code>ACTG175</code>. Now, your code should be able to access your local copy of the data, even when you are not online.</p></li>
-<li><p>The <code>ACTG175</code> data is comes from the <code>speff2trial</code> package. Install the <code>speff2trial</code> package using <code>install.packages()</code>, load the package with <code>library()</code> and then look at the help menu for the <code>ACTG175</code> data by running <code>?ACTG175</code></p></li>
-<li><p>First thing’s first, take a look at the first few rows of the data by printing it. It should look like this:</p></li>
+<li><p>Now it’s time to get the data back from the local file! To do this, use <code>read_csv()</code> to load the <code>ACTG175.csv</code> file data back into your R session and again store it as the object <code>ACTG175</code>. Now, your code should be able to access your local copy of the data, even when you are not online.</p></li>
+<li><p>The <code>ACTG175</code> data is comes from the <code>speff2trial</code> package. If you don’t have the <code>speff2trial</code> package allready, install it using <code>install.packages()</code>. Then, load the package with <code>library()</code> and then look at the help menu for the <code>ACTG175</code> data by running <code>?ACTG175</code>. (Note: If you become really interested in the data, you can also read an article discussing the trial here: <a href="http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article" class="uri">http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article</a>)</p></li>
+<li><p>First thing’s first, take a look at the first few rows of the data by printing the <code>ACTG175</code> object. It should look like this:</p></li>
 </ol>
 <pre class="r"><code>ACTG175</code></pre>
 <pre><code># A tibble: 2,139 x 27
@@ -409,6 +409,13 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     age.mean = mean(age),
     karnof.median = median(karnof)
   )</code></pre>
+<pre><code># A tibble: 4 x 3
+   arms age.mean karnof.median
+  &lt;int&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+1     0 35.22556           100
+2     1 35.22989           100
+3     2 35.43130           100
+4     3 35.11586           100</code></pre>
 <ol start="21" style="list-style-type: decimal">
 <li>Separately for male and female patients, calculate the percent who have a history of intravenous drug use.</li>
 </ol>
@@ -420,6 +427,11 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
   summarise(
     drug.percent = mean(drugs)
   )</code></pre>
+<pre><code># A tibble: 2 x 2
+  gender drug.percent
+   &lt;int&gt;        &lt;dbl&gt;
+1      0    0.2364130
+2      1    0.1095426</code></pre>
 <ol start="22" style="list-style-type: decimal">
 <li>Separately for male and female patients (<code>gender</code>), calculate the percent who have a history of intravenous drug use (<code>drugs</code>), and the percent of patients who indicate homosexual activity</li>
 </ol>
@@ -429,6 +441,11 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     drug.percent = mean(drugs),
     homo.percent = mean(homo)
   )</code></pre>
+<pre><code># A tibble: 2 x 3
+  gender drug.percent homo.percent
+   &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+1      0    0.2364130    0.0298913
+2      1    0.1095426    0.7922078</code></pre>
 <ol start="23" style="list-style-type: decimal">
 <li>Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</li>
 </ol>
@@ -438,6 +455,14 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     age.mean = mean(age),
     cd40.mean = mean(cd40)
   )</code></pre>
+<pre><code># A tibble: 4 x 4
+# Groups:   gender [?]
+  gender  race age.mean cd40.mean
+   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1      0     0 35.14194  355.9677
+2      0     1 33.71831  360.1925
+3      1     0 35.86320  349.9898
+4      1     1 34.01485  345.0248</code></pre>
 </div>
 <div id="challenges" class="section level3">
 <h3>Challenges</h3>
@@ -462,6 +487,13 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     cd4_change = mean(cd496 - cd40, na.rm = TRUE),
     N = n()
   )</code></pre>
+<pre><code># A tibble: 4 x 7
+   arms days_mean   cd4_bl   cd4_20   cd4_96 cd4_change     N
+  &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+1     0  801.2368 353.2049 336.1391 287.6168 -77.498442   532
+2     1  916.2395 348.7241 403.1724 341.2523  -6.903904   522
+3     2  905.7519 352.7748 372.0382 354.8190  -4.356083   524
+4     3  893.4795 347.4670 374.3244 328.7920 -19.393162   561</code></pre>
 <ol start="25" style="list-style-type: decimal">
 <li>Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of <code>arms</code> to text that reflect what the values actually represent. For example, looking at the help file <code>?ACTG175</code>, I can see that the treatment arm of - is “zidovudine”. I might call this arm <code>&quot;Z&quot;</code>. Do this in the all in the same chunk of code.</li>
 </ol>
@@ -482,6 +514,13 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     cd4_96 = mean(cd496, na.rm = TRUE),
     cd4_change = mean(cd496 - cd40, na.rm = TRUE)
   )</code></pre>
+<pre><code># A tibble: 4 x 6
+   arms days_mean   cd4_bl   cd4_20   cd4_96 cd4_change
+  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+1     D  893.4795 347.4670 374.3244 328.7920 -19.393162
+2     Z  801.2368 353.2049 336.1391 287.6168 -77.498442
+3    ZD  916.2395 348.7241 403.1724 341.2523  -6.903904
+4    ZZ  905.7519 352.7748 372.0382 354.8190  -4.356083</code></pre>
 <ol start="26" style="list-style-type: decimal">
 <li>Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (<code>z30</code>)</li>
 </ol>
@@ -503,6 +542,13 @@ write_csv(ACTG175, path = &quot;tutorials/data/ACTG175.csv&quot;)</code></pre>
     cd4_96 = mean(cd496, na.rm = TRUE),
     cd4_change = mean(cd496 - cd40, na.rm = TRUE)
   )</code></pre>
+<pre><code># A tibble: 4 x 6
+   arms days_mean   cd4_bl   cd4_20   cd4_96 cd4_change
+  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+1     D  883.3464 364.2288 408.6667 358.7549  -2.215686
+2     Z  821.9608 373.3595 374.7320 317.8936 -63.074468
+3    ZD  890.1438 359.4110 446.4452 381.1146  16.770833
+4    ZZ  909.9452 383.2671 416.0000 420.6044  41.186813</code></pre>
 </div>
 </div>
 <div id="additional-reading" class="section level1">
