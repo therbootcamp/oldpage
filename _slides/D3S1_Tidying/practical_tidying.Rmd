@@ -1,0 +1,290 @@
+---
+title: "Practical: Tidying"
+author: "BaselRBootcamp 2017"
+output: html_document
+---
+
+  ```{r, echo = FALSE}
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
+```
+
+### Slides
+
+Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_slides/D3S1_Tidying/Tidying.html">Link</a><br>
+
+### Overview
+
+In this practical you'll learn how to produce tidy code (and data). By the end of this practical you will know how to:
+
+1. Write clean, documented code
+2. Understand errors and warnings
+3. Deal with missing values
+
+### The Do's and Don'ts of clean code
+
+**Filenames** should be meaningful. To order them, prefix them with numbers. 
+```{r, eval = F}
+# Good
+analyze_my_data.R
+0_read_my_data.R
+1_analyze_my_data.R
+
+# Bad
+stuff.r
+code.r
+```
+
+**Object names** should be lowercase. Use `_` rather than `.` to capitalization for mult-word names. If possible use nouns for variables and verbs for functions. Use meaningful names. **Avoid using names of existing objects**. 
+
+```{r, eval = F}
+# Good
+trial_id
+trial_1
+
+# Bad
+name_of_trial
+trialID
+tid
+t1
+```
+
+Place **spaces** around all operators, e.g., `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.
+
+```{r, eval = F}
+# Good
+var_rt <- var(rt, na.rm = TRUE)
+
+
+# Bad
+var_rt<-var(rt,na.rm=TRUE)
+```
+
+Extra **spacing** may be used to align assignments.
+
+```{r, eval = F}
+# Good
+list(
+  var_rt  = var(rt)
+  mean_rt = mean(rt)
+)
+
+```
+
+
+An opening **curly bracket** should never be on its own line. Always indent within curly brackets. To **indent** code zse two spaces. Don't use tabs.
+
+```{r, eval = F}
+# Good
+if (my_dbl < 2){
+  message('my_dbl is smaller 2')
+} else {
+  message('my_dbl is larger or equal 2')
+}
+
+# Bad
+if (my_dbl < 2)
+{
+message('my_dbl is smaller 2')
+} else {
+message('my_dbl is smaller 2')  
+}
+
+```
+
+For **assignments** use `<-`, not `=`.
+
+```{r, eval = F}
+# Good
+x <- 24324
+
+# Bad
+x = 24324
+```
+
+**Comment** each line of your code. To break up your code in chunks use `-`.
+
+```{r, eval = F}
+# Plot data ----------------------------
+```
+
+### The most frequent errors
+
+R's error messages are not always very intuitive, but you over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g., 
+
+```{r, error = TRUE}
+sapply(1:10,'fefkl')
+```
+
+Here the key message is `'function' was not found`. I.e., R is interpreting `'fekl'` as a function but cannot find an instance of this function anywhere (because it doesn't exist).
+
+The **7 most frequent error messages** (according to <a href="https://stackoverflow.com/">stackoverflow.com</a>) and their meaning are: 
+
+| Error| Example| Description|
+|:------|:------------|:-----------------------------------|
+|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
+| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
+
+For more information go <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
+
+### A `mice` example
+
+Loads the titanic dataset containing records on 1313 Titanic survivors. Attempts to predict missing values in Age using central tendencies and mice. 
+
+```{r, eval = F}
+# Load packages
+library(readr)
+library(mice)
+
+# read in titanic data
+data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+
+# use central tendencies
+data$Age[is.na(data$Age)] <- mean(data$Age, na.rm = TRUE)
+data$Age[is.na(data$Age)] <- median(data$Age, na.rm = TRUE)
+
+# use mice
+mice_model <- mice(data)
+data       <- complete(mice_model)
+
+```
+
+
+## Tasks
+
+In the first part of this tutorial clean the code. 
+
+### Begin new project
+
+Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
+
+
+### Clean code
+
+1. Go through the code below and clean it, according to the above principles. Then download all of the data files in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2017Sep16.R`.
+
+```{r, eval = FALSE}
+
+
+
+
+```
+
+
+
+1. Create a new **project** either in the location of the downloaded data files or its parent folder (one folder higher). To do this go to *File/New Project...*, select existing directory, and enter the desired folder. This step will ease reading and saving data, as it sets the working directory to the proximity of the data files. Confirm this using `getwd()`.
+
+2. Identify the filepath (incl. filename) for each of the three data files. RStudio makes it really easy. Simply write quotation marks in your script editor, e.g., `""`, move the (text) curser between the marks, and press the tab key. This opens a file menu that allows you to conveniently select the path to the file. The result is a character string that exactly defines the location of the file relative to the current working directory. Oftentimes, it is convenient to do this directly within the read function, e.g., `read_csv("")`.
+
+3. Load the packages `readr` and `haven` using `library()`, and read in the three titanic data files usig `read_csv()`, `read_sas()`, and `read_sav()`. Call them `df_csv`, `df_sas`, and `df_sav`, respectively. Inspect each of the imported objects using `print()` and `str()`. What kind of object are they?
+
+```{r, eval=F, echo=F}
+df_csv <- read_csv('data_files/titanic.csv')
+df_sas <- read_sas('data_files/titanic.sas7bdat')
+df_sav <- read_sav('data_files/titanic.sav')
+df_csv ; df_sas ; df_sav
+str(df_csv) ; str(df_sas) ; str(df_sav)
+```
+
+4. Try to verify that the three data sets are identical. To do this use the *is-equal-to* operator `==` introduced in the last tutorial and the arithmetic mean function `mean()`. Remember, that logical values can be coerced to 0 and 1. Note, that the data sets contain NA's, that is missing values. One way to see this is via the summary function `summary()`. Specifically, the variable `Age` conains missing values. Use the help file `?mean` to find out how to compute the mean while ignoring missing values and then use `==` to verify the equality between the three data sets. 
+
+```{r, eval=F, echo=F}
+mean(df_csv == df_sas, na.rm=T) == 1
+mean(df_csv == df_sav, na.rm=T) == 1
+mean(df_sas == df_sav, na.rm=T) == 1
+```
+
+### Write to disk
+
+5. The first column in the titanic set contains row numbers. Older read and write functions in R would by default add a row number column to the data, when writing to disk. Newer functions, however, do not show this behavior. ELiminate the first column from `df_csv` using a negative index. Negtive indices mean *omit* rather than *select*. E.g., c(1, 2, 3)[-2] returns the vector without the second value. Then write the reduced data frame to disk using `write_csv()`. Use the exact same file path. Observe whether R gives you a warning before (over-)writing the data?
+```{r, eval=F, echo=F}
+df_csv = df_csv[,-1]
+write_csv(df_csv,"data_files/titanic.csv")
+```
+
+6. Determine the file path to `my_data.csv` and read it in using `read_csv()`. Now write the data back to disk using `write_sas`, `write_sav`, and also `saveRDS`. Each of these functions take as the first argument the data frame and as the second argumen the file path. To obtain the latter adapt the filepath of `my_data.csv` by hand to make sure that the file path has the correct file ending, i.e., `.sas7bdat`, `.sav`, and `.RDS`, respectively. While you write the individual data sets pay attention to the speed of execution. 
+
+```{r, eval=F, echo=F}
+my_data = read_csv("data_files/my_data.csv")
+write_sas(my_data,"data_files/my_data.sas7bdat")
+write_sav(my_data,"data_files/my_data.sav")
+saveRDS(my_data,"data_files/my_data.RDS")
+```
+
+7. You may have noticed that the `saveRDS` function was the slowest. This is because `.RDS` generally leads to the highest degree of compression, i.e., the smalles data files. To verify this use the `file.info()` on each of the four files, `my_data.csv`, `my_data.sas7bdat`, `my_data.sav`, and `my_data.RDS` (using the correct path). Look out for the `size` element, which gives the size in `bytes`.
+
+```{r, eval=F, echo=F}
+file.info("data_files/my_data.csv")
+file.info("data_files/my_data.sas7bdat")
+file.info("data_files/my_data.sav")
+file.info("data_files/my_data.RDS")
+```
+
+
+### File connections
+
+8. The most basic way to handle files is via file connections. The first step of working with file connections is to establish a file connections using, e.g., `file()`. The main arguments to `file` are a location (a file path, url, etc.) and a mode indicator, e.g., `r` for `Open for reading in text mode`. Try opening a connection to the `titanic.csv` dataset. To do this, you must assign the output of `file()` to an object, which then is the connection, e.g., `con = file("my_path","r")`. 
+
+```{r, eval=F, echo=F}
+con = file('data_files/titanic.csv','r')
+```
+
+9. Now that the connection is open, you can read the file using, e.g., `readLines`. `readLines` iterates through the file line by line and returns each line as a character string. Store the output in an object. Try reading the file. When done close the connection using `close(my_con)` and inspect the data.  
+
+```{r, eval=F, echo=F}
+lin = readLines(con)
+close(con)
+```
+
+10. As you can see the read in data looks much messier than with using `read_csv()`. If you're up for the challenge you can try to nonetheless parse this data. A good way is to split each line using the `stri_split_fixed` function using the comma `,` (from the `stringi` package). This will return a list of vectors, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using `do.call(rbind,my_list)`. What's then left is transform the matrix to a data frame and to take care of column types and names.  
+
+```{r, eval=F, echo=F}
+lin <- readLines(con)
+close(con)
+require(stringi)
+spl <- stri_split_fixed(lin,',')
+mat <- do.call(rbind,spl)
+df  <- as.tibble(mat)
+# take care of types
+```
+
+### Scraping the internet
+
+11. Finally on to something rather different. Connections can also be established to data located outside one's own disk, such as, for instance, the world wide web. Speicifically, using `url()` we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient `rvest` package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R's Wikipedia page.
+
+```{r, eval=F, echo=T}
+
+# load package
+install.packages('rvest')
+library(rvest) 
+library(magrittr)
+
+# get html
+url = 'https://en.wikipedia.org/wiki/R_(programming_language)' 
+page = read_html(url)
+
+# get table
+# use XPath from inspect page (e.g., in Chrome)
+table = page %>% html_node(xpath = '//*[@id="mw-content-text"]/div/table[2]') %>% html_table()
+
+# create tibble
+as.tibble(table)
+```
+
+
+
+# Additional reading
+
+- For more details on all steps of data analysis check out Hadley Wickham's [R for Data Science](http://r4ds.had.co.nz/).
+
+- For more advanced content on objects check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
+
+- For more on pirates and data analysis check out the respective chapters in YaRrr! The Pirate's Guide to R [YaRrr! Chapter Link](https://bookdown.org/ndphillips/YaRrr/htests.html)
+
+
+
+
