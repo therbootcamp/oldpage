@@ -45,7 +45,23 @@ options(digits = 4)
 The first step to making your code efficient is figuring out the critical parts of your code. 
 
 .pull-left4[
-<font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
+```{r}
+# load package
+library(lineprof)
+
+# load code
+source('profiling_code.R')
+
+print(my_expression)
+
+# profiling
+profile <- lineprof(eval(my_expression))
+
+# show
+shine(profile)
+
+
+```
 ]
 .pull-right5[
 <img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
