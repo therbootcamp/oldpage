@@ -35,12 +35,14 @@ options(digits = 4)
 ]
 
 .pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpg" width="500">
+<img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500">
 <p align="center"><font size=3>Donald E. Knuth<br>Author of <a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming">The Art of Programming</a><br>source<a href="http://www-cs-faculty.stanford.edu/"> http://www-cs-faculty.stanford.edu/</a>
 ]
 ---
 
-# Project structure
+# Profiling
+
+The first step to making your code efficient is figuring out the critical parts of your code. 
 
 .pull-left4[
 <font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
