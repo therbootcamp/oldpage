@@ -34,7 +34,7 @@ stuff.r
 code.r
 ```
 
-**Object names** should be lowercase. Use `_` rather than `.` to capitalization for mult-word names. If possible use nouns for variables and verbs for functions. Use meaningful names. **Avoid using names of existing objects**. 
+**Object names** should be lowercase. Use `_` rather than `.` or 'CamelCase' (using capitalization) for multi-word names. If possible use nouns for variables and verbs for functions. Use meaningful names. **Avoid using names of existing objects**. 
 
 ```{r, eval = F}
 # Good
@@ -71,7 +71,7 @@ list(
 ```
 
 
-An opening **curly bracket** should never be on its own line. Always indent within curly brackets. To **indent** code zse two spaces. Don't use tabs.
+An opening **curly bracket** should never be on its own line. Always indent within curly brackets. To **indent** code use two spaces. Don't use tabs.
 
 ```{r, eval = F}
 # Good
@@ -101,10 +101,12 @@ x <- 24324
 x = 24324
 ```
 
-**Comment** each line of your code. To break up your code in chunks use `-`.
+**Comment** each line of your code. To break up your code in chunks use `-` or `=`.
 
 ```{r, eval = F}
 # Plot data ----------------------------
+
+# Plot data ============================
 ```
 
 ### The most frequent errors
@@ -129,7 +131,7 @@ The **7 most frequent error messages** (according to <a href="https://stackoverf
 | `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
 | package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
 
-For more information go <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
+For more information go to <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
 
 ### A `mice` example
 

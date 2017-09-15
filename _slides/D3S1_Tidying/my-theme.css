@@ -95,6 +95,23 @@
   width: 90%;
 }
 
+.pull-left45 {
+  float: left;
+  width: 45%;
+}
+.pull-right45 {
+  float: right;
+  width: 45%;
+}
+
+.pull-left35 {
+  float: left;
+  width: 35%;
+}
+.pull-right35 {
+  float: right;
+  width: 35%;
+}
 
 br2 {
    display: block;

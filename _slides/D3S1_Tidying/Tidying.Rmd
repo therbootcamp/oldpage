@@ -1,5 +1,5 @@
 ---
-title: "Tidying?"
+title: "Tidying"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "September 2017"
@@ -45,384 +45,288 @@ In this introduction you will learn...
 ]
 ---
 
-# readr
+# Project structure
 
-`readr` is a `tidyverse` package that provides convenient functions to turn *flat* (non-nested) data files into data frames (`tibble`s to be precise):
+.pull-left4[
+<font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
+]
+.pull-right5[
+<img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
+]
 
+---
 
-.pull-left6[
-```{r, eval=F}
-# Functions for import
-read_csv()  # for comma-delimited files
-read_csv2() # for semicolon-delimeted file
-read_delim  # for any delimited files
+# Naming files
 
-# Functions for parsing
-parse_logical() # parse logical vectors
-parse_integer() # parse integers
-parse_double(), parse_number()  # parse numerics
-parse_character() # parse character aka string
-parse_date()    # parse date -> lubridate package
+.pull-left4[
+<font size = 6>**Filenames** should be meaningful. If you like, order them by prefixing them with numbers.
+]
+
+.pull-right5[
+```{r, eval = F}
+# Good
+analyze_my_data.R
+0_read_my_data.R
+1_analyze_my_data.R
+
+# Bad
+stuff.r
+code.r
 ```
+
+]
+
+---
+
+# Naming objects
+
+.pull-left4[
+- <font size=5>**Object names** should be lowercase.
+<br2>
+- <font size=5>Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
+<br2>
+- <font size=5>Use **nouns** for variables and **verbs** for functions.
+<br2>
+- <font size=5>Use meaningful names.
+<br2>
+- <font size=5>Avoid using names of **existing objects**
+]
+
+.pull-right5[
+```{r, eval = F}
+# Good
+trial_id
+trial_1
+
+# Bad
+name_of_trial
+trialID
+tid
+t1
+```
+]
+
+---
+
+# Spaces
+
+.pull-left4[
++ <font size=5>Place **spaces** around all operators, e.g., `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions.
+<br2>
++ <font size=5>Always put a space **after a comma**, never before.
+<br2>
++ <font size=5>Extra **spacing** may be used to align assignments.
+]
+
+.pull-right5[
+```{r, eval = F}
+# Good
+var_rt <- var(rt, na.rm = TRUE)
+
+
+# Bad
+var_rt<-var(rt,na.rm=TRUE)
+```
+
+```{r, eval = F}
+# Good
+list(
+  var_rt  = var(rt)
+  mean_rt = mean(rt)
+)
+
+```
+
+]
+---
+
+# Curly brackets
+.pull-left4[
++ <font size=5>An opening **curly bracket** should never be on its own line.
+<br2>
++ <font size=5>Always indent within curly brackets. 
+<br2>
++ <font size=5>To **indent** code use two spaces. Don't use tabs.
+]
+.pull-right5[
+```{r, eval = F}
+# Good
+if (my_dbl < 2){
+  message('my_dbl is smaller 2')
+} else {
+  message('my_dbl is larger or equal 2')
+}
+
+# Bad
+if (my_dbl < 2)
+{
+message('my_dbl is smaller 2')
+} else {
+message('my_dbl is smaller 2')  
+}
+
+```
+]
+
+---
+
+# Assignments & Comments
+
+.pull-left45[
+<font size=5>For **assignments** use `<-`, not `=`. However, to specify arguments in functions use `=`.
+```{r, eval = F}
+# Good
+x <- 24324
+
+# Bad
+x = 24324
+```
+]
+
+.pull-right45[
+<font size=5>**Comment** each line of your code. To break up your code in chunks use `-` or `=`.
+```{r, eval = F}
+# Plot data ----------------------------
+
+this_is <- "pseduo_code"
+my_function(arg1 = x,
+            arg2 = y)
+
+# Plot data ============================
+
+this_is <- "pseduo_code"
+```
+]
+---
+
+# Errors, Warnings, Messages
+
+R has different categories for telling you something has happened depending on the severity of the event. 
+
+.pull-left35[
+<font size=5>**Errors** indicate that **something bad** has happened. Errors always stop the code.
+<br><br><br>
+<font size=5>**Warnings** indicate that **something potentially worrying** has happened. Warnings do not stop the code.
+<br>
+<font size=5>**Messages** indicate that **something noteworthy** has happened, e.g., completition of an analysis step. 
 ]
 
 .pull-right6[
-```{r, out.height = "200px", echo = F}
-knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png")
+```{r, error = T}
+# Error
+stop('This is an error') ; men(c(1,2,3))
+
+# Warning
+warning('This is an error') #; c(1, 2) + c(2, 3, 4)
+
+# Message
+message('This is a message')
 ```
 ]
-
 
 ---
 
-# An example
+# 7 most frequent errors
 
-Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will automatically identify (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
+According to [stackoverflow.com](http://www.stackoverflow.com)
 
-.pull-left[
-```{r, eval = F}
-# define simple data set
-data <- 
-   "id, var_1, var_2\n
-  DCDL,  .287,  .048\n
-  FEFK,  .894,  .383\n
-  ZEWE, 1.374,  .623\n
-  OJEE,  .631,  .826"
-```
-]
-
-.pull-right8[
-```{r, eval = F}
-# read in data
-require(readr)
-read_csv(data)
-```
-
-```{r, echo = F}
-# define simple data set
-data <- 
-   "id, var_1, var_2\n
-  DCDL,  .287,  .048\n
-  FEFK,  .894,  .383\n
-  ZEWE, 1.374,  .623\n
-  OJEE,  .631,  .826"
-
-# read in data
-require(readr)
-read_csv(data)
-```
-]
-
+| Error| Example| Description|
+|:------|:------------|:-----------------------------------|
+|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
+| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
 
 ---
 
-# Parsing 
+# Missing data
 
-Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that transform the input into the apprpriate format and type. 
+.pull-left3[
+<font size=5>A pervasive problem in working with data is missing values. 
 
-###Examples
-
-.pull-left8[
-```{r, warning=F}
-# parsing a logical
-parse_logical(c("TRUE","FALSE","NA"))
-
-# parsing an integer + errors
-parse_integer(c("123", "345", "abc", "123.45"))
-```
+<font size=5>In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
 ]
 
-.pull-right8[
+.pull-right6[
 ```{r}
-# parse
-parse_character("hellow","world")
+# NA and NaN
+my_vec <- c(1,2) ; my_vec[5]
+0/0
 
-# parsing a numeric
-parse_number(c("1.23","$123.209"))
+# Tests
+is.na(my_vec[5]) ; is.na(0/0)
+is.nan(my_vec[5]) ; is.nan(0/0)
+
 ```
 ]
 
 ---
 
-# Locale
+# Handling missing data
 
-How the text input is parsed can largely be controlled using  arguments of the respective functions. Otherwise the parsing behavior will be controlled by settings `locale()`. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
+.pull-left3[
+<font size=5>Many functions have **inbuilt handlers** for missing data. 
 
-.pull-left8[
-```{r, tidy = T, tidy.opts=list(width.cutoff=60)}
-str(locale())
+<font size=5>In most cases, however, missing values have to and should be dealt with **before the analysis**.    
+]
+
+.pull-right6[
+```{r}
+# Example
+my_vec_1 <- c(1, 2, 3, 4, NA)
+my_vec_2 <- c(4, 2, NA, 3, 5)
+
+# Functions examples that include handlers
+mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
+
+# Actually using the handlers
+mean(my_vec_1, na.rm = T)
+cor(my_vec_1, my_vec_2, use = 'complete.obs')
+
 ```
 ]
+
 
 ---
 
-# Error handling
+# Impute missing data
 
-When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` infers the type of each column using a heuristic process base on the first 1,000 rows (see `guess_parser`). However, that may not always work. In that case consider ...  
+.pull-left3[
+<font size=5>Missing data can be **imputed**. 
 
+<font size=5>How missing data should be computed depends on whether the **data is missing at random** or not.
 
-```{r, eval = F}
-# to inspect the problems
-problems()
+<font size=5>**Packages**: `Hmisc`, `DMwR`, `mice`, etc.    
+]
 
-# to set the types
-read_csv(..., col_types = cols(...))
-
-# read in as character and convert later
-read_csv(..., col_types = cols(.default = col_character()))
-type_convert()
-
-# use more basic read-in functions (see later)
-
+.pull-right6[
+```{r, echo=F,warning=F,message=F}
+require(mice)
 ```
 
----
+```{r}
+# Example
+my_df <- data.frame('x' = c(1, 2, 3, 4, NA),
+                    'y' = c(4, 2, NA, 3, 5))
 
-# Other read in options
+# Impute using mean
+my_df[[1]][is.na(my_df[[1]])] <- 
+  mean(my_df[[1]], na.rm = T)
 
-The `tidyverse` together with other package offers a variety of built-in, automated read functions for almost any data format. For an overview see [rio](https://cran.r-project.org/web/packages/rio/vignettes/rio.html).
-.pull-left8[
-### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
-```{r, eval = F}
-# read fixed width files (can be fast)
-read_fwf()
+# Impute using regression (package: mice)
+mice_model  <- mice(my_df, method="norm", printFlag = F)
+my_df       <- complete(mice_model)
 
-# read Apache style log files
-read_log()
-
-```
-### `haven` <img src="http://haven.tidyverse.org/logo.png" width="50" align="right">
-```{r, eval = F}
-# read SAS's .sas7bat and sas7bcat files
-read_sas()
-
-# read SPSS's .sav files
-read_sav()
-
-# etc
+# print
+my_df
 ```
 ]
 
-.pull-right8[
-### `readxl` <img src="https://www.rstudio.com/wp-content/uploads/2017/05/readxl-259x300.png" width="50" align="right">
-```{r, eval = F}
-# read Excel's .xls and xlsx files
-read_excel()
-```
-<br>
-### Other packages
-```{r, eval = F}
-# from package R.matlab: read .mat
-readMat()
-
-# from package XML: read and wrangle .xml and .html
-xmlParseParse()
-
-# from package jsonlite: read .json files
-read_json()
-```
-]
-
----
-
-# Writing data
-
-Most read-in functions have **complementary write** functions to save the specific data format to disk. They usually require as arguments the data frame and a file path on the disk.
-
-.pull-left8[
-### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
-```{r, eval = F}
-# read fixed width files (can be fast)
-write_csv(my_data_frame,"my_data.csv")
-write_delim(...)
-
-```
-### `haven` <img src="http://haven.tidyverse.org/logo.png" width="50" align="right">
-```{r, eval = F}
-# read SAS's .sas7bat and sas7bcat files
-write_sas()
-
-# read SPSS's .sav files
-write_sav()
-
-# etc
-```
-]
-
-.pull-right8[
-### Other packages
-```{r, eval = F}
-# from package R.matlab: read .mat
-writeMat()
-
-# from package XML: read and wrangle .xml and .html
-saveXML()
-
-# from package jsonlite: read .json files
-write_json()
-```
-]
-
----
-
-# R's data formats
-
-R also has a couple of own data files that can be used to store and retrieve data. The benefits of these data files are that you can store **data as R objects**, as well as substantial **compression** (depending on repetitions/patterns in the data up to about 1% of the original size). 
-
-.pull-left8[
-### `.RData`  
-+ Bundles several R objects.
-+ Loads objects directly to workspace.
-+ Relatively slow.
-```{r, eval = F}
-# save data as .RData
-save(object_1, object_2,..., file = "my_data.RData")
-
-# load data from .RData
-load("my_data.RData")
-```
-]
-
-.pull-right8[
-### `.RDS`  
-+ Stores individual R objects.
-+ Import can is newly assigned.
-+ Relatively fast.
-```{r, eval = F}
-# save data as .RDS
-saveRDS(my_data, file = "my_data.RData")
-
-# load data from .RDS
-my_data <- readRDS("my_data.RData")
-```
-]
----
-
-# File connections
-
-Under the hood, practically all reading and writing functions rely on R's **file connection** architecture, which is very similar to most other programming languages. To the experienced programmer file connections represent a flexible option to access and manipulate files on any accessible location (harddrive, server, www). 
-
-
-.pull-left8[
-### Benefits of file connections
-+ Define access mode (read, write, append)
-<br2>
-+ Read/write as binary or raw
-<br2>
-+ Handle encodings directly
-<br2>
-+ Read and write compressed files
-<br2>
-+ Access to www and servers  
-]
-
-.pull-right8[
-### Functions
-```{r, eval = F}
-# access a file
-file("my_data.csv",'r')
-
-# access url
-url(...)
-
-# access compressed files
-gzfile(...)
-
-# to handle connections
-readLines() # to read contect
-close() # close connection 
-```
-]
-
----
-
-# `tibble`s
-
-The output from most `tidyverse` read functions such as `read_csv` and the preferred data format for many (but not all) analyses is a `tibble`. `tibble`s are a modern, leaner version of data.frames. 
-
-.pull-left8[
-### tibbles ...
-+ never change the input's type
-<br2>
-+ never add row names
-<br2>
-+ never change column names
-<br2>
-+ look better in `print` 
-<br2>
-+ are accessed more consistently
-]
-
-.pull-right8[
-### Functions
-```{r, eval = F}
-# create tibble
-my_data <- tibble(id, var_1, var_2)
-
-# convert to and from data.frame
-as_tibble(my_data_frame)
-as.data.frame(my_tibble)
-```
-
-```{r, echo = F}
-# define simple data set
-data <- 
-   "id, var_1, var_2\n
-  DCDL,  .287,  .048\n
-  FEFK,  .894,  .383\n
-  ZEWE, 1.374,  .623\n
-  OJEE,  .631,  .826"
-
-# read in data
-require(readr)
-read_csv(data)
-```
-]
 
 ---
 
 # Practical
 
-
-
-<!--- Tibble notes
-
-updated data.frame
-
-# creating tibbles
-as_tibble(data.frame)
-tibble() # recycles just as data frame
-
-# special about tibble
-never changes format -> no factors
-never changes names
-never creates row names
-non-valid R variables names (e.g., not starting with a letter)
-better printing behavior (only 10 rows + type + dim)
-no partial name matches
-[ always returns a tibble (more consistent)
-
-# common  
-subsetting
-
-
-# tribble for data entry in code
-tribble(
-tribble(
-  ~x, ~y, ~z,
-  #--|--|----
-  "a", 2, 3.6,
-  "b", 1, 8.5
-)
-#> # A tibble: 2 × 3
-#>       x     y     z
-#>   <chr> <dbl> <dbl>
-#> 1     a     2   3.6
-#> 2     b     1   8.5
-)
-
-# subsetting with pipe
-df %>% .$x
-
-# turn back to df
-as.data.frame() --->
