@@ -29,9 +29,9 @@ options(digits = 4)
 
 # Tidying
 
+.pull-left4[
 In this introduction you will learn...
 
-.pull-left4[
 ><font size = 5>...how to write clean, documented code.
 ><br2>
 ><font size = 5>...to understand errors (and warnings).
@@ -87,7 +87,7 @@ code.r
 <br2>
 - <font size=5>Use **nouns** for variables and **verbs** for functions.
 <br2>
-- <font size=5>Use meaningful names.
+- <font size=5>Use **meaningful** names.
 <br2>
 - <font size=5>Avoid using names of **existing objects**
 ]
@@ -144,9 +144,9 @@ list(
 .pull-left4[
 + <font size=5>An opening **curly bracket** should never be on its own line.
 <br2>
-+ <font size=5>Always indent within curly brackets. 
++ <font size=5>**Always indent** within curly brackets. 
 <br2>
-+ <font size=5>To **indent** code use two spaces. Don't use tabs.
++ <font size=5>To **indent** code, use two spaces. Don't use tabs.
 ]
 .pull-right5[
 ```{r, eval = F}
@@ -184,7 +184,7 @@ x = 24324
 ]
 
 .pull-right45[
-<font size=5>**Comment** each line of your code. To break up your code in chunks use `-` or `=`.
+<font size=5>**Comment each line** of your code. To break up your code in chunks use `-` or `=`.
 ```{r, eval = F}
 # Plot data ----------------------------
 
@@ -231,14 +231,14 @@ message('This is a message')
 According to [stackoverflow.com](http://www.stackoverflow.com)
 
 | Error| Example| Description|
-|:------|:------------|:-----------------------------------|
-|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
-|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
-|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
-| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
-| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
-| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
-| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
+|:------|:------------|:--------------------------------------------|
+|     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| A 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
+| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
 
 ---
 
@@ -297,7 +297,7 @@ cor(my_vec_1, my_vec_2, use = 'complete.obs')
 .pull-left3[
 <font size=5>Missing data can be **imputed**. 
 
-<font size=5>How missing data should be computed depends on whether the **data is missing at random** or not.
+<font size=5>How missing data should be imputed depends on whether the **data is missing at random** or not.
 
 <font size=5>**Packages**: `Hmisc`, `DMwR`, `mice`, etc.    
 ]

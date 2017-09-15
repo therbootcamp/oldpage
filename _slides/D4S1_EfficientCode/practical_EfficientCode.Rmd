@@ -1,28 +1,403 @@
 ---
-title: "Untitled"
+title: "Practical: Efficient Code"
+author: "BaselRBootcamp 2017"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+  ```{r, echo = FALSE}
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
 ```
 
-## R Markdown
+### Slides
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_slides/D4S1_EfficientCode/EfficientCode.html">Link</a><br>
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Overview
 
-```{r cars}
-summary(cars)
+In this practical you'll learn how to write efficient code. By the end of this practical you will know how to:
+
+1. Profile your code to identify critical parts
+2. Make critical code more efficient
+
+### Benchmarking and profiling functions
+
+Functions to profile your code are: 
+
+| Function| Package| Description| 
+|:------|:------|:------------|
+| `proc.time()`  |`base`|Returns the time.|
+| `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
+| `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
+| `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
+
+For more information go to <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
+
+### Microbenchmark: Example
+
+Small (minimal) chunks of code can conveniently be tested using `microbenchmark()`. 
+
+```{r, eval = F}
+# load packages
+library(microbenchmark)
+library(tibble)
+
+# get data
+df <- data.frame('var_1' = rnorm(1000,1),
+                 'var_2' = rnorm(1000,1))
+tbl <- as.tibble(df)
+
+# microbenchmark pt. 1
+microbenchmark(df[['var_1']],df$var_1,tbl$var_1)
+
 ```
 
-## Including Plots
+### Profiling: Example
 
-You can also embed plots, for example:
+Larger code chunks or even scripts can conveniently be tested using `lineprof()` from the `lineprof` package.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, eval = F}
+# ---- install and load package
+install.packages('devtools')
+devtools::install_github("hadley/lineprof")
+libarary(lineprof)
+
+# ---- define code chunnk as function
+
+my_chunkfun <- function(){
+
+  # load data
+  data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data <- data %>% 
+    mutate(months = Age * 12)
+  
+  # select
+  test_data <- data %>% 
+    select(Sex,Age,Survived)
+  
+  # multiple regression 
+  # Survival predicted by Sex, Age, and their interaction
+  model <- glm(Survived ~ Sex * Age, 
+              data = test_data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+  
+  }
+
+# ---- profiling
+
+# profile using system.time
+system.time(my_chunkfun())
+
+# profile using lineprof
+profile <- lineprof(my_chunkfun())
+shine(profile)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Tasks
+
+In the first part of this tutorial clean the code. 
+
+### Begin new project
+
+Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
+
+
+### Microbenchmark
+
+1. Run the microbenchmakr example from above. What do you find? Are `tibble`'s fast or slow?
+
+```{r, eval = F, echo = F}
+# load packages
+library(microbenchmark)
+library(tibble)
+
+# get data
+df <- data.frame('var_1' = rnorm(1000,1),
+                 'var_2' = rnorm(1000,1))
+tbl <- as.tibble(df)
+
+# microbenchmark pt. 1
+microbenchmark(df[['var_1']],df$var_1,tbl$var_1)
+```
+
+2. Repeat the comparison of `tibble`s and basic `data.frame`s of the first exercise now including for both data frame types the `.subset2` function (don't forget the dot). The function takes two arguments: The first argument is the data frame, the second argument is the column identifyier (index or name). What do you find?   
+
+```{r, eval = F, echo = F}
+# load packages
+library(microbenchmark)
+library(tibble)
+
+# get data
+df <- data.frame('var_1' = rnorm(1000,1),
+                 'var_2' = rnorm(1000,1))
+tbl <- as.tibble(df)
+
+# microbenchmark pt. 1
+microbenchmark(df[['var_1']],df$var_1,tbl$var_1,.subset(df,'var_1'),.subset(tbl,'var_1'))
+```
+
+3. Compare the the function `mean()` to one composed of its basic ingredients `sum()` and `length()`, i.e., `sum(my_vec)/length(my_vec)`. To do this first create a vector consisting of random numbers using `runif` (see `?runif`). What do you find? 
+
+```{r, eval = F, echo = F}
+# define vector
+my_vec <- runif(10000)
+
+# microbenchmark pt. 1
+microbenchmark(mean(my_vec), sum(my_vec)/length(my_vec))
+```
+
+4. Test the type of each of `mean`, `sum`, `length`, and `.subset2` using `typeof`. What's the fast type?
+
+```{r, eval = F, echo = F}
+# test type
+typeof(mean); typeof(sum); typeof(length); typeof(.subset2)
+
+```
+
+### Profiling
+
+5. Copy the profiling example into a new script file. After installing and loading the `devtools` and `lineprof` packages, run the code under 'define code chunnk as function' and then test the function by executing it, i.e., run `my_chunkfun()`. If it works you just defined and executed your first own function. Continue profiling the function using `system.time()` and `lineprof()`. What do you find? What parts of the code are most computationally expensive?
+
+
+```{r, eval = F}
+# ---- install and load package
+install.packages('devtools')
+devtools::install_github("hadley/lineprof")
+libarary(lineprof)
+
+# ---- define code chunnk as function
+
+my_chunkfun <- function(){
+
+  # load data
+  data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data <- data %>% 
+    mutate(months = Age * 12)
+  
+  # select
+  test_data <- data %>% 
+    select(Sex,months,Survived)
+  
+  # multiple regression 
+  # Survival predicted by Sex, months, and their interaction
+  model <- glm(Survived ~ Sex * months, 
+              data = test_data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+  
+  }
+
+# ---- profiling
+
+# profile using system.time
+system.time(my_chunkfun())
+
+# profile using lineprof
+profile <- lineprof(my_chunkfun())
+shine(profile)
+
+```
+
+### Speeding up code
+
+6. When speeding up code, the first question should always be whether faster solutions are already out there. In this case there are. Check out the `data.table` package and use the `fread()` function. Try defining a new function using this function rather than `read_csv()`. Then compare the performance of the two. 
+
+```{r, eval = F}
+# ---- install and load package
+install.packages('data.table')
+libarary(data.table)
+
+# ---- define code chunnk as function
+
+my_chunkfun_fast <- function(){
+
+  # load data
+  data <- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data <- data %>% 
+    mutate(months = Age * 12)
+  
+  # select
+  test_data <- data %>% 
+    select(Sex,months,Survived)
+  
+  # multiple regression 
+  # Survival predicted by Sex, months, and their interaction
+  model <- glm(Survived ~ Sex * months, 
+              data = test_data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+  
+  }
+
+# ---- profiling
+
+# profile using system.time
+system.time(my_chunkfun())
+system.time(my_chunkfun_fast())
+
+# profile using lineprof
+profile <- lineprof(my_chunkfun_fast())
+shine(profile)
+
+```
+
+7. The next part of optimising code is to identify bits that are not necessary. Try to identify a bit that is not entirely necessary and evaluate again.  
+
+```{r, eval = F}
+# ---- define code chunnk as function
+
+my_chunkfun_fast2 <- function(){
+
+  # load data
+  data <- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data <- data %>% 
+    mutate(months = months * 12)
+  
+  # multiple regression 
+  # Survival predicted by Sex, months, and their interaction
+  model <- glm(Survived ~ Sex * months, 
+              data = data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+  
+  }
+
+# ---- profiling
+
+# profile using lineprof
+profile <- lineprof(my_chunkfun_fast2())
+shine(profile)
+
+# profile using system.time
+system.time(my_chunkfun())
+system.time(my_chunkfun_fast())
+system.time(my_chunkfun_fast2())
+
+
+```
+
+8. Next think about whether vectorization may make sense. Find a code chunk that may be written in vector form and try to implement it. Is there any improvement?    
+
+```{r, eval = F}
+# ---- define code chunnk as function
+
+my_chunkfun_fast3 <- function(){
+
+  # load data
+  data <- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data[['months']] <- data$Age * 12
+  
+  # multiple regression 
+  # Survival predicted by Sex, months, and their interaction
+  model <- glm(Survived ~ Sex * months, 
+              data = data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+  
+  }
+
+# ---- profiling
+
+# profile using lineprof
+profile <- lineprof(my_chunkfun_fast3())
+shine(profile)
+
+# profile using system.time
+system.time(my_chunkfun())
+system.time(my_chunkfun_fast())
+system.time(my_chunkfun_fast2())
+system.time(my_chunkfun_fast3())
+
+```
+
+### Speeding up code pt 2 (advanced)
+
+9. In 95% of all cases the above steps will produce very efficient code. Sometimes, however, one is interested in even faster code execution. This is particularly the case when dealing with large data sets. One reason for this is that run time is often a super linear function of data size, i.e., a twice as large data sets requires more than twice as much of computation time. To see this program a simple function that identifies the smallest value of a vector (which has been provided as the argument) using `sort()` and selecting the first element of the sorted vector. Then feed it random vectors (using `runif()`) of length either 1e5+, 1e+6, 1e+7, 1e+8, and 1e+9  and evalute the computation time. Are they, each step, more or less than 10 times longer? If you want repeat it a couple of times.
+
+EXCURSION: How to program functions? Functions are always defined as this `my_fun <- function(){}`. Within the parentheses you define the names (and default values) of the arguments, e.g., `function(variable_1, variable_2)`. Within the curly brackets you define the functions expression, i.e., what's to be done. This could be for instance `variable_1 + variable_2`. When the function is called (executed) the argument names inside the functions expression, i.e., `variable_1` and `variable_2` will be replaced by the objects that were provided as arguments. That is, if the function is later provided with two vectors `my_vec_1` and `my_vec_2`, i.e., `my_fun(my_vec_1, my_vec_2)` is executed, then the function will compute the element-wise sum of these two vectors. This implies, importantly, that the provided arguments must fit to whatever is done with them inside the function. In this case this means that the objects provided as arguments cannot be of type `character`. The full function definition of the example may thus be `my_fun <- function(variable_1, variable_2) {variable_1 + variable_2}` and after its been defined you could call it using `my_fun(object_1, object_2)`.
+
+
+```{r, eval = F}
+# ---- define code chunnk as function
+
+my_fun <- function(x) sort(x)[1]
+
+# ---- profiling
+
+# profile using system.time
+system.time(my_fun(runif(1e+5)))
+system.time(my_fun(runif(1e+6)))
+system.time(my_fun(runif(1e+7)))
+system.time(my_fun(runif(1e+8)))
+
+```
+
+9. In cases where large datasets need to be processed and speed is of the essence it is often very useful to rely on multi-threaded, parallel execution. That is to run a task on multiple processors in parallel. To do this R has relatively convenient packages, e.g., the `paralell` package, which has recently been included in the standard R release. To use parallel execution three things need to be done. First, the data need to be split in separate jobs. E.g., a vector would be split in 100 separate pieces. Second, a function needs to be defined that performs the desired operations on a single piece of the vector. Finally, bot,. the jobs and the function, need to be combined in one of parallel's functions that passes a job and the function to individual workers and retrieves their results. This particular style of programming is also known as functional programming. Now try to run code below, which implements the function from above in this 'divide and conquer'-manner and compare its execution time to its non-parallel twin.         
+
+
+```{r}
+library(parallel)
+
+# define data
+my_vec <- runif(1e+8)
+
+# create jobs
+# matrix splits data in 100 columns
+# as.data.frame and as.list transform it to a list with 100 vectors
+jobs <- as.list(as.data.frame(matrix(my_vec, ncol = 100)))
+
+# define function
+my_fun <- function(x) sort(x)[1]
+
+# create a cluster with as many workers as cores
+cl <- makeCluster(detectCores())
+
+# apply function to jobs using a load balanced (LB) handler
+result <- clusterApplyLB(cl, jobs, my_fun)
+
+# flatten result and apply my_fun one last time
+my_fun(unlist(result))
+
+```
+
+# Additional reading
+
+- For more details check out check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
+
+

@@ -38,30 +38,21 @@ options(digits = 4)
 <img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500">
 <p align="center"><font size=3>Donald E. Knuth<br>Author of <a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming">The Art of Programming</a><br>source<a href="http://www-cs-faculty.stanford.edu/"> http://www-cs-faculty.stanford.edu/</a>
 ]
+
+---
+
+# Why is R slow? And, is it?
+
+
+
+
 ---
 
 # Profiling
 
 The first step to making your code efficient is figuring out the critical parts of your code. 
 
-.pull-left4[
-```{r}
-# load package
-library(lineprof)
 
-# load code
-source('profiling_code.R')
-
-print(my_expression)
-
-# profiling
-profile <- lineprof(eval(my_expression))
-
-# show
-shine(profile)
-
-
-```
 ]
 .pull-right5[
 <img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
