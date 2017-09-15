@@ -84,12 +84,16 @@ Often some small part of your code takes hundreds if not thousands times longer 
 
   # multiple regression 
   model &lt;- glm(Survived ~ Sex * Age, 
-              data = test_data, 
+              data = data, 
               family = 'binomial')
   
   # evaluate model
   summary(model)
 ```
+]
+
+.pull-right5[
+&lt;img src="https://therbootcamp.github.io/_slides/images/lineprof.png" width="500"&gt;
 ]
 
 ---
