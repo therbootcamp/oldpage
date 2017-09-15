@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Efficient code</title>
+    <meta charset="utf-8">
+    <meta name="author" content="The R Bootcamp Twitter: @therbootcamp" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Efficient code
+### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
+### September 2017
+
+---
+
+
+
+
+
+
+# What is efficient code?
+
+.pull-left4[
+&gt;&lt;font size = 5&gt;"Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered."&lt;br&gt;
+&gt;&lt;font size = 5&gt;-- Donald Knuth
+]
+
+.pull-right5[
+&lt;img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500"&gt;
+&lt;p align="center"&gt;&lt;font size=3&gt;Donald E. Knuth&lt;br&gt;Author of &lt;a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming"&gt;The Art of Programming&lt;/a&gt;&lt;br&gt;source&lt;a href="http://www-cs-faculty.stanford.edu/"&gt; http://www-cs-faculty.stanford.edu/&lt;/a&gt;
+]
+---
+
+# Project structure
+
+.pull-left4[
+&lt;font size = 6&gt;Good, clean, documented code begins with a **project** and a **folder structure**.
+]
+.pull-right5[
+&lt;img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500"&gt;
+]
+
+---
+
+# Naming files
+
+.pull-left4[
+&lt;font size = 6&gt;**Filenames** should be meaningful. If you like, order them by prefixing them with numbers.
+]
+
+.pull-right5[
+
+```r
+# Good
+analyze_my_data.R
+0_read_my_data.R
+1_analyze_my_data.R
+
+# Bad
+stuff.r
+code.r
+```
+
+]
+
+---
+
+# Naming objects
+
+.pull-left4[
+- &lt;font size=5&gt;**Object names** should be lowercase.
+&lt;br2&gt;
+- &lt;font size=5&gt;Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
+&lt;br2&gt;
+- &lt;font size=5&gt;Use **nouns** for variables and **verbs** for functions.
+&lt;br2&gt;
+- &lt;font size=5&gt;Use meaningful names.
+&lt;br2&gt;
+- &lt;font size=5&gt;Avoid using names of **existing objects**
+]
+
+.pull-right5[
+
+```r
+# Good
+trial_id
+trial_1
+
+# Bad
+name_of_trial
+trialID
+tid
+t1
+```
+]
+
+---
+
+# Spaces
+
+.pull-left4[
++ &lt;font size=5&gt;Place **spaces** around all operators, e.g., `=`, `+`, `-`, `&lt;-`, etc. Also applies for defining arguments in functions.
+&lt;br2&gt;
++ &lt;font size=5&gt;Always put a space **after a comma**, never before.
+&lt;br2&gt;
++ &lt;font size=5&gt;Extra **spacing** may be used to align assignments.
+]
+
+.pull-right5[
+
+```r
+# Good
+var_rt &lt;- var(rt, na.rm = TRUE)
+
+
+# Bad
+var_rt&lt;-var(rt,na.rm=TRUE)
+```
+
+
+```r
+# Good
+list(
+  var_rt  = var(rt)
+  mean_rt = mean(rt)
+)
+```
+
+]
+---
+
+# Curly brackets
+.pull-left4[
++ &lt;font size=5&gt;An opening **curly bracket** should never be on its own line.
+&lt;br2&gt;
++ &lt;font size=5&gt;Always indent within curly brackets. 
+&lt;br2&gt;
++ &lt;font size=5&gt;To **indent** code use two spaces. Don't use tabs.
+]
+.pull-right5[
+
+```r
+# Good
+if (my_dbl &lt; 2){
+  message('my_dbl is smaller 2')
+} else {
+  message('my_dbl is larger or equal 2')
+}
+
+# Bad
+if (my_dbl &lt; 2)
+{
+message('my_dbl is smaller 2')
+} else {
+message('my_dbl is smaller 2')  
+}
+```
+]
+
+---
+
+# Assignments &amp; Comments
+
+.pull-left45[
+&lt;font size=5&gt;For **assignments** use `&lt;-`, not `=`. However, to specify arguments in functions use `=`.
+
+```r
+# Good
+x &lt;- 24324
+
+# Bad
+x = 24324
+```
+]
+
+.pull-right45[
+&lt;font size=5&gt;**Comment** each line of your code. To break up your code in chunks use `-` or `=`.
+
+```r
+# Plot data ----------------------------
+
+this_is &lt;- "pseduo_code"
+my_function(arg1 = x,
+            arg2 = y)
+
+# Plot data ============================
+
+this_is &lt;- "pseduo_code"
+```
+]
+---
+
+# Errors, Warnings, Messages
+
+R has different categories for telling you something has happened depending on the severity of the event. 
+
+.pull-left35[
+&lt;font size=5&gt;**Errors** indicate that **something bad** has happened. Errors always stop the code.
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;font size=5&gt;**Warnings** indicate that **something potentially worrying** has happened. Warnings do not stop the code.
+&lt;br&gt;
+&lt;font size=5&gt;**Messages** indicate that **something noteworthy** has happened, e.g., completition of an analysis step. 
+]
+
+.pull-right6[
+
+```r
+# Error
+stop('This is an error') ; men(c(1,2,3))
+```
+
+```
+## Error in eval(expr, envir, enclos): This is an error
+```
+
+```
+## Error in men(c(1, 2, 3)): could not find function "men"
+```
+
+```r
+# Warning
+warning('This is an error') #; c(1, 2) + c(2, 3, 4)
+```
+
+```
+## Warning: This is an error
+```
+
+```r
+# Message
+message('This is a message')
+```
+
+```
+## This is a message
+```
+]
+
+---
+
+# 7 most frequent errors
+
+According to [stackoverflow.com](http://www.stackoverflow.com)
+
+| Error| Example| Description|
+|:------|:------------|:-----------------------------------|
+|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a &lt;- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
+| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
+
+---
+
+# Missing data
+
+.pull-left3[
+&lt;font size=5&gt;A pervasive problem in working with data is missing values. 
+
+&lt;font size=5&gt;In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
+]
+
+.pull-right6[
+
+```r
+# NA and NaN
+my_vec &lt;- c(1,2) ; my_vec[5]
+```
+
+```
+## [1] NA
+```
+
+```r
+0/0
+```
+
+```
+## [1] NaN
+```
+
+```r
+# Tests
+is.na(my_vec[5]) ; is.na(0/0)
+```
+
+```
+## [1] TRUE
+```
+
+```
+## [1] TRUE
+```
+
+```r
+is.nan(my_vec[5]) ; is.nan(0/0)
+```
+
+```
+## [1] FALSE
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+
+# Handling missing data
+
+.pull-left3[
+&lt;font size=5&gt;Many functions have **inbuilt handlers** for missing data. 
+
+&lt;font size=5&gt;In most cases, however, missing values have to and should be dealt with **before the analysis**.    
+]
+
+.pull-right6[
+
+```r
+# Example
+my_vec_1 &lt;- c(1, 2, 3, 4, NA)
+my_vec_2 &lt;- c(4, 2, NA, 3, 5)
+
+# Functions examples that include handlers
+mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
+```
+
+```
+## [1] NA
+```
+
+```
+## [1] NA
+```
+
+```r
+# Actually using the handlers
+mean(my_vec_1, na.rm = T)
+```
+
+```
+## [1] 2.5
+```
+
+```r
+cor(my_vec_1, my_vec_2, use = 'complete.obs')
+```
+
+```
+## [1] -0.3273
+```
+]
+
+
+---
+
+# Impute missing data
+
+.pull-left3[
+&lt;font size=5&gt;Missing data can be **imputed**. 
+
+&lt;font size=5&gt;How missing data should be computed depends on whether the **data is missing at random** or not.
+
+&lt;font size=5&gt;**Packages**: `Hmisc`, `DMwR`, `mice`, etc.    
+]
+
+.pull-right6[
+
+
+
+```r
+# Example
+my_df &lt;- data.frame('x' = c(1, 2, 3, 4, NA),
+                    'y' = c(4, 2, NA, 3, 5))
+
+# Impute using mean
+my_df[[1]][is.na(my_df[[1]])] &lt;- 
+  mean(my_df[[1]], na.rm = T)
+
+# Impute using regression (package: mice)
+mice_model  &lt;- mice(my_df, method="norm", printFlag = F)
+my_df       &lt;- complete(mice_model)
+
+# print
+my_df
+```
+
+```
+##     x     y
+## 1 1.0 4.000
+## 2 2.0 2.000
+## 3 3.0 7.862
+## 4 4.0 3.000
+## 5 2.5 5.000
+```
+]
+
+
+---
+
+# Practical
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
