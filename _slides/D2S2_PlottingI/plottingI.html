@@ -12,6 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Plotting Part I
+## ggplot2
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
 ### September 2017
 
@@ -21,14 +22,10 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
 # Plotting
 .pull-left3[
-
-dplyr is a package for managing dataframes.
-
-Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is almost certainly a way to do it in dplyr.
-
-&lt;img src="images/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -48,29 +45,27 @@ Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is 
 ]
 ---
 
-# dplyr CheatSheet!
-https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+# Cheat Sheet!
+https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
-&lt;img src="images/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="images/ggplot_cheatsheet_ss.png" width="600" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 
+## Grammar of Graphics
+
 .pull-left3[
-# dplyr
 
-dplyr is a combination of 3 things:
-
-1. **`objects`** like dataframes
-2. **`verbs`** that **do** things to objects.
-3. **`pipes`** `%&gt;%` that string together objects and verbs
 
 &lt;br&gt;
+&lt;br&gt;
 
+&gt;###1. A plot is built of simple building blocks
 
-&lt;img src="images/pipe.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+&gt;###2. By comining different building blocks, plots of any complexity can be created.
+
 
 
 ]
@@ -78,182 +73,298 @@ dplyr is a combination of 3 things:
 
 .pull-right3[
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-&lt;img src="images/sequential.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
-dplyr is meant to be sequential and work like language
-
-&gt; Take data X, then do Y, then do Z...
-
-Here's the basic structure of `dplyr` in action
-
-
-```r
-data %&gt;%           # Start with data, and THEN
-     VERB1 %&gt;%     # Do VERB1, (and THEN)
-     VERB2 %&gt;% ... # Do VERB2, (and THEN)
-```
+&lt;img src="images/wilkonson_book.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
-
 ---
 
-.pull-left4[
-# dplyr
-
-
-### Question:
-
-&gt; From the ChickWeight dataframe, calculate the mean weight and time for each diet
-
-]
-
-
-.pull-right4[
-
-### Answer:
-
-```r
-library(dplyr)
-
-x &lt;- ChickWeight %&gt;%  # Start with ChickWeight
-  group_by(Diet) %&gt;%  # Group by Diet
-  summarise(          # Get ready to summarise....
-    weight.mean = mean(weight), # Mean weight
-    time.mean = mean(Time),     # Mean time
-    N = n()                     # Number of cases
-  )
-  
-
-x
-```
-
-```
-## # A tibble: 4 x 4
-##     Diet weight.mean time.mean     N
-##   &lt;fctr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-## 1      1       102.6     10.48   220
-## 2      2       122.6     10.92   120
-## 3      3       142.9     10.92   120
-## 4      4       135.3     10.75   118
-```
-
-]
-
-
-
-
----
-
-
-# Common dplyr verbs
-
-| verb| action| example |
-|:---|:----|:----------------|
-|     `filter()`|    Select rows based on some criteria| `filter(age &gt; 40 &amp; sex == "m")`|
-|     `arrange()`|    Sort rows| `arrange(date, group)`|
-|     `select()`|    Select columns (and ignore all others)| `select(age, sex)`|
-|     `rename()`|    Rename columns| `rename(DATE_MONTHS_X24, date`)|
-|     `mutate()`|    Add new columns| `mutate(height.m = height.cm / 100)`|
-|     `case_when()`|    Recode values of a column| `sex.n = case_when(sex == 0 ~ "m", sex == 1 ~ "f")`|
-|     `group_by(), summarise()`|   Group data and then calculate summary statistics|`group_by(treatment) %&gt;% summarise(...)` |
-
-
-
-
-
-
----
-
-#### Ex: Chick 1
-
-*Add a column called `weight_d_time` that is weight divided by time*
-
-
-```r
-library(dplyr)
-
-x &lt;- ChickWeight %&gt;%          # Start with the ChickWeight data
-      mutate(                 # Create new columns...
-            weight_d_time = weight / Time
-            )
-
-head(x)   # Print the result
-```
-
-```
-##   weight Time Chick Diet weight_d_time
-## 1     42    0     1    1           Inf
-## 2     51    2     1    1         25.50
-## 3     59    4     1    1         14.75
-## 4     64    6     1    1         10.67
-## 5     76    8     1    1          9.50
-## 6     93   10     1    1          9.30
-```
-
-
-
----
-
-#### Ex: Chick 2
-
-*Add a column called `weight_d_time` that is weight divided by time AND `time_d` that is time in days*
-
-
-```r
-x &lt;- ChickWeight %&gt;%          # Start with the ChickWeight data
-      mutate(                 # Create new columns...
-            weight_d_time = weight / Time,  # weight_d_time is weight divided by Time
-            time_d = Time * 7               # time_d is Time times 7
-            )
-
-head(x)   # Print the result
-```
-
-```
-##   weight Time Chick Diet weight_d_time time_d
-## 1     42    0     1    1           Inf      0
-## 2     51    2     1    1         25.50     14
-## 3     59    4     1    1         14.75     28
-## 4     64    6     1    1         10.67     42
-## 5     76    8     1    1          9.50     56
-## 6     93   10     1    1          9.30     70
-```
-
----
-
-
-### Recoding values with case_when()
+## Grammar of Graphics
 
 .pull-left3[
-Recoding values is a common data wrangling task. You can easily do this with `case_when()`:
+
+
+]
+
+
+.pull-right3[
+
+&lt;img src="images/gg_diagram.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+## How??
+
+
+How do you make
+
+
+
+
+
+---
+## ggplot2
+
+
+.pull-left3[
+&lt;br&gt;
+&lt;br&gt;
+
+- ### ggplot2 is an R package written by Hadley Wickham.
+
+- ### Makes it *easy* to create plots according to the grammar of graphics
+
+- ### By far one of the most popular R packages, used to generate most R plots.
+
+
+]
+
+
+.pull-right3[
+
+
+&lt;img src="images/wickham_portrait.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+---
+## ggplot2
+
+
+.pull-left3[
+
+&lt;img src="images/ggplot_hex.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right3[
+
+### Load the ggplot2 package
 
 
 ```r
-data %&gt;%
-  mutate(
-  var_new = case_when(
-    var_old == OLD_A ~ NEW_A,
-    var_old == OLD_B ~ NEW_B
-  )
+# Load the tidyverse (includes ggplot2)
+library(tidyverse)
 ```
 
 
+### Or
 
-For example, in a dataset, the column `sex` might be coded with 1s and 0s.
 
-You might want to create a new column `sex_new` where 1 = "female" and 0 = "male":
+```r
+# Load ggplot2 directly
+library(ggplot2)
+```
 
-| sex| sex_new|
-|------:|----:|
-|    1|   "female"|
-|    0|   "male"|
+]
+
+
+---
+## `mpg` data
+
+.pull-left3[
+
+The `mpg` data is a tibble of car data contained in the `ggplot2` package
+
+
+|manufacturer |model              | cty| hwy|class      |
+|:------------|:------------------|---:|---:|:----------|
+|land rover   |range rover        |  11|  15|suv        |
+|hyundai      |sonata             |  19|  28|midsize    |
+|toyota       |camry              |  21|  31|midsize    |
+|jeep         |grand cherokee 4wd |  15|  20|suv        |
+|chevrolet    |c1500 suburban 2wd |  14|  20|suv        |
+|ford         |mustang            |  15|  23|subcompact |
+|volkswagen   |new beetle         |  29|  41|subcompact |
+|ford         |expedition 2wd     |  11|  17|suv        |
+
+]
+
+.pull-right3[
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="images/carlot.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+]
+
+
+---
+## Creating this plot
+
+.pull-left3[
+
+
+**Data**
+
+- Use the `mpg` tibble
+
+**Aesthetics**
+
+- Show engine displacement (`disp`) on the x axis
+- Show highway miles per gallon (`hwy`) on the y-axis
+- Color plotting elements by the class of car (`class`)
+
+**Geometric objects**
+
+- Show data as points.
+- Add a regression line
+
+**Labels and themes**
+
+- Add plotting labels
+- Use a black and white plotting theme
+
+]
+
+
+.pull-right3[
+
+Our goal is to build the following plot step by step:
+
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## `data`
+
+
+.pull-left3[
+
+- To create a ggplot2 object, use the `ggplot()` function.
+
+- Start with the `data` argument.
+
+   - `data` should be a dataframe (or Tibble)
+
+- Including only a `data` argument returns a blank plotting space, because we haven't specified any plotting *aesthetics* or *geometric objects*
+
+]
+
+
+.pull-right3[
+
+
+
+```r
+ggplot(data = mpg)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## Aesthetics
+
+
+.pull-left3[
+
+- An **aesthetic** is a visual property of the objects in your plot. 
+
+### Common aesthetics
+
+| aesthetics| Description|
+|:------|:----|
+|     `x`|    Data mapped to x-coordinate|
+|     `y`|    Data mapped to y-coordinate|
+|     `color`, `fill`|    Color and filling|
+|     `alpha`|    Transparency|
+|     `shape`| Overall shape|
+|    `size`|  Size|
+
+- Add plotting aesthetics with the `aes()` function
+
+
+]
+
+
+.pull-right3[
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy))
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+## Geometric objects (geoms)
+
+
+.pull-left3[
+
+- A **geom** is a geometric object in a plot that represents data
+
+
+### Common geoms
+
+| geom| plot type|
+|:------|:----|
+|     `geom_point()`|    Scatterplot|
+|     `geom_bar()`|    barplot|
+|     `geom_smooth()`|    Regression line|
+
+
+- To add a geom to a plot, just include ` + geom_X()` where X is the type of geom.
+- `ggplot()` will automatically apply that geom to the aesthetics.
+
+]
+
+
+.pull-right3[
+
+&gt; Add a point geom with `geom_point()`
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+## Geometric objects (geoms)
+
+.pull-left3[
+
+&lt;br&gt;
+&lt;br&gt;
+
+*How do we get points to be shown in different colors like the plot below?*
+
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
 
 ]
 
@@ -261,355 +372,756 @@ You might want to create a new column `sex_new` where 1 = "female" and 0 = "male
 
 
 
-To change the value of 1 to `"female"`, and 0 to `"male"`, you can use `case_when()`:
-
+&gt; What plotting aesthetic is missing from ths code below to make our plot on the left?
 
 
 ```r
-# Add a column sex_new to data 
-
-data &lt;- data %&gt;% 
-  mutate(
-        sex_new = case_when(
-          sex == 1 ~ "female",
-          sex == 0 ~ "male"
-        )
-  )
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point()
 ```
 
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-You can think about the code above as follows:
 
-- Create a new column `sex_new` where
-    - If `sex == 1`, then set the value to `"female"`
-    - If `sex == 0`, then set the value to `"male"`
 
 ]
 
 
+
+
 ---
+## Color aesthetic
+
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, col = class)) +  # Map mpg$class to color aes
+  geom_point()   # Add points that respect the aesthetics
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+
+---
+## Geometric objects (geoms)
 
 .pull-left3[
-#### Ex: Chick 3
 
-*Create a new variable Diet_name which shows Diet in text format. Here is a table of the values*
 
-| Diet| Diet_name|
-|------:|----:|
-|    1|   "fruit"|
-|    2|   "vegetables"|
-|    3|   "meat"|
-|    4|   "grains"|
+*Code WITHOUT color aesthetic*
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, 
+                     y = hwy)) + 
+  geom_point()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
 
 ]
 
 .pull-right3[
 
 
+*Code WITH color aesthetic*
+
+
 ```r
-ChickWeight &lt;- ChickWeight %&gt;%           # Start with the ChickWeight data
-                 mutate(
-                   Diet_name = case_when(
-                     Diet == 1 ~ "fruit",
-                     Diet == 2 ~ "vegetables",
-                     Diet == 3 ~ "meat",
-                     Diet == 4 ~ "grains"
-                   )
-   
- )
-
-head(ChickWeight)
+ggplot(data = mpg,
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     col = class)) + 
+  geom_point()
 ```
 
-```
-##   weight Time Chick Diet Diet_name
-## 1     42    0     1    1     fruit
-## 2     51    2     1    1     fruit
-## 3     59    4     1    1     fruit
-## 4     64    6     1    1     fruit
-## 5     76    8     1    1     fruit
-## 6     93   10     1    1     fruit
-```
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-19-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
 
 
 ]
 
-
-
-
-
-
 ---
 
-#### Ex: Chick 3
-
-*For each Diet, calculate the mean weight*
-
-
-```r
-ChickWeight %&gt;%           # Start with the ChickWeight data
-  group_by(Diet) %&gt;%      # Group the data by Diet
-  summarise(              # Now summarise....
-    weight.mean = mean(weight) # Mean weight
-  )
-```
-
-```
-## # A tibble: 4 x 2
-##     Diet weight.mean
-##   &lt;fctr&gt;       &lt;dbl&gt;
-## 1      1       102.6
-## 2      2       122.6
-## 3      3       142.9
-## 4      4       135.3
-```
-
-
-
-
-
----
-
-#### Ex: Chick 4
-
-*For each time period less than 10, calculate the mean weight*
-
-
-```r
-ChickWeight %&gt;%                # Start with the ChickWeight data
-  filter(Time &lt; 10) %&gt;%        # Only Time periods less than 10
-  group_by(Time) %&gt;%           # Group the data by Diet
-  summarise(                   # Now summarise....
-    weight.mean = mean(weight) # Mean weight
-  )
-```
-
-```
-## # A tibble: 5 x 2
-##    Time weight.mean
-##   &lt;dbl&gt;       &lt;dbl&gt;
-## 1     0       41.06
-## 2     2       49.22
-## 3     4       59.96
-## 4     6       74.31
-## 5     8       91.24
-```
-
-
-
-
-
----
-#### Ex: Chick 5:
-
-*For each Diet, calculate the mean weight, maximum time, and the number of chicks on each diet*:
-
-
-```r
-ChickWeight %&gt;%           # Start with the ChickWeight data
-  group_by(Diet) %&gt;%      # Group the data by Diet
-  summarise(              # Now summarise....
-    weight.mean = mean(weight), # Mean weight
-    time.max = max(Time),       # Max time
-    N = n()                     # Number of observations
-  )
-```
-
-```
-## # A tibble: 4 x 4
-##     Diet weight.mean time.max     N
-##   &lt;fctr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-## 1      1       102.6       21   220
-## 2      2       122.6       21   120
-## 3      3       142.9       21   120
-## 4      4       135.3       21   118
-```
-
-
-
-
----
-
-
-# Other dplyr verbs
-
-
-| verb| action| example |
-|:---|:----|:----------------|
-|     `sample_n()`|    Select a random sample of n rows| `sample_n(10)`|
-|     `sample_frac()`|    Select a random fraction of rows| `sample_frac(.20)`|
-|     `first(), last()`|    Give the first (or last) observation| `first(), last()`|
-
-
-
----
-
-#### Ex: Chick 6:
-
-*Give me a random sample of 10 rows from the ChickWeight dataframe, but only show me the values for Chick and weight*
-
-
-```r
-# Give me a random sample of 10 rows, but only show me columns Chick and weight
-
-ChickWeight %&gt;% 
-  select(Chick, weight) %&gt;%
-  sample_n(10)
-```
-
-```
-##     Chick weight
-## 505    44    145
-## 99      9     68
-## 358    32    129
-## 184    17     51
-## 540    47    185
-## 238    22     95
-## 194    17    142
-## 232    21    331
-## 575    50    205
-## 102     9     90
-```
-
-
----
-.pull-left3[
-
-#dplyr
-
-dplyr operations (almost) always return a dataframe which you can assign to a new object:
-
-
-&gt; *Create a dataframe with the average weight for each time period and nothing else!!*
-
-]
-
-.pull-right3[
-
-
-```r
-# Create a new object called time_agg
-
-time_agg &lt;- ChickWeight %&gt;%
-  group_by(Time) %&gt;%
-  summarise(
-    weight.mean = mean(weight)
-  )
-
-head(time_agg)
-```
-
-```
-## # A tibble: 6 x 2
-##    Time weight.mean
-##   &lt;dbl&gt;       &lt;dbl&gt;
-## 1     0       41.06
-## 2     2       49.22
-## 3     4       59.96
-## 4     6       74.31
-## 5     8       91.24
-## 6    10      107.84
-```
-
-
-]
-
-
----
+### What's next?
 
 .pull-left3[
 
-#dplyr summary
-
-dplyr is great for elegantly performing sequential operations on data.
-
-The 'pipe' operator `%&gt;%` helps you string multiple *objects* (like dataframes) and *verbs* (summarise, order, aggregate...) together.
+&gt; Where are are at
 
 
-&lt;img src="images/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     col = class)) + 
+  geom_point()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-20-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
 
 
-
-
 .pull-right3[
-
-&lt;br&gt;
 &lt;br&gt;
 
-Basic structure of dplyr commands:
+&gt; Our goal.
+
+&lt;br&gt;
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-21-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+### What are we missing?
+
+
+---
+### Smoothed lines with `geom_smooth()`
+
+.pull-left3[
+
+To add a smoothed line to a plot, use `geom_smooth()`
+
+### `geom_smooth()` arguments
+
+| Arguments| Description|
+|:------|:----|
+|     `method`| How should the line be generated?|
+|     `level`|    Confidence|
+| `col, size`, ...| Other plotting aesthetics|
+
+
+- If you add additional plotting aesthetics, they will *override* the general plotting aesthetics
+
+
+]
+
+.pull-right3[
+
+&gt; Add a blue smoothed line
 
 
 ```r
-data %&gt;%    # Start with data, AND THEN...
-  VERB1 %&gt;% # Do VERB1, AND THEN...
-  VERB2 %&gt;% # Do VERB2, AND THEN...
-  VERB3 %&gt;% # Do VERB3, AND THEN...
-  group_by(x, y) %&gt;%  # Group by variables x, y
-    summarise(
-      VAR_A_New = fun(X),
-      VAR_B_New = fun(Y)
-    )
-  )
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue")
 ```
 
-### Questions?
-
-]
-
----
-
-
-.pull-left3[
-#tidyr
-
-`tidyr` is a package for 'tidying' data.
-
-'tidying' data means getting it into a different format (usually moving data between rows and columns)
-
-
-&lt;img src="images/tidyr_hex.png" width="70%" style="display: block; margin: auto;" /&gt;
-]
-
-
-.pull-right3[
-
-&lt;br&gt;
-&lt;br&gt;
-
-### Questions you can answer with tidyr
-
-&gt; Right now there are different rows for each patient, I need every patient's data to be in a single row.
-
-&gt; Can you restructure the data so data in different columns are shown in a single column?
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 
 ---
-#tidyr
 
-There are two important functions in `tidyr`, `gather()` and `spread()`:
+## Why are these two different?
+
+.pull-leftEven[
+
+### Plot A
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, 
+                     col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue")
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-23-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-rightEven[
+
+### Plot B
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, 
+                     col = class)) +
+  geom_point() + 
+  geom_smooth()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-24-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+## Overrriding aesthetics
+
+
+- You can include additional aesthetics, like color, shape, and size, in *any* geom.
+
+- This will override the *global* aesthetics
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue") # geom_smooth IGNORES global col aesthetic
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Example A: No overriding
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + # geom_point RESPECTS global col aesthetic (class)
+  geom_smooth()  # geom_smooth RESPECTS global col aesthetic (class)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-26-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Example B: Override col aesthetic in geom_smooth()
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() +            # geom_point RESPECTS global col aesthetic (class)
+  geom_smooth(col = "blue") # geom_smooth IGNORES global col aesthetic (class)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-27-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+## Example C: Override col aesthetic in geom_smooth() &amp; geom_point()
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point(col = "pink") + # geom_point IGNORES global col aesthetic (class)
+  geom_smooth(col = "blue")  # geom_smooth IGNORES global col aesthetic (class)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+## Example D: Override col aesthetic in geom_point()
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point(col = "pink") + # geom_point IGNORES global col aesthetic (class)
+  geom_smooth()              # geom_smooth RESPECTS global col aesthetic (class)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-29-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## What we want
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() +
+  geom_smooth(col = "blue",  # geom_smooth RESPECTS global col aesthetic (class)
+              method = "lm") # Use lm (linear model) smoothing line
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-30-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+### What's next?
+
+.pull-left2[
+
+&gt; Where are are at
+
+
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() +
+  geom_smooth(col = "blue",  method = "lm")
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-31-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right2[
+&lt;br&gt;
+
+&gt; Our goal.
+
+&lt;br&gt;
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-32-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+### What are we missing?
+
+
+---
+## Add labels with `labs()`
 
 .pull-left3[
 
-`gather()`: Move data from *columns* into many *rows*
+You can add labels to a plot with the `labs()` function
 
+### `labs()` arguments
 
-&lt;img src="images/gather_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+| Arguments| Description|
+|:------|:----|
+|     `title`| How should the line be generated?|
+|     `subtitle`|    Confidence|
+|     `caption`| Caption|
+| `col, size`, ...| Other plotting aesthetics|
+
 ]
 
 
 .pull-right3[
 
-`spread()`: Move data from several *rows* into columns
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue", method = "lm") +
+  labs(x = "Engine Displ...",
+       y = "Highway miles...",
+       title = "MPG data",
+       subtitle = "Cars with ...",
+       caption = "Source...")
+```
 
-&lt;img src="images/spread_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
+
+
+
+
+---
+### What's next?
+
+.pull-left2[
+
+&gt; Where are are at
+
+
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point(size = 3, alpha = .9) + 
+  geom_smooth(col = "blue", method = "lm")+
+  labs(x = "Engine...",
+       y = "Highway ...",
+       title = "MPG data",
+       subtitle = "Cars with...",
+       caption = "Source:...")
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-34-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right2[
+&lt;br&gt;
+
+&gt; Our goal.
+
+&lt;br&gt;
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+### What are we missing?
+
+
+---
+## Themes with `theme_XX()`
+
+.pull-left3[
+
+A plotting *theme* controls many aspects of its overall look, from the background, to the grid lines, to the label font to the spacing between plot labels and the plotting space.
+
+
+### Common themes
+
+| Themes| 
+|:------|
+|     `theme_bw()`| 
+|     `theme_minimal()`| 
+|     `theme_classic()`|
+| `theme_light()`|
+| `theme_dark()`|
+
+
+- You can easily add a theme to a plot by including `+ theme_XX()`
+
+
+]
+
+.pull-right3[
+
+&gt; No theme specified
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## Themes with `theme_XX()`
+
+.pull-left3[
+
+A plotting *theme* controls many aspects of its overall look, from the background, to the grid lines, to the label font to the spacing between plot labels and the plotting space.
+
+
+### Common themes
+
+| Themes| 
+|:------|
+|     `theme_bw()`| 
+|     `theme_minimal()`| 
+|     `theme_classic()`|
+| `theme_light()`|
+| `theme_dark()`|
+
+
+- You can easily add a theme to a plot by including `+ theme_XX()`
+
+
+]
+
+.pull-right3[
+
+&gt; bw theme with `+ theme_bw()`
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point() + 
+  theme_bw()   # Use the black and white theme
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+## Themes with `theme_XX()`
+
+.pull-left3[
+
+A plotting *theme* controls many aspects of its overall look, from the background, to the grid lines, to the label font to the spacing between plot labels and the plotting space.
+
+
+### Common themes
+
+| Themes| 
+|:------|
+|     `theme_bw()`| 
+|     `theme_minimal()`| 
+|     `theme_classic()`|
+| `theme_light()`|
+| `theme_dark()`|
+
+
+- You can easily add a theme to a plot by including `+ theme_XX()`
+
+
+]
+
+.pull-right3[
+
+&gt; dark theme with `+ theme_dark()`
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point() + 
+  theme_dark()   # Use the dark theme
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-38-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## Themes with `theme_XX()`
+
+.pull-left3[
+
+A plotting *theme* controls many aspects of its overall look, from the background, to the grid lines, to the label font to the spacing between plot labels and the plotting space.
+
+
+### Common themes
+
+| Themes| 
+|:------|
+|     `theme_bw()`| 
+|     `theme_minimal()`| 
+|     `theme_classic()`|
+| `theme_light()`|
+| `theme_dark()`|
+
+
+- You can easily add a theme to a plot by including `+ theme_XX()`
+
+
+]
+
+.pull-right3[
+
+&gt; light theme with `+ theme_light()`
+
+
+```r
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point() + 
+  theme_light()   # Use the light theme
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-39-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## Final result!
+
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue", method = "lm")+
+  labs(x = "Engine Displacement in Liters",
+       y = "Highway miles per gallon",
+       title = "MPG data",
+       subtitle = "Cars with higher engine displacement tend to have lower highway mpg",
+       caption = "Source: mpg data in ggplot2") + 
+  theme_bw()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-40-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Facetting with `facet_wrap()`
+
+
+- *Facetting* = Create different plots for different groups
+- To facet plots, use `facet_wrap()`
+
+
+
+```r
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, color = class)) + 
+  geom_point()  +
+  facet_wrap(~ class)
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-41-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Additional geoms
+
+.pull-left3[
+
+### geom_boxplot()
+
+
+```r
+ggplot(data = mpg,
+  mapping = aes(x = class, y = hwy, fill = class)) + 
+  geom_boxplot()  + 
+  theme_bw()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right3[
+
+### geom_density()
+
+
+```r
+ggplot(data = mpg,
+  mapping = aes(x = hwy, fill = class)) + 
+  geom_density()  + 
+  theme_bw()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-43-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+
+.pull-left3[
+
+### geom_bar()
+
+
+```r
+ggplot(data = mpg,
+  mapping = aes(x = class, fill = class)) + 
+  geom_bar()  + 
+  theme_bw()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right3[
+
+### geom_count()
+
+
+```r
+ggplot(data = mpg,
+  mapping = aes(x = displ, y = hwy)) + 
+  geom_count()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+.pull-left3[
+
+### geom_joy()
+
+&gt; From the `ggjoy` package
+
+
+```r
+library(ggjoy) # Load the ggjoy package
+
+ggplot(data = midwest,
+       mapping = aes(percollege, 
+                     y = state, 
+                     fill = state)) + 
+  geom_joy(col = "white")
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-46-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+.pull-right3[
+
+### geom_tile()
+
+
+```r
+ggplot(nba_long, 
+       mapping = aes(x = Name, 
+                     y = measure, 
+                     fill = value)) + 
+  geom_tile(col = "white") + 
+  scale_fill_gradientn(colors = c("red", 
+                                  "white", 
+                                  "blue")) + 
+  coord_flip()
+```
+
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-48-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+## So much more
+
+- We have only touched the surface of what you can do with `ggplot`
+
+&lt;img src="images/plotting_books.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+##
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
