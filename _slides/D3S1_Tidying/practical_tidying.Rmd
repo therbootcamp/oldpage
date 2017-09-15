@@ -14,11 +14,11 @@ Here a link to the lecture slides for this session: <a href="https://therbootcam
 
 ### Overview
 
-In this practical you'll learn how to produce tidy code (and data). By the end of this practical you will know how to:
+In this practical you'll learn how to produce **tidy** code (and data). By the end of this practical you will know how to:
 
-1. Write clean, documented code
-2. Understand errors and warnings
-3. Deal with missing values
+1. Write clean, documented code.
+2. Understand errors and warnings.
+3. Deal with missing values.
 
 ### The Do's and Don'ts of clean code
 
@@ -48,12 +48,11 @@ tid
 t1
 ```
 
-Place **spaces** around all operators, e.g., `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.
+Place **spaces** around all operators, such as, `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.
 
 ```{r, eval = F}
 # Good
 var_rt <- var(rt, na.rm = TRUE)
-
 
 # Bad
 var_rt<-var(rt,na.rm=TRUE)
@@ -111,7 +110,7 @@ x = 24324
 
 ### The most frequent errors
 
-R's error messages are not always very intuitive, but you over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g., 
+R's error messages are not always very intuitive, but over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g., 
 
 ```{r, error = TRUE}
 sapply(1:10,'fefkl')
@@ -119,55 +118,55 @@ sapply(1:10,'fefkl')
 
 Here the key message is `'function' was not found`. I.e., R is interpreting `'fekl'` as a function but cannot find an instance of this function anywhere (because it doesn't exist).
 
-The **7 most frequent error messages** (according to <a href="https://stackoverflow.com/">stackoverflow.com</a>) and their meaning are: 
+According to an analysis of <a href="https://stackoverflow.com/">stackoverflow.com</a>, a popular help forum, the **7 most frequent error messages** and their meaning are: 
 
 | Error| Example| Description|
-|:------|:------------|:-----------------------------------|
-|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
-|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
-|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
-| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
-| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
-| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
-| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
+|:------|:------------|:--------------------------------------------|
+|     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| A 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
+| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
 
-For more information go to <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
+For more information visit <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
 
 ### A `mice` example
 
-Loads the titanic dataset containing records on 1313 Titanic survivors. Attempts to predict missing values in Age using central tendencies and mice. 
+To impute missing values, the `mice` package is very helpful. The code below loads the titanic dataset containing records on 1313 Titanic survivors and then attempts to predict missing values in Age using central tendencies and `mice`. 
 
 ```{r, eval = F}
 # Load packages
 library(readr)
 library(mice)
 
-# read in titanic data
+# read and duplicate in titanic data
 data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+data_mean <- data
+data_median <- data
+data_mice <- data
 
 # use central tendencies
-data$Age[is.na(data$Age)] <- mean(data$Age, na.rm = TRUE)
-data$Age[is.na(data$Age)] <- median(data$Age, na.rm = TRUE)
+data_mean$Age[is.na(data_mean$Age)] <- mean(data_mean$Age, na.rm = TRUE)
+data_median$Age[is.na(data_median$Age)] <- median(data_median$Age, na.rm = TRUE)
 
 # use mice
-mice_model <- mice(data)
-data       <- complete(mice_model)
+mice_model <- mice(data_mice, method = 'rf') # uses random forests
+data_mice  <- complete(mice_model)
 
 ```
 
 
 ## Tasks
 
-In the first part of this tutorial clean the code. 
-
 ### Begin new project
 
 Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
 
-
 ### Clean code
 
-1. Go through the code below and clean it, according to the above principles (incl. commenting). Then download all of the data files in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2017Sep16.R`.
+1. Go through the code below and clean it, according to the above principles (incl. commenting). Then download all of the data files referenced in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2017Sep16.R`.
 
 ```{r, eval = FALSE}
 library(readr   )
@@ -180,7 +179,7 @@ library(  dplyr)
         t.test(a,b) 
 ```
 
-2. Start again with the 'dirty' code above in a new script. Save it in your `2_code` folder. Now install and load the `formatR` package and try to clean up the 'dirty code' using the `tidy_source` function. What did and what didn't it fix?
+2. Start again with the 'dirty' code above in a new script. Save it in your `2_code` folder. Now install and load the `formatR` package and try to clean up the 'dirty code' using the `tidy_source()` function. What did it fix and what didn't it?
 
 ### Correct code
 
@@ -200,7 +199,31 @@ points(vs,pch=16)
 
 ### Replace NAs
 
-4. Run 'A `mice` example' from above and evaluate the mean and variance age as a function of mean and mice imputation, respectively. Are they different? Which imputation method produces the larger variance and why?
+4. Run 'A `mice` example' from above and evaluate the mean and variance (`var()`) of the variable `Age` as a function of mean and mice imputation, respectively. Are they different? Which imputation method produces the larger variance and why?
+
+```{r, eval = FALSE, echo = FALSE}
+# Load packages
+library(readr)
+library(mice)
+
+# read and duplicate in titanic data
+data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+data_mean <- data
+data_median <- data
+data_mice <- data
+
+# use central tendencies
+data_mean$Age[is.na(data_mean$Age)] <- mean(data_mean$Age, na.rm = TRUE)
+data_median$Age[is.na(data_median$Age)] <- median(data_median$Age, na.rm = TRUE)
+
+# use mice
+mice_model <- mice(data_mice, method = 'rf') # uses random forests
+data_mice  <- complete(mice_model)
+
+# evaluate
+mean(data_mean$Age) ; mean(data_median$Age) ; mean(data_mice$Age)
+var(data_mean$Age) ; var(data_median$Age) ; var(data_mice$Age)
+```
 
 5. Evaluate the performance of mean versus mice imputation. To do this, first load the galton data set, copy it, and remove 10% of the values in the variable `height` in the copy. Now create one new data frame for each method and apply to the mean and mice imputation. Finally, compare the mean squared error `mean((original - imputed)^2)` between the imputed and original values. Which method works better?  
 
@@ -231,7 +254,7 @@ mean((galton_mice$height - galton_data$height)[is.na(galton_copy$height)]**2)
 
 ```
 
-6. Repeat the analysis of the last exercise but this time introduce NAs systematically rather than randomly. Specifically, use some other variable or combination of other variables to determine the locations of NAs in the `height` variable. E.g., use the height of the `father` and the `sex` of the child. Have the results changed? If yes, why?  
+6. Repeat the analysis of the last exercise but this time introduce NAs systematically rather than randomly. That is use other variable or combination of other variables to determine the locations of NAs in the `height` variable. For instance, introduce NAs for `father > 70` and the `sex == 'M'`. Have the results changed? If yes, why?  
 
 ```{r, eval = FALSE, echo = F}
 # load packages
@@ -260,6 +283,8 @@ mean((galton_mean$height - galton_data$height)[is.na(galton_copy$height)]**2)
 mean((galton_mice$height - galton_data$height)[is.na(galton_copy$height)]**2)
 
 ```
+
+7. The mice package offers a variety of different methods. See `?mice`. Try out different methods and compare their performance.
 
 # Additional reading
 

@@ -128,11 +128,11 @@ $(document).ready(function () {
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
-<p>In this practical you’ll learn how to produce tidy code (and data). By the end of this practical you will know how to:</p>
+<p>In this practical you’ll learn how to produce <strong>tidy</strong> code (and data). By the end of this practical you will know how to:</p>
 <ol style="list-style-type: decimal">
-<li>Write clean, documented code</li>
-<li>Understand errors and warnings</li>
-<li>Deal with missing values</li>
+<li>Write clean, documented code.</li>
+<li>Understand errors and warnings.</li>
+<li>Deal with missing values.</li>
 </ol>
 </div>
 <div id="the-dos-and-donts-of-clean-code" class="section level3">
@@ -146,7 +146,7 @@ analyze_my_data.R
 # Bad
 stuff.r
 code.r</code></pre>
-<p><strong>Object names</strong> should be lowercase. Use <code>_</code> rather than <code>.</code> to capitalization for mult-word names. If possible use nouns for variables and verbs for functions. Use meaningful names. <strong>Avoid using names of existing objects</strong>.</p>
+<p><strong>Object names</strong> should be lowercase. Use <code>_</code> rather than <code>.</code> or ‘CamelCase’ (using capitalization) for multi-word names. If possible use nouns for variables and verbs for functions. Use meaningful names. <strong>Avoid using names of existing objects</strong>.</p>
 <pre class="r"><code># Good
 trial_id
 trial_1
@@ -156,10 +156,9 @@ name_of_trial
 trialID
 tid
 t1</code></pre>
-<p>Place <strong>spaces</strong> around all operators, e.g., <code>=</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.</p>
+<p>Place <strong>spaces</strong> around all operators, such as, <code>=</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.</p>
 <pre class="r"><code># Good
 var_rt &lt;- var(rt, na.rm = TRUE)
-
 
 # Bad
 var_rt&lt;-var(rt,na.rm=TRUE)</code></pre>
@@ -169,7 +168,7 @@ list(
   var_rt  = var(rt)
   mean_rt = mean(rt)
 )</code></pre>
-<p>An opening <strong>curly bracket</strong> should never be on its own line. Always indent within curly brackets. To <strong>indent</strong> code zse two spaces. Don’t use tabs.</p>
+<p>An opening <strong>curly bracket</strong> should never be on its own line. Always indent within curly brackets. To <strong>indent</strong> code use two spaces. Don’t use tabs.</p>
 <pre class="r"><code># Good
 if (my_dbl &lt; 2){
   message('my_dbl is smaller 2')
@@ -190,21 +189,23 @@ x &lt;- 24324
 
 # Bad
 x = 24324</code></pre>
-<p><strong>Comment</strong> each line of your code. To break up your code in chunks use <code>-</code>.</p>
-<pre class="r"><code># Plot data ----------------------------</code></pre>
+<p><strong>Comment</strong> each line of your code. To break up your code in chunks use <code>-</code> or <code>=</code>.</p>
+<pre class="r"><code># Plot data ----------------------------
+
+# Plot data ============================</code></pre>
 </div>
 <div id="the-most-frequent-errors" class="section level3">
 <h3>The most frequent errors</h3>
-<p>R’s error messages are not always very intuitive, but you over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g.,</p>
+<p>R’s error messages are not always very intuitive, but over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g.,</p>
 <pre class="r"><code>sapply(1:10,'fefkl')</code></pre>
 <pre><code>Error in get(as.character(FUN), mode = &quot;function&quot;, envir = envir): object 'fefkl' of mode 'function' was not found</code></pre>
 <p>Here the key message is <code>'function' was not found</code>. I.e., R is interpreting <code>'fekl'</code> as a function but cannot find an instance of this function anywhere (because it doesn’t exist).</p>
-<p>The <strong>7 most frequent error messages</strong> (according to <a href="https://stackoverflow.com/">stackoverflow.com</a>) and their meaning are:</p>
-<table style="width:82%;">
+<p>According to an analysis of <a href="https://stackoverflow.com/">stackoverflow.com</a>, a popular help forum, the <strong>7 most frequent error messages</strong> and their meaning are:</p>
+<table style="width:94%;">
 <colgroup>
 <col width="11%"></col>
 <col width="19%"></col>
-<col width="51%"></col>
+<col width="63%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -217,63 +218,65 @@ x = 24324</code></pre>
 <tr class="odd">
 <td align="left"><code>'could not find function'</code></td>
 <td align="left">lenth(my_vec)</td>
-<td align="left">means that there is a typo in the function name or that a package has not been loaded.</td>
+<td align="left">There is a typo in the function name or that a package has not been loaded.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>'error in if'</code></td>
 <td align="left">if(NA == 2) 2 + 2</td>
-<td align="left">means that the object in the <code>if</code> clause is non-logical or NA.</td>
+<td align="left">The object in the <code>if</code> clause is non-logical or NA.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>'error in eval'</code></td>
 <td align="left">lm(fefq~wzfe)</td>
-<td align="left">means that one uses an object that does not exist.</td>
+<td align="left">An object is used that does not exist.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>'cannot open()'</code></td>
 <td align="left">read_csv(‘hjht.txt’)</td>
-<td align="left">means that the file does not exist. Could be a typo or a missing filepath.</td>
+<td align="left">The file does not exist. Could be a typo or a missing filepath.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>'no applicable method'</code></td>
 <td align="left">predict(‘efwe’)</td>
-<td align="left">means that a ‘generic function’ has not been defined for this type/class</td>
+<td align="left">A ‘generic function’ has not been defined for this type/class</td>
 </tr>
 <tr class="even">
 <td align="left"><code>'subsscript out of bounds'</code></td>
 <td align="left">a &lt;- matrix(c(1,2)); a[2,2]</td>
-<td align="left">means that one is trying to access an element (or variable) that does not exist</td>
+<td align="left">R tried to access an element (or variable) that does not exist</td>
 </tr>
 <tr class="odd">
 <td align="left">package errors</td>
 <td align="left"></td>
-<td align="left">occur when R is unable to install, compile, or load a package. Often this means that some software is missing</td>
+<td align="left">Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing.</td>
 </tr>
 </tbody>
 </table>
-<p>For more information go <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br></p>
+<p>For more information visit <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br></p>
 </div>
 <div id="a-mice-example" class="section level3">
 <h3>A <code>mice</code> example</h3>
-<p>Loads the titanic dataset containing records on 1313 Titanic survivors. Attempts to predict missing values in Age using central tendencies and mice.</p>
+<p>To impute missing values, the <code>mice</code> package is very helpful. The code below loads the titanic dataset containing records on 1313 Titanic survivors and then attempts to predict missing values in Age using central tendencies and <code>mice</code>.</p>
 <pre class="r"><code># Load packages
 library(readr)
 library(mice)
 
-# read in titanic data
+# read and duplicate in titanic data
 data &lt;- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+data_mean &lt;- data
+data_median &lt;- data
+data_mice &lt;- data
 
 # use central tendencies
-data$Age[is.na(data$Age)] &lt;- mean(data$Age, na.rm = TRUE)
-data$Age[is.na(data$Age)] &lt;- median(data$Age, na.rm = TRUE)
+data_mean$Age[is.na(data_mean$Age)] &lt;- mean(data_mean$Age, na.rm = TRUE)
+data_median$Age[is.na(data_median$Age)] &lt;- median(data_median$Age, na.rm = TRUE)
 
 # use mice
-mice_model &lt;- mice(data)
-data       &lt;- complete(mice_model)</code></pre>
+mice_model &lt;- mice(data_mice, method = 'rf') # uses random forests
+data_mice  &lt;- complete(mice_model)</code></pre>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
-<p>In the first part of this tutorial clean the code.</p>
 <div id="begin-new-project" class="section level3">
 <h3>Begin new project</h3>
 <p>Begin a new project in a new folder. Within the folder, create two new folders called <code>1_data</code> and <code>2_code</code>.</p>
@@ -281,17 +284,23 @@ data       &lt;- complete(mice_model)</code></pre>
 <div id="clean-code" class="section level3">
 <h3>Clean code</h3>
 <ol style="list-style-type: decimal">
-<li>Go through the code below and clean it, according to the above principles (incl. commenting). Then download all of the data files in the code, store them in <code>1_data</code>, and change the filepaths in the code to this location. When ready save the code in the <code>2_code</code> folder as <code>cleaned_code_2017Sep16.R</code>.</li>
+<li>Go through the code below and clean it, according to the above principles (incl. commenting). Then download all of the data files referenced in the code, store them in <code>1_data</code>, and change the filepaths in the code to this location. When ready save the code in the <code>2_code</code> folder as <code>cleaned_code_2017Sep16.R</code>.</li>
 </ol>
 <pre class="r"><code>library(readr   )
+library(      magrittr)
+library(  dplyr)
   syc =   read_csv('https://therbootcamp.github.io/_slides/data/galton.txt')
+  syc = syc%&gt;%mutate(fcm=father/2.54,mcm=mother/2.54)
     a   = syc$father
       b = syc[['mother']]
         t.test(a,b) </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Start again with the ‘dirty’ code above in a new script. Save it in your <code>2_code</code> folder. Now install and load the <code>formatR</code> package and try to clean up the ‘dirty code’ using the <code>tidy_source()</code> function. What did it fix and what didn’t it?</li>
+</ol>
 </div>
 <div id="correct-code" class="section level3">
 <h3>Correct code</h3>
-<ol start="2" style="list-style-type: decimal">
+<ol start="3" style="list-style-type: decimal">
 <li>Go through the code below, clean it, and remove the errors. When ready save the code in the <code>2_code</code> folder as <code>corrected_code_2017Sep16.R</code>.</li>
 </ol>
 <pre class="r"><code>library(readr   )
@@ -306,16 +315,19 @@ points(vs,pch=16)</code></pre>
 </div>
 <div id="replace-nas" class="section level3">
 <h3>Replace NAs</h3>
-<ol start="3" style="list-style-type: decimal">
-<li><p>Run ‘A <code>mice</code> example’ from above and evaluate the mean and variance age as a function of mean and mice imputation, respectively. Are they different? Which imputation method produces the larger variance and why?</p></li>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Run ‘A <code>mice</code> example’ from above and evaluate the mean and variance (<code>var()</code>) of the variable <code>Age</code> as a function of mean and mice imputation, respectively. Are they different? Which imputation method produces the larger variance and why?</p></li>
 <li><p>Evaluate the performance of mean versus mice imputation. To do this, first load the galton data set, copy it, and remove 10% of the values in the variable <code>height</code> in the copy. Now create one new data frame for each method and apply to the mean and mice imputation. Finally, compare the mean squared error <code>mean((original - imputed)^2)</code> between the imputed and original values. Which method works better?</p></li>
+<li><p>Repeat the analysis of the last exercise but this time introduce NAs systematically rather than randomly. That is use other variable or combination of other variables to determine the locations of NAs in the <code>height</code> variable. For instance, introduce NAs for <code>father &gt; 70</code> and the <code>sex == 'M'</code>. Have the results changed? If yes, why?</p></li>
+<li><p>The mice package offers a variety of different methods. See <code>?mice</code>. Try out different methods and compare their performance.</p></li>
 </ol>
 </div>
 </div>
 <div id="additional-reading" class="section level1">
 <h1>Additional reading</h1>
 <ul>
-<li>For more details check out check out Hadley Wickham’s <a href="http://adv-r.had.co.nz/">Advanced R</a>.</li>
+<li><p>For more details check out check out Hadley Wickham’s <a href="http://adv-r.had.co.nz/">Advanced R</a>.</p></li>
+<li><p><a href="https://google.github.io/styleguide/Rguide.xml">Google style guide</a></p></li>
 </ul>
 </div>
 
