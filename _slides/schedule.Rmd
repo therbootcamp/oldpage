@@ -23,13 +23,12 @@ output: html_document
 
 ### September, 2017 Schedule
 
-```{r, out.width = "65%", echo = FALSE}
+```{r, out.width = "50%", echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png")
 ```
 
 
 ### Recommended readings
-
 
 
 <table width="100%" border="0">

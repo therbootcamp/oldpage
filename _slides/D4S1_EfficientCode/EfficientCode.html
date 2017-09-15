@@ -33,406 +33,150 @@ class: center, middle, inverse, title-slide
 &lt;img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500"&gt;
 &lt;p align="center"&gt;&lt;font size=3&gt;Donald E. Knuth&lt;br&gt;Author of &lt;a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming"&gt;The Art of Programming&lt;/a&gt;&lt;br&gt;source&lt;a href="http://www-cs-faculty.stanford.edu/"&gt; http://www-cs-faculty.stanford.edu/&lt;/a&gt;
 ]
+
+---
+
+# Why is R slow? And, is it?
+
+.pull-left4[
+&gt;&lt;font size = 5&gt;R is not a fast language. This is not an accident. R was purposely designed to make data analysis and statistics easier for you to do. It was not designed to make life easier for your computer. While R is slow compared to other programming languages, for most purposes, it’s fast enough.
+&gt;&lt;font size = 5&gt;-- Hadley Wickham
+]
+
+.pull-right5[
+### Reasons for R being slow
+**Extreme dynamism** - allows you to code flexibly.
+&lt;br2&gt;
+**Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
+]
+
 ---
 
 # Profiling
 
-The first step to making your code efficient is figuring out the critical parts of your code. 
+The first step to making your code efficient is figuring out the critical parts of your code. Do this using one of the following: 
 
-.pull-left4[
-
-```r
-# load package
-library(lineprof)
-
-# load code
-source('profiling_code.R')
-
-print(my_expression)
-```
-
-```
-## expression({
-##     data &lt;- read_csv("https://therbootcamp.github.io/_slides/data/titanic.csv")
-##     data &lt;- data[, -1]
-##     data &lt;- data %&gt;% mutate(months = Age * 12)
-##     test_data &lt;- data %&gt;% select(Sex, Age, Survived)
-##     model &lt;- lm(Survived ~ Sex * Age, data = test_data, family = "binomial")
-##     summary(model)
-## })
-```
-
-```r
-# 
-# # profiling
-# profile &lt;- lineprof(my_expression)
-# 
-# # show
-# shine(profile)
-```
-]
-.pull-right5[
-&lt;img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500"&gt;
-]
+| Function| Package| Description| 
+|:------|:------|:------------|
+| `proc.time()`  |`base`|Returns the time.|
+| `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
+| `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
+| `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
 
 ---
 
-# Naming files
+# Profiling: Example
+
+Often some small part of your code takes hundreds if not thousands times longer than everything else. Profiling is about figuring out which parts of your code takes how long.
 
 .pull-left4[
-&lt;font size = 6&gt;**Filenames** should be meaningful. If you like, order them by prefixing them with numbers.
-]
-
-.pull-right5[
 
 ```r
-# Good
-analyze_my_data.R
-0_read_my_data.R
-1_analyze_my_data.R
+  # load data
+  data &lt;- read_csv('titanic.csv')
+  
+  # remove first column
+  data &lt;- data[,-1]
+  
+  # mutate
+  data &lt;- data %&gt;% 
+    mutate(months = Age * 12)
 
-# Bad
-stuff.r
-code.r
-```
-
-]
-
----
-
-# Naming objects
-
-.pull-left4[
-- &lt;font size=5&gt;**Object names** should be lowercase.
-&lt;br2&gt;
-- &lt;font size=5&gt;Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
-&lt;br2&gt;
-- &lt;font size=5&gt;Use **nouns** for variables and **verbs** for functions.
-&lt;br2&gt;
-- &lt;font size=5&gt;Use meaningful names.
-&lt;br2&gt;
-- &lt;font size=5&gt;Avoid using names of **existing objects**
-]
-
-.pull-right5[
-
-```r
-# Good
-trial_id
-trial_1
-
-# Bad
-name_of_trial
-trialID
-tid
-t1
+  # multiple regression 
+  model &lt;- glm(Survived ~ Sex * Age, 
+              data = test_data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
 ```
 ]
 
 ---
 
-# Spaces
+# Improving performance
 
-.pull-left4[
-+ &lt;font size=5&gt;Place **spaces** around all operators, e.g., `=`, `+`, `-`, `&lt;-`, etc. Also applies for defining arguments in functions.
-&lt;br2&gt;
-+ &lt;font size=5&gt;Always put a space **after a comma**, never before.
-&lt;br2&gt;
-+ &lt;font size=5&gt;Extra **spacing** may be used to align assignments.
-]
+1. Look for existing solutions
+2. Do less work
+3. Vectorise
+4. Parallelise
+5. Avoid copies
+6. Byte-code compile
+7. Rcpp
+8. Using a different R
 
-.pull-right5[
+---
 
-```r
-# Good
-var_rt &lt;- var(rt, na.rm = TRUE)
+# Look for an existing solution
 
+google, stackoverflow, http://rseek.org/
 
-# Bad
-var_rt&lt;-var(rt,na.rm=TRUE)
-```
+other packages
 
+within R
 
-```r
-# Good
-list(
-  var_rt  = var(rt)
-  mean_rt = mean(rt)
+---
+
+# Do as little as possible
+
+### Or be as specifci as possible
+
+Use tailored function, e.g., rowSums()
+
+Sometimes this means providing more argzments
+
+read_csv(x, with col_classes)
+
+unlist(x, use.names = F) vs. unlist()
+
+---
+
+# Vectorise
+
+many functions are vectorised, e.g., rowSums or diff()
+
+---
+
+# Avoid copies
+
+whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
+
+microbenchmark(
+  loop10  = collapse(strings10),
+  loop100 = collapse(strings100),
+  vec10   = paste(strings10, collapse = ""),
+  vec100  = paste(strings100, collapse = "")
 )
-```
-
-]
----
-
-# Curly brackets
-.pull-left4[
-+ &lt;font size=5&gt;An opening **curly bracket** should never be on its own line.
-&lt;br2&gt;
-+ &lt;font size=5&gt;Always indent within curly brackets. 
-&lt;br2&gt;
-+ &lt;font size=5&gt;To **indent** code use two spaces. Don't use tabs.
-]
-.pull-right5[
-
-```r
-# Good
-if (my_dbl &lt; 2){
-  message('my_dbl is smaller 2')
-} else {
-  message('my_dbl is larger or equal 2')
-}
-
-# Bad
-if (my_dbl &lt; 2)
-{
-message('my_dbl is smaller 2')
-} else {
-message('my_dbl is smaller 2')  
-}
-```
-]
 
 ---
 
-# Assignments &amp; Comments
+# Byte-code compiation
 
-.pull-left45[
-&lt;font size=5&gt;For **assignments** use `&lt;-`, not `=`. However, to specify arguments in functions use `=`.
 
-```r
-# Good
-x &lt;- 24324
-
-# Bad
-x = 24324
-```
-]
-
-.pull-right45[
-&lt;font size=5&gt;**Comment** each line of your code. To break up your code in chunks use `-` or `=`.
-
-```r
-# Plot data ----------------------------
-
-this_is &lt;- "pseduo_code"
-my_function(arg1 = x,
-            arg2 = y)
-
-# Plot data ============================
-
-this_is &lt;- "pseduo_code"
-```
-]
----
-
-# Errors, Warnings, Messages
-
-R has different categories for telling you something has happened depending on the severity of the event. 
-
-.pull-left35[
-&lt;font size=5&gt;**Errors** indicate that **something bad** has happened. Errors always stop the code.
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;font size=5&gt;**Warnings** indicate that **something potentially worrying** has happened. Warnings do not stop the code.
-&lt;br&gt;
-&lt;font size=5&gt;**Messages** indicate that **something noteworthy** has happened, e.g., completition of an analysis step. 
-]
-
-.pull-right6[
-
-```r
-# Error
-stop('This is an error') ; men(c(1,2,3))
-```
-
-```
-## Error in eval(expr, envir, enclos): This is an error
-```
-
-```
-## Error in men(c(1, 2, 3)): could not find function "men"
-```
-
-```r
-# Warning
-warning('This is an error') #; c(1, 2) + c(2, 3, 4)
-```
-
-```
-## Warning: This is an error
-```
-
-```r
-# Message
-message('This is a message')
-```
-
-```
-## This is a message
-```
-]
+compiler
 
 ---
 
-# 7 most frequent errors
+# Parallel execution
 
-According to [stackoverflow.com](http://www.stackoverflow.com)
-
-| Error| Example| Description|
-|:------|:------------|:-----------------------------------|
-|     `'could not find function'`|lenth(my_vec)| means that there is a typo in the function name or that a package has not been loaded.|
-|     `'error in if'`|if(NA == 2) 2 + 2| means that the object in the `if` clause is non-logical or NA.|
-|     `'error in eval'`|lm(fefq~wzfe)| means that one uses an object that does not exist.|
-| `'cannot open()'`|read_csv('hjht.txt')| means that the file does not exist. Could be a typo or a missing filepath.|
-| `'no applicable method'`|predict('efwe')| means that a 'generic function' has not been defined for this type/class |
-| `'subsscript out of bounds'`|a &lt;- matrix(c(1,2)); a[2,2]| means that one is trying to access an element (or variable) that does not exist |
-| package errors|| occur when R is unable to install, compile, or load a package. Often this means that some software is missing |
+parallel example
 
 ---
 
-# Missing data
+# Rcpp
 
-.pull-left3[
-&lt;font size=5&gt;A pervasive problem in working with data is missing values. 
-
-&lt;font size=5&gt;In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
-]
-
-.pull-right6[
-
-```r
-# NA and NaN
-my_vec &lt;- c(1,2) ; my_vec[5]
-```
-
-```
-## [1] NA
-```
-
-```r
-0/0
-```
-
-```
-## [1] NaN
-```
-
-```r
-# Tests
-is.na(my_vec[5]) ; is.na(0/0)
-```
-
-```
-## [1] TRUE
-```
-
-```
-## [1] TRUE
-```
-
-```r
-is.nan(my_vec[5]) ; is.nan(0/0)
-```
-
-```
-## [1] FALSE
-```
-
-```
-## [1] TRUE
-```
-]
-
+parallel example
 ---
 
-# Handling missing data
+# Alternative R implementations
 
-.pull-left3[
-&lt;font size=5&gt;Many functions have **inbuilt handlers** for missing data. 
+pqR (pretty quick R) by Radford Neal. Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.
 
-&lt;font size=5&gt;In most cases, however, missing values have to and should be dealt with **before the analysis**.    
-]
+Renjin by BeDataDriven. Renjin uses the Java virtual machine, and has an extensive test suite.
 
-.pull-right6[
+FastR by a team from Purdue. FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.
 
-```r
-# Example
-my_vec_1 &lt;- c(1, 2, 3, 4, NA)
-my_vec_2 &lt;- c(4, 2, NA, 3, 5)
-
-# Functions examples that include handlers
-mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
-```
-
-```
-## [1] NA
-```
-
-```
-## [1] NA
-```
-
-```r
-# Actually using the handlers
-mean(my_vec_1, na.rm = T)
-```
-
-```
-## [1] 2.5
-```
-
-```r
-cor(my_vec_1, my_vec_2, use = 'complete.obs')
-```
-
-```
-## [1] -0.3273
-```
-]
-
-
----
-
-# Impute missing data
-
-.pull-left3[
-&lt;font size=5&gt;Missing data can be **imputed**. 
-
-&lt;font size=5&gt;How missing data should be computed depends on whether the **data is missing at random** or not.
-
-&lt;font size=5&gt;**Packages**: `Hmisc`, `DMwR`, `mice`, etc.    
-]
-
-.pull-right6[
-
-
-
-```r
-# Example
-my_df &lt;- data.frame('x' = c(1, 2, 3, 4, NA),
-                    'y' = c(4, 2, NA, 3, 5))
-
-# Impute using mean
-my_df[[1]][is.na(my_df[[1]])] &lt;- 
-  mean(my_df[[1]], na.rm = T)
-
-# Impute using regression (package: mice)
-mice_model  &lt;- mice(my_df, method="norm", printFlag = F)
-my_df       &lt;- complete(mice_model)
-
-# print
-my_df
-```
-
-```
-##     x     y
-## 1 1.0 4.000
-## 2 2.0 2.000
-## 3 3.0 5.207
-## 4 4.0 3.000
-## 5 2.5 5.000
-```
-]
-
+Riposte by Justin Talbot and Zachary DeVito. Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.
 
 ---
 

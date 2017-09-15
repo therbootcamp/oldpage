@@ -400,4 +400,4 @@ my_fun(unlist(result))
 
 - For more details check out check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
 
-
+- For more on parallel computing see [Parallel R](https://www.amazon.com/dp/B005Z29QT4/ref=cm_sw_su_dp) by McCallum and Weston.
