@@ -165,126 +165,104 @@ Begin a new project in a new folder. Within the folder, create two new folders c
 
 ### Clean code
 
-1. Go through the code below and clean it, according to the above principles. Then download all of the data files in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2017Sep16.R`.
+1. Go through the code below and clean it, according to the above principles (incl. commenting). Then download all of the data files in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2017Sep16.R`.
 
 ```{r, eval = FALSE}
+library(readr   )
+library(      magrittr)
+library(  dplyr)
+  syc =   read_csv('https://therbootcamp.github.io/_slides/data/galton.txt')
+  syc = syc%>%mutate(fcm=father/2.54,mcm=mother/2.54)
+    a   = syc$father
+      b = syc[['mother']]
+        t.test(a,b) 
+```
 
+2. Start again with the 'dirty' code above in a new script. Save it in your `2_code` folder. Now install and load the `formatR` package and try to clean up the 'dirty code' using the `tidy_source` function. What did and what didn't it fix?
 
+### Correct code
 
+3. Go through the code below, clean it, and remove the errors. When ready save the code in the `2_code` folder as `corrected_code_2017Sep16.R`.
+
+```{r, eval = FALSE}
+library(readr   )
+library(magritt)
+syc =   read_csv('1data/galton')
+syc %>% mutate(higher_ratio = height / fther)
+m=lm(height~father,data=syk)
+yhat=predict(M)
+plot(syc[[father]],yhat)
+vs = syc %>% group_by(father) %>% summarize(a = meaen(height))
+points(vs,pch=16)
+```
+
+### Replace NAs
+
+4. Run 'A `mice` example' from above and evaluate the mean and variance age as a function of mean and mice imputation, respectively. Are they different? Which imputation method produces the larger variance and why?
+
+5. Evaluate the performance of mean versus mice imputation. To do this, first load the galton data set, copy it, and remove 10% of the values in the variable `height` in the copy. Now create one new data frame for each method and apply to the mean and mice imputation. Finally, compare the mean squared error `mean((original - imputed)^2)` between the imputed and original values. Which method works better?  
+
+```{r, eval = FALSE, echo = F}
+# load packages
+library(readr)
+library(mice)
+
+# load and copy data
+galton_data <- read_csv('https://therbootcamp.github.io/_slides/data/galton.txt')
+galton_copy <- galton_data
+
+# introduce NAs
+galton_copy$height[sample(ceiling(nrow(galton_copy)*.1))] <- NA
+galton_mean <- galton_copy
+galton_mice <- galton_copy
+
+# impute mean
+galton_mean$height[is.na(galton_mean$height)] <- mean(galton_mean$height, na.rm = TRUE) 
+
+# impute mice
+mice_model  <- mice(galton_mice, method="rf")
+galton_mice <- complete(mice_model)
+
+# evaluate
+mean((galton_mean$height - galton_data$height)[is.na(galton_copy$height)]**2)
+mean((galton_mice$height - galton_data$height)[is.na(galton_copy$height)]**2)
 
 ```
 
+6. Repeat the analysis of the last exercise but this time introduce NAs systematically rather than randomly. Specifically, use some other variable or combination of other variables to determine the locations of NAs in the `height` variable. E.g., use the height of the `father` and the `sex` of the child. Have the results changed? If yes, why?  
 
+```{r, eval = FALSE, echo = F}
+# load packages
+library(readr)
+library(mice)
 
-1. Create a new **project** either in the location of the downloaded data files or its parent folder (one folder higher). To do this go to *File/New Project...*, select existing directory, and enter the desired folder. This step will ease reading and saving data, as it sets the working directory to the proximity of the data files. Confirm this using `getwd()`.
+# load and copy data
+galton_data <- read_csv('https://therbootcamp.github.io/_slides/data/galton.txt')
+galton_copy <- galton_data
 
-2. Identify the filepath (incl. filename) for each of the three data files. RStudio makes it really easy. Simply write quotation marks in your script editor, e.g., `""`, move the (text) curser between the marks, and press the tab key. This opens a file menu that allows you to conveniently select the path to the file. The result is a character string that exactly defines the location of the file relative to the current working directory. Oftentimes, it is convenient to do this directly within the read function, e.g., `read_csv("")`.
+# introduce NAs
+sel <- with(galton_copy, father > 70 | sex == 'M')
+galton_copy$height[sel] <- NA
+galton_mean <- galton_copy
+galton_mice <- galton_copy
 
-3. Load the packages `readr` and `haven` using `library()`, and read in the three titanic data files usig `read_csv()`, `read_sas()`, and `read_sav()`. Call them `df_csv`, `df_sas`, and `df_sav`, respectively. Inspect each of the imported objects using `print()` and `str()`. What kind of object are they?
+# impute mean
+galton_mean$height[is.na(galton_mean$height)] <- mean(galton_mean$height, na.rm = TRUE) 
 
-```{r, eval=F, echo=F}
-df_csv <- read_csv('data_files/titanic.csv')
-df_sas <- read_sas('data_files/titanic.sas7bdat')
-df_sav <- read_sav('data_files/titanic.sav')
-df_csv ; df_sas ; df_sav
-str(df_csv) ; str(df_sas) ; str(df_sav)
+# impute mice
+mice_model  <- mice(galton_mice, method="rf")
+galton_mice <- complete(mice_model)
+
+# evaluate error - MSE
+mean((galton_mean$height - galton_data$height)[is.na(galton_copy$height)]**2)
+mean((galton_mice$height - galton_data$height)[is.na(galton_copy$height)]**2)
+
 ```
-
-4. Try to verify that the three data sets are identical. To do this use the *is-equal-to* operator `==` introduced in the last tutorial and the arithmetic mean function `mean()`. Remember, that logical values can be coerced to 0 and 1. Note, that the data sets contain NA's, that is missing values. One way to see this is via the summary function `summary()`. Specifically, the variable `Age` conains missing values. Use the help file `?mean` to find out how to compute the mean while ignoring missing values and then use `==` to verify the equality between the three data sets. 
-
-```{r, eval=F, echo=F}
-mean(df_csv == df_sas, na.rm=T) == 1
-mean(df_csv == df_sav, na.rm=T) == 1
-mean(df_sas == df_sav, na.rm=T) == 1
-```
-
-### Write to disk
-
-5. The first column in the titanic set contains row numbers. Older read and write functions in R would by default add a row number column to the data, when writing to disk. Newer functions, however, do not show this behavior. ELiminate the first column from `df_csv` using a negative index. Negtive indices mean *omit* rather than *select*. E.g., c(1, 2, 3)[-2] returns the vector without the second value. Then write the reduced data frame to disk using `write_csv()`. Use the exact same file path. Observe whether R gives you a warning before (over-)writing the data?
-```{r, eval=F, echo=F}
-df_csv = df_csv[,-1]
-write_csv(df_csv,"data_files/titanic.csv")
-```
-
-6. Determine the file path to `my_data.csv` and read it in using `read_csv()`. Now write the data back to disk using `write_sas`, `write_sav`, and also `saveRDS`. Each of these functions take as the first argument the data frame and as the second argumen the file path. To obtain the latter adapt the filepath of `my_data.csv` by hand to make sure that the file path has the correct file ending, i.e., `.sas7bdat`, `.sav`, and `.RDS`, respectively. While you write the individual data sets pay attention to the speed of execution. 
-
-```{r, eval=F, echo=F}
-my_data = read_csv("data_files/my_data.csv")
-write_sas(my_data,"data_files/my_data.sas7bdat")
-write_sav(my_data,"data_files/my_data.sav")
-saveRDS(my_data,"data_files/my_data.RDS")
-```
-
-7. You may have noticed that the `saveRDS` function was the slowest. This is because `.RDS` generally leads to the highest degree of compression, i.e., the smalles data files. To verify this use the `file.info()` on each of the four files, `my_data.csv`, `my_data.sas7bdat`, `my_data.sav`, and `my_data.RDS` (using the correct path). Look out for the `size` element, which gives the size in `bytes`.
-
-```{r, eval=F, echo=F}
-file.info("data_files/my_data.csv")
-file.info("data_files/my_data.sas7bdat")
-file.info("data_files/my_data.sav")
-file.info("data_files/my_data.RDS")
-```
-
-
-### File connections
-
-8. The most basic way to handle files is via file connections. The first step of working with file connections is to establish a file connections using, e.g., `file()`. The main arguments to `file` are a location (a file path, url, etc.) and a mode indicator, e.g., `r` for `Open for reading in text mode`. Try opening a connection to the `titanic.csv` dataset. To do this, you must assign the output of `file()` to an object, which then is the connection, e.g., `con = file("my_path","r")`. 
-
-```{r, eval=F, echo=F}
-con = file('data_files/titanic.csv','r')
-```
-
-9. Now that the connection is open, you can read the file using, e.g., `readLines`. `readLines` iterates through the file line by line and returns each line as a character string. Store the output in an object. Try reading the file. When done close the connection using `close(my_con)` and inspect the data.  
-
-```{r, eval=F, echo=F}
-lin = readLines(con)
-close(con)
-```
-
-10. As you can see the read in data looks much messier than with using `read_csv()`. If you're up for the challenge you can try to nonetheless parse this data. A good way is to split each line using the `stri_split_fixed` function using the comma `,` (from the `stringi` package). This will return a list of vectors, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using `do.call(rbind,my_list)`. What's then left is transform the matrix to a data frame and to take care of column types and names.  
-
-```{r, eval=F, echo=F}
-lin <- readLines(con)
-close(con)
-require(stringi)
-spl <- stri_split_fixed(lin,',')
-mat <- do.call(rbind,spl)
-df  <- as.tibble(mat)
-# take care of types
-```
-
-### Scraping the internet
-
-11. Finally on to something rather different. Connections can also be established to data located outside one's own disk, such as, for instance, the world wide web. Speicifically, using `url()` we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient `rvest` package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R's Wikipedia page.
-
-```{r, eval=F, echo=T}
-
-# load package
-install.packages('rvest')
-library(rvest) 
-library(magrittr)
-
-# get html
-url = 'https://en.wikipedia.org/wiki/R_(programming_language)' 
-page = read_html(url)
-
-# get table
-# use XPath from inspect page (e.g., in Chrome)
-table = page %>% html_node(xpath = '//*[@id="mw-content-text"]/div/table[2]') %>% html_table()
-
-# create tibble
-as.tibble(table)
-```
-
-
 
 # Additional reading
 
-- For more details on all steps of data analysis check out Hadley Wickham's [R for Data Science](http://r4ds.had.co.nz/).
+- For more details check out check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
 
-- For more advanced content on objects check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
-
-- For more on pirates and data analysis check out the respective chapters in YaRrr! The Pirate's Guide to R [YaRrr! Chapter Link](https://bookdown.org/ndphillips/YaRrr/htests.html)
-
-
+- [Google style guide](https://google.github.io/styleguide/Rguide.xml)
 
 

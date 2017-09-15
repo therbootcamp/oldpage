@@ -1,13 +1,4 @@
 /* Two-column layout */
-.pull-left2 {
-  float: left;
-  width: 65%;
-}
-.pull-right2 {
-  float: right;
-  width: 32%;
-}
-
 
 .small-code .remark-code {
     font-size: 80%;
@@ -28,70 +19,80 @@
   padding: 2px;
 }
 
+
+.pull-left1 {
+  float: left;
+  width: 10%;
+}
+.pull-right1 {
+  float: right;
+  width: 10%;
+}
+
+.pull-left2 {
+  float: left;
+  width: 20%;
+}
+.pull-right2 {
+  float: right;
+  width: 20%;
+}
+
 .pull-left3 {
   float: left;
-  width: 43%;
+  width: 30%;
 }
 .pull-right3 {
   float: right;
-  width: 52%;
+  width: 30%;
 }
-
-
 .pull-left4 {
   float: left;
-  width: 32%;
+  width: 40%;
 }
 .pull-right4 {
   float: right;
-  width: 65%;
+  width: 40%;
 }
-
 .pull-left5 {
   float: left;
-  width: 45%;
+  width: 50%;
 }
 .pull-right5 {
   float: right;
-  width: 55%;
-}
-
-.pull-left6 {
-  float: left;
   width: 50%;
 }
-.pull-right6 {
-  float: right;
-  width: 45%;
-}
-
-
-.pull-left7 {
+.pull-left6 {
   float: left;
   width: 60%;
 }
+.pull-right6 {
+  float: right;
+  width: 60%;
+}
+.pull-left7 {
+  float: left;
+  width: 70%;
+}
 .pull-right7 {
   float: right;
-  width: 30%;
+  width: 70%;
 }
-
 .pull-left8 {
   float: left;
-  width: 45%;
+  width: 80%;
 }
 .pull-right8 {
   float: right;
-  width: 45%;
+  width: 80%;
 }
-
-
 .pull-left9 {
   float: left;
-  width: 50%;
+  width: 90%;
 }
 .pull-right9 {
   float: right;
-  width: 38%;
+  width: 90%;
 }
 
 
