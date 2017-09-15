@@ -27,7 +27,7 @@ options(width=110)
 options(digits = 4)
 ```
 
-# Importing and Exporting Data
+# Tidying
 
 In this introduction you will learn...
 
