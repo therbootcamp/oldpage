@@ -35,10 +35,41 @@ class: center, middle, inverse, title-slide
 ]
 ---
 
-# Project structure
+# Profiling
+
+The first step to making your code efficient is figuring out the critical parts of your code. 
 
 .pull-left4[
-&lt;font size = 6&gt;Good, clean, documented code begins with a **project** and a **folder structure**.
+
+```r
+# load package
+library(lineprof)
+
+# load code
+source('profiling_code.R')
+
+print(my_expression)
+```
+
+```
+## expression({
+##     data &lt;- read_csv("https://therbootcamp.github.io/_slides/data/titanic.csv")
+##     data &lt;- data[, -1]
+##     data &lt;- data %&gt;% mutate(months = Age * 12)
+##     test_data &lt;- data %&gt;% select(Sex, Age, Survived)
+##     model &lt;- lm(Survived ~ Sex * Age, data = test_data, family = "binomial")
+##     summary(model)
+## })
+```
+
+```r
+# 
+# # profiling
+# profile &lt;- lineprof(my_expression)
+# 
+# # show
+# shine(profile)
+```
 ]
 .pull-right5[
 &lt;img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500"&gt;
@@ -396,7 +427,7 @@ my_df
 ##     x     y
 ## 1 1.0 4.000
 ## 2 2.0 2.000
-## 3 3.0 7.862
+## 3 3.0 5.207
 ## 4 4.0 3.000
 ## 5 2.5 5.000
 ```
