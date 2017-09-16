@@ -130,7 +130,7 @@ Source: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/<
 </div>
 <div id="slides" class="section level3">
 <h3>Slides</h3>
-<p><a href="https://therbootcamp.github.io/_slides/D2S1_Wrangling/wrangling_lecture.html">Here are the introduction slides for this practical on plotting!</a></p>
+<p><a href="https://therbootcamp.github.io/_slides/D3S3_PlottingII/plottingII.html#1">Here are the introduction slides for this practical on Plotting 2.0: Shiny!</a></p>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -421,6 +421,7 @@ output$summary &lt;- renderPrint({
 <h2>Challenges</h2>
 <p>C1. Now that you have multiple datasets, try removing the Plot title and X-axis label inputs (<code>input$main</code>, <code>input$xlab</code>), and instead have the plot automatically adjust the plot title and axis label based on the dataset the users selects. Just like we did with <code>x_reactive()</code>, you’ll need to assign the main title and x label as reactive values.</p>
 <p>C2. Instead of a histogram, try creating a scatterplot as the main plotting output. Keep in mind that you’ll now need to create two reactive values: <code>x_reactive()</code> for the data on the x-axis and <code>y_reactive()</code> for the y-axis. Then, as an optional argument (using a <code>checkboxInput</code>), allow the user to add a regression line to the plot.</p>
+<p>C3. Check out the <a href="https://shiny.rstudio.com/gallery/">RStudio Shiny Gallery</a> at <a href="https://shiny.rstudio.com/gallery/" class="uri">https://shiny.rstudio.com/gallery/</a> and look for a Shiny app you really like. Find the code, copy it, and paste it into a new app in RStudio. See if you can get the app to run. Then, customise it!</p>
 <div id="references" class="section level3">
 <h3>References</h3>
 <ul>
