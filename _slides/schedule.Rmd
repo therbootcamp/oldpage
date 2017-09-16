@@ -14,12 +14,13 @@ output: html_document
 |3|   Data I/O<br>[slides](D1S3_dataio/Data_IO.html), [practical](practical_readin.html), [solutions](practical_readin_sol.html)|Machine Learning<br> [slides](D2S3_MachineLearning/machinelearning_lecture.html), [practical](machinelearning_practical.html), [solutions](machinelearning_practical_answers.html) | Plotting 2.0<br> [slides](D3S3_PlottingII/plottingII.html), [practical](plotting2_practical.html) | Next Steps |
 
 
+<!---
 ### Datasets
 
 *To save data, right-click and "save link as..."*
 
 - [ACTG175 AIDS clinical trial](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/data/ACTG175.csv)
-
+--->
 
 ### September, 2017 Schedule
 
