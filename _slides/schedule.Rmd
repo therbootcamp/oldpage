@@ -10,16 +10,17 @@ output: html_document
 |:--|:-------------|:-------------|:-------------|:--------------|
 |0| Welcome!<br>[slides](D1S0_Intro/Intro.html) | *none* | [Recap](D3S0_Recap/Recap_II.html) | Recap |
 |1| What is R?<br>[slides](D1S1_WhatIsR/what_is_R.html), [practical](practical_what_is_R.html), [solutions](practical_what_is_R_sol.html) | Data Wrangling<br> [slides](D2S1_Wrangling/wrangling_lecture.html), [practical](wrangling_practical.html), [solutions](wrangling_practical_answers.html)|Tidying Code<br>[slides](D3S1_Tidying/Tidying.html), [practical](D3S1_Tidying/practical_tidying.html) | Efficient code |
-|2|  Objects in R<br>[slides](D1S2_Objects/Working_with_objects.html), [practical](practical_objects.html), [solutions](practical_objects_sol.html) | Statistics<br> [slides](D2S2_Statistics/statistics_lecture.html), [practical](statistics_practical.html), [solutions](statistics_practical_answers.html)| Plotting 1.0:<br> [slides](D3S2_PlottingI/plottingI.html), [practical](plotting1_practical.html) |  Dynamic Reports |
-|3|   Data I/O<br>[slides](D1S3_dataio/Data_IO.html), [practical](practical_readin.html), [solutions](practical_readin_sol.html)|Machine Learning<br> [slides](D2S3_MachineLearning/machinelearning_lecture.html), [practical](machinelearning_practical.html), [solutions](machinelearning_practical_answers.html) | Plotting 2.0:<br> [slides](D3S3_PlottingII/plottingII.html), [practical](plotting2_practical.html) | Next Steps |
+|2|  Objects in R<br>[slides](D1S2_Objects/Working_with_objects.html), [practical](practical_objects.html), [solutions](practical_objects_sol.html) | Statistics<br> [slides](D2S2_Statistics/statistics_lecture.html), [practical](statistics_practical.html), [solutions](statistics_practical_answers.html)| Plotting 1.0<br> [slides](D3S2_PlottingI/plottingI.html), [practical](plotting1_practical.html) |  Dynamic Reports |
+|3|   Data I/O<br>[slides](D1S3_dataio/Data_IO.html), [practical](practical_readin.html), [solutions](practical_readin_sol.html)|Machine Learning<br> [slides](D2S3_MachineLearning/machinelearning_lecture.html), [practical](machinelearning_practical.html), [solutions](machinelearning_practical_answers.html) | Plotting 2.0<br> [slides](D3S3_PlottingII/plottingII.html), [practical](plotting2_practical.html) | Next Steps |
 
 
+<!---
 ### Datasets
 
 *To save data, right-click and "save link as..."*
 
 - [ACTG175 AIDS clinical trial](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/data/ACTG175.csv)
-
+--->
 
 ### September, 2017 Schedule
 
