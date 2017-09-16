@@ -1,0 +1,224 @@
+---
+title: "Efficient code"
+subtitle: ""
+author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "September 2017"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my-theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+```
+
+# What we did not cover?
+
+https://goo.gl/forms/k9PIIabfqzW2JwRE3
+
+.pull-left4[
+><font size = 5>"Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered."<br>
+><font size = 5>-- Donald Knuth
+]
+
+.pull-right5[
+<img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500">
+<p align="center"><font size=3>Donald E. Knuth<br>Author of <a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming">The Art of Programming</a><br>source<a href="http://www-cs-faculty.stanford.edu/"> http://www-cs-faculty.stanford.edu/</a>
+]
+
+---
+
+# Why is R slow? And, is it?
+
+.pull-left45[
+><font size = 5>R is not a fast language. This is not an accident. R was purposely designed to make data analysis and statistics easier for you to do. It was not designed to make life easier for your computer. While R is slow compared to other programming languages, for most purposes, it’s fast enough.
+><font size = 5>-- Hadley Wickham
+]
+
+.pull-right45[
+<font size = 5>*Reasons for R being slow*<br><br>
+**Extreme dynamism** - allows you to code flexibly.
+<br2>
+**Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
+]
+
+---
+
+# Profiling
+
+The first step to making your code efficient is to **identify critical parts** of your code. Do this using one of the following: 
+
+| Function| Package| Description| 
+|:------|:------|:------------|
+| `proc.time()`  |`base`|Returns the time.|
+| `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
+| `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
+| `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
+
+---
+
+# Profiling: Example
+
+Often some small part of your code takes hundreds if not thousands times longer than everything else. Profiling is about figuring out which parts of your code takes how long.
+
+.pull-left4[
+```{r, eval = F}
+
+  # load data
+  data <- read_csv('titanic.csv')
+  
+  # remove first column
+  data <- data[,-1]
+  
+  # mutate
+  data <- data %>% 
+    mutate(months = Age * 12)
+
+  # multiple regression 
+  model <- glm(Survived ~ Sex * Age, 
+              data = data, 
+              family = 'binomial')
+  
+  # evaluate model
+  summary(model)
+
+```
+]
+
+.pull-right5[
+<img src="https://therbootcamp.github.io/_slides/images/lineprof.png" width="500">
+]
+
+---
+
+# Improving performance
+
+<font size = 4><i>beginner<br>
+<font size = 6>
+1. Look for existing solutions<br>
+2. Do less work<br>
+3. Vectorise<br>
+4. Parallelise<br>
+5. Avoid copies<br>
+6. Byte-code compile<br>
+</font>
+<br>
+
+<font size = 4><i>advanced<br>
+<font size = 6>
+7. Rcpp<br>
+8. Using a different R<br>
+</font>
+---
+
+# Look for an existing solution
+
+.pull-left3[
+Almost always the problem you are having has been solved by someone else.
+
+<font size = 4><i>Look for solutions in:</i></font>
+
+**Base R**
+
+**Other packages** 
+
+<a href="http://google.com" align="center">**google**</a>, <a href="http://stackoverflow.com" align="center">**stackoverflow**</a>, <a href="http://rseek.org/" align="center">**rseek**</a>  
+
+]
+
+.pull-right6[
+<div style="margin:0px auto; width:100%; float:right">
+  <div style="float:left"; margin:0; width:48%">
+    <img src="stacksite.png" height="360" width="310" align="center"><br>
+    <p align = "center"><a href="stackoverflow.com" align="center"><font size = 3>https://stackoverflow.com</font></a></p>
+  </div>
+  <div style="float:right"; margin:0; width:48%">
+  <img src="rseeksite.png" height="360" width="310" align="center"><br>
+    <p align = "center"><a href="http://rseek.org" align="center"><font size = 3>http://rseek.org</font></a></p>
+  </div>
+</div>
+
+]
+
+---
+
+# Do as little as possible
+
+### Or be as specifci as possible
+
+Use tailored function, e.g., rowSums()
+
+Sometimes this means providing more argzments
+
+read_csv(x, with col_classes)
+
+unlist(x, use.names = F) vs. unlist()
+
+---
+
+# Vectorise
+
+many functions are vectorised, e.g., rowSums or diff()
+
+---
+
+# Avoid copies
+
+whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
+
+microbenchmark(
+  loop10  = collapse(strings10),
+  loop100 = collapse(strings100),
+  vec10   = paste(strings10, collapse = ""),
+  vec100  = paste(strings100, collapse = "")
+)
+
+---
+
+# Byte-code compiation
+
+
+compiler
+
+---
+
+# Parallel execution
+
+parallel example
+
+---
+
+# Rcpp
+
+parallel example
+---
+
+# Alternative R implementations
+
+pqR (pretty quick R) by Radford Neal. Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.
+
+Renjin by BeDataDriven. Renjin uses the Java virtual machine, and has an extensive test suite.
+
+FastR by a team from Purdue. FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.
+
+Riposte by Justin Talbot and Zachary DeVito. Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.
+
+---
+
+# Practical
+

@@ -43,13 +43,13 @@ options(digits = 4)
 
 # Why is R slow? And, is it?
 
-.pull-left4[
+.pull-left45[
 ><font size = 5>R is not a fast language. This is not an accident. R was purposely designed to make data analysis and statistics easier for you to do. It was not designed to make life easier for your computer. While R is slow compared to other programming languages, for most purposes, it’s fast enough.
 ><font size = 5>-- Hadley Wickham
 ]
 
-.pull-right5[
-### Reasons for R being slow
+.pull-right45[
+<font size = 5>*Reasons for R being slow*<br><br>
 **Extreme dynamism** - allows you to code flexibly.
 <br2>
 **Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
@@ -59,7 +59,7 @@ options(digits = 4)
 
 # Profiling
 
-The first step to making your code efficient is figuring out the critical parts of your code. Do this using one of the following: 
+The first step to making your code efficient is to **identify critical parts** of your code. Do this using one of the following: 
 
 | Function| Package| Description| 
 |:------|:------|:------------|
@@ -72,7 +72,7 @@ The first step to making your code efficient is figuring out the critical parts 
 
 # Profiling: Example
 
-Often some small part of your code takes hundreds if not thousands times longer than everything else. Profiling is about figuring out which parts of your code takes how long.
+Often some small part of your code takes orders of magnitudes longer than everything else. Profiling is about figuring out which parts of your code take so long.
 
 .pull-left4[
 ```{r, eval = F}
@@ -106,87 +106,265 @@ Often some small part of your code takes hundreds if not thousands times longer 
 
 # Improving performance
 
-1. Look for existing solutions
-2. Do less work
-3. Vectorise
-4. Parallelise
-5. Avoid copies
-6. Byte-code compile
-7. Rcpp
-8. Using a different R
+<font size = 4><i>beginner</i><br>
+<font size = 6>
+1. Look for existing solutions<br>
+2. Do less work<br>
+3. Vectorise<br>
+4. Parallelise<br>
+5. Avoid copies<br>
+6. Byte-code compile<br>
+</font>
+<br>
 
+<font size = 4><i>advanced</i><br>
+<font size = 6>
+7. Rcpp<br>
+8. Using a different R<br>
+</font>
 ---
 
 # Look for an existing solution
 
-google, stackoverflow, http://rseek.org/
+.pull-left3[
+Almost always your problem has been solved by someone else.
 
-other packages
+<font size = 4><i>Look for solutions in:</i></font>
 
-within R
+**Base R** which can be amazingly fast.
+
+**Other packages** which often provide faster versions of one and the same function.
+
+<a href="http://google.com" align="center">**google**</a>, <a href="http://stackoverflow.com" align="center">**stackoverflow**</a>, <a href="http://rseek.org/" align="center">**rseek**</a>  
+
+]
+
+.pull-right6[
+<div style="margin:0px auto; width:100%; float:right">
+  <div style="float:left"; margin:0; width:48%">
+    <img src="stacksite.png" height="360" width="310" align="center"><br>
+    <p align = "center"><a href="stackoverflow.com" align="center"><font size = 3>https://stackoverflow.com</font></a></p>
+  </div>
+  <div style="float:right"; margin:0; width:48%">
+  <img src="rseeksite.png" height="360" width="310" align="center"><br>
+    <p align = "center"><a href="http://rseek.org" align="center"><font size = 3>http://rseek.org</font></a></p>
+  </div>
+</div>
+
+]
 
 ---
 
 # Do as little as possible
 
-### Or be as specifci as possible
+.pull-left35[
+### Or be as specific as possible
 
-Use tailored function, e.g., rowSums()
+Use **tailor-made** functions, e.g., `.subset2()`.
 
-Sometimes this means providing more argzments
+**Provide focus**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
 
-read_csv(x, with col_classes)
+**Don't repeat** code.
+]
 
-unlist(x, use.names = F) vs. unlist()
+.pull-right65[
+```{r, echo=F,warning=F,message=F}
+require(readr)
+require(microbenchmark)
+require(data.table)
+options(digits=3)
+```
+
+```{r, warning=F, message=F, eval = T}
+# load package
+library(microbenchmark, quietly = T)
+
+# define link to data
+link <- 'http://tinyurl.com/y92qpp7h'
+
+# microbenchmark
+microbenchmark(
+  web   = read_csv(link),
+  local = read_csv('titanic.csv'),
+  fread = fread('titanic.csv'),
+  times = 10)
+
+```
+]
 
 ---
 
 # Vectorise
 
-many functions are vectorised, e.g., rowSums or diff()
+.pull-left35[
+Whenever possible **use vector operations** or functions do vectorized operations. 
+
+In other words, **don't use loops** and stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc.
+]
+
+.pull-right6[
+
+```{r, warning=F, message=F, eval = T}
+# create data
+my_data <- matrix(rnorm(1000000), ncol = 10)
+
+# microbenchmark
+microbenchmark(
+  colMeans = colMeans(my_data), 
+  apply = apply(my_data, 2, mean),
+  times = 10)
+```
+]
 
 ---
+
+.pull-left3[
 
 # Avoid copies
 
+**R always copies.** 
+
 whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
 
+]
+
+
+.pull-right65[
+
+
+```{r, message=F, warning=F, eval = T}
+# define character vectors
+letters10  <- LETTERS[sample(1:26, 10, replace = T)]
+letters100 <- LETTERS[sample(1:26, 100, replace = T)] 
+
+# define collapse function
+collapse <- function(x) {
+  my_string <- ''
+  for(i in 1:length(x)) paste(my_string, x, sep = "")
+}
+
+# microbenchmark
 microbenchmark(
-  loop10  = collapse(strings10),
-  loop100 = collapse(strings100),
-  vec10   = paste(strings10, collapse = ""),
-  vec100  = paste(strings100, collapse = "")
+  loop10  = collapse(letters10),
+  loop100 = collapse(letters100),
+  vec10   = paste(letters10, collapse = ""),
+  vec100  = paste(letters100, collapse = "")
 )
+```
 
+]
+---
+.pull-left2[
+# Byte-code<br>compilation
+
+Using the base R package `compiler` code can be compiled to byte-code, a faster, **lower-level version of the code**.
+
+As R compiles functions anyway after the first execution, this is **often not useful**. 
+
+]
+.pull-right7[
+```{r, message=F, warning=F, eval = T}
+# define unneccessarily complex function and compile
+my_fun <- function(x, f, ...) {
+  for (i in seq_along(x)) f(x[[i]], ...)
+  }
+my_fun_c <- compiler::cmpfun(my_fun)
+
+# define some awfully complex data
+x <- list(1:10, letters, c(F, T), NULL)
+
+# microbenchmark
+microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
+
+# microbenchmark again
+microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
+```
+]
 ---
 
-# Byte-code compiation
+.pull-left2[
+# Parallel<br>computing
 
+When working with large data one of the **best way to speed up** execution is parallel execution. 
 
-compiler
+Parallel execution splits the data in many **jobs** and then has many **workers** (separate R instances) working on them in parallel. 
+]
 
+.pull-right7[
+```{r, message=F, warning=F, eval = T}
+# define data and splitted data (jobs)
+my_data <- matrix(rnorm(10000000),ncol = 10)
+my_split_data <- lapply(1:10, function(i) my_data[(1:1000) + (i - 1) * 1000, ])
+
+# open cluster 
+require(parallel)
+clu <- makeCluster(5)
+
+# my cluster fun
+my_cluster_fun <- function(my_split_data){
+
+  # apply cluster function
+  out <- clusterApplyLB(clu, my_split_data, colMeans)
+  
+  # combine results
+  colMeans(do.call(rbind, out))
+  }
+
+# microbenchmark
+microbenchmark(vectorz = colMeans(my_data),
+               cluster = my_cluster_fun(my_split_data))
+```
+]
 ---
 
-# Parallel execution
-
-parallel example
-
----
-
+.pull-left2[
 # Rcpp
 
-parallel example
+Another very effective, but highly advanced option is to write the essential code using Rcpp - **R's C++ interface**.
+
+As many functions are already implemented in C++ or Fortran in the background, this works well **only for non-standard operations**. 
+
+<a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf">**Quick-Guide**</a>
+
+]
+
+.pull-right7[
+```{r, message=F, warning=F, eval = T}
+# define data
+my_data <- matrix(rnorm(10000000),ncol = 10)
+
+# define function
+my_Rcpp_fun = "
+NumericVector colMeans_c(NumericMatrix x){
+  NumericVector out(x.ncol());
+  for(int j = 0; j < x.ncol(); ++j){
+    double m = 0;
+    for(int i = 0; i < x.nrow(); ++i) m += x(i, j);
+  out[j] = m / x.nrow(); 
+  }
+return out;
+}"
+
+# compile function
+require(Rcpp) ; cppFunction(my_Rcpp_fun)
+
+# microbenchmark
+microbenchmark(vectorz = colMeans(my_data),
+               Rcpp = colMeans_c(my_data))
+```
+]
 ---
 
 # Alternative R implementations
 
-pqR (pretty quick R) by Radford Neal. Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.
+from <a href="http://adv-r.had.co.nz/Performance.html"> **Advanced R**</a>
 
-Renjin by BeDataDriven. Renjin uses the Java virtual machine, and has an extensive test suite.
-
-FastR by a team from Purdue. FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.
-
-Riposte by Justin Talbot and Zachary DeVito. Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.
+| R implementation| Author | Description| 
+|:------|:------|:------------|
+| `pqR`  |Radford Neal|Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.|
+| `Renjin`  |BeDataDriven| Renjin uses the Java virtual machine, and has an extensive test suite.|
+| `FastR`  |Purdue University| FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.|
+| `Riposte`  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
 
 ---
 

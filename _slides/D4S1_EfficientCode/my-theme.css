@@ -113,6 +113,15 @@
   width: 35%;
 }
 
+.pull-left65 {
+  float: left;
+  width: 65%;
+}
+.pull-right65 {
+  float: right;
+  width: 65%;
+}
+
 br2 {
    display: block;
    margin: 8px 0;
