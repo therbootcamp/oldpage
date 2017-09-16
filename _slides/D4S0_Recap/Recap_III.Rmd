@@ -1,0 +1,232 @@
+---
+title: "Recap III"
+subtitle: ""
+author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
+date: "September 2017"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my-theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+
+
+```{r setup, include=FALSE, echo = FALSE, message = FALSE, warning = FALSE}
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+library(tidyverse)
+```
+
+
+
+
+# Tidying
+
+.pull-left4[
+In this introduction you will learn...
+
+><font size = 5>...how to write clean, documented code.
+><br2>
+><font size = 5>...to understand errors (and warnings).
+><br2>
+><font size = 5>...how to deal with missing values.
+]
+
+.pull-right5[
+<img src="https://build2be.com/sites/build2be.com/files/shutterstock_232639537.jpg" width="500">
+<p align="center"><font size=3>source<a href="https://build2be.com/"> https://build2be.com/</a>
+]
+---
+
+# Project structure
+
+.pull-left4[
+<font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
+]
+.pull-right5[
+<img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
+]
+
+
+---
+
+# 7 most frequent errors
+
+According to [stackoverflow.com](http://www.stackoverflow.com)
+
+| Error| Example| Description|
+|:------|:------------|:--------------------------------------------|
+|     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
+|     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if` clause is non-logical or NA.|
+|     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
+| `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing filepath.|
+| `'no applicable method'`|predict('efwe')| A 'generic function' has not been defined for this type/class |
+| `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
+| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
+
+
+---
+
+# Assignments & Comments
+
+.pull-left45[
+<font size=5>For **assignments** use `<-`, not `=`. However, to specify arguments in functions use `=`.
+```{r, eval = F}
+# Good
+x <- 24324
+
+# Bad
+x = 24324
+```
+]
+
+.pull-right45[
+<font size=5>**Comment each line** of your code. To break up your code in chunks use `-` or `=`.
+```{r, eval = F}
+# Plot data ----------------------------
+
+this_is <- "pseduo_code"
+my_function(arg1 = x,
+            arg2 = y)
+
+# Plot data ============================
+
+this_is <- "pseduo_code"
+```
+]
+
+---
+
+# You can do amazing plots in R!
+
+- As good as R is for statistics, it's as good if not better for plots.
+
+```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
+knitr::include_graphics("images/ggplotgallery.png")
+```
+
+
+
+
+---
+
+## Grammar of Graphics
+
+.pull-left3[
+
+The Grammar of graphics breaks down plots into several key pieces:
+
+
+| aesthetics| Description|
+|:------|:----|
+|     Data|    What dataframe contains the data?|
+|     Aesthetics| What does the x-axis, y-axis, color (etc) represent?|
+|     Geometries| What kind of geometric object do you want to plot?|
+|     Facets| Should there be groups of plots?|
+|     Statistics|What statistic summaries / transformations should be done?|
+|    Coordinates| What is the scale of the axes?|
+|    Theme| What should the overall plot look like?|
+
+
+]
+
+
+.pull-right3[
+```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
+knitr::include_graphics("images/complexplot1.png")
+```
+
+]
+
+
+---
+## ggplot2
+
+.pull-left3[
+
+How do we make elegant, easy to program plots according to the grammar of graphics in R?
+
+###Answer: ggplot2
+
+By far one of the most popular R packages, used to generate the vast majority of plots from R.
+
+
+
+]
+
+
+.pull-right3[
+
+
+```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
+knitr::include_graphics("images/wickham_portrait.png")
+```
+
+
+]
+
+
+---
+
+## Final result!
+
+
+```{r, fig.width = 7, fig.height = 4, out.width = "40%"}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue", method = "lm")+
+  labs(x = "Engine Displacement in Liters",
+       y = "Highway miles per gallon",
+       title = "MPG data",
+       subtitle = "Cars with higher engine displacement tend to have lower highway mpg",
+       caption = "Source: mpg data in ggplot2") + 
+  theme_bw()
+
+```
+
+
+
+---
+## What is Shiny?
+
+```{r, echo = FALSE, fig.align = 'center', fig.cap = 'Source: http://shiny.rstudio.com/images/shiny-cheatsheet.pdf', out.width = "95%"}
+knitr::include_graphics("images/shiny_definition.png")
+```
+
+
+
+---
+## Structure of a Shiny App
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "75%"}
+knitr::include_graphics("images/uiandserver.png")
+```
+
+---
+## User Interface
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+knitr::include_graphics("images/exampleapp_B.png")
+```
+
+---
+## Day 4
+
+
+# 1. Efficient Code
+
+# 2. Dynamic Reports
+
+# 3. Next Steps
