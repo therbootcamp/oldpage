@@ -123,7 +123,7 @@ var_rt &lt;- var(rt, na.rm = TRUE)
 
 
 # Bad
-var_rt&lt;-var(rt,na.rm=TRUE)
+var_rt&lt;-var(rt, na.rm = TRUE)
 ```
 
 
@@ -215,7 +215,7 @@ R has different categories for telling you something has happened depending on t
 
 ```r
 # Error
-stop('This is an error') ; men(c(1,2,3))
+stop('This is an error') ; men(c(1, 2, 3))
 ```
 
 ```
@@ -330,7 +330,7 @@ is.nan(my_vec[5]) ; is.nan(0/0)
 
 ```r
 # Example
-my_vec_1 &lt;- c(1, 2, 3, 4, NA)
+my_vec_1 &lt;- c(1, 2, 3,  4, NA)
 my_vec_2 &lt;- c(4, 2, NA, 3, 5)
 
 # Functions examples that include handlers
@@ -347,7 +347,7 @@ mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
 
 ```r
 # Actually using the handlers
-mean(my_vec_1, na.rm = T)
+mean(my_vec_1, na.rm = TRUE)
 ```
 
 ```
@@ -371,7 +371,7 @@ cor(my_vec_1, my_vec_2, use = 'complete.obs')
 .pull-left3[
 &lt;font size=5&gt;Missing data can be **imputed**. 
 
-&lt;font size=5&gt;How missing data should be computed depends on whether the **data is missing at random** or not.
+&lt;font size=5&gt;How missing data should be imputed depends on whether the **data is missing at random** or not.
 
 &lt;font size=5&gt;**Packages**: `Hmisc`, `DMwR`, `mice`, etc.    
 ]
@@ -382,15 +382,16 @@ cor(my_vec_1, my_vec_2, use = 'complete.obs')
 
 ```r
 # Example
-my_df &lt;- data.frame('x' = c(1, 2, 3, 4, NA),
-                    'y' = c(4, 2, NA, 3, 5))
+my_df &lt;- data.frame('x' = c(1, 2,  3, 4, NA),
+                    'y' = c(4, 2, NA, 3, 5)
+                    )
 
 # Impute using mean
 my_df[[1]][is.na(my_df[[1]])] &lt;- 
-  mean(my_df[[1]], na.rm = T)
+  mean(my_df[[1]], na.rm = TRUE)
 
 # Impute using regression (package: mice)
-mice_model  &lt;- mice(my_df, method="norm", printFlag = F)
+mice_model  &lt;- mice(my_df, method = "norm", printFlag = FALSE)
 my_df       &lt;- complete(mice_model)
 
 # print
@@ -399,11 +400,11 @@ my_df
 
 ```
 ##     x     y
-## 1 1.0  4.00
-## 2 2.0  2.00
-## 3 3.0 10.58
-## 4 4.0  3.00
-## 5 2.5  5.00
+## 1 1.0 4.000
+## 2 2.0 2.000
+## 3 3.0 7.426
+## 4 4.0 3.000
+## 5 2.5 5.000
 ```
 ]
 
