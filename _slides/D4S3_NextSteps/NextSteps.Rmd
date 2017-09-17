@@ -83,7 +83,6 @@ A social graph of package Co-authors using `tidyverse` plus `ggraph`, an extensi
 > -- duw
 
 <br>
-<br>
 
 | Package| Description| 
 |:------|:------------|
