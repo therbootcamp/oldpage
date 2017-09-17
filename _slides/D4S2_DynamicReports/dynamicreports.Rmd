@@ -406,6 +406,27 @@ knitr::include_graphics("images/rmarkdown_templates.png")
 ]
 
 
+---
+## To write to PDF, you need TeX
+
+.pull-left3[
+
+In order to knit your document to a PDF, you'll need a TeX installation
+
+]
+
+
+.pull-right3[
+
+```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
+knitr::include_graphics("images/")
+```
+
+
+
+]
+
+
 
 ---
 ## Why are RMarkdown documents so great?
