@@ -25,7 +25,7 @@ In this practical you'll learn how to write efficient code. By the end of this p
 Functions to profile your code are: 
 
 | Function| Package| Description| 
-|:------|:------|:------------|
+|:------|:------|:------------------------------------------|
 | `proc.time()`  |`base`|Returns the time.|
 | `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
 | `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|

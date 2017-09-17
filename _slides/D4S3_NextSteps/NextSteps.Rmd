@@ -286,17 +286,17 @@ With the need for more computing power for, e.g., machine learning, R is also mo
   
   <td><a href="http://r4ds.had.co.nz/cover.png"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" width="100" height="150"></a></td>
 
-  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" width="150" height="100"></a></td>  
+  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" height="150"></a></td>  
   
     <td><a href="https://images.springer.com/sgw/books/medium/9783540799979.jpg"><img border="0" alt="W3Schools" src="https://images.springer.com/sgw/books/medium/9783540799979.jpg" width="100" height="150"></a></td>  
   
-  <td><a href="http://adv-r.had.co.nz/"><img border="0" alt="W3Schools" src="https://images.tandf.co.uk/common/jackets/amazon/978146658/9781466586963.jpg" width="150" height="100"></a></td>
+  <td><a href="http://adv-r.had.co.nz/"><img border="0" alt="W3Schools" src="https://images.tandf.co.uk/common/jackets/amazon/978146658/9781466586963.jpg" height="150" ></a></td>
 
-  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320" width="150" height="100"></a></td>
+  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320" height="150" ></a></td>
 
+  <td><a href="https://images-na.ssl-images-amazon.com/images/I/41eCbcQARTL._SX342_BO1,204,203,200_.jpg"><img border="0" alt="W3Schools" src="https://images-na.ssl-images-amazon.com/images/I/41eCbcQARTL._SX342_BO1,204,203,200_.jpg" height="150" ></a></td>
 
-
-The art the programming
+  <td><a href="https://images-na.ssl-images-amazon.com/images/I/41eCbcQARTL._SX342_BO1,204,203,200_.jpg"><img border="0" alt="W3Schools" src="https://images-na.ssl-images-amazon.com/images/I/41eCbcQARTL._SX342_BO1,204,203,200_.jpg" height="150" ></a></td>
 
 the art of programming with R
 
