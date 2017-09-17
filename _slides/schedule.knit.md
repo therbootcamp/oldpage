@@ -25,9 +25,7 @@ output: html_document
 
 ### September, 2017 Schedule
 
-```{r, out.width = "50%", echo = FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png")
-```
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png" width="50%" />
 
 
 ### Recommended readings
