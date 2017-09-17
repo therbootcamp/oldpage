@@ -46,7 +46,7 @@ df <- data.frame('var_1' = rnorm(1000,1),
 tbl <- as.tibble(df)
 
 # microbenchmark pt. 1
-microbenchmark(df[['var_1']],df$var_1,tbl$var_1)
+microbenchmark(df[['var_1']], df$var_1, tbl$var_1)
 
 ```
 
@@ -78,7 +78,7 @@ my_chunkfun <- function(){
   
   # select
   test_data <- data %>% 
-    select(Sex,Age,Survived)
+    select(Sex, Age, Survived)
   
   # multiple regression 
   # Survival predicted by Sex, Age, and their interaction
@@ -114,8 +114,8 @@ library(microbenchmark)
 library(tibble)
 
 # get data
-df <- data.frame('var_1' = rnorm(1000,1),
-                 'var_2' = rnorm(1000,1))
+df <- data.frame('var_1' = rnorm(1000, 1),
+                 'var_2' = rnorm(1000, 1))
 tbl <- as.tibble(df)
 
 # microbenchmark
@@ -186,7 +186,7 @@ my_chunkfun <- function(){
   
   # select
   test_data <- data %>% 
-    select(Sex,months,Survived)
+    select(Sex, months, Survived)
   
   # multiple regression 
   # Survival predicted by Sex, months, and their interaction
@@ -235,7 +235,7 @@ my_chunkfun_fast <- function(){
   
   # select
   test_data <- data %>% 
-    select(Sex,months,Survived)
+    select(Sex, months, Survived)
   
   # multiple regression 
   # Survival predicted by Sex, months, and their interaction
