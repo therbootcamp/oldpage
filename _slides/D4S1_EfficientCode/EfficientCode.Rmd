@@ -139,6 +139,7 @@ Almost always your problem has been solved by someone else.
 
 ]
 
+
 .pull-right6[
 <div style="margin:0px auto; width:100%; float:right">
   <div style="float:left"; margin:0; width:48%">
