@@ -133,6 +133,7 @@ Almost always your problem has been solved by someone else.
 
 ]
 
+
 .pull-right6[
 &lt;div style="margin:0px auto; width:100%; float:right"&gt;
   &lt;div style="float:left"; margin:0; width:48%"&gt;
@@ -182,10 +183,10 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##   expr    min     lq    mean  median      uq     max neval cld
-##    web 881095 977350 1065361 1026678 1182499 1282598    10   b
-##  local   4191   4639   17558    4810    5491  131584    10  a 
-##  fread   1000   1061    1267    1118    1229    2613    10  a
+##   expr    min     lq   mean median     uq     max neval cld
+##    web 782662 887207 972916 959920 984393 1399284    10   b
+##  local   4259   4562   7034   4712   4856   28368    10  a 
+##  fread    954   1096   1278   1171   1210    2519    10  a
 ```
 ]
 
@@ -216,8 +217,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   810   867  1026    991   1144   1367    10  a 
-##     apply 12252 13933 47285  15735 120587 124814    10   b
+##  colMeans   766   837   916    860   1022   1184    10  a 
+##     apply 13286 14344 48277  16115 123153 126345    10   b
 ```
 ]
 
@@ -260,11 +261,11 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##     expr     min      lq    mean median     uq    max neval cld
-##   loop10   21.87   23.88   49.89   25.1   26.7 2423.6   100  a 
-##  loop100 1198.91 1272.48 1388.52 1330.8 1412.5 2568.2   100   b
-##    vec10    1.80    2.03    3.17    2.3    2.6   35.5   100  a 
-##   vec100    9.38    9.83   11.36   10.7   11.8   38.1   100  a
+##     expr     min      lq    mean  median      uq    max neval cld
+##   loop10   21.78   24.12   54.88   25.70   28.26 2877.3   100  a 
+##  loop100 1242.55 1309.18 1411.08 1375.76 1474.69 1836.9   100   b
+##    vec10    1.85    2.09    2.97    2.33    2.62   31.8   100  a 
+##   vec100    9.46   10.12   11.28   11.02   11.98   17.7   100  a
 ```
 
 ]
@@ -295,9 +296,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq  mean median   uq    max neval cld
-##    my_fun(x, is.null) 1.24 1.27 23.27   1.38 1.55 2181.8   100   a
-##  my_fun_c(x, is.null) 1.23 1.29  1.66   1.41 1.58   16.1   100   a
+##                  expr   min    lq  mean median   uq    max neval cld
+##    my_fun(x, is.null) 0.962 0.996 20.63   1.09 1.24 1946.7   100   a
+##  my_fun_c(x, is.null) 0.947 0.991  1.32   1.06 1.22   17.9   100   a
 ```
 
 ```r
@@ -308,8 +309,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq   max neval cld
-##    my_fun(x, is.null) 1.02 1.12 1.54   1.24 1.49 16.10   100   a
-##  my_fun_c(x, is.null) 1.02 1.06 1.22   1.14 1.25  3.43   100   a
+##    my_fun(x, is.null) 1.24 1.28 1.45   1.38 1.49  3.71   100   a
+##  my_fun_c(x, is.null) 1.24 1.30 1.56   1.39 1.56 12.48   100   a
 ```
 ]
 ---
@@ -350,9 +351,9 @@ microbenchmark(vectorz = colMeans(my_data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.83 8.16 8.53   8.30 8.54 12.0   100   b
-##  cluster 2.44 2.66 2.97   2.82 3.02 10.5   100  a
+##     expr  min   lq mean median   uq   max neval cld
+##  vectorz 7.86 8.19 8.67   8.34 8.77 11.81   100   b
+##  cluster 2.37 2.77 3.11   2.93 3.28  8.93   100  a
 ```
 ]
 ---
@@ -397,8 +398,8 @@ microbenchmark(vectorz = colMeans(my_data),
 ```
 ## Unit: milliseconds
 ##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.82 8.10 8.58   8.23 8.73 11.6   100   a
-##     Rcpp 7.83 8.03 8.54   8.17 8.62 12.0   100   a
+##  vectorz 7.88 8.11 8.76   8.38 9.13 11.9   100   a
+##     Rcpp 7.85 8.10 8.88   8.35 9.40 15.0   100   a
 ```
 ]
 ---

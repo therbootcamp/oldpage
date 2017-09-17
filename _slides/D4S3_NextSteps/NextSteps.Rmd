@@ -277,6 +277,35 @@ With the need for more computing power for, e.g., machine learning, R is also mo
 # Books
 
 
+
+
+<table width="100%" style="cellspacing:0; cellpadding:0; border:none">
+  <tr>    
+  <td> <a href="http://r4ds.had.co.nz/"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" width="100" height="150"></a></td>
+  <td><a href="https://bookdown.org/ndphillips/YaRrr/"><img border="0" alt="W3Schools" src="https://bookdown.org/ndphillips/YaRrr/images/YaRrr_Cover.jpg" width="100" height="150"></a></td>
+  
+  <td><a href="http://r4ds.had.co.nz/cover.png"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" width="100" height="150"></a></td>
+
+  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" width="150" height="100"></a></td>  
+  
+    <td><a href="https://images.springer.com/sgw/books/medium/9783540799979.jpg"><img border="0" alt="W3Schools" src="https://images.springer.com/sgw/books/medium/9783540799979.jpg" width="100" height="150"></a></td>  
+  
+  <td><a href="http://adv-r.had.co.nz/"><img border="0" alt="W3Schools" src="https://images.tandf.co.uk/common/jackets/amazon/978146658/9781466586963.jpg" width="150" height="100"></a></td>
+
+  <td><a href="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=18809753&resolution=320" width="150" height="100"></a></td>
+
+
+
+The art the programming
+
+the art of programming with R
+
+</td>
+  </tr>
+</table>
+<br>
+
+
 ---
 
 # Websites
@@ -311,7 +340,5 @@ Just use the logos
 
 # Consulting
 
-
----
 
 
