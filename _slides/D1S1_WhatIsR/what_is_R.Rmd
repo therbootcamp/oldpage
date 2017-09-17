@@ -116,6 +116,7 @@ knitr::include_graphics("https://i0.wp.com/r4stats.com/wp-content/uploads/2017/0
 ```
 <p style="font-size:10px" align="center">source: https://i0.wp.com/r4stats.com/<p>
 
+
 ---
 
 # R is so popular because
