@@ -43,7 +43,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 </table>
 <br>
 
-R for Data Science by Grolemund and Wickham: [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/) 
+R for Data Science by Grolemund and Wickham: [http://r4ds.had.co.nz/](http://r4ds.had.co.nz/)
+<br>
 YaRrr! The Pirate's Guide to R! [https://bookdown.org/ndphillips/YaRrr/](https://bookdown.org/ndphillips/YaRrr/)
+<br>
 Advanced R by Wickham: [http://adv-r.had.co.nz/](http://adv-r.had.co.nz/) 
 
