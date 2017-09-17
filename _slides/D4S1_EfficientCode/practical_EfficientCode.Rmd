@@ -31,8 +31,6 @@ Functions to profile your code are:
 | `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
 | `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
 
-For more information go to <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
-
 ### Microbenchmark: Example
 
 Small (minimal) chunks of code can conveniently be tested using `microbenchmark()`. 
