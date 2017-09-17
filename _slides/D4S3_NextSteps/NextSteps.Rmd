@@ -1,5 +1,5 @@
 ---
-title: "Efficient code"
+title: "Next steps"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "September 2017"
@@ -27,198 +27,251 @@ options(width=110)
 options(digits = 4)
 ```
 
-# What we did not cover?
+# Next steps
 
-https://goo.gl/forms/k9PIIabfqzW2JwRE3
-
-.pull-left4[
-><font size = 5>"Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered."<br>
-><font size = 5>-- Donald Knuth
-]
-
-.pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500">
-<p align="center"><font size=3>Donald E. Knuth<br>Author of <a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming">The Art of Programming</a><br>source<a href="http://www-cs-faculty.stanford.edu/"> http://www-cs-faculty.stanford.edu/</a>
-]
-
----
-
-# Why is R slow? And, is it?
-
-.pull-left45[
-><font size = 5>R is not a fast language. This is not an accident. R was purposely designed to make data analysis and statistics easier for you to do. It was not designed to make life easier for your computer. While R is slow compared to other programming languages, for most purposes, it’s fast enough.
-><font size = 5>-- Hadley Wickham
-]
-
-.pull-right45[
-<font size = 5>*Reasons for R being slow*<br><br>
-**Extreme dynamism** - allows you to code flexibly.
-<br2>
-**Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
-]
-
----
-
-# Profiling
-
-The first step to making your code efficient is to **identify critical parts** of your code. Do this using one of the following: 
-
-| Function| Package| Description| 
-|:------|:------|:------------|
-| `proc.time()`  |`base`|Returns the time.|
-| `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
-| `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
-| `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
-
----
-
-# Profiling: Example
-
-Often some small part of your code takes hundreds if not thousands times longer than everything else. Profiling is about figuring out which parts of your code takes how long.
 
 .pull-left4[
-```{r, eval = F}
-
-  # load data
-  data <- read_csv('titanic.csv')
-  
-  # remove first column
-  data <- data[,-1]
-  
-  # mutate
-  data <- data %>% 
-    mutate(months = Age * 12)
-
-  # multiple regression 
-  model <- glm(Survived ~ Sex * Age, 
-              data = data, 
-              family = 'binomial')
-  
-  # evaluate model
-  summary(model)
-
-```
-]
-
-.pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/lineprof.png" width="500">
-]
-
----
-
-# Improving performance
-
-<font size = 4><i>beginner<br>
+<font size = 4><i>What we would have liked to cover</i><br>
 <font size = 6>
-1. Look for existing solutions<br>
-2. Do less work<br>
-3. Vectorise<br>
-4. Parallelise<br>
-5. Avoid copies<br>
-6. Byte-code compile<br>
+1. Networks<br>
+2. Bayesian stats<br>
+3. Text analysis<br>
+4. Rcpp<br>
+5. Forms<br>
+6. Github<br>
+7. R on servers<br>
 </font>
 <br>
 
-<font size = 4><i>advanced<br>
+<font size = 4><i>How to continue</i><br>
 <font size = 6>
-7. Rcpp<br>
-8. Using a different R<br>
+7. Books<br>
+8. Websites R<br>
+9. Groups<br>
 </font>
----
-
-# Look for an existing solution
-
-.pull-left3[
-Almost always the problem you are having has been solved by someone else.
-
-<font size = 4><i>Look for solutions in:</i></font>
-
-**Base R**
-
-**Other packages** 
-
-<a href="http://google.com" align="center">**google**</a>, <a href="http://stackoverflow.com" align="center">**stackoverflow**</a>, <a href="http://rseek.org/" align="center">**rseek**</a>  
-
 ]
 
-.pull-right6[
-<div style="margin:0px auto; width:100%; float:right">
-  <div style="float:left"; margin:0; width:48%">
-    <img src="stacksite.png" height="360" width="310" align="center"><br>
-    <p align = "center"><a href="stackoverflow.com" align="center"><font size = 3>https://stackoverflow.com</font></a></p>
-  </div>
-  <div style="float:right"; margin:0; width:48%">
-  <img src="rseeksite.png" height="360" width="310" align="center"><br>
-    <p align = "center"><a href="http://rseek.org" align="center"><font size = 3>http://rseek.org</font></a></p>
-  </div>
-</div>
-
+.pull-right5[
+<p align="center"><img src="https://i0.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot.png?zoom=2&w=450" width=400 align="center"><br><br>
+<font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a>
+</p>
 ]
 
 ---
 
-# Do as little as possible
+# Network analysis
 
-### Or be as specifci as possible
+A social graph of package Co-authors using `tidyverse` plus `ggraph`, an extension for `ggplot2` for graphs (aka networks) and `igraph`, an extremely powerful network analysis library. Find the code and additional explanation [**here**](https://www.r-bloggers.com/exploring-the-cran-social-network/).
 
-Use tailored function, e.g., rowSums()
+.pull-left[
+  <p align="center"><img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot04.png?zoom=2&w=450" width=450><br>
+  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
+  ]
 
-Sometimes this means providing more argzments
-
-read_csv(x, with col_classes)
-
-unlist(x, use.names = F) vs. unlist()
-
----
-
-# Vectorise
-
-many functions are vectorised, e.g., rowSums or diff()
+.pull-right[
+<p align="center">
+<br><br>
+  <img src="https://i1.wp.com/www.pieceofk.fr/wp-content/uploads/2017/09/Rplot02.png?zoom=2&w=450" width=450><br><br><br>
+  <font size=2>source <a href="https://www.r-bloggers.com/exploring-the-cran-social-network/">R-bloggers.com</a></p>
+  ]
 
 ---
 
-# Avoid copies
+# Stats packages
 
-whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to contain its inputs.
+>"If there is a new statistical method, it is first implemented in R" <br>
+> -- duw
 
-microbenchmark(
-  loop10  = collapse(strings10),
-  loop100 = collapse(strings100),
-  vec10   = paste(strings10, collapse = ""),
-  vec100  = paste(strings100, collapse = "")
-)
+<br>
+<br>
+
+| Package| Description| 
+|:------|:------------|
+| `stats`  | Many individual tests plus all the distributions in the world.|
+| `lme`, `glm`  | (Generalized) linear models.|
+| `lme4`, `afex`  | Mixed-mode, hierarchical regression.|
+| `caret`, `mlr`, `e1071`, `rpart`, etc.| Machine learning.|
+| `BayesFactor`, `rstanarm`| Bayesian linear models.|
+| `rjags`, `rstan`| Bayesian graphical models.|
+| `forecast`, `mgm`, `timeSeries`, etc.| Time series models.|
+| `cluster`, `fastcluster`, `cstab`, etc.| Cluster analysis.|
 
 ---
 
-# Byte-code compiation
+# Bayesian statistics
 
+.pull-left5[
+Recent years several convenient and efficient packages for **Bayesian statistics** have been developed, facilitating a shift to a more informative and consistent statistical framework. <br><br2>
+Using these packages is oftentimes **as easy as using their Frequentist counterparts**. See in particular the [**BayesFactor**](http://bayesfactorpcl.r-forge.r-project.org/) package.  
 
-compiler
+<br>
+<p align="center">
+  <img src="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg" width=350><br>
+  <font size=2>source <a href="http://www.labtimes.org/labtimes/method/methods/img/2011_04b.jpg/">labtimes.org</a></p>
+  ]
+
+.pull-right45[
+```{r, message=F, eval = F}
+# load package
+library(BayesFactor)
+
+# define data
+x <- rnorm(100, 0, 1)
+y <- rnorm(100, 1, 1)
+
+# run Frequentist analysis
+t.test(x, y)
+
+# run Bayesian analysis
+ttestBF(x, y)
+```
+
+```{r, message=F, echo = F}
+# load package
+library(BayesFactor)
+
+# define data
+x <- rnorm(100, 0, 1)
+y <- rnorm(100, 1, 1)
+
+# run Frequentist analysis
+#t.test(x, y)
+
+# run Bayesian analysis
+ttestBF(x, y)
+```
+]
 
 ---
 
-# Parallel execution
+# Text analysis
 
-parallel example
+Another area were R has seen much development is **text analysis**. New packages provide access to lightning fast **C++ string libraries**, 'new' data formats such as **html**, **xml**, and **json**, and also to the API of social platforms, such as [**facebook.com**](www.facebook.com) and [**twitter.com**](www.twitter.com).
+<br><br>
+
+| Package| Description| 
+|:------|:------------|
+| `stringr`, `stringi`  | String operations and regular expressions. |
+| `rvest`, `XML`  | Scraping content of the internet|
+| `lsa`, `fast.svd` | Singular value decomposition and latent semantic analysis. |
+| `SentimentAnalysis`| Sentiment analysis.|
+| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
+| `Rfacebook`| Accessing the Facebook API. |
+
+---
+
+# Text analysis: Applications
+
+.pull-left4[
+<p align="center">
+  <img src="emojis.png" width=450><br>
+  <font size=1>source <a href="http://www.lrec-conf.org/proceedings/lrec2016/pdf/735_Paper.pdf/">Barbieri, F., Ronzano, F., & Saggion, H. (2016, May). What does this Emoji<br>Mean?A Vector Space Skip-Gram Model for Twitter Emojis. In LREC.</a><br>See also my <a href="https://dwulff.github.io/Naturallanguage/">natural language course page</a>.</p>
+]
+
+
+.pull-right5[
+<br><br2>
+<p align="center">
+  <img src="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413" width=500><br>
+  <font size=2><br>Alexander Nix, Cambridge Analytica<br><font size=1><br>source <a href="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413">spectator.imgix.net</a></p>
+
+]
+
 
 ---
 
 # Rcpp
 
-parallel example
+By now one of the most referenced R packages is Rcpp - **R's interface to C++**. With often relatively little effort due to **Rcpp sugar**, Rcpp can provide vast speed improvements, which many packages today rely on Rcpp in the background for **swift code execution**. Rcpp becomes particularly powerful, when supplemented with `BH`, which makes avaialble a collection **free, peer-reviewed C++ libraries**, and `RcppArmdillo`, which available the high-performance *Armadillo* library for linear algebra methods. 
+
+
+.pull-left4[
+<p align="center">
+  <img src="https://classic105.s3.amazonaws.com/wp-content/uploads/2017/05/180207142-sugar.jpg" width=350><br>
+  <font size=2>source <a href="https://classic105.s3.amazonaws.com/wp-content/uploads/2017/05/180207142-sugar.jpg/">classic105.com</a></p>
+]
+
+.pull-right6[
+
+<p align="center">
+  <img src="Rcpp.png" width=480><br><br2>
+  <font size=2><a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf">Quick Reference Guide</a></p>
+]
+
+
+
 ---
 
-# Alternative R implementations
+.pull-left5[
+# Google Forms & Maps
 
-pqR (pretty quick R) by Radford Neal. Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.
+New packages also allow you to interact with [Google Maps](https://www.google.com/maps) and [Google Forms](https://docs.google.com/forms). Use `ggmap` to access Google Maps and `googlesheets` to access Google Forms.
 
-Renjin by BeDataDriven. Renjin uses the Java virtual machine, and has an extensive test suite.
+```{r, eval = F}
+library(ggmap)
+ggmap(get_map(c(7.588576, 47.559601),zoom=16))
+```
+<p align="center">
+  <img src="basel.png" width=350></p>
+]
 
-FastR by a team from Purdue. FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.
+.pull-right45[
 
-Riposte by Justin Talbot and Zachary DeVito. Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.
+<p align="center"><br><br><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfAGQRft3YGz-urIVyFQ1s2o5B_63C2J92V7bowa-RJsNfinQ/viewform?embedded=true" width="430" height="550">Wird geladen...</iframe></p>
+
+]
+
+
 
 ---
 
-# Practical
+# Github & Dropbox
+
+
+---
+
+
+# R on servers
+
+SQL R
+Hadoop R
+
+Microsoft R server
+
+Spark R
+
+
+---
+
+# How to continue
+
+
+---
+
+# Books
+
+
+---
+
+# Websites
+
+r bloggers
+
+---
+
+# R groups
+
+
+---
+
+# Consulting
+
+
+---
+
+# Questionnaire
+
+https://goo.gl/forms/k9PIIabfqzW2JwRE3
+
+---
 
