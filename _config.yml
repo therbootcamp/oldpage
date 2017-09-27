@@ -12,7 +12,7 @@ email: therbootcamp@gmail.com
 twitter_username: therbootcamp
 github_username:  therbootcamp
 
-include: ['_slides', '_tutorials','_materials']
+include: ['_sessions', '_tutorials','_materials']
 
 # Google-analytics
 google-analytics:
