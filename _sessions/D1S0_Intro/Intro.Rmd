@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "my-theme.css"]
+    css: ["default", "../_css/my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -31,22 +31,17 @@ options(digits = 4)
 
 # Welcome!
 
-
 .pull-left5[
-
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("homepage.png")
+knitr::include_graphics("../_image/homepage.png")
 ```
-
 ]
 
 
 .pull-right5[
-
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("basel.jpeg")
 ```
-
 ]
 
 
