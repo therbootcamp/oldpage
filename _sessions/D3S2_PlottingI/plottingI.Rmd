@@ -650,7 +650,7 @@ ggplot(nba_long,
 
 ```{r, out.width= "50%", echo = FALSE}
 # Read in nba data
-nba_long <- read.csv("../_data/nba_long.csv")
+nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
 
 ggplot(nba_long, 
        mapping = aes(x = Name, y = measure, fill = value)) + 

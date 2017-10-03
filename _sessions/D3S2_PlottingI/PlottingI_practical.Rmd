@@ -23,7 +23,7 @@ In this practical you'll practice plotting data with the `ggplot2` package.
 ###Cheatsheet
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf", out.width = "60%"}
-knitr::include_graphics("images/ggplot_cheatsheet_ss.png")
+knitr::include_graphics("../_image/ggplot_cheatsheet_ss.png")
 ```
 
 If you don't have it already, you can access the `ggplot2` cheatsheet here [https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf). This has a nice overview of all the major functions in ggplot2.
