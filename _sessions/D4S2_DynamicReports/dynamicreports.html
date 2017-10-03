@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="The R Bootcamp Twitter: @therbootcamp" />
     <link href="libs/remark-css/example.css" rel="stylesheet" />
-    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_css/my-theme.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -27,10 +27,9 @@ class: center, middle, inverse, title-slide
 
 ## What is a dynamic report?
 
-.pull-left4[
+.pull-left45[
 
 A dynamic report is a document that contains key elements which are automatically accessed and/or created by code:
-
 
 - Access Data
 - Wrangling / Statistics
@@ -38,48 +37,39 @@ A dynamic report is a document that contains key elements which are automaticall
 - Regular Text
 - Formatting
 
-
 ]
 
+.pull-right45[
 
-.pull-right4[
-
-**Example: http://rpubs.com/fabiorocha5150/decisiontreemodel**
+### Example: 
 
 &lt;iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="1000"&gt;&lt;/iframe&gt;
 
 ]
 
-
 ---
 ## Why are dynamic reports important?
 
-.pull-left3[
+.pull-left45[
 
 ### 1. Efficiency
 
-
 ### 2. Reproducibility
-
 
 ### 3. Scaleability
 
 ]
 
+.pull-right45[
 
-.pull-right3[
-
-
-&lt;img src="images/reproducibility_images.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/reproducibility_images.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 ## What are the benefits of dynamic reports?
 
-.pull-left3[
+.pull-left45[
 
 - Data, code, analyses, and plots are all interconnected.
 
@@ -93,9 +83,7 @@ A dynamic report is a document that contains key elements which are automaticall
 
 ]
 
-
-.pull-right3[
-
+.pull-right45[
 
 &lt;iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="1000"&gt;&lt;/iframe&gt;
 
@@ -105,7 +93,7 @@ A dynamic report is a document that contains key elements which are automaticall
 ---
 ## What dynamic reports can I make in RStudio?
 
-.pull-left3[
+.pull-left45[
 
 - Web (HTML) pages
    - Websites, blog posts, single documents to share
@@ -115,20 +103,15 @@ A dynamic report is a document that contains key elements which are automaticall
 - Books
 - R Packages
 
-
 ### How? Answer: R Markdown
 
-
 ]
 
+.pull-right45[
 
-.pull-right3[
-
-&lt;img src="images/RMarkdownOutputFormats.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/RMarkdownOutputFormats.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 ## What is Markdown?
@@ -137,44 +120,34 @@ A dynamic report is a document that contains key elements which are automaticall
 
 - **R Markdown** is a combination of Markdown and R code.
 
-&lt;img src="images/markdown_ss.png" width="50%" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="../_image/markdown_ss.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Cheatsheet
 
-&lt;img src="images/markdown_cheat.png" width="55%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../_image/markdown_cheat.png" width="55%" style="display: block; margin: auto;" /&gt;
 
 Source: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
-
-
 
 ---
 ## How do I write an R Markdown Document
 
-&lt;img src="images/openmarkdown.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
-## R Markdown = Markdown + R code
-
-&lt;img src="images/markdown_example.png" width="45%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/openmarkdown.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## R Markdown = Markdown + R code
 
-&lt;img src="images/rmarkdown_ss2.png" width="70%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/markdown_example.png" width="45%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## R Markdown = Markdown + R code
 
-&lt;img src="images/knitto.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../_image/rmarkdown_ss2.png" width="70%" style="display: block; margin: auto;" /&gt;
 
+---
+## R Markdown = Markdown + R code
 
-
+&lt;img src="../_image/knitto.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## R Markdown Applications
@@ -183,14 +156,10 @@ http://rmarkdown.rstudio.com/gallery.html
 
 &lt;iframe src="http://rmarkdown.rstudio.com/gallery.html" width="800" height="800"&gt;&lt;/iframe&gt;
 
-
-
 ---
 ## R Chunks in R Markdown
 
-&lt;img src="images/chunkoptions.png" width="60%" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="../_image/chunkoptions.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## R Chunks in R Markdown
@@ -214,37 +183,25 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 
 - We recommend setting chunk options at the beginning of each document!
 
-
-
-
 ---
 ## Inline chunks
-
 
 - You can also include *inline chunks* where R code is included in a sentence. This allows you to include R output in your text!
 
 &lt;br&gt;
 &lt;br&gt;
 
-&lt;img src="images/minichunk_ss_D.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
-
-
+&lt;img src="../_image/minichunk_ss_D.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Inline chunks
 
-
-
-&lt;img src="images/minichunk_big_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="../_image/minichunk_big_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Key points in R Markdown
 
-.pull-left3[
+.pull-left45[
 
 &lt;br&gt;
 &lt;br&gt;
@@ -257,23 +214,20 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 
 ]
 
-.pull-right3[
+.pull-right45[
 
 #### Here is the "Root" directory of the R Markdown file `dynamicreports.Rmd` that created *this* presentation
 
-&lt;img src="images/rmarkdown_directory.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/rmarkdown_directory.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
-
 
 ---
 ## Rendering output with `knitr`
 
-.pull-left3[
+.pull-left45[
 
-&lt;img src="images/knitr_hex.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../_image/knitr_hex.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 - To render output like images and tables into R Markdown, use the `knitr` package.
 
@@ -284,10 +238,9 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 |     `include_graphics(path)`| Include an external image (e.g.; .png, .jpg)|
 |     `kable(df, format)`|Include a dataframe as a table|
 
-
 ]
 
-.pull-right3[
+.pull-right45[
 
 ### Print a dataframe as a table with `kable()`
 
@@ -309,17 +262,12 @@ kable(economics[1:3, c("date", "pop")],
 
 
 ```r
-include_graphics(path = "images/rlogo.png")
+include_graphics(path = "../_image/rlogo.png")
 ```
 
-&lt;img src="images/rlogo.png" width="20%" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="../_image/rlogo.png" width="20%" style="display: block; margin: auto;" /&gt;
 
 ]
-
-
-
 
 ---
 ## Key points in R Markdown
@@ -337,20 +285,18 @@ include_graphics(path = "images/rlogo.png")
 
 ]
 
-.pull-right3[
+.pull-right6[
 
 #### Well formatted R Markdown document
 
-&lt;img src="images/wellformattedmarkdown.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/wellformattedmarkdown.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 ## Output types
 
-.pull-left3[
+.pull-left4[
 
 - There are *many* different output formats you can create from an R Markdown document
 
@@ -363,55 +309,37 @@ include_graphics(path = "images/rlogo.png")
 |     `rmdformats`|Many templates|
 |     `prettydoc`|Many templates|
 
-
 * = On GitHub
 
 ]
 
-
-
-
-.pull-right3[
+.pull-right55[
 
 ### R Markdown templates in R Studio
 
-&lt;img src="images/rmarkdown_templates.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../_image/rmarkdown_templates.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
-
-
-
 ---
-## To write to PDF, you need TeX installed
+## To write to PDF, you need TeX
 
 .pull-left3[
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-
-
-- In order to knit your document to a PDF, you'll need a TeX installation (you can install it for free: just Google 'Install TeX')
-
-- TeX is a much more advanced markup language. It's used in most scientific publications.
-
-- To create a PDF, Markdown is converted to LaTeX, which is then converted to a PDF document.
+In order to knit your document to a PDF, you'll need a TeX installation
 
 ]
 
+.pull-right65[
 
-.pull-right3[
-
-&lt;img src="images/latex_collage.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/latex_collage.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 ## Why are RMarkdown documents so great?
 
-.pull-left3[
+.pull-left45[
 
 &lt;br&gt;
 &lt;br&gt;
@@ -424,18 +352,16 @@ include_graphics(path = "images/rlogo.png")
 
 ]
 
-.pull-right3[
+.pull-right45[
 
-&lt;img src="images/markdown_complete.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="../_image/markdown_complete.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 ## R Packages - The ultimate dynamic report?
 
-
-.pull-left3[
+.pull-left45[
 
 If you want a fully contained, dynamic report that contains data, code, statistics, plots, text, help files and documentation that you can easily share, your answer may be creating an **R Package**.
 
@@ -460,18 +386,13 @@ FFTrees(success ~ .,
         data = study1_A)
 ```
 
-
-
 ]
 
-
-
-.pull-right3[
+.pull-right45[
 
 ### Folder structure for a simple package
 
-&lt;img src="images/phillips2017_package_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="../_image/phillips2017_package_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 &lt;br&gt;
 

@@ -4,7 +4,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "my-theme.css"]
+    css: ["default", "../_css/my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -36,10 +36,9 @@ library(knitr)
 
 ## What is a dynamic report?
 
-.pull-left3[
+.pull-left45[
 
 A dynamic report is a document that contains key elements which are automatically accessed and/or created by code:
-
 
 - Access Data
 - Wrangling / Statistics
@@ -47,11 +46,9 @@ A dynamic report is a document that contains key elements which are automaticall
 - Regular Text
 - Formatting
 
-
 ]
 
-
-.pull-right3[
+.pull-right45[
 
 ### Example: 
 
@@ -59,38 +56,31 @@ A dynamic report is a document that contains key elements which are automaticall
 
 ]
 
-
 ---
 ## Why are dynamic reports important?
 
-.pull-left3[
+.pull-left45[
 
 ### 1. Efficiency
 
-
 ### 2. Reproducibility
-
 
 ### 3. Scaleability
 
 ]
 
-
-.pull-right3[
-
+.pull-right45[
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/reproducibility_images.png")
+knitr::include_graphics("../_image/reproducibility_images.png")
 ```
 
-
 ]
-
 
 ---
 ## What are the benefits of dynamic reports?
 
-.pull-left3[
+.pull-left45[
 
 - Data, code, analyses, and plots are all interconnected.
 
@@ -104,9 +94,7 @@ knitr::include_graphics("images/reproducibility_images.png")
 
 ]
 
-
-.pull-right3[
-
+.pull-right45[
 
 <iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="1000"></iframe>
 
@@ -116,7 +104,7 @@ knitr::include_graphics("images/reproducibility_images.png")
 ---
 ## What dynamic reports can I make in RStudio?
 
-.pull-left3[
+.pull-left45[
 
 - Web (HTML) pages
    - Websites, blog posts, single documents to share
@@ -126,22 +114,17 @@ knitr::include_graphics("images/reproducibility_images.png")
 - Books
 - R Packages
 
-
 ### How? Answer: R Markdown
 
-
 ]
 
-
-.pull-right3[
+.pull-right45[
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/RMarkdownOutputFormats.png")
+knitr::include_graphics("../_image/RMarkdownOutputFormats.png")
 ```
 
-
 ]
-
 
 ---
 ## What is Markdown?
@@ -151,55 +134,45 @@ knitr::include_graphics("images/RMarkdownOutputFormats.png")
 - **R Markdown** is a combination of Markdown and R code.
 
 ```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
-knitr::include_graphics("images/markdown_ss.png")
+knitr::include_graphics("../_image/markdown_ss.png")
 ```
-
-
 
 ---
 ## Cheatsheet
 
 ```{r, echo = FALSE, out.width="55%", fig.align = 'center'}
-knitr::include_graphics("images/markdown_cheat.png")
+knitr::include_graphics("../_image/markdown_cheat.png")
 ```
 
 Source: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
-
-
 
 ---
 ## How do I write an R Markdown Document
 
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
-knitr::include_graphics("images/openmarkdown.png")
+knitr::include_graphics("../_image/openmarkdown.png")
 ```
-
 
 ---
 ## R Markdown = Markdown + R code
 
 ```{r, echo = FALSE, out.width="45%", fig.align = 'center'}
-knitr::include_graphics("images/markdown_example.png")
+knitr::include_graphics("../_image/markdown_example.png")
 ```
-
 
 ---
 ## R Markdown = Markdown + R code
 
 ```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("images/rmarkdown_ss2.png")
+knitr::include_graphics("../_image/rmarkdown_ss2.png")
 ```
-
 
 ---
 ## R Markdown = Markdown + R code
 
 ```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("images/knitto.png")
+knitr::include_graphics("../_image/knitto.png")
 ```
-
-
-
 
 ---
 ## R Markdown Applications
@@ -208,16 +181,12 @@ http://rmarkdown.rstudio.com/gallery.html
 
 <iframe src="http://rmarkdown.rstudio.com/gallery.html" width="800" height="800"></iframe>
 
-
-
 ---
 ## R Chunks in R Markdown
 
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
-knitr::include_graphics("images/chunkoptions.png")
+knitr::include_graphics("../_image/chunkoptions.png")
 ```
-
-
 
 ---
 ## R Chunks in R Markdown
@@ -240,12 +209,8 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 
 - We recommend setting chunk options at the beginning of each document!
 
-
-
-
 ---
 ## Inline chunks
-
 
 - You can also include *inline chunks* where R code is included in a sentence. This allows you to include R output in your text!
 
@@ -253,28 +218,20 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 <br>
 
 ```{r, echo = FALSE, fig.cap = "", out.width = "70%"}
-knitr::include_graphics("images/minichunk_ss_D.png")
+knitr::include_graphics("../_image/minichunk_ss_D.png")
 ```
-
-
-
-
 
 ---
 ## Inline chunks
 
-
-
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("images/minichunk_big_ss.png")
+knitr::include_graphics("../_image/minichunk_big_ss.png")
 ```
-
-
 
 ---
 ## Key points in R Markdown
 
-.pull-left3[
+.pull-left45[
 
 <br>
 <br>
@@ -287,26 +244,23 @@ knitr::include_graphics("images/minichunk_big_ss.png")
 
 ]
 
-.pull-right3[
+.pull-right45[
 
 #### Here is the "Root" directory of the R Markdown file `dynamicreports.Rmd` that created *this* presentation
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/rmarkdown_directory.png")
+knitr::include_graphics("../_image/rmarkdown_directory.png")
 ```
 
-
 ]
-
-
 
 ---
 ## Rendering output with `knitr`
 
-.pull-left3[
+.pull-left45[
 
 ```{r, out.width = "30%", echo = FALSE}
-knitr::include_graphics("images/knitr_hex.png")
+knitr::include_graphics("../_image/knitr_hex.png")
 ```
 
 - To render output like images and tables into R Markdown, use the `knitr` package.
@@ -318,10 +272,9 @@ knitr::include_graphics("images/knitr_hex.png")
 |     `include_graphics(path)`| Include an external image (e.g.; .png, .jpg)|
 |     `kable(df, format)`|Include a dataframe as a table|
 
-
 ]
 
-.pull-right3[
+.pull-right45[
 
 ### Print a dataframe as a table with `kable()`
 
@@ -333,15 +286,10 @@ kable(economics[1:3, c("date", "pop")],
 ### Include an image
 
 ```{r, echo = TRUE, out.width = "20%"}
-include_graphics(path = "images/rlogo.png")
+include_graphics(path = "../_image/rlogo.png")
 ```
 
-
-
 ]
-
-
-
 
 ---
 ## Key points in R Markdown
@@ -359,22 +307,20 @@ include_graphics(path = "images/rlogo.png")
 
 ]
 
-.pull-right3[
+.pull-right6[
 
 #### Well formatted R Markdown document
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/wellformattedmarkdown.png")
+knitr::include_graphics("../_image/wellformattedmarkdown.png")
 ```
 
-
 ]
-
 
 ---
 ## Output types
 
-.pull-left3[
+.pull-left4[
 
 - There are *many* different output formats you can create from an R Markdown document
 
@@ -387,24 +333,19 @@ knitr::include_graphics("images/wellformattedmarkdown.png")
 |     `rmdformats`|Many templates|
 |     `prettydoc`|Many templates|
 
-
 * = On GitHub
 
 ]
 
-
-
-
-.pull-right3[
+.pull-right55[
 
 ### R Markdown templates in R Studio
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/rmarkdown_templates.png")
+knitr::include_graphics("../_image/rmarkdown_templates.png")
 ```
 
 ]
-
 
 ---
 ## To write to PDF, you need TeX
@@ -415,23 +356,18 @@ In order to knit your document to a PDF, you'll need a TeX installation
 
 ]
 
+.pull-right65[
 
-.pull-right3[
-
-```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/")
+```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
+knitr::include_graphics("../_image/latex_collage.png")
 ```
 
-
-
 ]
-
-
 
 ---
 ## Why are RMarkdown documents so great?
 
-.pull-left3[
+.pull-left45[
 
 <br>
 <br>
@@ -444,20 +380,18 @@ knitr::include_graphics("images/")
 
 ]
 
-.pull-right3[
+.pull-right45[
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/markdown_complete.png")
+knitr::include_graphics("../_image/markdown_complete.png")
 ```
 
 ]
 
-
 ---
 ## R Packages - The ultimate dynamic report?
 
-
-.pull-left3[
+.pull-left45[
 
 If you want a fully contained, dynamic report that contains data, code, statistics, plots, text, help files and documentation that you can easily share, your answer may be creating an **R Package**.
 
@@ -481,20 +415,15 @@ FFTrees(success ~ .,
         data = study1_A)
 ```
 
-
-
 ]
 
-
-
-.pull-right3[
+.pull-right45[
 
 ### Folder structure for a simple package
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/phillips2017_package_ss.png")
+knitr::include_graphics("../_image/phillips2017_package_ss.png")
 ```
-
 
 <br>
 
