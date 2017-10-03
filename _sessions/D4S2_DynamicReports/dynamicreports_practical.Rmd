@@ -9,7 +9,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval 
 ```
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "Source: https://www.rstudio.com/", out.width = "30%"}
-knitr::include_graphics("images/rmarkdown_hex.png")
+knitr::include_graphics("../_image/rmarkdown_hex.png")
 ```
 
 ### Slides
@@ -23,7 +23,7 @@ In this practical you'll practice creating interactive reports using RMarkdown.
 ### Cheatsheet
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf", out.width = "60%"}
-knitr::include_graphics("images/markdown_cheat.png")
+knitr::include_graphics("../_image/markdown_cheat.png")
 ```
 
 If you don't have it already, you can access the `Markdown` cheatsheet here [https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
@@ -33,31 +33,31 @@ If you don't have it already, you can access the `Markdown` cheatsheet here [htt
 - Because R Markdown looks quite a bit different from standard R code, the best way to look at examples is to see a new R Markdown document in action. In RStudio, click File -- New File -- R Markdown
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/rmarkdown_ss_A.png")
+knitr::include_graphics("../_image/rmarkdown_ss_A.png")
 ```
 
 - Give the document a title and an author. For the output format, select HTML (the default). Click Ok!
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/rmarkdown_ss_B.png")
+knitr::include_graphics("../_image/rmarkdown_ss_B.png")
 ```
 
 - A new file that looks like this should open up. This is your first R Markdown document!
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/rmarkdown_ss_C.png")
+knitr::include_graphics("../_image/rmarkdown_ss_C.png")
 ```
 
 - Before you do anything else, let's *knit* the R Markdown document to an HTML file. Click the *knit* button (or use the Command + Shift + K shortcut)
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/rmarkdown_ss_D.png")
+knitr::include_graphics("../_image/rmarkdown_ss_D.png")
 ```
 
 - Now you should see your final, HTML document! Scroll up and down the document and see how she looks!
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/rmarkdown_ss_E.png")
+knitr::include_graphics("../_image/rmarkdown_ss_E.png")
 ```
 
 
@@ -99,7 +99,7 @@ options(digits = 2)  # Round all output to 2 digits
 9. Add the necessary text and markdown to your document to create the following two paragraphs. Pay attention to the header sizes, *italics* and `code` formats.
 
 ```{r, fig.cap = "Write the necessary markdown to create this output!", eval = TRUE, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("images/markdown_ss.png")
+knitr::include_graphics("../_image/markdown_ss.png")
 ```
 
 10. Knit the document! Diagnose and correct any errors!
@@ -107,7 +107,7 @@ knitr::include_graphics("images/markdown_ss.png")
 11. Add the appropriate combination of text, markdown, code chunks, and R code to add the following output to your document. To report the number of patients, use an in-line chunk to access the number directly from the data -- that is, don't type 2139 directly! To create the table, create a new chunk, and inside that chunk, use the `kable()` function, with the appropriate arguments, to create the table.
 
 ```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("images/markdown_analysis_ss.png")
+knitr::include_graphics("../_image/markdown_analysis_ss.png")
 ```
 
 12. Knit the document! Diagnose and correct any errors!
@@ -115,7 +115,7 @@ knitr::include_graphics("images/markdown_analysis_ss.png")
 13. Write the necessary code to add the following output to your document. To do this, create a new chunk. In the chunk use `dplyr` code to create the summary table of data. Assign the result to the object `trial_summary`. Then, use `kable()` to render this dataframe as a table in the final document.
 
 ```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("images/markdown_analysis_ss_B.png")
+knitr::include_graphics("../_image/markdown_analysis_ss_B.png")
 ```
 
 Here is some code you might find helpful in creating this table!
@@ -139,7 +139,7 @@ tbl2 <- ACTG175 %>%
 15. Add the appropriate combination of text, markdown, code chunks, and R code to add the following output to your document. Be sure to include the figure caption (you can do this with the `fig.cap` argument to the chunk)
 
 ```{r, echo = FALSE, out.width = "75%", eval = TRUE}
-knitr::include_graphics("images/markdown_ggplot_ss.png")
+knitr::include_graphics("../_image/markdown_ggplot_ss.png")
 ```
 
 This code might help you to create the plot:
@@ -181,7 +181,7 @@ ggplot(data = XX,
 devtools::install_github("yihui/xaringan")
 ```
 
-22. Play around with the presentation a bit. Change the existing content a bit and add a few slides. Try adding an image (maybe this one: https://actgnetwork.org/sites/default/files/images/ACTG_logo_2007_color.jpg) by saving the image to your `3_Materials` folder, and then loading the image into your document with `include_graphics()`.
+22. Play around with the presentation a bit. Change the existing content a bit and add a few slides. Try adding an image (maybe this one: https://actgnetwork.org/sites/default/files/../_image/ACTG_logo_2007_color.jpg) by saving the image to your `3_Materials` folder, and then loading the image into your document with `include_graphics()`.
 
 23. Now, try to customize the presentation to include all of main analyses, outputs, and plots you have in your `speffanalysis.Rmd` document! Of course, there won't be room for all of the text, so treat it like a normal presentation and put in what's important.
 

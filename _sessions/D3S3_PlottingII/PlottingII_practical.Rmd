@@ -22,36 +22,36 @@ In this practical you'll practice creating interactive graphics with `shiny`.
 
 ###Cheatsheet
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "http://shiny.rstudio.com/images/shiny-cheatsheet.pdf", out.width = "60%"}
-knitr::include_graphics("images/shiny_cheatsheet_ss.png")
+```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "http://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf", out.width = "60%"}
+knitr::include_graphics("../_image/shiny_cheatsheet_ss.png")
 ```
 
-If you don't have it already, you can access the `shiny` cheatsheet here [ttp://shiny.rstudio.com/images/shiny-cheatsheet.pdf](ttp://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
+If you don't have it already, you can access the `shiny` cheatsheet here [ttp://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf](ttp://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf)
 
 ### Examples
 
 - Because Shiny code looks quite a bit different from standard R code, the best way to look at examples is to see a new app in action. In RStudio, click File -- New File -- Shiny Web App
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/newapp_a_ss.png")
+knitr::include_graphics("../_image/newapp_a_ss.png")
 ```
 
 - Save the app under the name "geyser" in a directory of your choosing
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/newapp_b_ss.png")
+knitr::include_graphics("../_image/newapp_b_ss.png")
 ```
 
 - A new file called `geyser.app` should now be open. Click the "Run App" button to open the app.
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/newapp_d_ss.png")
+knitr::include_graphics("../_image/newapp_d_ss.png")
 ```
 
 - Your app should now be up in a new window! Play around with the Number of Bins slider to see its effect on the plot
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "60%"}
-knitr::include_graphics("images/newapp_e_ss.png")
+knitr::include_graphics("../_image/newapp_e_ss.png")
 ```
 
 
@@ -72,7 +72,7 @@ By the end of this practical, you'll try to create the following app:
 #### Part B: Add a `selectInput` to change bin colors
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_B2.png")
+knitr::include_graphics("../_image/shinygeyser_ss_B2.png")
 ```
 
 5. Now let's add a new widget that allows the user to control the color of the histogram as a Select Box. Below the bin slider input, add a new `selectInput` like in the code below. 
@@ -96,7 +96,7 @@ knitr::include_graphics("images/shinygeyser_ss_B2.png")
 6. Now reload your app. You should now see a new select box on the sidebar panel. Try playing around with it by changing the color to green. Nothing happens!??! Why is that???
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_A.png")
+knitr::include_graphics("../_image/shinygeyser_ss_A.png")
 ```
 
 7. The problem is that we changed the input, but we haven't told the actual plotting code in the server portion of the app (specifically `hist()`) to use the new color input! In the server portion of the app, tell the histogram to use the new color input as follows:
@@ -115,7 +115,7 @@ hist(x,
 8. Now reload the app and try changing the histogram bin color using the select input. You should now see a change in the color!
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_B.png")
+knitr::include_graphics("../_image/shinygeyser_ss_B.png")
 ```
 
 
@@ -141,14 +141,14 @@ colors()
 11. Now re-run your app! Your color input should now have access to *all* of the named colors in R. Try playing around with it to see the results!
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_C.png")
+knitr::include_graphics("../_image/shinygeyser_ss_C.png")
 ```
 
 
 #### Part C: Add a `checkboxInput` to add mean line
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_D.png")
+knitr::include_graphics("../_image/shinygeyser_ss_D.png")
 ```
 
 
@@ -183,7 +183,7 @@ if(input$addmean) {  # If the addmean box is checked...
 #### Part D: Add plot labels with `textInput`
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_E.png")
+knitr::include_graphics("../_image/shinygeyser_ss_E.png")
 ```
 
 
@@ -233,7 +233,7 @@ mainPanel(
 19. Reload your app, it should look like this. You should be able to click on the two new tabs, however, the Summary and Description tabs are currently empty. We'll fill them in the next step
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_F.png")
+knitr::include_graphics("../_image/shinygeyser_ss_F.png")
 ```
 
 20. Now let's fill in the Summary tab. When the user clicks on this tab, we'll print summary statistics of the data. We'll do this in two steps. First, we need to create the summary statistics, then *render* those statistics using `renderPrint()`, and then assign the result to `output$summary`. To do this, add the following code within your server function (you can actually put it anywhere in the server function!)
@@ -262,7 +262,7 @@ tabsetPanel(type = "tabs",
 22. Reload the app! You should now see the summary output in the Summary tab!
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_G.png")
+knitr::include_graphics("../_image/shinygeyser_ss_G.png")
 ```
 
 23. Finally, it's time to add a verbal description to our app in the Description tab. To do this, we can use a collection of the `h3(), p(), a()` functions. If you're familiar with HTML, these functions simply return HTML. Using the following code template, update the contents of the `"Description"` tab panel to display some text and a link.
@@ -286,7 +286,7 @@ tabsetPanel(type = "tabs",
 
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_H.png")
+knitr::include_graphics("../_image/shinygeyser_ss_H.png")
 ```
 
 
@@ -294,7 +294,7 @@ knitr::include_graphics("images/shinygeyser_ss_H.png")
 
 
 ```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("images/shinygeyser_ss_I.png")
+knitr::include_graphics("../_image/shinygeyser_ss_I.png")
 ```
 
 
