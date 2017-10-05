@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "../_css/my-theme.css"]
+    css: ["default", "https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_css/my-theme.css", "../_css/my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -17,11 +17,6 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-# see: https://github.com/yihui/xaringan
-# install.packages("xaringan")
-# see: 
-# https://github.com/yihui/xaringan/wiki
-# https://github.com/gnab/remark/wiki/Markdown
 options(width=110)
 options(digits = 4)
 ```

@@ -9,14 +9,14 @@ global_path <- "~/Dropbox/therbootcamp/therbootcamp.github.io/_sessions/"   # Ta
 
 
 # Dirk's version
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
-xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd',cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
+xaringan::inf_mr('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D1S0_Intro/Intro.Rmd', cast_from = '~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions')
 
 
 # Tanny's version
