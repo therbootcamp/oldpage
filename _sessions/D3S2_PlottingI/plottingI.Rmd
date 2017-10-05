@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_css/my-theme.css", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -37,7 +37,7 @@ library(tidyverse)
 - As good as R is for statistics, it's as good if not better for plots.
 
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
-knitr::include_graphics("../_image/ggplotgallery.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplotgallery.png")
 ```
 
 ---
@@ -144,11 +144,11 @@ plot(x = economics$date,
 ### These plots would take a lot of code in base R
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("../_image/complexplot1.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/complexplot1.png")
 ```
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("../_image/complexplot2.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/complexplot2.png")
 ```
 ]
 
@@ -176,7 +176,7 @@ knitr::include_graphics("../_image/complexplot2.png")
 .pull-right5[
 
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
-knitr::include_graphics("../_image/wilkonson_book.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wilkonson_book.png")
 ```
 
 ]
@@ -207,7 +207,7 @@ The Grammar of graphics breaks down plots into several key pieces:
 
 .pull-right5[
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("../_image/complexplot1.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/complexplot1.png")
 ```
 
 ]
@@ -233,7 +233,7 @@ By far one of the most popular R packages, used to generate the vast majority of
 
 
 ```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("../_image/wickham_portrait.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wickham_portrait.png")
 ```
 
 
@@ -271,7 +271,7 @@ ggplot(data = mpg,
 ### In the practical, you will create all of these!!
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("../_image/ggplotgallery.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplotgallery.png")
 ```
 
 
@@ -285,7 +285,7 @@ knitr::include_graphics("../_image/ggplotgallery.png")
 .pull-left6[
 
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
-knitr::include_graphics("../_image/ggplot_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplot_hex.png")
 ```
 
 
@@ -319,7 +319,7 @@ library(ggplot2)
 https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
 ```{r, echo = FALSE, out.width="600", fig.align = 'center'}
-knitr::include_graphics("../_image/ggplot_cheatsheet_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplot_cheatsheet_ss.png")
 ```
 
 
@@ -345,7 +345,7 @@ knitr::kable(mpg[sample(nrow(mpg), size = 8),c("manufacturer", "model", "cty", "
 <br>
 
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
-knitr::include_graphics("../_image/carlot.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/carlot.jpg")
 ```
 
 
@@ -1215,7 +1215,7 @@ ggplot(data = mpg,
 
 
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
-knitr::include_graphics("../_image/plotting_books.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/plotting_books.png")
 ```
 
 ---

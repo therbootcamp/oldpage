@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_css/my-theme.css", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -171,7 +171,7 @@ t.test(x = c(4, 3, 6, 5, 3, 2),
 `?t.test`
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/ttesthelp_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
 ```
 
 ]
@@ -331,7 +331,7 @@ head(x)
 .pull-right6[
 
 ```{r, fig.cap = "Source: http://awallpapersimages.com/wp-content/uploads/2016/07/Chicken-cute-baby-image.jpg", echo = FALSE}
-knitr::include_graphics("../_image/cutechicken.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/cutechicken.jpg")
 ```
 
 
@@ -621,7 +621,7 @@ test_A$statistic # Ah ok! Show me the test statistic
 `?t.test`
 
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("../_image/ttesthelp_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
 ```
 
 #### Questions?

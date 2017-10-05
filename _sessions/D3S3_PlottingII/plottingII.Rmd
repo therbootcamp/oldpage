@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default", "https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_css/my-theme.css", "../_css/my-theme.css"]
+    css: ["default", "my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/whatisshiny.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/whatisshiny.png")
 ```
 
 
@@ -48,8 +48,8 @@ knitr::include_graphics("../_image/whatisshiny.png")
 ---
 ## What is Shiny?
 
-```{r, echo = FALSE, fig.align = 'center', fig.cap = 'Source: http://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf', out.width = "95%"}
-knitr::include_graphics("../_image/shiny_definition.png")
+```{r, echo = FALSE, fig.align = 'center', fig.cap = 'Source: http://shiny.rstudio.com/https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny-cheatsheet.pdf', out.width = "95%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny_definition.png")
 ```
 
 
@@ -66,7 +66,7 @@ knitr::include_graphics("../_image/shiny_definition.png")
 
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/nohtml.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/nohtml.png")
 ```
 
 ]
@@ -77,7 +77,7 @@ knitr::include_graphics("../_image/nohtml.png")
 ### I can easily do this all in Shiny!
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("../_image/shiny_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny_ss.png")
 ```
 
 ]
@@ -111,7 +111,7 @@ Source: http://gliovis.bioinfo.cnio.es/
 
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "65%", fig.cap = "http://shiny.rstudio.com"}
-knitr::include_graphics("../_image/whatyoucando.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/whatyoucando.png")
 ```
 
 ---
@@ -122,7 +122,7 @@ knitr::include_graphics("../_image/whatyoucando.png")
 ### R Studio has great tutorials for creating Shiny Apps
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%", fig.cap = "http://shiny.rstudio.com"}
-knitr::include_graphics("../_image/learnshiny_B.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/learnshiny_B.png")
 ```
 
 ]
@@ -133,7 +133,7 @@ knitr::include_graphics("../_image/learnshiny_B.png")
 ### Learn by example. Tons of shiny apps online. Most code is available.
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "90%", fig.cap = "http://shiny.rstudio.com"}
-knitr::include_graphics("../_image/shinygallery.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shinygallery.png")
 ```
 
 ]
@@ -142,14 +142,14 @@ knitr::include_graphics("../_image/shinygallery.png")
 # How programming a Shiny App looks
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/shinyprogramming_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shinyprogramming_ss.png")
 ```
 
 ---
 ## Structure of a Shiny App
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "75%"}
-knitr::include_graphics("../_image/uiandserver.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/uiandserver.png")
 ```
 
 ---
@@ -165,63 +165,63 @@ knitr::include_graphics("../_image/uiandserver.png")
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_A.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_A.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_B.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_B.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_C.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_C.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_D.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_D.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_E.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_E.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_F.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_F.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_G.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_G.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_H.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_H.png")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/exampleapp_B.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_B.png")
 ```
 
 ---
@@ -235,7 +235,7 @@ knitr::include_graphics("../_image/exampleapp_B.png")
 The user interface typically contains two main components: Widgets and
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("../_image/userinterface_description.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/userinterface_description.png")
 ```
 
 ---
@@ -245,7 +245,7 @@ knitr::include_graphics("../_image/userinterface_description.png")
 - Widgets are simple fields added to the user interface for users to add inputs.
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "70%"}
-knitr::include_graphics("../_image/widgetcode_output.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/widgetcode_output.png")
 ```
 
 ---
@@ -254,7 +254,7 @@ knitr::include_graphics("../_image/widgetcode_output.png")
 - You can control the layouts of apps with layout functions
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "60%"}
-knitr::include_graphics("../_image/shinylayouts.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shinylayouts.png")
 ```
 
 ---
@@ -263,7 +263,7 @@ knitr::include_graphics("../_image/shinylayouts.png")
 - All R code that creates plots, does machine learning, accesses databases, searches twitter data (really anything!) goes in the `server()` function.
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "55%"}
-knitr::include_graphics("../_image/serverdescription.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/serverdescription.png")
 ```
 
 ---
@@ -287,7 +287,7 @@ knitr::include_graphics("../_image/serverdescription.png")
 ### To send output to the user interface, you must use a render function
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("../_image/render_example.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/render_example.png")
 ```
 
 ]
@@ -336,7 +336,7 @@ shinyApp(ui = ui, server = server)
 The Shiny cheatsheet explains the most common functions for rendering and presenting output.
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("../_image/rendering_output.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rendering_output.png")
 ```
 
 ---
@@ -356,7 +356,7 @@ knitr::include_graphics("../_image/rendering_output.png")
 .pull-right45[
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%", fig.cap = "http://shiny.rstudio.com"}
-knitr::include_graphics("../_image/shinypublish.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shinypublish.png")
 ```
 
 ]
@@ -367,7 +367,7 @@ knitr::include_graphics("../_image/shinypublish.png")
 - In the practical, we will create the following app from scratch, and publish it online!
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "70%"}
-knitr::include_graphics("../_image/exampleapp_A.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_A.png")
 ```
 
 ---
@@ -376,7 +376,7 @@ knitr::include_graphics("../_image/exampleapp_A.png")
 .pull-left45[
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
-knitr::include_graphics("../_image/exampleapp_A.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/exampleapp_A.png")
 ```
 
 ]
@@ -384,7 +384,7 @@ knitr::include_graphics("../_image/exampleapp_A.png")
 .pull-right45[
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "90%", fig.cap = "http://shiny.rstudio.com"}
-knitr::include_graphics("../_image/shinygallery.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shinygallery.png")
 ```
 
 ]
