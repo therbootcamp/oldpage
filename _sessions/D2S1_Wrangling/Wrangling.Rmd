@@ -29,7 +29,7 @@ dplyr is a package for managing dataframes.
 Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is almost certainly a way to do it in dplyr.
 
 ```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
-knitr::include_graphics("../_image/dplyr_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png")
 ```
 
 
@@ -54,7 +54,7 @@ knitr::include_graphics("../_image/dplyr_hex.png")
 https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 
 ```{r, echo = FALSE, out.width="600", fig.align = 'center'}
-knitr::include_graphics("../_image/data_wrangling_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png")
 ```
 
 
@@ -75,7 +75,7 @@ dplyr is a combination of 3 things:
 
 
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("../_image/pipe.jpg")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe.jpg")
 ```
 
 
@@ -89,7 +89,7 @@ knitr::include_graphics("../_image/pipe.jpg")
 <br>
 
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("../_image/sequential.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/sequential.png")
 ```
 
 
@@ -427,7 +427,7 @@ The 'pipe' operator `%>%` helps you string multiple *objects* (like dataframes) 
 
 
 ```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
-knitr::include_graphics("../_image/dplyr_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png")
 ```
 
 
@@ -472,7 +472,7 @@ data %>%    # Start with data, AND THEN...
 
 
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("../_image/tidyr_hex.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png")
 ```
 ]
 
@@ -503,7 +503,7 @@ There are two important functions in `tidyr`, `gather()` and `spread()`:
 
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/gather_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png")
 ```
 ]
 
@@ -513,7 +513,7 @@ knitr::include_graphics("../_image/gather_ss.png")
 `spread()`: Move data from several *rows* into columns
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("../_image/spread_ss.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png")
 ```
 
 ]
