@@ -147,7 +147,7 @@ knitr::include_graphics("interactiveprogramming.gif")
 
 
 
-.pull-left3[
+.pull-left2[
 
 - No explicit breaks during the practical, but feel free to take them!
 
@@ -168,7 +168,7 @@ knitr::include_graphics("interactiveprogramming.gif")
 ]
 
 
-.pull-right3[
+.pull-right2[
 
 
 <p align='center'><font size="6">Tibits</p>
