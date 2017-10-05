@@ -20,7 +20,7 @@ google-analytics:
 
 exclude: ['package.json', 'src' , 'node_modules']
 
-
+url:
 baseurl: ""
 
 permalink: /:title/
