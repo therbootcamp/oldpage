@@ -19,3 +19,6 @@ google-analytics:
   id: "UA-98354683-1"
 
 exclude: ['package.json', 'src' , 'node_modules']
+
+
+permalink: /:title/
