@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default","https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/7be2d0fd88963c5dd69eeafd24eee317740c7f63/_sessions/_css/my-theme.css"]
+    css: ["default","../_css/my-theme.css","https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/7be2d0fd88963c5dd69eeafd24eee317740c7f63/_sessions/_css/my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -147,7 +147,7 @@ knitr::include_graphics("interactiveprogramming.gif")
 
 
 
-.pull-left3[
+.pull-left2[
 
 - No explicit breaks during the practical, but feel free to take them!
 
@@ -168,7 +168,7 @@ knitr::include_graphics("interactiveprogramming.gif")
 ]
 
 
-.pull-right3[
+.pull-right2[
 
 
 <p align='center'><font size="6">Tibits</p>
