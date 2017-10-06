@@ -1,5 +1,6 @@
 ---
 title: "Dynamic Reports"
+subtitle: "With RMarkdown"
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "September 2017"
 output:
