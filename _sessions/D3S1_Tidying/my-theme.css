@@ -1,5 +1,9 @@
 /* Two-column layout */
 
+.a{
+color="#F62D73";
+}
+
 .small-code .remark-code {
     font-size: 80%;
 }

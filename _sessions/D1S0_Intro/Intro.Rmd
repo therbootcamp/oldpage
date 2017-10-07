@@ -5,7 +5,7 @@ author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>
 date: "September 2017"
 output:
   xaringan::moon_reader:
-    css: ["default","../_css/my-theme.css","https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/7be2d0fd88963c5dd69eeafd24eee317740c7f63/_sessions/_css/my-theme.css"]
+    css: ["default","my-theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -31,63 +31,49 @@ options(digits = 4)
 # Welcome!
 
 .pull-left5[
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("../_image/homepage.png")
-```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/homepage.png" width="500" height="400"></p>
 ]
 
 
 .pull-right5[
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("basel.jpeg")
-```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/basel.jpeg" width="500"  height="400"></p>
+]
+
+---
+
+.pull-left3[
+# Schedule and<br>Course links
+]
+
+.pull-right7[
+<p align="center"><br><br>
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Schedule.png" height="500"><br><br>
+<font size="5" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule.html">therbootcamp.github.io/schedule.html</b>
+</p>
 ]
 
 
 ---
-# Schedule and Course links
-
-
-##[https://therbootcamp.github.io/_slides/schedule.html](https://therbootcamp.github.io/_slides/schedule.html)
-
-
-
-```{r, echo = FALSE, out.width = "60%", fig.align = 'center'}
-knitr::include_graphics("scheduless.png")
-```
-
-
-
-
-
-
----
-# Who are we
-
-```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
-knitr::include_graphics("aboutus.png")
-```
-
+.pull-left25[
+# Who are we?
+]
+.pull-right7[
+<p align="left"><br><br><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/aboutus.png" height="500"></p>
+]
 
 ---
 
 # Aim
 
-.pull-left3[
+.pull-left6[
 
-
-<br>
-<br>
-###The aim of this workshop is enable you to thoughtfully and actively use R. We will communicate both the basics of the R language, as well as cutting-edge packages for wrangling, analyzing, and communicating statistical data.  
+>##<i>The aim of this workshop is enable you to thoughtfully and actively use R. We will communicate both the basics of the R language, as well as cutting-edge packages for wrangling, analyzing, and communicating statistical data.  
 
 ]
 
 
-.pull-right3[
-
-```{r, echo = FALSE, out.width = "60%", fig.align = 'center'}
-knitr::include_graphics("target.png")
-```
+.pull-right4[
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/target.png" height="350"></p>
 
 ]
 
@@ -96,24 +82,18 @@ knitr::include_graphics("target.png")
 # Where can I learn more?
 
 
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("rbooks.png")
-```
+<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
+
+---
+
+# Schedule <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Schedule.png" height="600" align="right">
 
 
 ---
 
-# Schedule <img src="schedule.png" height="600" align="right">
+# Survey results
 
-
----
-
-# Survey
-
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("survey.png")
-```
-
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/survey.png" height="400">
 
 ---
 
@@ -121,61 +101,40 @@ knitr::include_graphics("survey.png")
 
 .pull-left3[
 
-- Each session is 2 hours
+- Each **session** is 2 hours
 
-- 20-40 minute introduction.
+- 20-40 minute **introduction**.
 
-- 80 - 100 minute hands-on, interactive practical.
-    - Starts easy, gets more challenging.
-    - Some elements go beyond the lecture, be bold!
+- 80 - 100 minute hands-on, interactive **practical**.
+    - Starts **easy**, gets more **challenging**.
+    - Some elements go **beyond the lecture**, be bold!
     
 ]
 
 
-.pull-right3[
+.pull-right7[
 
-```{r, echo = FALSE, out.width = "90%", fig.align = 'center'}
-knitr::include_graphics("interactiveprogramming.gif")
-```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/interactiveprogramming.gif" height="350"></p>
 
 ]
 
 
 ---
 
+.pull-left4[
 # Breaks & refreshments
 
-
-
-.pull-left2[
-
-- No explicit breaks during the practical, but feel free to take them!
-
-<br2>
-
-- Refreshments nearby
-
-<br2>
-
-- Coffee machine nearby (1 CHF)
-
-<br2>
-
-- Lunch time at local grocery store / restaurant
-
-
-
+- **No explicit breaks** during the practical, but feel free to take them!<br2>
+- **Refreshments** nearby<br2>
+- **Coffee machine** nearby (1 CHF)<br2>
+- **Lunch** time at local grocery store / restaurant
 ]
 
 
-.pull-right2[
+.pull-right6[
 
-
-<p align='center'><font size="6">Tibits</p>
-
-```{r, echo = FALSE, out.width = "60%", fig.align = 'center'}
-knitr::include_graphics("tibits.jpg")
-```
+<p align='center'><br><br><br><font size="6"><b><a href="https://www.tibits.ch/de/restaurants.html#tibits-basel">Tibits</a><br>
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tibits.jpg" height="400" vspace="10"></p>
 
 ]
 
@@ -183,9 +142,7 @@ knitr::include_graphics("tibits.jpg")
 
 # Questions?
 
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("questions.jpg")
-```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/questions.jpg" height="500"></p>
 
 
 ---
@@ -204,14 +161,9 @@ knitr::include_graphics("questions.jpg")
 
 ]
 
-.pull-right3[
+.pull-right6[
 
-
-
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("introductions.jpg")
-```
-
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
 
 ]
 
