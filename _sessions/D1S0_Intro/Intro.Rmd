@@ -166,38 +166,3 @@ options(digits = 4)
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
 
 ]
-
----
-
-.pull-left3[
-
-# Session 1
-# What is R???
-
-```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("rlogo.png")
-```
-
-
-]
-
-
-.pull-right3[
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("rstudio.jpg")
-
-```
-
-
-]
-
-
