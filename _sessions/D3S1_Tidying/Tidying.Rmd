@@ -45,13 +45,14 @@ In this introduction you will learn...
 ]
 ---
 
+.pull-left4[
 # Project structure
 
-.pull-left4[
 <font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
 ]
 .pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
+<br><br>
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/folder_structure.png" height="400" vspace="25">
 ]
 
 ---
@@ -59,7 +60,7 @@ In this introduction you will learn...
 # Naming files
 
 .pull-left4[
-<font size = 6>**Filenames** should be meaningful. If you like, order them by prefixing them with numbers.
+<font size = 6>**Filenames** should be **meaningful**. If you like, **order them by prefixing** them with numbers.
 ]
 
 .pull-right5[
@@ -80,7 +81,7 @@ code.r
 
 # Naming objects
 
-.pull-left4[
+.pull-left45[
 - <font size=5>**Object names** should be lowercase.
 <br2>
 - <font size=5>Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
@@ -92,7 +93,7 @@ code.r
 - <font size=5>Avoid using names of **existing objects**
 ]
 
-.pull-right5[
+.pull-right45[
 ```{r, eval = F}
 # Good
 trial_id
@@ -110,7 +111,7 @@ t1
 
 # Spaces
 
-.pull-left4[
+.pull-left45[
 + <font size=5>Place **spaces** around all operators, e.g., `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions.
 <br2>
 + <font size=5>Always put a space **after a comma**, never before.
@@ -118,7 +119,7 @@ t1
 + <font size=5>Extra **spacing** may be used to align assignments.
 ]
 
-.pull-right5[
+.pull-right45[
 ```{r, eval = F}
 # Good
 var_rt <- var(rt, na.rm = TRUE)
@@ -141,14 +142,14 @@ list(
 ---
 
 # Curly brackets
-.pull-left4[
+.pull-left45[
 + <font size=5>An opening **curly bracket** should never be on its own line.
 <br2>
 + <font size=5>**Always indent** within curly brackets. 
 <br2>
 + <font size=5>To **indent** code, use two spaces. Don't use tabs.
 ]
-.pull-right5[
+.pull-right45[
 ```{r, eval = F}
 # Good
 if (my_dbl < 2){
@@ -318,8 +319,8 @@ my_df[[1]][is.na(my_df[[1]])] <-
   mean(my_df[[1]], na.rm = TRUE)
 
 # Impute using regression (package: mice)
-mice_model  <- mice(my_df, method = "norm", printFlag = FALSE)
-my_df       <- complete(mice_model)
+model <- mice(my_df, method = 'norm', printFlag = FALSE)
+my_df <- complete(model)
 
 # print
 my_df
@@ -330,4 +331,6 @@ my_df
 ---
 
 # Practical
+
+<p><font size=6><b><a href="">Link to practical</a>
 

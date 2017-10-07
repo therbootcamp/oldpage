@@ -51,10 +51,14 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Statistical_model) (emphasis adde
 4. Print result
 ]
 
-.pull-right4[
+.pull-right6[
 ### Implementation in R
+```{r,echo=F}
+link = 'https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/my_data.txt'
+```
+
 ```{r, results='hide'}
-data <- read.table('my_data.txt')
+data <- read.table(link)
 variables <- data[,c('group','variable')]
 analysis <- lm(variable ~ group, data = variables)
 summary(analysis)
@@ -89,7 +93,7 @@ Robert Gentleman and Ross Ihaka<br>
 
 R has been build for **statistical computing and graphics** and that is basically it:
 
-.pull-left4[
+.pull-left5[
 ### Use R for...
 1. Loading and handling data
 2. Run statistical analyses
@@ -97,23 +101,23 @@ R has been build for **statistical computing and graphics** and that is basicall
 4. Prepare reproducible reports
 ]
 
-.pull-right4[
+.pull-right5[
 ### Don't use R for...
 1. OS programs
-2. Server-side programs
-3. Database handling
-4. (Behvioral experiments)
+2. GUIs
+3. (Dynamic) Websites
+4. Behvioral experiments
 ]
 
 ---
 
 # R is widely used
 
-R steadily grows in popularity. Today, R is one of the most popular languages for data science and overall. In terms of the number of data science jobs, R beats SAS and Matlab, and is on par with Python:
-<br><br><br>
-```{r, out.height = "370px", echo = F, fig.align='center'}
-knitr::include_graphics("https://i0.wp.com/r4stats.com/wp-content/uploads/2017/02/Fig-1a-IndeedJobs-2017.png")
-```
+R steadily **grows in popularity**. Today, R is one of the **most popular languages for data science** and overall. In terms of the number of data science jobs, **R beats SAS and Matlab**, and is on par with Python:
+<br><br>
+
+<p align="center"><img src="https://i0.wp.com/r4stats.com/wp-content/uploads/2017/02/Fig-1a-IndeedJobs-2017.png" height="370"></p>
+
 <p style="font-size:10px" align="center">source: https://i0.wp.com/r4stats.com/<p>
 
 
@@ -126,12 +130,12 @@ Although R has been implemented in **C, Fortran, and R**, R is often a slow and 
 .pull-left5[
 ### Pro
 1. **It's free**
-2. Relatively easy
-3. Extensibility ([CRAN](https://cran.r-project.org/), packages)
-4. User base (e.g., [stackoverflow](https://stackoverflow.com/))
-5. [Tidyverse](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
-6. [RStudio](https://www.rstudio.com/)
-7. Producitivity options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
+2. Relatively **easy**
+3. **Extensibility** ([CRAN](https://cran.r-project.org/), packages)
+4. **User base** (e.g., [stackoverflow](https://stackoverflow.com/))
+5. [**Tidyverse**](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
+6. [**RStudio**](https://www.rstudio.com/)
+7. **Producitivity** options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
 ]
 
 .pull-right5[
@@ -150,9 +154,7 @@ $\rightarrow$ [Rcpp](http://www.rcpp.org/), [rPython](http://rpython.r-forge.r-p
 Next to many useful packages, R users greatly benefit from R's integrated development environment [**RStudio**](https://www.rstudio.com/). Rstudio is a **graphical user interface** that allows you to (a) edit code, (b) run code, (c) access files and progress, and (d) create plots. In addition RStudio helps you with **version control** via [Github](https://github.com/), to write **reports** using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), integrating **C++** into R, writing **clean code**, and to **debug** code.<br><br>  
 
 
-```{r, out.width = "800px", echo = F, fig.align='center'}
-knitr::include_graphics("rstudio_plus.png")
-```
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudio_plus.png" height="360"></p>
 
 ---
 
@@ -170,9 +172,9 @@ RStudio facilitate project management via the use of *projects*. Projects suppor
 4. **Version control** by linking projects to repositories (e.g., using [GitHub](https://github.com/))
 ]
 .pull-right5[
-```{r, out.width = "550px", echo = F, fig.align='center'}
-knitr::include_graphics("Projects.png")
-```
+
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Projects.png" height="360"></p>
+
 ]
 
 ---
@@ -201,15 +203,19 @@ knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b98
 
 # Essentials of the R language
 
-.pull-left7[
+.pull-left5[
 >"To understand computations in R, two slogans are helpful:
+<br><br>
 >###(1) Everything that exists is an object and 
 >###(2) everything that happens is a function call."
 ]
 
-.pull-right7[
+.pull-right5[
 <p align="center"><img src="https://statweb.stanford.edu/~jmc4/CopyPhoto.jpg" width="350" align="center"></p>
-<p align="center">John Chambers<br> <font size=2> Author of S and developer of R</font></p>
+<p align="center">John Chambers<br> <font size=2> Author of S and developer of R</font><br>
+<font size=2><a href="https://statweb.stanford.edu/~jmc4/">statweb.stanford.edu</a>
+</p>
+
 ]
 
 ---
@@ -218,7 +224,7 @@ knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b98
 
 In R every action is a function call. Specifically, R programs advance by **passing on arguments to functions**, **calling the function**, and **receiving and storing its output**. And this goes deep, many operations are functions in disguise.
 
-.pull-left9[
+.pull-left45[
 ```{r}
 # defining a function - arithm. mean
 my_fun <- function(x, b){ x * b }
@@ -235,7 +241,7 @@ my_out <- my_fun(my_data, 5)
 
 ]
 
-.pull-right9[
+.pull-right45[
 ```{r}
 # a basic expression
 2 + 2
@@ -274,7 +280,7 @@ print(my_vector) # still unsorted
 
 Every language has a specific expressive style. R is characterized by the following elements...
 
-.pull-left9[
+.pull-left35[
 + Comment symbol `#`
 <br2>
 + Quotations with either `""` or ''
@@ -288,6 +294,8 @@ Every language has a specific expressive style. R is characterized by the follow
 + `<`,`>`,`|`,`&`,`==`, `!=` define logical statements
 ]
 
+
+.pull-right55[
 ```{r, eval = F}
 # This is a comment
 
@@ -309,10 +317,10 @@ my_fun(x,y){ x  + y }
 
 ---
 
-.pull-left9[
+.pull-left5[
 # Help
 
-An facilitator for using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). Don't worry if help files may appear cryptical, however, over time you will realise how helpful they are. Vignettes are longer tutorials sometimes provided by the authors of a package.     
+An facilitator for using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). Don't worry if help files may appear cryptical, however, over time you will realise how helpful they are. **Vignettes** are long tutorials sometimes provided by the authors of a package.     
 
 ```{r, eval = F}
 # To access help files
@@ -329,8 +337,8 @@ vignette(package="name_of_vignette")
 
 ]
 
-.pull-right9[
-<br><br><iframe src="R_ Arithmetic Mean.htm" height="520" width="800" align="center"></iframe>
+.pull-right45[
+<br><br><iframe src="R_ Arithmetic Mean.htm" height="510" width="800" align="center"></iframe>
 ]
 
 ---
@@ -353,13 +361,11 @@ require(package_name)
 ---
 
 # The workflow of R
-
-```{r, out.width = "800px", echo = F, fig.align='center'}
-knitr::include_graphics("rstudio_workings.png")
-```
-
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudio_workings.png" height="500" align="center"></p>
 
 ---
 
 # Interactive session
+
+Open up **Rstudio**...
 

@@ -35,7 +35,7 @@ options(digits = 4)
 ]
 
 .pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/donald_knuth.jpeg" width="500">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/donald_knuth.jpeg" width="500">
 <p align="center"><font size=3>Donald E. Knuth<br>Author of <a href:"https://de.wikipedia.org/wiki/The_Art_of_Computer_Programming">The Art of Programming</a><br>source<a href="http://www-cs-faculty.stanford.edu/"> http://www-cs-faculty.stanford.edu/</a>
 ]
 
@@ -99,7 +99,8 @@ Often some small part of your code takes orders of magnitudes longer than everyt
 ]
 
 .pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/lineprof.png" width="500">
+<img src=" = TRUE, out.width=450}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/lineprof.png" width="500">
 ]
 
 ---
@@ -143,11 +144,11 @@ Almost always your problem has been solved by someone else.
 .pull-right6[
 <div style="margin:0px auto; width:100%; float:right">
   <div style="float:left"; margin:0; width:48%">
-    <img src="stacksite.png" height="360" width="310" align="center"><br>
+    <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stacksite.png" height="360" width="310" align="center"><br>
     <p align = "center"><a href="stackoverflow.com" align="center"><font size = 3>https://stackoverflow.com</font></a></p>
   </div>
   <div style="float:right"; margin:0; width:48%">
-  <img src="rseeksite.png" height="360" width="310" align="center"><br>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rseeksite.png" height="360" width="310" align="center"><br>
     <p align = "center"><a href="http://rseek.org" align="center"><font size = 3>http://rseek.org</font></a></p>
   </div>
 </div>
@@ -181,7 +182,7 @@ options(digits=3)
 library(microbenchmark, quietly = T)
 
 # define link to data
-link <- 'http://tinyurl.com/y92qpp7h'
+link <- 'http://tinyurl.com/y99aj5ed'
 
 # microbenchmark
 microbenchmark(
@@ -192,6 +193,7 @@ microbenchmark(
 
 ```
 ]
+
 
 ---
 

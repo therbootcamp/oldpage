@@ -221,12 +221,4 @@ knitr::include_graphics("images/uiandserver.png")
 knitr::include_graphics("images/exampleapp_B.png")
 ```
 
----
-## Day 4
 
-
-# 1. Efficient Code
-
-# 2. Dynamic Reports
-
-# 3. Next Steps
