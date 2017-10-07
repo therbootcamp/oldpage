@@ -163,7 +163,7 @@ Another area were R has seen much development is **text analysis**. New packages
 
 .pull-left4[
 <p align="center">
-  <img src="emojis.png" width=450><br>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/emojis.png" width=450><br>
   <font size=1>source <a href="http://www.lrec-conf.org/proceedings/lrec2016/pdf/735_Paper.pdf/">Barbieri, F., Ronzano, F., & Saggion, H. (2016, May). What does this Emoji<br>Mean?A Vector Space Skip-Gram Model for Twitter Emojis. In LREC.</a><br>See also my <a href="https://dwulff.github.io/Naturallanguage/">natural language course page</a>.</p>
 ]
 
@@ -193,7 +193,7 @@ By now one of the most referenced R packages is Rcpp - **R's interface to C++**.
 .pull-right6[
 
 <p align="center">
-  <img src="Rcpp.png" width=480><br><br2>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Rcpp.png" width=480><br><br2>
   <font size=2><a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf">Quick Reference Guide</a></p>
 ]
 
@@ -211,7 +211,7 @@ library(ggmap)
 ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 ```
 <p align="center">
-  <img src="basel.png" width=350></p>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/basel.png" width=350></p>
 ]
 
 .pull-right45[
@@ -238,9 +238,9 @@ An important part of programming is to **keep track of the progress** to potenti
 .pull-right7[
 
 <p align="center">
-  <img src="github.png" width=265>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/github.png" width=265>
 
-  <img src="rstudiogit.png" width=380></p>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudiogit.png" width=380></p>
 
 ]
 
@@ -255,14 +255,14 @@ With the need for more computing power for, e.g., machine learning, R is also mo
 .pull-left6[
 
 <p align="left">
-  <img src="rstudiologin.png" width=435></p>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudiologin.png" width=435></p>
 
 ]
 
 .pull-right4[
 
 <p align="left">
-  <img src="rserver_square.png" width=330>
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rserver_square.png" width=330>
 
 ]
 
@@ -356,9 +356,9 @@ The web is a great place to learn about R.
 
 .pull-right5[
 <p align="left" style="padding: 0 0px"><br><br><br><br><br><br><br><br><br>
-    <a href="https://www.google.com/"><img border="0" alt="W3Schools" src="google.png" height="100"></a><img border="0" alt="W3Schools" src="comma.png" height="50"><a href="http://rseek.org/"><img border="0" alt="W3Schools" src="rseek.png" height="100" style="margin-left:10px; margin-buttom:10px"></a><br><br><br><br>
-    <a href="https://www.r-bloggers.com/"><img border="0" alt="W3Schools" src="rbloggers.png" height="105" style="margin-bottom:10px"></a><br>
-  <a href="https://stackoverflow.com/"><img border="0" alt="W3Schools" src="stackoverflow.png" height="105"></a>
+    <a href="https://www.google.com/"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/google.png" height="100"></a><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/comma.png" height="50"><a href="http://rseek.org/"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rseek.png" height="100" style="margin-left:10px; margin-buttom:10px"></a><br><br><br><br>
+    <a href="https://www.r-bloggers.com/"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbloggers.png" height="105" style="margin-bottom:10px"></a><br>
+  <a href="https://stackoverflow.com/"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stackoverflow.png" height="105"></a>
 </p>
 ]
 
@@ -372,17 +372,15 @@ Great place to meet other **R enthusiast** in and outside of industry and see in
 
 .pull-left5[
 <p align="left">
-    <a href="https://www.meetup.com/de-DE/BaselR/"><img border="0" alt="W3Schools" src="baselr.png" height="400"></a>
+    <a href="https://www.meetup.com/de-DE/BaselR/"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/baselr.png" height="400"></a>
 ]
 
 .pull-right5[
 
 <p align="left">
-    <a href="https://www.meetup.com/de-DE/Zurich-R-User-Group/?chapter_analytics_code=UA-94107719-1"><img border="0" alt="W3Schools" src="zurichr.png" height="400"></a>
+    <a href="https://www.meetup.com/de-DE/Zurich-R-User-Group/?chapter_analytics_code=UA-94107719-1"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/zurichr.png" height="400"></a>
 
 ]
-
-
 
 ---
 
