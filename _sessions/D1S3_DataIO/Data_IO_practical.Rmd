@@ -11,7 +11,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-Here a link to the lecture slides for this session: <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/D1S3_DataIO/Data_IO.html"><b>LINK</b></a>.
+Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D1S3_DataIO/Data_IO.html"><b>LINK</b></a>
 
 ### Overview
 

@@ -93,7 +93,7 @@ Often some small part of your code takes orders of magnitudes longer than everyt
 ]
 
 .pull-right5[
-&lt;img src="https://therbootcamp.github.io/_slides/images/lineprof.png" width="500"&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/lineprof.png" width="500"&gt;
 ]
 
 ---
@@ -137,11 +137,11 @@ Almost always your problem has been solved by someone else.
 .pull-right6[
 &lt;div style="margin:0px auto; width:100%; float:right"&gt;
   &lt;div style="float:left"; margin:0; width:48%"&gt;
-    &lt;img src="stacksite.png" height="360" width="310" align="center"&gt;&lt;br&gt;
+    &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/stacksite.png" height="360" width="310" align="center"&gt;&lt;br&gt;
     &lt;p align = "center"&gt;&lt;a href="stackoverflow.com" align="center"&gt;&lt;font size = 3&gt;https://stackoverflow.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
   &lt;/div&gt;
   &lt;div style="float:right"; margin:0; width:48%"&gt;
-  &lt;img src="rseeksite.png" height="360" width="310" align="center"&gt;&lt;br&gt;
+  &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rseeksite.png" height="360" width="310" align="center"&gt;&lt;br&gt;
     &lt;p align = "center"&gt;&lt;a href="http://rseek.org" align="center"&gt;&lt;font size = 3&gt;http://rseek.org&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -176,17 +176,17 @@ link &lt;- 'http://tinyurl.com/y99aj5ed'
 # microbenchmark
 microbenchmark(
   web   = read_csv(link),
-  local = read_csv('titanic.csv'),
-  fread = fread('titanic.csv'),
+  local = read_csv('data/titanic.csv'),
+  fread = fread('data/titanic.csv'),
   times = 10)
 ```
 
 ```
 ## Unit: microseconds
-##   expr    min     lq   mean median     uq     max neval cld
-##    web 839925 867811 906530 893116 949742 1016239    10   b
-##  local   4166   4275  18357   4933   5546  117496    10  a 
-##  fread    931   1170   1612   1237   1365    5225    10  a
+##   expr    min     lq   mean median      uq     max neval cld
+##    web 753036 784171 931712 950495 1046002 1077292    10   b
+##  local   4190   4535   4925   4895    5136    6052    10  a 
+##  fread    929   1069   1374   1302    1499    2500    10  a
 ```
 ]
 
@@ -217,9 +217,9 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   806   847   968    889   1003   1461    10  a 
-##     apply 13523 15808 47143  17682 116423 122085    10   b
+##      expr   min    lq  mean median    uq    max neval cld
+##  colMeans   774   778  1063    846   893   2508    10  a 
+##     apply 11877 12918 25289  13926 15315 126855    10   b
 ```
 ]
 
@@ -262,11 +262,11 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##     expr     min      lq    mean  median      uq    max neval cld
-##   loop10   22.37   24.13   27.97   25.89   30.01   57.4   100  a 
-##  loop100 1234.56 1280.96 1512.90 1400.53 1596.74 3985.2   100   b
-##    vec10    1.77    2.12    2.79    2.47    2.87   22.7   100  a 
-##   vec100    9.46   10.00   11.77   10.74   12.53   29.5   100  a
+##     expr     min      lq    mean  median      uq     max neval cld
+##   loop10   22.06   24.58   51.16   25.81   30.11 2365.99   100  a 
+##  loop100 1225.22 1304.80 1479.32 1420.30 1602.66 2337.05   100   b
+##    vec10    1.79    2.23    2.79    2.46    2.92    7.88   100  a 
+##   vec100    9.64   10.08   12.01   11.01   12.46   30.45   100  a
 ```
 
 ]
@@ -292,26 +292,26 @@ my_fun_c &lt;- compiler::cmpfun(my_fun)
 x &lt;- list(1:10, letters, c(F, T), NULL)
 
 # microbenchmark
-microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
+microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 
 ```
 ## Unit: microseconds
-##                  expr   min    lq  mean median   uq     max neval cld
-##    my_fun(x, is.null) 0.958 0.986 19.26   1.08 1.27 1812.08   100   a
-##  my_fun_c(x, is.null) 0.955 0.973  1.16   1.04 1.20    3.96   100   a
+##                  expr   min   lq mean median   uq    max neval cld
+##    my_fun(x, is.null) 0.957 1.07 19.6   1.18 1.37 1840.0   100   a
+##  my_fun_c(x, is.null) 0.954 1.10  1.4   1.20 1.38   14.6   100   a
 ```
 
 ```r
 # microbenchmark again
-microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit = 'us')
+microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 
 ```
 ## Unit: microseconds
-##                  expr   min    lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 0.874 0.972 1.42   1.09 1.43 11.7   100   a
-##  my_fun_c(x, is.null) 0.881 0.941 1.50   1.04 1.32 15.6   100   a
+##                  expr  min   lq mean median   uq   max neval cld
+##    my_fun(x, is.null) 1.11 1.25 1.44   1.39 1.55  3.86   100   a
+##  my_fun_c(x, is.null) 1.11 1.19 1.56   1.37 1.54 19.02   100   a
 ```
 ]
 ---
@@ -328,33 +328,33 @@ Parallel execution splits the data in many **jobs** and then has many **workers*
 
 ```r
 # define data and splitted data (jobs)
-my_data &lt;- matrix(rnorm(10000000),ncol = 10)
-my_split_data &lt;- lapply(1:10, function(i) my_data[(1:1000) + (i - 1) * 1000, ])
+data       &lt;- matrix(rnorm(10000000), ncol = 10)
+split_data &lt;- lapply(1:10, function(i) data[(1:1000)+(i-1)*1000, ])
 
 # open cluster 
 require(parallel)
 clu &lt;- makeCluster(5)
 
 # my cluster fun
-my_cluster_fun &lt;- function(my_split_data){
+my_cluster_fun &lt;- function(split_data){
 
   # apply cluster function
-  out &lt;- clusterApplyLB(clu, my_split_data, colMeans)
+  out &lt;- clusterApplyLB(clu, split_data, colMeans)
   
   # combine results
   colMeans(do.call(rbind, out))
   }
 
 # microbenchmark
-microbenchmark(vectorz = colMeans(my_data),
-               cluster = my_cluster_fun(my_split_data))
+microbenchmark(vectorz = colMeans(data),
+               cluster = my_cluster_fun(split_data))
 ```
 
 ```
 ## Unit: milliseconds
 ##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.68 7.88 8.32   8.04 8.28 13.1   100   b
-##  cluster 2.51 2.73 3.07   2.91 3.06 11.2   100  a
+##  vectorz 7.71 8.18 8.83   8.47 9.27 11.7   100   b
+##  cluster 2.44 2.74 3.15   3.00 3.34 11.1   100  a
 ```
 ]
 ---
@@ -399,8 +399,8 @@ microbenchmark(vectorz = colMeans(my_data),
 ```
 ## Unit: milliseconds
 ##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.55 7.65 8.09   7.72 7.91 13.1   100   a
-##     Rcpp 7.54 7.63 8.00   7.73 7.99 10.9   100   a
+##  vectorz 7.67 7.91 8.71   8.27 9.12 13.0   100   a
+##     Rcpp 7.61 7.83 8.46   8.01 8.97 11.6   100   a
 ```
 ]
 ---
@@ -419,6 +419,8 @@ from &lt;a href="http://adv-r.had.co.nz/Performance.html"&gt; **Advanced R**&lt;
 ---
 
 # Practical
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D4S1_EfficientCode/EfficientCode_practical.html"&gt;Link to practical&lt;/a&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

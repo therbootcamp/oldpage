@@ -395,7 +395,8 @@ read_csv(data)
 
 # Practical
 
-<p><font size=6><b><a href="">Link to practical</a>
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D1S3_DataIO/Data_IO_practical.html">Link to practical</a>
+
 
 
 

@@ -124,7 +124,7 @@ $(document).ready(function () {
 
 <div id="slides" class="section level3">
 <h3>Slides</h3>
-<p>Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_slides/D4S1_EfficientCode/EfficientCode.html">Link</a><br></p>
+<p>Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D4S1_EfficientCode/EfficientCode.html"><b>LINK</b></a><br></p>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
@@ -193,8 +193,8 @@ microbenchmark(df[['var_1']], df$var_1, tbl$var_1)</code></pre>
 <div id="profiling-example" class="section level3">
 <h3>Profiling: Example</h3>
 <p>Larger code chunks or even scripts can conveniently be tested using <code>system.time()</code> and <code>lineprof()</code> from the <code>lineprof</code> package.</p>
-<pre class="r"><code># ---- install and load package
-install.packages('devtools')
+<pre class="r"><code># ---- install and load packages
+install.packages('devtools', repos = &quot;https://stat.ethz.ch/CRAN/&quot;)
 devtools::install_github(&quot;hadley/lineprof&quot;)
 library(lineprof)
 library(readr)
@@ -205,7 +205,7 @@ library(dplyr)
 my_chunkfun &lt;- function(){
 
   # load data
-  data &lt;- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+  data &lt;- read_csv('http://tinyurl.com/titanic-dataset-web')
   
   # remove first column
   data &lt;- data[,-1]
@@ -252,191 +252,23 @@ shine(profile)</code></pre>
 <div id="profiling" class="section level3">
 <h3>Profiling</h3>
 <ol start="5" style="list-style-type: decimal">
-<li>Copy the profiling example into a new script file. After installing and loading the <code>devtools</code> and <code>lineprof</code> packages, run the code under <em>‘define code chunk as function’</em> and then test the function by runnning it, i.e., execute <code>my_chunkfun()</code>. If it works you just defined and executed your first self-created function. Continue by profiling the function using <code>system.time()</code> and <code>lineprof()</code>. What do you find? What parts of the code are most computationally expensive? Repeat the analysis. Remember R compiles functions after first use.</li>
+<li>Copy the profiling example into a new script file. After installing and loading the <code>devtools</code> and <code>lineprof</code> packages, run the code under <em>‘define code chunk as function’</em> and then test the function by runnning it, i.e., execute <code>my_chunkfun()</code>. You just defined and executed your first self-created function. Continue by profiling the function using <code>system.time()</code> and <code>lineprof()</code>. What do you find? What parts of the code are most computationally expensive? Repeat the analysis. Remember R compiles functions after first use.</li>
 </ol>
-<pre class="r"><code># ---- install and load package
-install.packages('devtools')
-devtools::install_github(&quot;hadley/lineprof&quot;)
-library(lineprof)
-library(readr)
-library(dplyr)
-
-# ---- define code chunk as function
-
-my_chunkfun &lt;- function(){
-
-  # load data
-  data &lt;- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
-  
-  # remove first column
-  data &lt;- data[,-1]
-  
-  # mutate
-  data &lt;- data %&gt;% 
-    mutate(months = Age * 12)
-  
-  # select
-  test_data &lt;- data %&gt;% 
-    select(Sex, months, Survived)
-  
-  # multiple regression 
-  # Survival predicted by Sex, months, and their interaction
-  model &lt;- glm(Survived ~ Sex * months, 
-              data = test_data, 
-              family = 'binomial')
-  
-  # evaluate model
-  summary(model)
-  
-  }
-
-# ---- profiling
-
-# profile using system.time
-system.time(my_chunkfun())
-
-# profile using lineprof
-profile &lt;- lineprof(my_chunkfun())
-shine(profile)</code></pre>
 </div>
 <div id="speeding-up-code" class="section level3">
 <h3>Speeding up code</h3>
 <ol start="6" style="list-style-type: decimal">
-<li>When speeding up code, the first question should always be whether faster solutions are already out there. In this case there are. Check out the <code>data.table</code> package (means: install and load) and use the <code>fread()</code> function. Try defining a new function using this function rather than <code>read_csv()</code>. Then compare the performance of the two. How much faster is the new relative to the old function (use <code>system.time()</code>)?</li>
+<li><p>When speeding up code, the first question should always be whether faster solutions are already out there. In this case there are. Check out the <code>data.table</code> package (means: install and load) and use the <code>fread()</code> function. Try defining a new function using this function rather than <code>read_csv()</code>. Then compare the performance of the two. How much faster is the new relative to the old function (use <code>system.time()</code>)?</p></li>
+<li><p>The next step of optimising code is to identify bits that are not necessary. Try to identify a bit that is not entirely necessary, remove it, and evaluate the function’s performance again.</p></li>
+<li><p>Next think about whether vectorization may make sense. Find a code chunk that may be written using a vector and vector multiplication and try to implement it. Is there any improvement?</p></li>
 </ol>
-<pre class="r"><code># ---- install and load package
-install.packages('data.table')
-libarary(data.table)
-
-# ---- define code chunk as function
-
-my_chunkfun_fast &lt;- function(){
-
-  # load data
-  data &lt;- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
-  
-  # remove first column
-  data &lt;- data[,-1]
-  
-  # mutate
-  data &lt;- data %&gt;% 
-    mutate(months = Age * 12)
-  
-  # select
-  test_data &lt;- data %&gt;% 
-    select(Sex, months, Survived)
-  
-  # multiple regression 
-  # Survival predicted by Sex, months, and their interaction
-  model &lt;- glm(Survived ~ Sex * months, 
-              data = test_data, 
-              family = 'binomial')
-  
-  # evaluate model
-  summary(model)
-  
-  }
-
-# ---- profiling
-
-# profile using system.time
-system.time(my_chunkfun())
-system.time(my_chunkfun_fast())
-
-# profile using lineprof
-profile &lt;- lineprof(my_chunkfun_fast())
-shine(profile)</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>The next part of optimising code is to identify bits that are not necessary. Try to identify a bit that is not entirely necessary, remove it, and evaluate the function’s performance again.</li>
-</ol>
-<pre class="r"><code># ---- define code chunnk as function
-
-my_chunkfun_fast2 &lt;- function(){
-
-  # load data
-  data &lt;- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
-  
-  # remove first column
-  data &lt;- data[,-1]
-  
-  # mutate
-  data &lt;- data %&gt;% 
-    mutate(months = months * 12)
-  
-  # multiple regression 
-  # Survival predicted by Sex, months, and their interaction
-  model &lt;- glm(Survived ~ Sex * months, 
-              data = data, 
-              family = 'binomial')
-  
-  # evaluate model
-  summary(model)
-  
-  }
-
-# ---- profiling
-
-# profile using lineprof
-profile &lt;- lineprof(my_chunkfun_fast2())
-shine(profile)
-
-# profile using system.time
-system.time(my_chunkfun())
-system.time(my_chunkfun_fast())
-system.time(my_chunkfun_fast2())</code></pre>
-<ol start="8" style="list-style-type: decimal">
-<li>Next think about whether vectorization may make sense. Find a code chunk that may be written using a vector and multiplications and try to implement it. Is there any improvement?</li>
-</ol>
-<pre class="r"><code># ---- define code chunk as function
-
-my_chunkfun_fast3 &lt;- function(){
-
-  # load data
-  data &lt;- fread('https://therbootcamp.github.io/_slides/data/titanic.csv')
-  
-  # remove first column
-  data &lt;- data[,-1]
-  
-  # mutate
-  data[['months']] &lt;- data$Age * 12
-  
-  # multiple regression 
-  # Survival predicted by Sex, months, and their interaction
-  model &lt;- glm(Survived ~ Sex * months, 
-              data = data, 
-              family = 'binomial')
-  
-  # evaluate model
-  summary(model)
-  
-  }
-
-# ---- profiling
-
-# profile using lineprof
-profile &lt;- lineprof(my_chunkfun_fast3())
-shine(profile)
-
-# profile using system.time
-system.time(my_chunkfun())
-system.time(my_chunkfun_fast())
-system.time(my_chunkfun_fast2())
-system.time(my_chunkfun_fast3())</code></pre>
 </div>
 <div id="speeding-up-code-pt-2-advanced" class="section level3">
 <h3>Speeding up code pt 2 (advanced)</h3>
 <ol start="9" style="list-style-type: decimal">
 <li>In 95% of all cases the above steps will produce efficient-enough code. Sometimes, however, one is interested in even faster code execution. This is particularly the case when dealing with large data sets. One reason for this is that run time can be a super-linear function of data size, i.e., a twice as large data sets requires more than twice as much computation time. To see this, program a simple function that identifies the smallest value of a vector (passed on as the argument) using <code>sort()</code> and selecting the first element of the sorted vector, i.e., <code>sort(my_vector)[1]</code>. Then feed it random vectors (using <code>runif()</code>) of length either 1e5+, 1e+6, 1e+7, 1e+8, and 1e+9 and evalute the computation time (using <code>system.time()</code>). Does it increase by more or less than 10 times each step? You want to repeat this a couple of times.</li>
 </ol>
-<p>EXCURSION: How to program functions? Functions are always defined as this <code>my_fun &lt;- function(){}</code>. Within the parentheses you define the names of the arguments, e.g., <code>function(variable_1, variable_2)</code>. Within the curly brackets you define the function’s expression, i.e., what it’s supposed to do. This could be for instance <code>variable_1 + variable_2</code>, when the goal is to compute the element-wise sum of two vectors. By calling (executing) the function, the argument names inside the functions expression, i.e., <code>variable_1</code> and <code>variable_2</code> will then be replaced by the objects that were provided (passed on) as arguments. That is, if the function is provided with two vectors <code>my_vec_1</code> and <code>my_vec_2</code>, i.e., <code>my_fun(my_vec_1, my_vec_2)</code>, then the function will compute the sum of these two vectors. This requires, of course, that the provided arguments fit to whatever is done with them inside the function. In this case, the objects are thus required to be <code>numerical</code> and cannot be, e.g., of type <code>character</code>. The full function definition in this case is <code>my_fun &lt;- function(variable_1, variable_2) {variable_1 + variable_2}</code>. After its been defined you would could call it using <code>my_fun(object_1, object_2)</code>.</p>
-<pre class="r"><code># define function
-my_fun &lt;- function(x) sort(x)[1]
-
-# profile using system.time
-system.time(my_fun(runif(1e+5)))
-system.time(my_fun(runif(1e+6)))
-system.time(my_fun(runif(1e+7)))
-system.time(my_fun(runif(1e+8)))</code></pre>
+<p><b>Excursion</b>: How to program functions? Functions are always defined as this <code>my_fun &lt;- function(){}</code>. Within the parentheses you define the names of the arguments, e.g., <code>function(variable_1, variable_2)</code>. Within the curly brackets you define the function’s expression, i.e., what it’s supposed to do. This could be for instance <code>variable_1 + variable_2</code>, when the goal is to compute the element-wise sum of two vectors. By calling (executing) the function, the argument names inside the functions expression, i.e., <code>variable_1</code> and <code>variable_2</code> will then be replaced by the objects that were provided (passed on) as arguments. That is, if the function is provided with two vectors <code>my_vec_1</code> and <code>my_vec_2</code>, i.e., <code>my_fun(my_vec_1, my_vec_2)</code>, then the function will compute the sum of these two vectors. This requires, of course, that the provided arguments fit to whatever is done with them inside the function. In this case, the objects are thus required to be <code>numerical</code> and cannot be, e.g., of type <code>character</code>. The full function definition in this case is <code>my_fun &lt;- function(variable_1, variable_2) {variable_1 + variable_2}</code>. After its been defined you would could call it using <code>my_fun(object_1, object_2)</code>.</p>
 <ol start="9" style="list-style-type: decimal">
 <li>When large datasets need to be processed and speed is of the essence, it can be extremely useful to rely on multi-threaded, parallel computation. That is to run a task on multiple processors in parallel. To do this, R has relatively convenient packages, in particular, the <code>paralell</code> package, which has recently been included in the standard R library. To use parallel execution four things need to be done. (1) The data need to be split into separate jobs. For instance, a vector may be split into a list containing 100 separate pieces. (2) A function needs to be defined that performs the desired operations on a single job (one piece of the vector). (3) A cluster of workers needs to be created using, e.g., <code>makeCluster</code>. (3) The jobs and the function need to be combined in one of <code>parallel</code>‘s functions. Those functions manage the passing on of jobs to individual workers in the cluster and the retrieval of the results of their computations. This particular style of programming is also known as functional programming. Now try to run the code below, which implements the function from above in this ’divide and conquer’-manner. If it runs and you understood what it does, compare its execution time to its non-parallel twin above.</li>
 </ol>
@@ -461,7 +293,6 @@ result &lt;- clusterApplyLB(cl, jobs, my_fun)
 
 # flatten result and apply my_fun one last time
 my_fun(unlist(result))</code></pre>
-<pre><code>[1] 2.095476e-09</code></pre>
 </div>
 </div>
 <div id="additional-reading" class="section level1">

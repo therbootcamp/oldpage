@@ -332,5 +332,5 @@ my_df
 
 # Practical
 
-<p><font size=6><b><a href="">Link to practical</a>
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D3S1_Tidying/Tidying_practical.html">Link to practical</a>
 

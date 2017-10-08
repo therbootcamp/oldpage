@@ -11,7 +11,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-Here a link to the lecture slides for this session: LINK
+Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D1S2_Objects/Objects.html"><b>LINK</b></a>
 
 ### Overview
 

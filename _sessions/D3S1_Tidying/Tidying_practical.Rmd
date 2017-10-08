@@ -10,7 +10,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_slides/D3S1_Tidying/Tidying.html">Link</a><br>
+Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D3S1_Tidying/Tidying.html"><b>LINK</b></a>
 
 ### Overview
 

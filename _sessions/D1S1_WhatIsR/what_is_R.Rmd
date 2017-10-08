@@ -367,5 +367,7 @@ require(package_name)
 
 # Interactive session
 
-Open up **Rstudio**...
+<p><font size=6>Open up **Rstudio**...</font>
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D1S1_WhatIsR/What_is_R_practical.html">Link to practical</a>
 

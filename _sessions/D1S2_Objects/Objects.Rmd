@@ -411,6 +411,6 @@ my_vec %*% my_mat
 
 # Practical
 
-<p><font size=6><b><a href="">Link to practical</a>
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D1S2_Objects/Objects_practical.html">Link to practical</a>
 
 
