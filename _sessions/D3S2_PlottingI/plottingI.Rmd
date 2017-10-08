@@ -1230,42 +1230,42 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 
 
----
-## Extra slides
+<!-- --- -->
+<!-- ## Extra slides -->
 
 
----
+<!-- --- -->
 
-## Why are these two different?
+<!-- ## Why are these two different? -->
 
-.pull-leftEven[
+<!-- .pull-leftEven[ -->
 
-### Plot A
+<!-- ### Plot A -->
 
-```{r, fig.width = 7, fig.height = 4, out.width = "90%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, 
-                     col = class)) +
-  geom_point() + 
-  geom_smooth(col = "blue")
-```
+<!-- ```{r, fig.width = 7, fig.height = 4, out.width = "90%"} -->
+<!-- ggplot(data = mpg,  -->
+<!--        mapping = aes(x = displ, y = hwy,  -->
+<!--                      col = class)) + -->
+<!--   geom_point() +  -->
+<!--   geom_smooth(col = "blue") -->
+<!-- ``` -->
 
-]
+<!-- ] -->
 
 
-.pull-rightEven[
+<!-- .pull-rightEven[ -->
 
-### Plot B
+<!-- ### Plot B -->
 
-```{r, fig.width = 7, fig.height = 4, out.width = "90%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, 
-                     col = class)) +
-  geom_point() + 
-  geom_smooth()
-```
+<!-- ```{r, fig.width = 7, fig.height = 4, out.width = "90%"} -->
+<!-- ggplot(data = mpg,  -->
+<!--        mapping = aes(x = displ, y = hwy,  -->
+<!--                      col = class)) + -->
+<!--   geom_point() +  -->
+<!--   geom_smooth() -->
+<!-- ``` -->
 
-]
+<!-- ] -->
 
 
 

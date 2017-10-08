@@ -425,16 +425,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 369    33     96
-## 313    28    184
-## 459    40    295
-## 386    34    294
-## 523    46    101
-## 162    14    164
-## 37      4     42
-## 158    14     62
-## 519    46     40
-## 230    21    307
+## 46      4    154
+## 343    31     62
+## 61      6     41
+## 429    38     98
+## 113    10     81
+## 466    41    124
+## 547    48    104
+## 482    42    234
+## 335    30    115
+## 33      3    163
 ```
 
 ---
@@ -528,54 +528,60 @@ data %&gt;%    # Start with data, AND THEN...
 
 
 
-.pull-left4[
-#tidyr
+&lt;!-- .pull-left4[ --&gt;
+&lt;!-- #tidyr --&gt;
 
-`tidyr` is a package for 'tidying' data.
+&lt;!-- `tidyr` is a package for 'tidying' data. --&gt;
 
-'tidying' data means getting it into a different format (usually moving data between rows and columns)
-
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png" width="70%" style="display: block; margin: auto;" /&gt;
-]
+&lt;!-- 'tidying' data means getting it into a different format (usually moving data between rows and columns) --&gt;
 
 
-.pull-right5[
-
-&lt;br&gt;
-&lt;br&gt;
-
-### Questions you can answer with tidyr
-
-&gt; Right now there are different rows for each patient, I need every patient's data to be in a single row.
-
-&gt; Can you restructure the data so data in different columns are shown in a single column?
-
-]
+&lt;!-- ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'} --&gt;
+&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png") --&gt;
+&lt;!-- ``` --&gt;
+&lt;!-- ] --&gt;
 
 
+&lt;!-- .pull-right5[ --&gt;
 
----
-#tidyr
+&lt;!-- &lt;br&gt; --&gt;
+&lt;!-- &lt;br&gt; --&gt;
 
-There are two important functions in `tidyr`, `gather()` and `spread()`:
+&lt;!-- ### Questions you can answer with tidyr --&gt;
 
-.pull-left4[
+&lt;!-- &gt; Right now there are different rows for each patient, I need every patient's data to be in a single row. --&gt;
 
-`gather()`: Move data from *columns* into many *rows*
+&lt;!-- &gt; Can you restructure the data so data in different columns are shown in a single column? --&gt;
 
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
-]
+&lt;!-- ] --&gt;
 
 
-.pull-right5[
 
-`spread()`: Move data from several *rows* into columns
+&lt;!-- --- --&gt;
+&lt;!-- #tidyr --&gt;
 
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;!-- There are two important functions in `tidyr`, `gather()` and `spread()`: --&gt;
 
-]
+&lt;!-- .pull-left4[ --&gt;
+
+&lt;!-- `gather()`: Move data from *columns* into many *rows* --&gt;
+
+
+&lt;!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} --&gt;
+&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png") --&gt;
+&lt;!-- ``` --&gt;
+&lt;!-- ] --&gt;
+
+
+&lt;!-- .pull-right5[ --&gt;
+
+&lt;!-- `spread()`: Move data from several *rows* into columns --&gt;
+
+&lt;!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} --&gt;
+&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png") --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;!-- ] --&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

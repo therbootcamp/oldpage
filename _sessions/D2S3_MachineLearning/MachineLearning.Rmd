@@ -593,27 +593,25 @@ pred_err_A <- mean(abs(pred_A - data_test$y))
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S3_MachineLearning/MachineLearning_practical.html">Link to Machine Learning practical</a>
 
 
----
+<!-- --- -->
+<!-- # What is the history of machine learning? -->
 
----
-# What is the history of machine learning?
+<!-- - 1805 - 1809: Legendre and Gauss discover least squares. Soon after Galton defines **Regression** in a biological context, followed by Pearson for purely statistical analyses. -->
 
-- 1805 - 1809: Legendre and Gauss discover least squares. Soon after Galton defines **Regression** in a biological context, followed by Pearson for purely statistical analyses.
+<!-- - 1952: Arthur Samuel creates first computer learning program for learning checkers and coins the term **Machine Learning** in 1959.  -->
 
-- 1952: Arthur Samuel creates first computer learning program for learning checkers and coins the term **Machine Learning** in 1959. 
+<!-- - 1957: Frank Rosenblatt creates first **Neural Network** to simulate the thought process of the human brain. -->
 
-- 1957: Frank Rosenblatt creates first **Neural Network** to simulate the thought process of the human brain.
+<!-- - 1963: First algorithm for **Support Vector Machines** is developed by Vapnik & Chervonenkis. -->
 
-- 1963: First algorithm for **Support Vector Machines** is developed by Vapnik & Chervonenkis.
+<!-- - 1967: **Nearest neighbor algorithm** is developed for classification -->
 
-- 1967: **Nearest neighbor algorithm** is developed for classification
+<!-- - 1984: Breiman & Olshen publish the CART algorithm for **Decision Trees**, followed by Quinlan who publishes the ID3 algorithm followed by C4.5 -->
 
-- 1984: Breiman & Olshen publish the CART algorithm for **Decision Trees**, followed by Quinlan who publishes the ID3 algorithm followed by C4.5
+<!-- - 1986: Rina Dechter introduces **Deep Learning**, with many subsequent updates in the 2000s. -->
 
-- 1986: Rina Dechter introduces **Deep Learning**, with many subsequent updates in the 2000s.
+<!-- - 1995: Tin Kam Ho develops first algorithm for **Random Forests** -->
 
-- 1995: Tin Kam Ho develops first algorithm for **Random Forests**
-
-Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes.
+<!-- Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes. -->
 
 

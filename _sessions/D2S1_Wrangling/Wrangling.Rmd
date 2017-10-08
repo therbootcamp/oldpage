@@ -429,60 +429,60 @@ data %>%    # Start with data, AND THEN...
 
 
 
-.pull-left4[
-#tidyr
+<!-- .pull-left4[ -->
+<!-- #tidyr -->
 
-`tidyr` is a package for 'tidying' data.
+<!-- `tidyr` is a package for 'tidying' data. -->
 
-'tidying' data means getting it into a different format (usually moving data between rows and columns)
-
-
-```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png")
-```
-]
+<!-- 'tidying' data means getting it into a different format (usually moving data between rows and columns) -->
 
 
-.pull-right5[
-
-<br>
-<br>
-
-### Questions you can answer with tidyr
-
-> Right now there are different rows for each patient, I need every patient's data to be in a single row.
-
-> Can you restructure the data so data in different columns are shown in a single column?
-
-]
+<!-- ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'} -->
+<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png") -->
+<!-- ``` -->
+<!-- ] -->
 
 
+<!-- .pull-right5[ -->
 
----
-#tidyr
+<!-- <br> -->
+<!-- <br> -->
 
-There are two important functions in `tidyr`, `gather()` and `spread()`:
+<!-- ### Questions you can answer with tidyr -->
 
-.pull-left4[
+<!-- > Right now there are different rows for each patient, I need every patient's data to be in a single row. -->
 
-`gather()`: Move data from *columns* into many *rows*
+<!-- > Can you restructure the data so data in different columns are shown in a single column? -->
 
-
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png")
-```
-]
+<!-- ] -->
 
 
-.pull-right5[
 
-`spread()`: Move data from several *rows* into columns
+<!-- --- -->
+<!-- #tidyr -->
 
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png")
-```
+<!-- There are two important functions in `tidyr`, `gather()` and `spread()`: -->
 
-]
+<!-- .pull-left4[ -->
+
+<!-- `gather()`: Move data from *columns* into many *rows* -->
+
+
+<!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} -->
+<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png") -->
+<!-- ``` -->
+<!-- ] -->
+
+
+<!-- .pull-right5[ -->
+
+<!-- `spread()`: Move data from several *rows* into columns -->
+
+<!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} -->
+<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png") -->
+<!-- ``` -->
+
+<!-- ] -->
 
 
 

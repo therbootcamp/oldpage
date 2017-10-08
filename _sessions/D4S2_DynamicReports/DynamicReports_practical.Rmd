@@ -90,7 +90,7 @@ options(digits = 2)  # Round all output to 2 digits
 
 5. Knit the document to make sure it worked! If you have any errors, try to figure out how to solve them!
 
-6. For this practical we'll use the `ACTG175` dataset. This dataset originally comes from the `speff2trial` package. However, I saved a copy of the dataset as a text file at `"https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_slides/data/ACTG175.csv"`. Open this link in a web-browser, and then save the `ACTG175.csv` file to the `1_Data` folder.
+6. For this practical we'll use the `ACTG175` dataset. This dataset originally comes from the `speff2trial` package. However, I saved a copy of the dataset as a text file at `"https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG175.csv"`. Open this link in a web-browser, and then save the `ACTG175.csv` file to the `1_Data` folder.
 
 7. Create a new code chunk and put it under the previous one. We will use this chunk to load the `ACTG175.csv`. In this chunk, read the csv data with `read_csv()` and assign the result to the object `ACTG175`. Write appropriate comments in the chunk!
 
@@ -99,7 +99,7 @@ options(digits = 2)  # Round all output to 2 digits
 9. Add the necessary text and markdown to your document to create the following two paragraphs. Pay attention to the header sizes, *italics* and `code` formats.
 
 ```{r, fig.cap = "Write the necessary markdown to create this output!", eval = TRUE, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("../_image/markdown_ss.png")
+knitr::include_graphics("../_image/markdown_output_ss.png")
 ```
 
 10. Knit the document! Diagnose and correct any errors!
@@ -123,15 +123,14 @@ Here is some code you might find helpful in creating this table!
 ```{r, echo = TRUE}
 # Helpful code to create the summary table!
 
-tbl2 <- ACTG175 %>% 
-  group_by(arms) %>% 
-  summarise(
-    N = n(),
-    Mean = mean(days),
-    Median = median(days),
-    SD = sd(days),
-    Max = max(days)
-)
+trial_summary <- ACTG175 %>% 
+                 group_by(arms) %>% 
+                 summarise(
+                          N = n(),
+                          Mean = mean(days),
+                          Median = median(days),
+                          SD = sd(days),
+                          Max = max(days))
 ```
 
 14. Knit the document! Diagnose and correct any errors!

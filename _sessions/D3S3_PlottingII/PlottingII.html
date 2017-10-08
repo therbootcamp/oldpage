@@ -348,93 +348,91 @@ The Shiny cheatsheet explains the most common functions for rendering and presen
 
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S3_PlottingII/PlottingII_practical.html"&gt;Link to Plotting II practical&lt;/a&gt;
 
----
+&lt;!-- --- --&gt;
 
-## Additional Slides
+&lt;!-- ## Additional Slides --&gt;
 
----
-## Server
+&lt;!-- --- --&gt;
+&lt;!-- ## Server --&gt;
 
-.pull-left5[
+&lt;!-- .pull-left5[ --&gt;
 
-&lt;iframe src="https://econpsychbasel.shinyapps.io/barebones_hist/" width="800" height="800"&gt;&lt;/iframe&gt;
-
-
-]
-
-.pull-right45[
-
-### What you *want* to write... (but it won't work)
-
-```r
-library(shiny)
-
-# User Interface: 
-ui &lt;- fluidPage(
-    mainPanel(
-      # Create a histogram of x in main panel
-      hist(x)
-    )
-  )
-
-server &lt;- function(input, output) {
-  
-  # Define x
-  x &lt;- ChickWeight$weight
-  
-}
-
-shinyApp(ui = ui, server = server)
-```
+&lt;!-- &lt;iframe src="https://econpsychbasel.shinyapps.io/barebones_hist/" width="800" height="800"&gt;&lt;/iframe&gt; --&gt;
 
 
+&lt;!-- ] --&gt;
 
-]
+&lt;!-- .pull-right45[ --&gt;
+
+&lt;!-- ### What you *want* to write... (but it won't work) --&gt;
+&lt;!-- ```{r, eval = FALSE} --&gt;
+&lt;!-- library(shiny) --&gt;
+
+&lt;!-- # User Interface:  --&gt;
+&lt;!-- ui &lt;- fluidPage( --&gt;
+&lt;!--     mainPanel( --&gt;
+&lt;!--       # Create a histogram of x in main panel --&gt;
+&lt;!--       hist(x) --&gt;
+&lt;!--     ) --&gt;
+&lt;!--   ) --&gt;
+
+&lt;!-- server &lt;- function(input, output) { --&gt;
+
+&lt;!--   # Define x --&gt;
+&lt;!--   x &lt;- ChickWeight$weight --&gt;
+
+&lt;!-- } --&gt;
+
+&lt;!-- shinyApp(ui = ui, server = server) --&gt;
+&lt;!-- ``` --&gt;
 
 
 
----
-## Server
-
-
-.pull-left5[
-
-&lt;iframe src="https://econpsychbasel.shinyapps.io/barebones_hist/" width="800" height="800"&gt;&lt;/iframe&gt;
+&lt;!-- ] --&gt;
 
 
 
-]
+&lt;!-- --- --&gt;
+&lt;!-- ## Server --&gt;
 
-.pull-right45[
 
-### What you *must* write...this will work!
+&lt;!-- .pull-left5[ --&gt;
 
-```r
-library(shiny)
+&lt;!-- &lt;iframe src="https://econpsychbasel.shinyapps.io/barebones_hist/" width="800" height="800"&gt;&lt;/iframe&gt; --&gt;
 
-# User Interface:
-ui &lt;- fluidPage(
-  mainPanel(
-    textInput("Title", "Title"),
-    plotOutput("myplot")  # Create the plot output$displot
-  )
-)
 
-server &lt;- function(input, output) {
 
-  # Define x
-  x &lt;- ChickWeight$weight
+&lt;!-- ] --&gt;
 
-  # Send rendered plot to output
-  output$myplot &lt;- renderPlot({
-    hist(x, main = input$Title)
-  })
-}
+&lt;!-- .pull-right45[ --&gt;
 
-shinyApp(ui = ui, server = server)
-```
+&lt;!-- ### What you *must* write...this will work! --&gt;
+&lt;!-- ```{r, eval = FALSE} --&gt;
+&lt;!-- library(shiny) --&gt;
 
-]
+&lt;!-- # User Interface: --&gt;
+&lt;!-- ui &lt;- fluidPage( --&gt;
+&lt;!--   mainPanel( --&gt;
+&lt;!--     textInput("Title", "Title"), --&gt;
+&lt;!--     plotOutput("myplot")  # Create the plot output$displot --&gt;
+&lt;!--   ) --&gt;
+&lt;!-- ) --&gt;
+
+&lt;!-- server &lt;- function(input, output) { --&gt;
+
+&lt;!--   # Define x --&gt;
+&lt;!--   x &lt;- ChickWeight$weight --&gt;
+
+&lt;!--   # Send rendered plot to output --&gt;
+&lt;!--   output$myplot &lt;- renderPlot({ --&gt;
+&lt;!--     hist(x, main = input$Title) --&gt;
+&lt;!--   }) --&gt;
+&lt;!-- } --&gt;
+
+&lt;!-- shinyApp(ui = ui, server = server) --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;!-- ] --&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
