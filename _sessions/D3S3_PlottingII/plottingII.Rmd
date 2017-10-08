@@ -99,7 +99,7 @@ https://econpsychbasel.shinyapps.io/shinyfftrees/
 ---
 ## GlioVis
 
-<iframe src="http://gliovis.bioinfo.cnio.es/" width="1200" height="750"></iframe>
+<iframe src="gliovis.htm" width="1200" height="750"></iframe>
 
 http://gliovis.bioinfo.cnio.es/
 
