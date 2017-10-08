@@ -26,7 +26,7 @@ output: html_document
 
 
 <p align="center"><br>
-    <a href="http://i.imgur.com/PgtvQar.png"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png" width=620></a><br>
+    <a href="http://i.imgur.com/PgtvQar.png"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png" width=660></a><br>
 
 
 <!---
