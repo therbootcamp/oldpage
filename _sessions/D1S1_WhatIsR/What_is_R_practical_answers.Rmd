@@ -35,7 +35,7 @@ All of the code used in this tutorial is based on basic R functions. While they 
 
 1. First we’ll install and load the yarrr package. The yarrr package contains many datasets and functions (created by Nathaniel Phillips).
 
-```{r, eval=F}
+```{r, eval=T}
 # Install and load the yarrr package
 # 1install.packages('yarrr')
 library(yarrr)
@@ -45,7 +45,7 @@ library(yarrr)
 
 2. The pirates dataset contains data from a survey of 1,000 pirates. Inspect it one-by-one using the following functions.
 
-```{r, eval=F}
+```{r, eval=T}
 # Get help for pirates data
 ?pirates
 
@@ -61,7 +61,7 @@ View(pirates)
 
 3. Descriptives for numeric data and categorical data.
 
-```{r, eval=F}
+```{r, eval=T}
 # What is the mean age?
 mean(pirates$age)
 
@@ -74,7 +74,7 @@ table(pirates$sex)
 
 4. Descriptive tatistics as a function of another categorical variable.
 
-```{r, eval=F}
+```{r, eval=T}
 # What was the mean age for each sex?
 aggregate(formula = age ~ sex, 
           data = pirates,
@@ -91,7 +91,7 @@ aggregate(formula = age ~ sex + headband,
 
 5. Creating a histograms of numeric variables.
 
-```{r, eval=F}
+```{r, eval=T}
 # --- A default histogram of pirate ages
 hist(x = pirates$age)
 
@@ -146,7 +146,7 @@ legend(x = 40,
 
 6. Creating scatterplots of two numerical variables.
 
-```{r, eval=F}
+```{r, eval=T}
 # --- A simple scatterplot of pirate height and weight
 plot(x = pirates$height,
      y = pirates$weight,
@@ -179,7 +179,7 @@ abline(model,
 
 7. Changing colors
 
-```{r, eval=F}
+```{r, eval=T}
 # --- Look at all the palettes from piratepal()
 piratepal()
 
@@ -209,7 +209,7 @@ grid()
 
 8. Create a barplot for stratified data
 
-```{r, eval=F}
+```{r, eval=T}
 # --- Barpot of mean height by favorite.pirate
 
 # Calculate mean height for each favorite.pirate
@@ -236,7 +236,7 @@ abline(h = seq(0, 200, 25), lty = 3, lwd = c(1, .5))
 
 9. Run a group comparisons.
 
-```{r, eval=F}
+```{r, eval=T}
 # Do pirates with eyepatches have longer beards than those without eyepatches?
 t.test(formula = beard.length ~ eyepatch, 
        data = pirates,
@@ -255,7 +255,7 @@ summary(beard.aov)
 
 10. Run a regression analysis.
 
-```{r, eval=F}
+```{r, eval=T}
 # regression analysis showing if age, weight, and tattoos predict how many treasure chests a pirate has found
 
 # Run the regression

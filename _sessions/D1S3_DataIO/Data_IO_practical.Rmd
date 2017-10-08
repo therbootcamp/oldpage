@@ -11,7 +11,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-Here a link to the lecture slides for this session: LINK
+Here a link to the lecture slides for this session: <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/D1S3_DataIO/Data_IO.html"><b>LINK</b></a>.
 
 ### Overview
 
@@ -54,10 +54,10 @@ Later you will be working with a randomly generated artificial data set of mine,
 
 Please download the following data files and save them to an appropriate location on the disc:
 
-<a href="{{site.url}}/_materials/data_sets/titanic.csv">titanic.csv</a><br>
-<a href="{{site.url}}/_materials/data_sets/titanic.sav">titanic.sav</a><br>
-<a href="{{site.url}}/_materials/data_sets/titanic.sas7bdat">titanic.sas7bdat</a><br>
-<a href="{{site.url}}/_materials/data_sets/my_data.csv">my_data.csv</a>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.csv">titanic.csv</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sav">titanic.sav</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sas7bdat">titanic.sas7bdat</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/my_data.csv">my_data.csv</a>
 
 If you can, please verify whether the `.sav` and `sas7bdat` are appropriate SPSS and SAS files, respectively.
 
