@@ -51,7 +51,7 @@ A dynamic report is a document that contains key elements which are automaticall
 
 .pull-right6[
 
-<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="400"></iframe>
+<iframe src="decisiontree_rpubs.htm" width="800" height="400"></iframe>
 <br>
 <a href="http://rpubs.com/fabiorocha5150/decisiontreemodel">http://rpubs.com/fabiorocha5150/decisiontreemodel</a>
 
@@ -97,7 +97,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right45[
 
-<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="400"></iframe>
+<iframe src="decisiontree_rpubs.htm" width="800" height="400"></iframe>
 <br>
 <a href="http://rpubs.com/fabiorocha5150/decisiontreemodel">http://rpubs.com/fabiorocha5150/decisiontreemodel</a>
 ]
@@ -181,7 +181,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 http://rmarkdown.rstudio.com/gallery.html
 
-<iframe src="http://rmarkdown.rstudio.com/gallery.html" width="800" height="450"></iframe>
+<iframe src="rmarkdown_gallery.htm" width="800" height="450"></iframe>
 
 ---
 ## R Chunks in R Markdown

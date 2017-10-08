@@ -41,9 +41,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## This is Shiny
 
-<iframe src="https://shiny.rstudio.com/gallery/movie-explorer.html" width="1200" height="800"></iframe>
-
-
+<iframe src="movie_explorer.htm" width="1200" height="800"></iframe>
 
 ---
 ## What is Shiny?
