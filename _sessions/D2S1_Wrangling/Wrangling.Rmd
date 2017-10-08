@@ -57,9 +57,6 @@ https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png")
 ```
 
-
-
-
 ---
 
 .pull-left4[
@@ -78,9 +75,7 @@ dplyr is a combination of 3 things:
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe.jpg")
 ```
 
-
 ]
-
 
 .pull-right5[
 
@@ -91,7 +86,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/sequential.png")
 ```
-
 
 dplyr is meant to be sequential and work like language
 
@@ -107,22 +101,19 @@ data %>%           # Start with data, and THEN
 
 ]
 
-
-
 ---
 
 .pull-left4[
 # dplyr
 
-
 ### Question:
 
-> From the ChickWeight dataframe, calculate the mean weight and time for each diet
+> <font size=5>From the ChickWeight dataframe, calculate the mean weight and time for each diet</font>
 
 ]
 
 
-.pull-right4[
+.pull-right55[
 
 ### Answer:
 ```{r, message = FALSE, warning = FALSE}
@@ -167,7 +158,7 @@ x
 
 ---
 
-#### Ex: Chick 1
+#### Example 1
 
 *Add a column called `weight_d_time` that is weight divided by time*
 
@@ -186,7 +177,7 @@ head(x)   # Print the result
 
 ---
 
-#### Ex: Chick 2
+#### Example 2
 
 *Add a column called `weight_d_time` that is weight divided by time AND `time_d` that is time in days*
 
@@ -217,8 +208,6 @@ data %>%
   )
 ```
 
-
-
 For example, in a dataset, the column `sex` might be coded with 1s and 0s.
 
 You might want to create a new column `sex_new` where 1 = "female" and 0 = "male":
@@ -232,10 +221,7 @@ You might want to create a new column `sex_new` where 1 = "female" and 0 = "male
 
 .pull-right5[
 
-
-
 To change the value of 1 to `"female"`, and 0 to `"male"`, you can use `case_when()`:
-
 
 ```{r, eval = FALSE}
 # Add a column sex_new to data 
@@ -258,11 +244,11 @@ You can think about the code above as follows:
 
 ]
 
-
 ---
 
 .pull-left4[
-#### Ex: Chick 3
+
+#### Example 3
 
 *Create a new variable Diet_name which shows Diet in text format. Here is a table of the values*
 
@@ -276,7 +262,8 @@ You can think about the code above as follows:
 ]
 
 .pull-right5[
-
+<br>
+<br>
 ```{r, message = FALSE, warning = FALSE, eval = TRUE}
 
 ChickWeight <- ChickWeight %>%           # Start with the ChickWeight data
@@ -293,17 +280,11 @@ ChickWeight <- ChickWeight %>%           # Start with the ChickWeight data
 head(ChickWeight)
 ```
 
-
 ]
-
-
-
-
-
 
 ---
 
-#### Ex: Chick 3
+#### Example 4
 
 *For each Diet, calculate the mean weight*
 
@@ -315,13 +296,9 @@ ChickWeight %>%           # Start with the ChickWeight data
   )
 ```
 
-
-
-
-
 ---
 
-#### Ex: Chick 4
+#### Example 5
 
 *For each time period less than 10, calculate the mean weight*
 
@@ -334,12 +311,8 @@ ChickWeight %>%                # Start with the ChickWeight data
   )
 ```
 
-
-
-
-
 ---
-#### Ex: Chick 5:
+#### Example 6
 
 *For each Diet, calculate the mean weight, maximum time, and the number of chicks on each diet*:
 
@@ -353,14 +326,9 @@ ChickWeight %>%           # Start with the ChickWeight data
   )
 ```
 
-
-
-
 ---
 
-
 # Other dplyr verbs
-
 
 | verb| action| example |
 |:---|:----|:----------------|
@@ -368,11 +336,9 @@ ChickWeight %>%           # Start with the ChickWeight data
 |     `sample_frac()`|    Select a random fraction of rows| `sample_frac(.20)`|
 |     `first(), last()`|    Give the first (or last) observation| `first(), last()`|
 
-
-
 ---
 
-#### Ex: Chick 6:
+#### Example 7
 
 *Give me a random sample of 10 rows from the ChickWeight dataframe, but only show me the values for Chick and weight*
 
@@ -384,7 +350,6 @@ ChickWeight %>%
   sample_n(10)
 ```
 
-
 ---
 .pull-left4[
 
@@ -392,13 +357,13 @@ ChickWeight %>%
 
 dplyr operations (almost) always return a dataframe which you can assign to a new object:
 
-
 > *Create a dataframe with the average weight for each time period and nothing else!!*
 
 ]
 
 .pull-right5[
-
+<br>
+<br>
 ```{r}
 # Create a new object called time_agg
 
@@ -411,9 +376,7 @@ time_agg <- ChickWeight %>%
 head(time_agg)
 ```
 
-
 ]
-
 
 ---
 
@@ -425,16 +388,11 @@ dplyr is great for elegantly performing sequential operations on data.
 
 The 'pipe' operator `%>%` helps you string multiple *objects* (like dataframes) and *verbs* (summarise, order, aggregate...) together.
 
-
 ```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png")
 ```
 
-
 ]
-
-
-
 
 .pull-right5[
 
