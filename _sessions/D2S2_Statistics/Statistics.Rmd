@@ -128,7 +128,7 @@ median(ChickWeight$Time) # Mean Time
 
 ]
 
-.pull-right6[
+.pull-right55[
 #### R implimentation
 
 ```{r}
@@ -309,7 +309,6 @@ names(weight.tt)
 ---
 # Examples with ChickWeight Data
 
-
 .pull-left4[
 
 ```{r, eval = FALSE}
@@ -328,16 +327,13 @@ head(x)
 ]
 
 
-.pull-right6[
+.pull-right55[
 
 ```{r, fig.cap = "Source: http://awallpapersimages.com/wp-content/uploads/2016/07/Chicken-cute-baby-image.jpg", echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/cutechicken.jpg")
 ```
 
-
 ]
-
-
 
 ---
 # t-tests with `t.test()`
@@ -360,35 +356,29 @@ head(x)
 
 ]
 
-.pull-right6[
+.pull-right65[
 
 ### One sample t-test
 
 > Is the mean weight of the chicks significantly different from 120?
 
 ```{r, eval = TRUE}
-A <- t.test(x = ChickWeight$weight, # Vector of values 
+t.test(x = ChickWeight$weight,      # Vector of values 
        alternative = "two.sided",   # Two sided test
        mu = 120)                    # Null is 120
-
-A
 ```
 
 ]
 
-
-
-
 ---
 # t-tests with `t.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 ```{r, eval = FALSE}
 ChickWeight
 ```
-
 
 ```{r, echo = FALSE}
 set.seed(102)
@@ -397,31 +387,26 @@ rownames(x) <- NULL
 head(x)
 ```
 
-
 ]
 
-.pull-right6[
+.pull-right65[
 
 ### Two sample t-test
 
 > Is the mean weight of the chicks on Diet 1 different from Diet 2?
 
 ```{r, eval = TRUE}
-B <- t.test(formula = weight ~ Diet,    # Formula
-            data = ChickWeight,         # Data in Chickweight
-            subset = Diet %in% c(1, 2), # Only Diets 1,2
-            alternative = 'two.sided')  # Two-sided test
-
-B
+t.test(formula = weight ~ Diet,    # Formula
+       data = ChickWeight,         # Data in Chickweight
+       subset = Diet %in% c(1, 2)) # Only Diets 1,2
 ```
 
 ]
 
-
 ---
 # Correlation test with `cor.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 ```{r, eval = FALSE}
@@ -435,7 +420,6 @@ x <- ChickWeight[sample(nrow(ChickWeight)),]
 rownames(x) <- NULL
 head(x)
 ```
-
 
 ]
 
@@ -448,10 +432,9 @@ head(x)
 - For `cor.test()`, formula looks like `formula = ~ a + b`
 
 ```{r, eval = TRUE}
-C <- cor.test(formula = ~ weight + Time, # Formula
-              data = ChickWeight)          # Data in Chickweight
+cor.test(formula = ~ weight + Time, # Formula
+         data = ChickWeight)          # Data in Chickweight
 
-C
 ```
 
 ]
@@ -461,7 +444,7 @@ C
 ---
 # Chi-Square test with `chisq.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 ```{r, eval = FALSE}
@@ -488,29 +471,20 @@ head(x)
 - For `chisq.test()`, main argument should be a table of values created from the `table()` function:
 
 ```{r, eval = TRUE}
-table(ChickWeight$Diet)  # Table of counts
-
-D <- chisq.test(x = table(ChickWeight$Diet))
-
-D
+chisq.test(x = table(ChickWeight$Diet))
 ```
 
 ]
 
-
-
-
-
 ---
 # ANOVA with `aov()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 ```{r, eval = FALSE}
 ChickWeight
 ```
-
 
 ```{r, echo = FALSE}
 set.seed(102)
@@ -518,7 +492,6 @@ x <- ChickWeight[sample(nrow(ChickWeight)),]
 rownames(x) <- NULL
 head(x)
 ```
-
 
 ]
 
@@ -537,53 +510,36 @@ E <- aov(formula = weight ~ Diet, # Formula
 summary(E)  # Sow a summary of the results
 ```
 
-
-
 ]
-
-
-
 
 ---
 # Post-hoc tests with `TukeyHSD()`
 
 .pull-left4[
 
-### ChickWeight data
-```{r, eval = FALSE}
-ChickWeight
-```
-
-
-```{r, echo = FALSE}
-set.seed(102)
-x <- ChickWeight[sample(nrow(ChickWeight)),]
-rownames(x) <- NULL
-head(x)
-```
-
-
-]
-
-.pull-right6[
-
-### Post Hoc
-
 > Which specific pairs of Diets differed?
+
+### Step 1: Create aov object
 
 - Apply `TukeyHSD()` to an `aov` object to get post-hoc tests.
 
 ```{r, eval = TRUE}
-D <- aov(formula = weight ~ Diet, # Formula
-         data = ChickWeight)      # Data in Chickweight
+# Create an aov object called D
 
-TukeyHSD(D)  # Conduct post-hoc tests on D
+D <- aov(formula = weight ~ Diet,
+         data = ChickWeight)
 ```
-
-
 
 ]
 
+.pull-right55[
+
+### Step 2: Apply `TukeyHSD()` to object
+```{r}
+TukeyHSD(D)  # Conduct post-hoc tests
+```
+
+]
 
 
 ---
@@ -599,7 +555,7 @@ TukeyHSD(D)  # Conduct post-hoc tests on D
 
 - When in doubt, always look at the help files and examples at the end.
 
-- Save hypothesis tests as new objects, then apply `names()` to see what elements it contains, then extract what you want with `S`
+- Save hypothesis tests as new objects, then apply `names()` to see what elements it contains, then extract what you want with `$`
 
 ```{r, eval = FALSE}
 # Run test and save as test_A
@@ -616,7 +572,7 @@ test_A$statistic # Ah ok! Show me the test statistic
 
 ]
 
-.pull-right3[
+.pull-right25[
 
 `?t.test`
 
@@ -628,5 +584,14 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
+
+
+
 ---
-# Statistics Practical
+
+## Statistics Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html">Link to Statistics practical</a>
+
+
+---

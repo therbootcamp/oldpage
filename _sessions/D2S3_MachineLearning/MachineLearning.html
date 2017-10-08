@@ -113,7 +113,7 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 &gt; "An economist is an expert who will know tomorrow why the things he predicted yesterday didn't happen today." ~ Evan Esar
 
-&gt; "A prediction about the direction of the stock market tells you nothing about where stocks are headed, but a whole lot about the person doing the predicting" ~ Warren Buffett
+&lt;!-- &gt; "A prediction about the direction of the stock market tells you nothing about where stocks are headed, but a whole lot about the person doing the predicting" ~ Warren Buffett --&gt;
 
 ]
 
@@ -332,9 +332,10 @@ loan_rpart_pred &lt;- predict(loan_rpart_model,
 ---
 # Advanced algorithms
 
-.pull-left5[
+.pull-left45[
 
-### Support Vector Machines with `e1071::svm()`
+### Support Vector Machines 
+###`e1071::svm()`
 
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/supportvectormachine.png" width="40%" style="display: block; margin: auto;" /&gt;
@@ -349,15 +350,12 @@ svm_model &lt;- svm(formula = risk ~ .,
                  ...)
 ```
 
-
-
 ]
-
 
 .pull-right5[
 
-### Random Forests with `randomForest::randomForest()`
-
+### Random Forests
+###`randomForest::randomForest()`
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest.png" width="50%" style="display: block; margin: auto;" /&gt;
 
@@ -373,18 +371,14 @@ rf_model &lt;- randomForest(formula = risk ~ .,
 
 ]
 
-
-
-
 ---
 # How do I do machine learning in R?
 
 .pull-left4[
 
-
 If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
 
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="95%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -426,6 +420,15 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 # Questions?
 
 
+
+---
+
+## Machine Learning Pratical
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S3_MachineLearning/MachineLearning_practical.html"&gt;Link to Machine Learning practical&lt;/a&gt;
+
+
+---
 
 ---
 # What is the history of machine learning?

@@ -462,6 +462,14 @@ data %>%    # Start with data, AND THEN...
 
 ---
 
+## Wrangling Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html">Link to Wrangling practical</a>
+
+
+---
+
+
 
 .pull-left4[
 #tidyr

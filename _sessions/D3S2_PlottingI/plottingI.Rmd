@@ -245,7 +245,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-left5[
 
-
 - In this introduction, we'll introduce the basic building blocks of creating plots with ggplot2 by creating the following plot from the ground-up:
 
 ```{r, echo = FALSE, fig.width = 7, fig.height = 4}
@@ -759,7 +758,7 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-> Our goal.
+<font size=5>Our goal</font>
 
 <br>
 
@@ -803,7 +802,7 @@ To add a smoothed line to a plot, use `geom_smooth()`
 
 .pull-right45[
 
-> Add a blue smoothed line
+<font size =5>Add a blue smoothed line</font>
 
 ```{r, fig.width = 7, fig.height = 4}
 ggplot(data = mpg, 
@@ -909,7 +908,7 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-<font size=5>Our goal.</font>
+<font size=5>Our goal</font>
 
 <br>
 <br>
@@ -1010,7 +1009,7 @@ ggplot(data = mpg,
 .pull-right35[
 <br>
 
-<font size = 5>Our Goal</font>
+<font size=5>Our goal</font>
 
 <br>
 <br>
@@ -1220,6 +1219,15 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ---
 ## Questions?
+
+---
+
+## Plotting Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D3S2_PlottingI/PlottingI_practical.html">Link to Plotting practical</a>
+
+
+---
 
 
 ---

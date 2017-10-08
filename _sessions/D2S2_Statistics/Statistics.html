@@ -141,7 +141,7 @@ median(ChickWeight$Time) # Mean Time
 
 ]
 
-.pull-right6[
+.pull-right55[
 #### R implimentation
 
 
@@ -347,7 +347,6 @@ names(weight.tt)
 ---
 # Examples with ChickWeight Data
 
-
 .pull-left4[
 
 
@@ -371,14 +370,11 @@ ChickWeight
 ]
 
 
-.pull-right6[
+.pull-right55[
 
 ![Source: http://awallpapersimages.com/wp-content/uploads/2016/07/Chicken-cute-baby-image.jpg](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/cutechicken.jpg)
 
-
 ]
-
-
 
 ---
 # t-tests with `t.test()`
@@ -406,7 +402,7 @@ ChickWeight
 
 ]
 
-.pull-right6[
+.pull-right65[
 
 ### One sample t-test
 
@@ -414,11 +410,9 @@ ChickWeight
 
 
 ```r
-A &lt;- t.test(x = ChickWeight$weight, # Vector of values 
+t.test(x = ChickWeight$weight,      # Vector of values 
        alternative = "two.sided",   # Two sided test
        mu = 120)                    # Null is 120
-
-A
 ```
 
 ```
@@ -437,20 +431,16 @@ A
 
 ]
 
-
-
-
 ---
 # t-tests with `t.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 
 ```r
 ChickWeight
 ```
-
 
 
 ```
@@ -463,10 +453,9 @@ ChickWeight
 ## 6    148   18    22    2
 ```
 
-
 ]
 
-.pull-right6[
+.pull-right65[
 
 ### Two sample t-test
 
@@ -474,12 +463,9 @@ ChickWeight
 
 
 ```r
-B &lt;- t.test(formula = weight ~ Diet,    # Formula
-            data = ChickWeight,         # Data in Chickweight
-            subset = Diet %in% c(1, 2), # Only Diets 1,2
-            alternative = 'two.sided')  # Two-sided test
-
-B
+t.test(formula = weight ~ Diet,    # Formula
+       data = ChickWeight,         # Data in Chickweight
+       subset = Diet %in% c(1, 2)) # Only Diets 1,2
 ```
 
 ```
@@ -498,11 +484,10 @@ B
 
 ]
 
-
 ---
 # Correlation test with `cor.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 
@@ -522,7 +507,6 @@ ChickWeight
 ## 6    148   18    22    2
 ```
 
-
 ]
 
 .pull-right6[
@@ -535,10 +519,8 @@ ChickWeight
 
 
 ```r
-C &lt;- cor.test(formula = ~ weight + Time, # Formula
-              data = ChickWeight)          # Data in Chickweight
-
-C
+cor.test(formula = ~ weight + Time, # Formula
+         data = ChickWeight)          # Data in Chickweight
 ```
 
 ```
@@ -562,7 +544,7 @@ C
 ---
 # Chi-Square test with `chisq.test()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 
@@ -595,19 +577,7 @@ ChickWeight
 
 
 ```r
-table(ChickWeight$Diet)  # Table of counts
-```
-
-```
-## 
-##   1   2   3   4 
-## 220 120 120 118
-```
-
-```r
-D &lt;- chisq.test(x = table(ChickWeight$Diet))
-
-D
+chisq.test(x = table(ChickWeight$Diet))
 ```
 
 ```
@@ -620,21 +590,16 @@ D
 
 ]
 
-
-
-
-
 ---
 # ANOVA with `aov()`
 
-.pull-left4[
+.pull-left3[
 
 ### ChickWeight data
 
 ```r
 ChickWeight
 ```
-
 
 
 ```
@@ -646,7 +611,6 @@ ChickWeight
 ## 5     48    4     5    1
 ## 6    148   18    22    2
 ```
-
 
 ]
 
@@ -674,53 +638,35 @@ summary(E)  # Sow a summary of the results
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
-
 ]
-
-
-
 
 ---
 # Post-hoc tests with `TukeyHSD()`
 
 .pull-left4[
 
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-
-]
-
-.pull-right6[
-
-### Post Hoc
-
 &gt; Which specific pairs of Diets differed?
+
+### Step 1: Create aov object
 
 - Apply `TukeyHSD()` to an `aov` object to get post-hoc tests.
 
 
 ```r
-D &lt;- aov(formula = weight ~ Diet, # Formula
-         data = ChickWeight)      # Data in Chickweight
+# Create an aov object called D
 
-TukeyHSD(D)  # Conduct post-hoc tests on D
+D &lt;- aov(formula = weight ~ Diet,
+         data = ChickWeight)
+```
+
+]
+
+.pull-right55[
+
+### Step 2: Apply `TukeyHSD()` to object
+
+```r
+TukeyHSD(D)  # Conduct post-hoc tests
 ```
 
 ```
@@ -739,10 +685,7 @@ TukeyHSD(D)  # Conduct post-hoc tests on D
 ## 4-3 -7.687 -30.8450 15.47 0.8278
 ```
 
-
-
 ]
-
 
 
 ---
@@ -758,7 +701,7 @@ TukeyHSD(D)  # Conduct post-hoc tests on D
 
 - When in doubt, always look at the help files and examples at the end.
 
-- Save hypothesis tests as new objects, then apply `names()` to see what elements it contains, then extract what you want with `S`
+- Save hypothesis tests as new objects, then apply `names()` to see what elements it contains, then extract what you want with `$`
 
 
 ```r
@@ -776,7 +719,7 @@ test_A$statistic # Ah ok! Show me the test statistic
 
 ]
 
-.pull-right3[
+.pull-right25[
 
 `?t.test`
 
@@ -786,8 +729,17 @@ test_A$statistic # Ah ok! Show me the test statistic
 
 ]
 
+
+
+
 ---
-# Statistics Practical
+
+## Statistics Pratical
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html"&gt;Link to Statistics practical&lt;/a&gt;
+
+
+---
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

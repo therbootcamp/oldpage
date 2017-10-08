@@ -37,7 +37,7 @@ library(knitr)
 
 ## What is a dynamic report?
 
-.pull-left45[
+.pull-left35[
 
 A dynamic report is a document that contains key elements which are automatically accessed and/or created by code:
 
@@ -49,18 +49,18 @@ A dynamic report is a document that contains key elements which are automaticall
 
 ]
 
-.pull-right45[
+.pull-right6[
 
-### Example: 
-
-<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="1000"></iframe>
+<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="400"></iframe>
+<br>
+<a href="http://rpubs.com/fabiorocha5150/decisiontreemodel">http://rpubs.com/fabiorocha5150/decisiontreemodel</a>
 
 ]
 
 ---
 ## Why are dynamic reports important?
 
-.pull-left45[
+.pull-left4[
 
 ### 1. Efficiency
 
@@ -70,7 +70,7 @@ A dynamic report is a document that contains key elements which are automaticall
 
 ]
 
-.pull-right45[
+.pull-right55[
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/reproducibility_images.png")
@@ -97,8 +97,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right45[
 
-<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="1000"></iframe>
-
+<iframe src="http://rpubs.com/fabiorocha5150/decisiontreemodel" width="800" height="400"></iframe>
+<br>
+<a href="http://rpubs.com/fabiorocha5150/decisiontreemodel">http://rpubs.com/fabiorocha5150/decisiontreemodel</a>
 ]
 
 
@@ -141,11 +142,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## Cheatsheet
 
-```{r, echo = FALSE, out.width="55%", fig.align = 'center'}
+```{r, echo = FALSE, out.width="50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_cheat.png")
 ```
 
-Source: https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+<a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf</a>
 
 ---
 ## How do I write an R Markdown Document
@@ -176,11 +177,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ---
-## R Markdown Applications
+## R Markdown Gallery
 
 http://rmarkdown.rstudio.com/gallery.html
 
-<iframe src="http://rmarkdown.rstudio.com/gallery.html" width="800" height="800"></iframe>
+<iframe src="http://rmarkdown.rstudio.com/gallery.html" width="800" height="450"></iframe>
 
 ---
 ## R Chunks in R Markdown
@@ -433,9 +434,13 @@ Read Wickham's book **"R Packages"** (also available for free online) to learn h
 ]
 
 ---
-## Practical
 
-- Goal: Create a basic, dynamic report that returns an HTML (or PDF) document as a report, and another that returns a presentation!
+## Dynamic Reports Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D4S2_DynamicReports/DynamicReports_practical.html">Link to Dynamic Reports practical</a>
+
+
+---
 
 
 
