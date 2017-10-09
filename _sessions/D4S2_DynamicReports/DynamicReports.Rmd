@@ -288,6 +288,10 @@ kable(economics[1:3, c("date", "pop")],
 ### Include an image
 
 ```{r, echo = TRUE, out.width = "20%"}
+include_graphics(path = ".../rlogo.png")
+```
+
+```{r, echo = FALSE, out.width = "20%"}
 include_graphics(path = "https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rlogo.png")
 ```
 

@@ -55,7 +55,7 @@ In this introduction you will learn...
 <font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
 ]
 .pull-right5[
-<img src="https://therbootcamp.github.io/_slides/images/folder_structure.png" width="500">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/folder_structure.png" width="400">
 ]
 
 
@@ -113,20 +113,17 @@ this_is <- "pseduo_code"
 - As good as R is for statistics, it's as good if not better for plots.
 
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
-knitr::include_graphics("images/ggplotgallery.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/ggplotgallery.png?raw=true")
 ```
-
-
 
 
 ---
 
 ## Grammar of Graphics
 
-.pull-left3[
+.pull-left5[
 
 The Grammar of graphics breaks down plots into several key pieces:
-
 
 | aesthetics| Description|
 |:------|:----|
@@ -138,22 +135,21 @@ The Grammar of graphics breaks down plots into several key pieces:
 |    Coordinates| What is the scale of the axes?|
 |    Theme| What should the overall plot look like?|
 
-
 ]
 
 
-.pull-right3[
+.pull-right45[
+
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("images/complexplot1.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/complexplot1.png?raw=true")
 ```
 
 ]
 
-
 ---
 ## ggplot2
 
-.pull-left3[
+.pull-left4[
 
 How do we make elegant, easy to program plots according to the grammar of graphics in R?
 
@@ -161,28 +157,23 @@ How do we make elegant, easy to program plots according to the grammar of graphi
 
 By far one of the most popular R packages, used to generate the vast majority of plots from R.
 
-
-
 ]
 
 
-.pull-right3[
+.pull-right5[
 
 
 ```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("images/wickham_portrait.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/wickham_portrait.png?raw=true")
 ```
 
-
 ]
-
 
 ---
 
 ## Final result!
 
-
-```{r, fig.width = 7, fig.height = 4, out.width = "40%"}
+```{r, fig.width = 7, fig.height = 4, out.width = "40%", fig.align = 'center'}
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy, col = class)) +
   geom_point() + 
@@ -196,29 +187,24 @@ ggplot(data = mpg,
 
 ```
 
-
-
 ---
 ## What is Shiny?
 
 ```{r, echo = FALSE, fig.align = 'center', fig.cap = 'Source: http://shiny.rstudio.com/images/shiny-cheatsheet.pdf', out.width = "95%"}
-knitr::include_graphics("images/shiny_definition.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/shiny_definition.png?raw=true")
 ```
-
-
 
 ---
 ## Structure of a Shiny App
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "75%"}
-knitr::include_graphics("images/uiandserver.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/uiandserver.png?raw=true")
 ```
 
 ---
 ## User Interface
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("images/exampleapp_B.png")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/exampleapp_B.png?raw=true")
 ```
-
 

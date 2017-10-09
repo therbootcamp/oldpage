@@ -27,7 +27,7 @@ In this practical you'll practice creating interactive graphics with `shiny`.
 knitr::include_graphics("../_image/shiny_cheatsheet_ss.png")
 ```
 
-If you don't have it already, you can access the `shiny` cheatsheet here [ttp://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf](ttp://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf)
+If you don't have it already, you can access the `shiny` cheatsheet here [http://shiny.rstudio.com/images/shiny-cheatsheet.pdf](http://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
 ### Examples
 
