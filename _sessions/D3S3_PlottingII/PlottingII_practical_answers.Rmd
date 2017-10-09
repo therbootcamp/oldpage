@@ -14,7 +14,7 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 ### Slides
 
-[Here are the introduction slides for this practical on plotting!](https://therbootcamp.github.io/_slides/D2S1_Wrangling/wrangling_lecture.html)
+[Here are the introduction slides for this practical on Plotting 2.0: Shiny!](https://therbootcamp.github.io/_sessions/D3S3_PlottingII/PlottingII.html)
 
 ### Overview
 
@@ -362,14 +362,34 @@ output$summary <- renderPrint({
  
 ```
 
-
 27. Reload your app and have fun!! You're finished!
 
 ## Challenges
 
 C1. Now that you have multiple datasets, try removing the Plot title and X-axis label inputs (`input$main`, `input$xlab`), and instead have the plot automatically adjust the plot title and axis label based on the dataset the users selects. Just like we did with `x_reactive()`, you'll need to assign the main title and x label as reactive values.
    
-C2. Instead of a histogram, try creating a scatterplot as the main plotting output. Keep in mind that you'll now need to create two reactive values: `x_reactive()` for the data on the x-axis and `y_reactive()` for the y-axis. Then, as an optional argument (using a `checkboxInput`), allow the user to add a regression line to the plot.
+```{r}
+
+main_r <- reactive({
+
+  switch(input$mydata,  # Look at the value of input$mydata...
+         "geyser" = "Geyser",          # If the value is 'geyser', return data from faithful
+         "economics" = "Economics", # if the value is 'economics' return unemployment data
+         "diamonds" = "Diamonds")      # If the value is 'diamonds' return price data
+
+})
+
+hist(x_reactive(),             
+    breaks = 10,
+    col = input$bincolor,  
+    border = 'white',
+    main = main_r(),          # HERE!!! Change to main_r()
+    xlab = input$xlab)
+
+```
+
+<!-- C2. Instead of a histogram, try creating a scatterplot as the main plotting output. Keep in mind that you'll now need to create two reactive values: `x_reactive()` for the data on the x-axis and `y_reactive()` for the y-axis. Then, as an optional argument (using a `checkboxInput`), allow the user to add a regression line to the plot. -->
+
 
 
 

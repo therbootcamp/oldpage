@@ -16,7 +16,7 @@ knitr::include_graphics("https://image.slidesharecdn.com/8-150928160000-lva1-app
 
 ### Slides
 
-- [Here are the introduction slides for this practical on statistics!](https://therbootcamp.github.io/_slides/D2S2_Statistics/statistics_lecture.html)
+- [Here are the introduction slides for this practical on statistics!](https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics.html)
 
 ### Overview
 

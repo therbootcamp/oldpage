@@ -14,7 +14,8 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 ### Slides
 
-[Here are the introduction slides for this practical on Plotting 1.0: ggplot!](https://therbootcamp.github.io/_slides/D3S2_PlottingI/plottingI.html#1)
+[Here are the introduction slides for this practical on Plotting 1.0: ggplot!](https://therbootcamp.github.io/_sessions/D3S2_PlottingI/PlottingI.html)
+
 
 ### Overview
 
@@ -400,7 +401,7 @@ ggplot(data = midwest,
 
 ```{r, echo = TRUE, eval = FALSE}
 # Read in nba data
-nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_slides/data/nba_long.csv")
+nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
 
 ggplot(XX, 
        mapping = aes(x = XX, y = XX, fill = XX)) + 
@@ -419,7 +420,7 @@ ggplot(XX,
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 10, fig.height = 12}
 # Read in nba data
-nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_slides/data/nba_long.csv")
+nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
 
 ggplot(nba_long, 
        mapping = aes(x = Name, y = measure, fill = value)) + 

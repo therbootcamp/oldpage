@@ -14,7 +14,8 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 ### Slides
 
-[Here are the introduction slides for this practical on Plotting 2.0: Shiny!](https://therbootcamp.github.io/_slides/D3S3_PlottingII/plottingII.html#1)
+[Here are the introduction slides for this practical on Plotting 2.0: Shiny!](https://therbootcamp.github.io/_sessions/D3S3_PlottingII/PlottingII.html)
+
 
 ### Overview
 

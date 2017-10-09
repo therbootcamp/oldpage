@@ -14,7 +14,7 @@ knitr::include_graphics("../_image/rmarkdown_hex.png")
 
 ### Slides
 
-[Here are the introduction slides for this practical on dynamic reports!](https://therbootcamp.github.io/_slides/D4S2_DynamicReports/dynamicreports.html)
+[Here are the introduction slides for this practical on dynamic reports!](https://therbootcamp.github.io/_sessions/D4S1_DynamicReports/DynamicReports.html)
 
 ### Overview
 

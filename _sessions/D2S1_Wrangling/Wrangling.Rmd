@@ -33,9 +33,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 
-
 ]
-
 
 .pull-right5[
 

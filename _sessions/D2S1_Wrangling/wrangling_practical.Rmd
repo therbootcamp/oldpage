@@ -14,7 +14,7 @@ knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a53
 
 ### Slides
 
-- [Here are the introduction slides for this practical on data wrangling!](https://therbootcamp.github.io/_slides/D2S1_Wrangling/wrangling_lecture.html)
+- [Here are the introduction slides for this practical on data wrangling!](https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling.html)
 
 ### Overview
 

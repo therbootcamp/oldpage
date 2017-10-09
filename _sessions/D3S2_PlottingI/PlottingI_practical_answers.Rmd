@@ -14,7 +14,7 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 ### Slides
 
-[Here are the introduction slides for this practical on plotting!](https://therbootcamp.github.io/_slides/D2S1_Wrangling/wrangling_lecture.html)
+[Here are the introduction slides for this practical on Plotting 1.0: ggplot!](https://therbootcamp.github.io/_sessions/D3S2_PlottingI/PlottingI.html)
 
 ### Overview
 

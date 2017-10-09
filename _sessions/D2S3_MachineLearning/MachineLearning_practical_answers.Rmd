@@ -16,7 +16,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-- [Here are the introduction slides for this practical on machine learning!](https://therbootcamp.github.io/_slides/D2S3_MachineLearning/machinelearning_lecture.html)
+- [Here are the introduction slides for this practical on machine learning!](https://therbootcamp.github.io/_sessions/D2S3_MachineLearning/MachineLearning.html)
 
 ### Overview
 
