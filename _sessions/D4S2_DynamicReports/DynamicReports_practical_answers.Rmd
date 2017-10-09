@@ -5,10 +5,10 @@ date: "10/8/2017"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, echo = FALSE}
 knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
                       fig.height = 6,       # Figure height (in)
-                      echo = TRUE,          # Repeat code
+                      echo = FALSE,          # Repeat code
                       eval = TRUE,          # Evaluate chunks
                       message = FALSE,      # Don't print messages
                       warning = FALSE,      # Don't print warnings
@@ -90,7 +90,7 @@ cd4_cor_r <- cd4_cor$estimate  # Get the correlation
 cd4_cor_p <- cd4_cor$p.value   # Get the p-value
 ```
 
-The correlation between CD4 T cell count at baseline and number of days until a major negative event was r = `round(cd4_cor_r, 2)`, p = `r round(cd4_cor_p, 2)`
+The correlation between CD4 T cell count at baseline and number of days until a major negative event was r = `r round(cd4_cor_r, 2)`, p < .01.
 
 
 ```{r}
