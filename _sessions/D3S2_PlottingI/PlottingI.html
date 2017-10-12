@@ -65,7 +65,7 @@ hist(x = ChickWeight$weight,
      main = "Histogram in Base R")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -107,7 +107,7 @@ plot(x = economics$date,
      )
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -233,7 +233,7 @@ By far one of the most popular R packages, used to generate the vast majority of
 
 - In this introduction, we'll introduce the basic building blocks of creating plots with ggplot2 by creating the following plot from the ground-up:
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -360,7 +360,7 @@ The `mpg` data is a tibble of car data contained in the `ggplot2` package
 Our goal is to build the following plot step by step:
 
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-18-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-18-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -391,7 +391,7 @@ Our goal is to build the following plot step by step:
 ggplot(data = mpg)
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -430,7 +430,7 @@ ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy))
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -463,7 +463,7 @@ ggplot(data = mpg,
 ### ggplot uses `+` to add additional elements to a plot
 
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-22-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -504,7 +504,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-23-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -526,7 +526,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-24-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-24-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -544,7 +544,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -565,7 +565,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -582,7 +582,7 @@ ggplot(data = mpg,
   geom_count()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -607,7 +607,7 @@ ggplot(data = midwest,
   geom_joy(col = "white")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -630,7 +630,7 @@ ggplot(nba_long,
   coord_flip()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -647,7 +647,7 @@ ggplot(nba_long,
 
 *How do we get points to be shown in different colors like the plot below?*
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -662,7 +662,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -677,7 +677,7 @@ ggplot(data = mpg,
   geom_point()   # Add points that respect the aesthetics
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-33-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-33-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -695,7 +695,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -714,7 +714,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-35-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -735,7 +735,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-36-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -747,7 +747,7 @@ ggplot(data = mpg,
 
 &lt;br&gt;
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-37-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -784,7 +784,7 @@ ggplot(data = mpg,
   geom_smooth(col = "blue")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -806,7 +806,7 @@ ggplot(data = mpg,
   geom_smooth(col = "blue") # geom_smooth IGNORES global col aesthetic
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-39-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-39-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -820,7 +820,7 @@ ggplot(data = mpg,
   geom_smooth()  # geom_smooth RESPECTS global col aesthetic (class)
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-40-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-40-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -834,7 +834,7 @@ ggplot(data = mpg,
   geom_smooth(col = "blue") # Overrides global col aesthetic (class)
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-41-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-41-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Example C: Override col aesthetic in geom_smooth() &amp; geom_point()
@@ -847,7 +847,7 @@ ggplot(data = mpg,
   geom_smooth(col = "blue")  # Overrides global col aesthetic (class)
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-42-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-42-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Example D: Override col aesthetic in geom_point()
@@ -860,7 +860,7 @@ ggplot(data = mpg,
   geom_smooth()              #
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-43-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-43-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -876,7 +876,7 @@ ggplot(data = mpg,
               method = "lm") # Use lm (linear model) smoothing line
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-44-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-44-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -897,7 +897,7 @@ ggplot(data = mpg,
   geom_smooth(col = "blue",  method = "lm")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-45-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-45-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -910,7 +910,7 @@ ggplot(data = mpg,
 &lt;br&gt;
 &lt;br&gt;
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-46-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -948,7 +948,7 @@ ggplot(data = mpg +
 ```
 
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-48-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-48-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -975,7 +975,7 @@ ggplot(data = mpg,
        caption = "Source:...")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-49-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-49-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -990,7 +990,7 @@ ggplot(data = mpg,
 &lt;br&gt;
 &lt;br&gt;
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1028,7 +1028,7 @@ ggplot(data = mpg,
   geom_smooth(method = "lm")
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-51-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-51-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1065,7 +1065,7 @@ ggplot(data = mpg,
   theme_bw()   # Use the black and white theme
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1102,7 +1102,7 @@ ggplot(data = mpg,
   theme_dark()   # Use the dark theme
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1139,7 +1139,7 @@ ggplot(data = mpg,
   theme_light()   # Use the light theme
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -1162,7 +1162,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-55-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-55-1.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1179,7 +1179,7 @@ ggplot(data = mpg,
   facet_wrap(~ class)
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-56-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+&lt;img src="plottingI_files/figure-html/unnamed-chunk-56-1.png" width="30%" style="display: block; margin: auto;" /&gt;
 
 
 ---
