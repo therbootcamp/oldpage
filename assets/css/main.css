@@ -69,14 +69,14 @@ body {
     }
 }
 .content .current-boot {
-    font-size: 20px;
+    font-size: 30px;
     display: block;
     line-height: 1;
     margin: 5px 0 10px
 }
 @media only screen and (min-width: 768px) {
     .content .current-boot {
-        font-size: 40px
+        font-size: 60px
     }
 }
 .content .site-description {
