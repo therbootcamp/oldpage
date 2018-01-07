@@ -55,6 +55,42 @@ https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png")
 ```
 
+
+
+---
+
+.pull-left5[
+# Descriptive functions
+
+- Each takes a numeric vector `x`, and returns a numeric scaler
+
+| Function| action|
+|:-------------|:----|
+|     `sum(x)`, `prod(x)`|   Sum or product|
+|     `min(x), max(x)`|    Minimum, maximum|
+|     `mean(x), median(x)`|    Arithmetic mean or median| 
+|     `var(x)`, `sd(x)`|   Variance, standard deviation|
+
+]
+
+.pull-right5[
+
+### Examples
+
+```{r}
+# What is the sum of all weights in the data?
+sum(ChickWeight$weight)
+
+# What is the mean weight?
+mean(ChickWeight$weight)
+
+# What is the standard deviation of the weights?
+sd(ChickWeight$weight)
+```
+
+
+]
+
 ---
 
 .pull-left4[

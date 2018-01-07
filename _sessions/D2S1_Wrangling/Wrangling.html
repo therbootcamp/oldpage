@@ -31,9 +31,7 @@ Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
-
 ]
-
 
 .pull-right5[
 
@@ -52,6 +50,59 @@ Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is 
 https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+.pull-left5[
+# Descriptive functions
+
+- Each takes a numeric vector `x`, and returns a numeric scaler
+
+| Function| action|
+|:-------------|:----|
+|     `sum(x)`, `prod(x)`|   Sum or product|
+|     `min(x), max(x)`|    Minimum, maximum|
+|     `mean(x), median(x)`|    Arithmetic mean or median| 
+|     `var(x)`, `sd(x)`|   Variance, standard deviation|
+
+]
+
+.pull-right5[
+
+### Examples
+
+
+```r
+# What is the sum of all weights in the data?
+sum(ChickWeight$weight)
+```
+
+```
+## [1] 70411
+```
+
+```r
+# What is the mean weight?
+mean(ChickWeight$weight)
+```
+
+```
+## [1] 121.8
+```
+
+```r
+# What is the standard deviation of the weights?
+sd(ChickWeight$weight)
+```
+
+```
+## [1] 71.07
+```
+
+
+]
 
 ---
 
@@ -425,16 +476,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 46      4    154
-## 343    31     62
-## 61      6     41
-## 429    38     98
-## 113    10     81
-## 466    41    124
-## 547    48    104
-## 482    42    234
-## 335    30    115
-## 33      3    163
+## 486    43     55
+## 47      4    160
+## 523    46    101
+## 567    50     41
+## 99      9     68
+## 38      4     49
+## 398    35    332
+## 514    45    141
+## 421    37    135
+## 352    31    256
 ```
 
 ---
