@@ -134,13 +134,9 @@ write_csv(ACTG175, path = "tutorials/data/ACTG175.csv")
 
 4. Ok you've got the data from the internet into your R session. But let's save a local copy of the data as a `.csv` file so we'll always have access to it. Using `write_csv()`, save a copy of the data as a `.csv` file called `ACTG175.csv`, also make sure to put it in the data folder you just created (Hint: the main arguments to `write_csv()` are `x`, the object you are writing, and `path`, the directory and file name you're saving the object to.)
 
-5. Now that you have a local copy of the data saved, we try loading the data back into R from that file. But first, delete the object `ACTG175` from your workspace by running `rm(ACTG175)`.
+5. The `ACTG175` data is comes from the `speff2trial` package. If you don't have the `speff2trial` package allready, install it using `install.packages()`. Then, load the package with `library()` and then look at the help menu for the `ACTG175` data by running `?ACTG175`. (Note: If you become really interested in the data, you can also read an article discussing the trial here: [http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article](http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article))
 
-6. Now it's time to get the data back from the local file! To do this, use `read_csv()` to load the `ACTG175.csv` file data back into your R session and again store it as the object `ACTG175`. Now, your code should be able to access your local copy of the data, even when you are not online.
-
-7. The `ACTG175` data is comes from the `speff2trial` package. If you don't have the `speff2trial` package allready, install it using `install.packages()`. Then, load the package with `library()` and then look at the help menu for the `ACTG175` data by running `?ACTG175`. (Note: If you become really interested in the data, you can also read an article discussing the trial here: [http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article](http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article))
-
-8. First thing's first, take a look at the first few rows of the data by printing the `ACTG175` object. It should look like this:
+6. First thing's first, take a look at the first few rows of the data by printing the `ACTG175` object. It should look like this:
 
 ```{r, eval = TRUE, echo = FALSE}
 ACTG175
@@ -148,7 +144,7 @@ ACTG175
 
 ### `mutate()`
 
-9. Add a new column to the dataframe called `age_months` that shows each patient's age in months instead of years (Hint: do simple arithmetic!).
+7. Add a new column to the dataframe called `age_months` that shows each patient's age in months instead of years (Hint: do simple arithmetic!).
 
 ```{r}
 ACTG175 <- ACTG175 %>% mutate(
@@ -156,7 +152,7 @@ ACTG175 <- ACTG175 %>% mutate(
 )
 ```
 
-10. The column `karnof` shows each patient's [Karnofsky score](http://emedicine.medscape.com/article/2172510-overview) on a scale from 0 to 100, create a new variable called `karnof_b` that shows the score on a scale from 0 to 1 (hint: just divide the original column by 100)
+8. The column `karnof` shows each patient's [Karnofsky score](http://emedicine.medscape.com/article/2172510-overview) on a scale from 0 to 100, create a new variable called `karnof_b` that shows the score on a scale from 0 to 1 (hint: just divide the original column by 100)
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
@@ -165,7 +161,7 @@ ACTG175 <- ACTG175 %>%
         )
 ```
 
-11. Now, do the previous two questions in one chunk of code. That is, using one call to `mutate()` create both `age_months` and `karnof_b`
+9. Now, do the previous two questions in one chunk of code. That is, using one call to `mutate()` create both `age_months` and `karnof_b`
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
@@ -175,7 +171,7 @@ ACTG175 <- ACTG175 %>%
     )
 ```
 
-12. A physician wants to see a new score called the `sparrow` which is equal to the Karnofsky score divided by a person's age plus the person's weight in kg. Add each participant's sparrow score as a new column called `sparrow` (Hint: Just take `karnof / age + wtkg)
+10. A physician wants to see a new score called the `sparrow` which is equal to the Karnofsky score divided by a person's age plus the person's weight in kg. Add each participant's sparrow score as a new column called `sparrow` (Hint: Just take `karnof / age + wtkg)
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
@@ -186,14 +182,14 @@ ACTG175 <- ACTG175 %>%
 
 ### `arrange()`
 
-13. Arrange the `ACTG175` data in ascending order of age (from lowest to highest). After, look at the first few rows of the data with `head()` to make sure it worked.
+11. Arrange the `ACTG175` data in ascending order of age (from lowest to highest). After, look at the first few rows of the data with `head()` to make sure it worked.
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
  arrange(age)
 ```
 
-14. Now arrange the data in *descending* order of age (from highest to lowest). After, look at the first few rows of the data with `head()` to make sure it worked.
+12. Now arrange the data in *descending* order of age (from highest to lowest). After, look at the first few rows of the data with `head()` to make sure it worked.
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
@@ -202,7 +198,7 @@ ACTG175 <- ACTG175 %>%
 
    - To arrange data in descending order, just include `desc()` around the variable. E.g.; `data %>% arrrange(desc(height))`
 
-15. You can sort the rows of dataframes with multiple columns by including many arguments to `arrange()`. Now sort the data by `karnof` and then age (`age`), and then arms (`arms`)
+13. You can sort the rows of dataframes with multiple columns by including many arguments to `arrange()`. Now sort the data by `karnof` and then age (`age`), and then arms (`arms`)
 
 ```{r}
 ACTG175 <- ACTG175 %>% 
@@ -211,7 +207,7 @@ ACTG175 <- ACTG175 %>%
 
 ### `case_when()`
 
-16. Create a new column `gender_char` that shows gender as a string.
+14. Create a new column `gender_char` that shows gender as a string.
 
    - Look at the help file with `?ACTG175` to see how gender is coded.
     
@@ -226,7 +222,7 @@ ACTG175 <- ACTG175 %>%
 ```
 
 
-17. Create a new column `over50` that is 1 when patients are older than 50, and 0 when they are younger than or equal to 50
+15. Create a new column `over50` that is 1 when patients are older than 50, and 0 when they are younger than or equal to 50
 
 ```{r}
 ACTG175 <- ACTG175 %>%
@@ -239,7 +235,7 @@ ACTG175 <- ACTG175 %>%
 ```
 
 
-18. Now, repeat the previous two questions, but do them both in the same call to `mutate()`. That is, in one block of code, create `gender_char` and `over50`
+16. Now, repeat the previous two questions, but do them both in the same call to `mutate()`. That is, in one block of code, create `gender_char` and `over50`
 
 ```{r}
 ACTG175 <- ACTG175 %>%
@@ -256,7 +252,7 @@ ACTG175 <- ACTG175 %>%
 
 ### `group_by()` and `summarise()`
 
-19. For each arm, calculate the mean participant age.
+17. For each arm, calculate the mean participant age.
 
 ```{r, eval = FALSE}
 ACTG175 %>% 
@@ -266,7 +262,7 @@ ACTG175 %>%
   )
 ```
 
-20. For each arm, calculate the mean participant age *and* the median Karnofsky score
+18. For each arm, calculate the mean participant age *and* the median Karnofsky score
 
 ```{r}
 ACTG175 %>% 
@@ -277,7 +273,9 @@ ACTG175 %>%
   )
 ```
 
-21. Separately for male and female patients, calculate the percent who have a history of intravenous drug use.
+# Checkpoint!
+
+19. Separately for male and female patients, calculate the percent who have a history of intravenous drug use.
 
    - To calculate a percent of a binary variable with 0s and 1s, just calculate the mean
 
@@ -289,7 +287,7 @@ ACTG175 %>%
   )
 ```
 
-22. Separately for male and female patients (`gender`), calculate the percent who have a history of intravenous drug use (`drugs`), and the percent of patients who indicate homosexual activity
+20. Separately for male and female patients (`gender`), calculate the percent who have a history of intravenous drug use (`drugs`), and the percent of patients who indicate homosexual activity
 
 ```{r}
 ACTG175 %>%
@@ -301,7 +299,7 @@ ACTG175 %>%
 ```
 
 
-23. Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
+21. Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
 
 ```{r}
 ACTG175 %>%
@@ -315,7 +313,7 @@ ACTG175 %>%
 
 ### Challenges
 
-24. Now let's check the major differences between the treatment arms. For each arm, calculate the following:
+22. Now let's check the major differences between the treatment arms. For each arm, calculate the following:
 
    - Mean days until a a major negative event (`days`)
    - Mean CD4 T cell count at baseline.
@@ -337,7 +335,7 @@ ACTG175 %>%
   )
 ```
 
-25. Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of `arms` to text that reflect what the values actually represent. For example, looking at the help file `?ACTG175`, I can see that the treatment arm of - is "zidovudine". I might call this arm `"Z"`. Do this in the all in the same chunk of code.
+23. Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of `arms` to text that reflect what the values actually represent. For example, looking at the help file `?ACTG175`, I can see that the treatment arm of - is "zidovudine". I might call this arm `"Z"`. Do this in the all in the same chunk of code.
 
 
 ```{r}
@@ -360,7 +358,7 @@ ACTG175 %>%
   )
 ```
 
-26. Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (`z30`)
+24. Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (`z30`)
 
 ```{r}
 ACTG175 %>%

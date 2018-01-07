@@ -32,75 +32,272 @@ options(digits = 4)
 
 ### In this tutorial we will cover
 
-- How to calculate basic descriptive statistics
-    - `mean()`, `median()`, `sd()`, ...
+- The basic structure and arguments of most statistical functions
+    - `formula`, `data`, `subset`
+    
+- Simple `htest` objects
 
-- How to conduct hypothesis tests and how to work with `htest` objects
-    - `t.test()`, `cor.test()`, `aov()`, ...
+- General linear model, ANOVA
 
+- Using different methods
+    - `print()`, `summary()`, `names()`, `predict()`, `plot()`
+
+- Accessing elements from statistical objects
 
 ]
-
 
 .pull-right6[
 
 ### Examples
 
 ```{r, eval = FALSE}
-# mean weight
-mean(ChickWeight$weight)
-
-# Standard deviation of Time
-sd(ChickWeight$Time)
-
 # T-test comparing weights from Diets 1 and 2
 t.test(formula = weight ~ Diet,
        data = Chickweight,
        subset = Diet %in% c(1, 2))
 
-# Correlation test between weight and Time
-cor.test(formula = ~ weight + Time,
-         data = ChickWeight)
+# Regression model
+
+weight_glm <- glm(formula = weight ~ .,
+                  data = ChickWeight)
+
+# Summary information
+summary(weight_glm)
+
+weight_glm$coefficients # Acess coefficients
+weight_glm$coefficients # Access residuals
 ```
 
-
-
 ]
+
 ---
-# Two types of statistics: Descriptive and Inferential
+# Basic structure of statistical tests
 
 .pull-left4[
 
-### Descriptive
+### Formula
 
-- Also called *sample statistics*
-- Used to describe general characteristics of a sample
-- Descriptive statistics typically a single scaler value
+- Most statistical functions require a `formula` argument
 
+> `formula = y ~ a + b + ...`
 
-#### Examples
+Means...
 
-| Statistic| R Function|
-|------:|----:|
-|     Mean|    `mean(x)`|
-|     Median|    `median(x)`|
-|     Mode|   `mode(x)`|
-|     Standard Deviation|    `sd(x)`|
+> Model a dependent variable `y` as a function of `a` and `b` and `...`
+
+- Formulas go together with dataframes `data` containing all variables in the formula.
+
 ]
 
 .pull-right6[
-#### R implimentation
+
+### General structure of a hypothesis test and formula
+
+```{r, eval = FALSE}
+my.test(formula = y ~ a + b, # Formula
+        data = my.data,      # Dataframe
+        ...                  # Additional
+        )
+```
+
+- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
+- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
+-  `...` additional arguments specific to test
+]
+
+---
+
+.pull-left4[
+
+## Regression example with `glm()`
 
 ```{r}
-sd(c(5, 3, 6, 3, 2, 6))  # Standard deviation
+head(ChickWeight)
+```
 
-mean(ChickWeight$weight) # Mean weight
+**Goal**: Create a regression model predicting `weight` as a function of Time
 
-median(ChickWeight$Time) # Mean Time
+<br>
+$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$
+]
+
+.pull-right55[
+
+
+- Function: `glm()`
+- Formula: `formula = weight ~ Time`
+- Data: `data = ChickWeight`
+
+```{r}
+# Create a glm object 
+
+# formula: weight ~ Time
+# data: ChickWeight
+
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+
+# Print the object
+chick_glm
+```
+]
+
+
+---
+
+.pull-left7[
+## Using formulas
+
+You can keep adding terms with `+` 
+
+```{r}
+# Include multiple terms with +
+chick_glm_A <- glm(formula = weight ~ Time + Diet + Chick,
+                   data = ChickWeight)
+```
+
+To include *all* variables, use the generic notation <font color = "blue"> `formula = y ~ .`</font>
+
+```{r}
+# Use  y ~ . to include ALL variables
+chick_glm_B <- glm(formula = weight ~ .,
+                   data = ChickWeight)
+```
+
+To include *interaction terms* use `*`
+
+```{r}
+# Include an interaction term between Time and Diet
+chick_glm_C <- glm(formula = weight ~ Time * Diet + Chick,
+                   data = ChickWeight)
+```
+
+]
+
+
+
+---
+
+.pull-left35[
+
+
+<br><br>
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+```{r, eval = FALSE}
+# Create statistical object
+my_obj <- FUN(formula = ...,
+              data = ...)
+
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+**Apply generic functions to a statistical object**
+
+```{r, eval = TRUE}
+# Create a glm object
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+print(chick_glm)
 ```
 
 
+
 ]
+
+---
+
+.pull-left35[
+
+## Exploring statistical objects
+
+The output of a statistical function is always a list with many named elements.
+
+Different statistical objects have different **classes** with different outputs.
+
+To see what is inside of a statistical object, use the `names()` function:
+
+Once you know the names of the elements, use `$` to access them!
+
+]
+
+.pull-right6[
+
+```{r}
+chick_glm <- glm(formula = weight ~ Time + Diet,
+                 data = ChickWeight)
+
+# What class is this object?
+class(chick_glm)
+
+# What are the named elements?
+names(chick_glm)
+
+# Access the coefficients
+chick_glm$coefficients
+```
+
+]
+
+
+---
+
+.pull-left5[
+
+## Common statistical modelling functions
+
+| Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+|     Simple regression|    `lm()`|
+|     General Linear Model|    `glm()`|
+
+
+
+### Check help menus!
+
+
+- Different statistical functions require different arguments.
+
+- Look at the help menus to know exactly what arguments each function needs.
+
+]
+
+
+.pull-right5[
+
+#### Always check help menus!
+
+
+`?t.test`
+
+```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
+```
+
+
+
+]
+
+
+
 
 
 
@@ -224,43 +421,6 @@ t.test(x = ChickWeight$weight,
 
 ]
 
-
-
----
-# Inferential Statistics
-
-.pull-left4[
-
-### Formula
-
-- Many tests allow you to include a `formula` argument
-
-> `formula = y ~ a + b + ...`
-
-Means...
-
-> Model a dependent variable `y` as a function of `a` and `b` and `...`
-
-- Formulas go together with dataframes `data` containing all variables in the formula, and optional `subset` arguments to specify which cases in `data` to include. 
-
-
-]
-
-.pull-right6[
-
-### General structure of a hypothesis test and formula
-
-```{r, eval = FALSE}
-my.test(formula = y ~ a + b, # Formula
-        data = my.data,      # Dataframe
-        ...                  # Additional
-        )
-```
-
-- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
-- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
--  `...` additional arguments specific to test
-]
 
 
 
