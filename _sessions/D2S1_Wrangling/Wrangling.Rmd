@@ -60,7 +60,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 
 .pull-left5[
-# Descriptive functions
+# Vector to scaler functions
 
 - Each takes a numeric vector `x`, and returns a numeric scaler
 
@@ -73,23 +73,60 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
-.pull-right5[
+.pull-right45[
+<br>
 
 ### Examples
 
 ```{r}
-# What is the sum of all weights in the data?
+# Sum of all weights?
 sum(ChickWeight$weight)
 
-# What is the mean weight?
+# Mean weight?
 mean(ChickWeight$weight)
 
-# What is the standard deviation of the weights?
+# Standard deviation of weights?
 sd(ChickWeight$weight)
 ```
 
+]
+
+
+
+---
+
+.pull-left5[
+# Vector to vector / table functions
+
+- Each takes a numeric vector `x`, and returns a vector or table
+
+| Function| action|
+|:-------------|:----|
+|     `unique(x)`|   What are the unique values of x?|
+|     `table(x)`|    How many are there of each unique value in x?|
+|     `rank(x)|    What is the rank order of values in x?|
+
 
 ]
+
+.pull-right45[
+<br>
+
+### Examples
+
+```{r}
+# Sum of all weights?
+sum(ChickWeight$weight)
+
+# Mean weight?
+mean(ChickWeight$weight)
+
+# Standard deviation of weights?
+sd(ChickWeight$weight)
+```
+
+]
+
 
 ---
 
