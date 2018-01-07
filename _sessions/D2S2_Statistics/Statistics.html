@@ -27,15 +27,19 @@ class: center, middle, inverse, title-slide
 
 ### In this tutorial we will cover
 
-- How to calculate basic descriptive statistics
-    - `mean()`, `median()`, `sd()`, ...
+- The basic structure and arguments of most statistical functions
+    - `formula`, `data`, `subset`
+    
+- Simple `htest` objects
 
-- How to conduct hypothesis tests and how to work with `htest` objects
-    - `t.test()`, `cor.test()`, `aov()`, ...
+- General linear model, ANOVA
 
+- Using different methods
+    - `print()`, `summary()`, `names()`, `predict()`, `plot()`
+
+- Accessing elements from statistical objects
 
 ]
-
 
 .pull-right6[
 
@@ -43,77 +47,317 @@ class: center, middle, inverse, title-slide
 
 
 ```r
-# mean weight
-mean(ChickWeight$weight)
-
-# Standard deviation of Time
-sd(ChickWeight$Time)
-
 # T-test comparing weights from Diets 1 and 2
 t.test(formula = weight ~ Diet,
        data = Chickweight,
        subset = Diet %in% c(1, 2))
 
-# Correlation test between weight and Time
-cor.test(formula = ~ weight + Time,
-         data = ChickWeight)
+# Regression model
+
+weight_glm &lt;- glm(formula = weight ~ .,
+                  data = ChickWeight)
+
+# Summary information
+summary(weight_glm)
+
+weight_glm$coefficients # Acess coefficients
+weight_glm$coefficients # Access residuals
 ```
 
-
-
 ]
+
 ---
-# Two types of statistics: Descriptive and Inferential
+# Basic structure of statistical tests
 
 .pull-left4[
 
-### Descriptive
+### Formula
 
-- Also called *sample statistics*
-- Used to describe general characteristics of a sample
-- Descriptive statistics typically a single scaler value
+- Most statistical functions require a `formula` argument
 
+&gt; `formula = y ~ a + b + ...`
 
-#### Examples
+Means...
 
-| Statistic| R Function|
-|------:|----:|
-|     Mean|    `mean(x)`|
-|     Median|    `median(x)`|
-|     Mode|   `mode(x)`|
-|     Standard Deviation|    `sd(x)`|
+&gt; Model a dependent variable `y` as a function of `a` and `b` and `...`
+
+- Formulas go together with dataframes `data` containing all variables in the formula.
+
 ]
 
 .pull-right6[
-#### R implimentation
+
+### General structure of a hypothesis test and formula
 
 
 ```r
-sd(c(5, 3, 6, 3, 2, 6))  # Standard deviation
+my.test(formula = y ~ a + b, # Formula
+        data = my.data,      # Dataframe
+        ...                  # Additional
+        )
 ```
 
-```
-## [1] 1.722
-```
+- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
+- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
+-  `...` additional arguments specific to test
+]
+
+---
+
+.pull-left4[
+
+## Regression example with `glm()`
+
 
 ```r
-mean(ChickWeight$weight) # Mean weight
+head(ChickWeight)
 ```
 
 ```
-## [1] 121.8
+##   weight Time Chick Diet
+## 1     42    0     1    1
+## 2     51    2     1    1
+## 3     59    4     1    1
+## 4     64    6     1    1
+## 5     76    8     1    1
+## 6     93   10     1    1
 ```
+
+**Goal**: Create a regression model predicting `weight` as a function of Time
+
+&lt;br&gt;
+`$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$`
+]
+
+.pull-right55[
+
+
+- Function: `glm()`
+- Formula: `formula = weight ~ Time`
+- Data: `data = ChickWeight`
+
 
 ```r
-median(ChickWeight$Time) # Mean Time
+# Create a glm object 
+
+# formula: weight ~ Time
+# data: ChickWeight
+
+chick_glm &lt;- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+
+# Print the object
+chick_glm
 ```
 
 ```
-## [1] 10
+## 
+## Call:  glm(formula = weight ~ Time, data = ChickWeight)
+## 
+## Coefficients:
+## (Intercept)         Time  
+##        27.5          8.8  
+## 
+## Degrees of Freedom: 577 Total (i.e. Null);  576 Residual
+## Null Deviance:	    2910000 
+## Residual Deviance: 872000 	AIC: 5880
 ```
+]
+
+
+---
+
+.pull-left7[
+## Using formulas
+
+You can keep adding terms with `+` 
+
+
+```r
+# Include multiple terms with +
+chick_glm_A &lt;- glm(formula = weight ~ Time + Diet + Chick,
+                   data = ChickWeight)
+```
+
+To include *all* variables, use the generic notation &lt;font color = "blue"&gt; `formula = y ~ .`&lt;/font&gt;
+
+
+```r
+# Use  y ~ . to include ALL variables
+chick_glm_B &lt;- glm(formula = weight ~ .,
+                   data = ChickWeight)
+```
+
+To include *interaction terms* use `*`
+
+
+```r
+# Include an interaction term between Time and Diet
+chick_glm_C &lt;- glm(formula = weight ~ Time * Diet + Chick,
+                   data = ChickWeight)
+```
+
+]
+
+
+
+---
+
+.pull-left35[
+
+
+&lt;br&gt;&lt;br&gt;
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+
+```r
+# Create statistical object
+my_obj &lt;- FUN(formula = ...,
+              data = ...)
+
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+```
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+**Apply generic functions to a statistical object**
+
+
+```r
+# Create a glm object
+chick_glm &lt;- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+print(chick_glm)
+```
+
+```
+## 
+## Call:  glm(formula = weight ~ Time, data = ChickWeight)
+## 
+## Coefficients:
+## (Intercept)         Time  
+##        27.5          8.8  
+## 
+## Degrees of Freedom: 577 Total (i.e. Null);  576 Residual
+## Null Deviance:	    2910000 
+## Residual Deviance: 872000 	AIC: 5880
+```
+
 
 
 ]
+
+---
+
+.pull-left35[
+
+## Exploring statistical objects
+
+The output of a statistical function is always a list with many named elements.
+
+Different statistical objects have different **classes** with different outputs.
+
+To see what is inside of a statistical object, use the `names()` function:
+
+Once you know the names of the elements, use `$` to access them!
+
+]
+
+.pull-right6[
+
+
+```r
+chick_glm &lt;- glm(formula = weight ~ Time + Diet,
+                 data = ChickWeight)
+
+# What class is this object?
+class(chick_glm)
+```
+
+```
+## [1] "glm" "lm"
+```
+
+```r
+# What are the named elements?
+names(chick_glm)
+```
+
+```
+##  [1] "coefficients"      "residuals"         "fitted.values"     "effects"           "R"                
+##  [6] "rank"              "qr"                "family"            "linear.predictors" "deviance"         
+## [11] "aic"               "null.deviance"     "iter"              "weights"           "prior.weights"    
+## [16] "df.residual"       "df.null"           "y"                 "converged"         "boundary"         
+## [21] "model"             "call"              "formula"           "terms"             "data"             
+## [26] "offset"            "control"           "method"            "contrasts"         "xlevels"
+```
+
+```r
+# Access the coefficients
+chick_glm$coefficients
+```
+
+```
+## (Intercept)        Time       Diet2       Diet3       Diet4 
+##       10.92        8.75       16.17       36.50       30.23
+```
+
+]
+
+
+---
+
+.pull-left5[
+
+## Common statistical modelling functions
+
+| Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+|     Simple regression|    `lm()`|
+|     General Linear Model|    `glm()`|
+
+
+
+### Check help menus!
+
+
+- Different statistical functions require different arguments.
+
+- Look at the help menus to know exactly what arguments each function needs.
+
+]
+
+
+.pull-right5[
+
+#### Always check help menus!
+
+
+`?t.test`
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+]
+
+
+
 
 
 
@@ -250,44 +494,6 @@ t.test(x = ChickWeight$weight,
 
 ]
 
-
-
----
-# Inferential Statistics
-
-.pull-left4[
-
-### Formula
-
-- Many tests allow you to include a `formula` argument
-
-&gt; `formula = y ~ a + b + ...`
-
-Means...
-
-&gt; Model a dependent variable `y` as a function of `a` and `b` and `...`
-
-- Formulas go together with dataframes `data` containing all variables in the formula, and optional `subset` arguments to specify which cases in `data` to include. 
-
-
-]
-
-.pull-right6[
-
-### General structure of a hypothesis test and formula
-
-
-```r
-my.test(formula = y ~ a + b, # Formula
-        data = my.data,      # Dataframe
-        ...                  # Additional
-        )
-```
-
-- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
-- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
--  `...` additional arguments specific to test
-]
 
 
 
