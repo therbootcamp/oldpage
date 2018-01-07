@@ -57,6 +57,17 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 
+
+---
+# Vector functions
+
+
+```{r, echo = FALSE, out.width="600", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector_functions.png")
+```
+
+
+
 ---
 
 .pull-left5[
