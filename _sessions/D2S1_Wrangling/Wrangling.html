@@ -17,8 +17,31 @@ class: center, middle, inverse, title-slide
 
 ---
 
+.pull-left5[
 
 
+
+# What is Wrangling?
+
+Organisation
+- Moving data between columns and rows
+- Merging several dataframes
+- Sorting data by columns
+
+Transformation
+- Adding new columns
+- Combining columns
+- Splitting columns
+
+Aggregation
+- Grouping data according to variables
+- Summarising data across groups
+
+]
+
+
+
+---
 
 
 # dplyr
@@ -44,23 +67,12 @@ Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is 
 &gt; *What percent of female patients had adverse events to drug X during weeks 5 through 10?*
 
 ]
----
-
-# dplyr CheatSheet!
-https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
-
-
-
 
 ---
 # Vector functions
 
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector_functions.png" width="900" style="display: block; margin: auto;" /&gt;
-
-
 
 ---
 
@@ -539,16 +551,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 55      5    141
-## 505    44    145
-## 140    12    162
-## 223    21     62
-## 577    50    264
-## 211    20     54
-## 103     9     92
-## 294    27     46
-## 63      6     59
-## 243    22    164
+## 561    49    152
+## 80      7    174
+## 526    46    156
+## 575    50    205
+## 23      2    209
+## 205    19    106
+## 451    40     66
+## 61      6     41
+## 30      3     99
+## 32      3    138
 ```
 
 ---
@@ -627,75 +639,24 @@ data %&gt;%    # Start with data, AND THEN...
   )
 ```
 
-### Questions?
-
 ]
 
 ---
 
-## Wrangling Pratical
+## CheatSheet
+
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Practical
 
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html"&gt;Link to Wrangling practical&lt;/a&gt;
 
 
 ---
-
-
-
-&lt;!-- .pull-left4[ --&gt;
-&lt;!-- #tidyr --&gt;
-
-&lt;!-- `tidyr` is a package for 'tidying' data. --&gt;
-
-&lt;!-- 'tidying' data means getting it into a different format (usually moving data between rows and columns) --&gt;
-
-
-&lt;!-- ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'} --&gt;
-&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png") --&gt;
-&lt;!-- ``` --&gt;
-&lt;!-- ] --&gt;
-
-
-&lt;!-- .pull-right5[ --&gt;
-
-&lt;!-- &lt;br&gt; --&gt;
-&lt;!-- &lt;br&gt; --&gt;
-
-&lt;!-- ### Questions you can answer with tidyr --&gt;
-
-&lt;!-- &gt; Right now there are different rows for each patient, I need every patient's data to be in a single row. --&gt;
-
-&lt;!-- &gt; Can you restructure the data so data in different columns are shown in a single column? --&gt;
-
-&lt;!-- ] --&gt;
-
-
-
-&lt;!-- --- --&gt;
-&lt;!-- #tidyr --&gt;
-
-&lt;!-- There are two important functions in `tidyr`, `gather()` and `spread()`: --&gt;
-
-&lt;!-- .pull-left4[ --&gt;
-
-&lt;!-- `gather()`: Move data from *columns* into many *rows* --&gt;
-
-
-&lt;!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} --&gt;
-&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png") --&gt;
-&lt;!-- ``` --&gt;
-&lt;!-- ] --&gt;
-
-
-&lt;!-- .pull-right5[ --&gt;
-
-&lt;!-- `spread()`: Move data from several *rows* into columns --&gt;
-
-&lt;!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} --&gt;
-&lt;!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png") --&gt;
-&lt;!-- ``` --&gt;
-
-&lt;!-- ] --&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

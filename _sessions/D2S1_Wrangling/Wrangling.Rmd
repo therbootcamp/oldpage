@@ -13,13 +13,45 @@ output:
       countIncrementalSlides: false
       ratio: '16:9'
 ---
-
-
+.pull-left5[
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 options(width=110)
 options(digits = 4)
 ```
+
+
+# What is Wrangling?
+
+Organisation
+- Moving data between columns and rows
+- Merging several dataframes
+- Sorting data by columns
+
+Transformation
+- Adding new columns
+- Combining columns
+- Splitting columns
+
+Aggregation
+- Grouping data according to variables
+- Summarising data across groups
+
+]
+
+
+.pull-right5[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png")
+```
+
+
+]
+
+
+---
+
 
 # dplyr
 .pull-left4[
@@ -46,17 +78,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 > *What percent of female patients had adverse events to drug X during weeks 5 through 10?*
 
 ]
----
-
-# dplyr CheatSheet!
-https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
-
-```{r, echo = FALSE, out.width="600", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png")
-```
-
-
-
 
 ---
 # Vector functions
@@ -65,8 +86,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```{r, echo = FALSE, out.width="900", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector_functions.png")
 ```
-
-
 
 ---
 
@@ -496,79 +515,26 @@ data %>%    # Start with data, AND THEN...
   )
 ```
 
-### Questions?
-
 ]
 
 ---
 
-## Wrangling Pratical
+## CheatSheet
+
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
+```{r, echo = FALSE, out.width="600", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png")
+```
+
+---
+
+## Practical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html">Link to Wrangling practical</a>
 
 
 ---
-
-
-
-<!-- .pull-left4[ -->
-<!-- #tidyr -->
-
-<!-- `tidyr` is a package for 'tidying' data. -->
-
-<!-- 'tidying' data means getting it into a different format (usually moving data between rows and columns) -->
-
-
-<!-- ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'} -->
-<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tidyr_hex.png") -->
-<!-- ``` -->
-<!-- ] -->
-
-
-<!-- .pull-right5[ -->
-
-<!-- <br> -->
-<!-- <br> -->
-
-<!-- ### Questions you can answer with tidyr -->
-
-<!-- > Right now there are different rows for each patient, I need every patient's data to be in a single row. -->
-
-<!-- > Can you restructure the data so data in different columns are shown in a single column? -->
-
-<!-- ] -->
-
-
-
-<!-- --- -->
-<!-- #tidyr -->
-
-<!-- There are two important functions in `tidyr`, `gather()` and `spread()`: -->
-
-<!-- .pull-left4[ -->
-
-<!-- `gather()`: Move data from *columns* into many *rows* -->
-
-
-<!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} -->
-<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/gather_ss.png") -->
-<!-- ``` -->
-<!-- ] -->
-
-
-<!-- .pull-right5[ -->
-
-<!-- `spread()`: Move data from several *rows* into columns -->
-
-<!-- ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'} -->
-<!-- knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/spread_ss.png") -->
-<!-- ``` -->
-
-<!-- ] -->
-
-
-
-
 
 
 
