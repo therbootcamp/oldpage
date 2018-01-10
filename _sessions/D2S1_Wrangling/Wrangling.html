@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Data Wranging with dplyr</title>
+    <title>Data Wranging</title>
     <meta charset="utf-8">
     <meta name="author" content="The R Bootcamp Twitter: @therbootcamp" />
     <link href="libs/remark-css/example.css" rel="stylesheet" />
@@ -11,7 +11,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Data Wranging with dplyr
+# Data Wranging
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
 ### September 2017
 
@@ -19,19 +19,17 @@ class: center, middle, inverse, title-slide
 
 .pull-left5[
 
-
-
 # What is Wrangling?
-
-Organise
-- Moving data between columns and rows
-- Merging several dataframes
-- Sorting data by columns
 
 Transform
 - Adding new columns
 - Combining columns
 - Splitting columns
+
+Organise
+- Moving data between columns and rows
+- Merging several dataframes
+- Sorting data by columns
 
 Aggregation
 - Aggregate data according to variables
@@ -44,22 +42,18 @@ Aggregation
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-
 ]
-
 
 ---
 
 .pull-left4[
 # How do we wrangle data in R?
 
+&lt;font size = 5&gt;Answer: dplyr&lt;/font&gt;
 
-&lt;font size = 5&gt;Answer: dplyr and tidyr&lt;/font&gt;
-
-Anytime you want to organise, transform, or aggregate data, use a combination of `dplyr` and `tidyr`
+Anytime you want to transform, organise, or aggregate data, use `dplyr`
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
-
 
 ]
 
@@ -67,12 +61,727 @@ Anytime you want to organise, transform, or aggregate data, use a combination of
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" width="100%" style="display: block; margin: auto;" /&gt;
 
+]
+
+---
+
+.pull-left4[
+# dplyr
+
+dplyr is a combination of 3 things:
+
+1. **`objects`** like dataframes
+2. **`functions`** that **do** things to objects.
+3. **`pipes`** `%&gt;%` that string together objects and verbs
+
+&lt;br&gt;
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right5[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/sequential.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+dplyr is meant to be sequential and work like language
+
+&gt; Take data X, then do Y, then do Z...
+
+Here's the basic structure of `dplyr` in action
+
+
+```r
+data %&gt;%           # Start with data, and THEN
+     FUNCTION1 %&gt;%     # Do FUNCTION1, (and THEN)
+     FUNCTION2 %&gt;% ... # Do FUNCTION2, (and THEN)
+```
+
+]
+
+
+---
+
+
+
+
+
+.pull-left4[
+# Transformation Functions
+
+| Function| Description|
+|:-------------|:----|
+| `rename()` | Change column names |
+| `mutate()`|   Create a new column from existing columns|
+| `case_when()`|  Recode values from a vector to another|
+| `left_join()` | Combine multiple dataframes| 
+
+]
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;
+
+```r
+patients_df   # Demographic data
+```
+
+```
+## # A tibble: 5 x 3
+##      id     b     c
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0
+## 2    22    64     1
+## 3     5    55     0
+## 4    67    34     0
+## 5    34    29     1
+```
+
+### Goal:
+
+- Create better column names with `rename()`
+- Add new columns with `mutate()`
+- Recode values with `case_when()`
+- Merge with a new dataframe using `left_join()`
+
+]
+
+
+---
+
+
+.pull-left3[
+# rename() 
+
+
+&lt;font size = 5&gt; Change column names with rename()&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;New = Old, &lt;br&gt;New = Old, ...&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+
+
+```r
+patients_df  # Original
+```
+
+```
+## # A tibble: 5 x 3
+##      id     b     c
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0
+## 2    22    64     1
+## 3     5    55     0
+## 4    67    34     0
+## 5    34    29     1
+```
+]
+
+.pull-right65[
+&lt;font size = 5&gt;1) Create better column names with rename()&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c)
+```
+
+```
+## # A tibble: 5 x 3
+##      id   age   arm
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0
+## 2    22    64     1
+## 3     5    55     0
+## 4    67    34     0
+## 5    34    29     1
+```
 
 ]
 
 ---
-# Vector functions
 
+.pull-left3[
+# mutate() 
+
+&lt;font size = 5&gt; Add new columns with mutate()&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Add as many you'd like&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Example:&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+
+
+```r
+df %&gt;%
+  mutate(
+   NEW = DEFINITION,
+   Year = Month * 12,
+   BMI = weight / height ^ 2
+  )
+```
+]
+
+.pull-right65[
+&lt;font size = 5&gt;2) Add new columns with  mutate()&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c) %&gt;%
+  
+# 2) Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10)
+```
+
+```
+## # A tibble: 5 x 5
+##      id   age   arm age_months age_decades
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1    13    38     0        456         3.8
+## 2    22    64     1        768         6.4
+## 3     5    55     0        660         5.5
+## 4    67    34     0        408         3.4
+## 5    34    29     1        348         2.9
+```
+
+]
+
+
+---
+
+.pull-left3[
+# case_when() 
+
+&lt;font size = 5&gt;Use case_when() in combination with mutate()&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Allows you to define values based on logical conditions&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Example:&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+
+
+```r
+df %&gt;%
+  mutate(
+    NEW = case_when(
+      COND1 ~ VAL1,
+      COND2 ~ VAL2
+    )
+  )
+```
+]
+
+.pull-right65[
+&lt;font size = 5&gt;3) Recode values with case_when()&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c) %&gt;%
+  
+# 2) Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10,
+         arm_char = case_when(arm == 0 ~ "placebo",
+                              arm == 1 ~ "drugX")
+         )
+```
+
+```
+## # A tibble: 5 x 6
+##      id   age   arm age_months age_decades arm_char
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;    &lt;chr&gt;
+## 1    13    38     0        456         3.8  placebo
+## 2    22    64     1        768         6.4    drugX
+## 3     5    55     0        660         5.5  placebo
+## 4    67    34     0        408         3.4  placebo
+## 5    34    29     1        348         2.9    drugX
+```
+
+]
+
+
+
+---
+# Merging data
+
+
+.pull-left45[
+
+
+```r
+patients_df
+```
+
+```
+## # A tibble: 5 x 3
+##      id     b     c
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0
+## 2    22    64     1
+## 3     5    55     0
+## 4    67    34     0
+## 5    34    29     1
+```
+&lt;br&gt;
+
+&lt;font size = 5&gt;Goal: Add scores_df data to patents_df&lt;/font&gt;
+&lt;br3&gt;
+&lt;font size = 5&gt; For each matching id in scores, add time1 and time2 to patients_df
+
+]
+
+
+.pull-right45[
+
+
+```r
+scores_df
+```
+
+```
+## # A tibble: 5 x 3
+##      id time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    67     2     4
+## 2     5     3     3
+## 3    34     3     5
+## 4    13     4     6
+## 5    22     7     5
+```
+&lt;br&gt;
+
+]
+
+
+
+---
+
+.pull-left3[
+# left_join()
+
+&lt;font size = 5&gt;Use left_join() to combine data from 2 dataframes&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Must include one or more 'key' columns used to match rows&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Example:&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+
+
+```r
+df %&gt;%
+  left_join(df2, 
+      by = c("KEY1", 
+             "KEY2"))
+```
+
+
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;4) Merge patients_df with scores_df&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c) %&gt;%
+  
+# 2) Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10,
+         arm_char = case_when(arm == 0 ~ "placebo",
+                              arm == 1 ~ "drugX")
+         ) %&gt;%
+  
+  # 3) Add data from scores_df with left_join()
+  left_join(scores_df, by = "id")
+```
+
+```
+## # A tibble: 5 x 8
+##      id   age   arm age_months age_decades arm_char time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0        456         3.8  placebo     4     6
+## 2    22    64     1        768         6.4    drugX     7     5
+## 3     5    55     0        660         5.5  placebo     3     3
+## 4    67    34     0        408         3.4  placebo     2     4
+## 5    34    29     1        348         2.9    drugX     3     5
+```
+
+]
+
+
+---
+
+
+.pull-left3[
+
+# Notes
+
+&lt;font size = 5&gt;1) Continue as long as you want with more pipes %&gt;%&lt;/font&gt;
+&lt;br&gt; &lt;br&gt;
+&lt;font size = 5&gt; 2) Order of functions matters &lt;/font&gt;
+&lt;br&gt; &lt;br&gt;
+&lt;font size = 5&gt; 3) You can refer to new objects in later code &lt;/font&gt;
+&lt;br&gt; &lt;br&gt;
+&lt;font size = 5&gt;4) To update a dataframe, make sure to assign it to itself with &lt;- &lt;/font&gt;
+
+]
+
+.pull-right65[
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;patients_df &lt;- patients_df %&gt;% ...&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df &lt;- patients_df %&gt;%
+  
+# 1) Change column names with rename()
+  rename(age = b,  
+         arm = c) %&gt;%
+  
+# 2) Create new columns with mutate()
+  mutate(age_months = age * 12,
+         age_decades = age / 10,
+         arm_char = case_when(arm == 0 ~ "placebo",
+                              arm == 1 ~ "drugX")
+         ) %&gt;%
+  
+# 3) Add data from scores_df with left_join()
+  left_join(scores_df, by = "id")
+```
+
+
+]
+
+---
+.pull-left3[
+
+# Organisation Functions
+
+| Function| action|
+|:-------------|:----|
+| `arrange()` |Sort rows |
+| `filter()` | Select specific rows |
+| `select()`|   Select specific columns|
+
+]
+
+
+.pull-right65[
+&lt;br&gt;&lt;br&gt;
+
+```r
+patients_df 
+```
+
+```
+## # A tibble: 5 x 8
+##      id   age   arm age_months age_decades arm_char time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38     0        456         3.8  placebo     4     6
+## 2    22    64     1        768         6.4    drugX     7     5
+## 3     5    55     0        660         5.5  placebo     3     3
+## 4    67    34     0        408         3.4  placebo     2     4
+## 5    34    29     1        348         2.9    drugX     3     5
+```
+
+### Goal:
+
+- Sort rows by `id` then by `age`
+- Select drugX over the age of 30
+- Get rid of the columns `age_months` and `age_decades`
+
+]
+
+
+---
+
+.pull-left3[
+# arrange()
+
+&lt;font size = 5&gt;The arrange() function is used to sort (aka, arrange) rows of a dataframe&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;You can sort by as many conditions as you want&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;To sort in descending order, use desc()&lt;/font&gt;
+
+
+
+
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;1) Sort rows by id then in decending order of age&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Sort by id then age (descending)
+  arrange(id, desc(age))
+```
+
+```
+## # A tibble: 5 x 8
+##      id   age   arm age_months age_decades arm_char time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     5    55     0        660         5.5  placebo     3     3
+## 2    13    38     0        456         3.8  placebo     4     6
+## 3    22    64     1        768         6.4    drugX     7     5
+## 4    34    29     1        348         2.9    drugX     3     5
+## 5    67    34     0        408         3.4  placebo     2     4
+```
+
+]
+
+
+
+---
+
+.pull-left3[
+# filter()
+
+&lt;font size = 5&gt;The filter() funciton is used to select specific rows&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;For complex conditions, chain multiple logical comparison operators&lt;br&gt;&lt;br&gt;(==, !=, &lt;, &gt;, &lt;=, &gt;=, &amp;, |)&lt;/font&gt;
+
+
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;2) Select drugX over 30&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Sort by id then age (descending)
+  arrange(id, desc(age)) %&gt;%
+  
+# 2) Select drugX over 30
+  filter(arm_char == "drugX" &amp; age &gt; 30)
+```
+
+```
+## # A tibble: 1 x 8
+##      id   age   arm age_months age_decades arm_char time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    22    64     1        768         6.4    drugX     7     5
+```
+
+]
+
+
+
+---
+
+.pull-left3[
+# select()
+
+
+&lt;font size = 5&gt;Keep columns with &lt;br&gt;&lt;br&gt;select(COL1, COL2, ...)&lt;font&gt;
+&lt;br&gt;
+&lt;font size = 5&gt;Remove columns with &lt;br&gt;&lt;br&gt; select(-COL1, -COL2, ...)&lt;font&gt;
+&lt;br&gt;
+
+
+
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;3) Remove age_months and age_decades&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Sort by id then age (descending)
+  arrange(id, desc(age)) %&gt;%
+  
+# 2) Select drugX over 30
+  filter(arm_char == "drugX" &amp; age &gt; 30) %&gt;%
+  
+# 3) Remove age_months and age_decades
+  select(-age_months, -age_decades)
+```
+
+```
+## # A tibble: 1 x 6
+##      id   age   arm arm_char time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    22    64     1    drugX     7     5
+```
+
+]
+
+
+---
+.pull-left4[
+
+# Aggregation functions
+
+| Function| action|
+|:-------------|:----|
+| `group_by()` |Group data by levels of specific variables |
+| `summarise()` | Calculate summary statistics |
+
+### Statistical functions
+
+| Function| action|
+|:-------------|:----|
+| `mean(), median()` |Mean, Median |
+| `sd()` |Standard deviation|
+| `sum()` | Sum|
+| `n()`| Number of cases|
+]
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;
+
+```r
+patients_df &lt;- patients_df %&gt;%
+  select(id, age, arm_char, time1, time2) %&gt;%
+  rename(arm = arm_char)
+
+patients_df
+```
+
+```
+## # A tibble: 5 x 5
+##      id   age     arm time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38 placebo     4     6
+## 2    22    64   drugX     7     5
+## 3     5    55 placebo     3     3
+## 4    67    34 placebo     2     4
+## 5    34    29   drugX     3     5
+```
+
+### Goal:
+
+- Group data by arm
+- Calculate summary statistics from time1 and time1
+
+]
+
+
+
+
+---
+.pull-left3[
+# group_by() 
+
+&lt;font size = 5&gt;Used to combine data into groups&lt;font&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;You can group by as many variables as you wish&lt;font&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;You won't see any changes to the data until you use summarise()&lt;font&gt;
+&lt;br&gt;
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;1) Group data by arm&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Group data by arm with group_by
+  group_by(arm)
+```
+
+```
+## # A tibble: 5 x 5
+## # Groups:   arm [2]
+##      id   age     arm time1 time2
+##   &lt;dbl&gt; &lt;dbl&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    13    38 placebo     4     6
+## 2    22    64   drugX     7     5
+## 3     5    55 placebo     3     3
+## 4    67    34 placebo     2     4
+## 5    34    29   drugX     3     5
+```
+
+]
+
+
+
+
+---
+.pull-left3[
+# summarise() 
+
+&lt;font size = 5&gt;Used to summarise data from groups&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;Within summarise() create new variables using summary functions&lt;font&gt;
+&lt;br&gt;
+
+
+```r
+df %&gt;%
+  group_by(VAR1) %&gt;%
+  summarise(
+    SUMMARY = FUN(x),       # 
+    age_mean = mean(age),   # Ex 1
+    heigh_min = min(height) # Ex 2 
+  )
+```
+
+
+]
+
+.pull-right65[
+&lt;font size = 5&gt;2) Calculate summary statistics from times&lt;/font&gt;
+
+
+```r
+# 0) Start with patients_df data
+patients_df %&gt;%
+  
+# 1) Group data by arm with group_by
+  group_by(arm) %&gt;%
+  
+# 2) Calculate summary columns
+  summarise(
+    time1_mean = mean(time1),
+    time2_mean = mean(time2),
+    diff = time2_mean - time1_mean,
+    N = n()
+  )
+```
+
+```
+## # A tibble: 2 x 5
+##       arm time1_mean time2_mean  diff     N
+##     &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1   drugX          5      5.000 0.000     2
+## 2 placebo          3      4.333 1.333     3
+```
+
+]
+
+
+---
+# Vector functions
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector_functions.png" width="900" style="display: block; margin: auto;" /&gt;
 
@@ -275,12 +984,12 @@ x
 
 | verb| action| example |
 |:---|:----|:----------------|
-|     `filter()`|    Select rows based on some criteria| `filter(age &gt; 40 &amp; sex == "m")`|
+|     `filter()`|    Select rows based on some criteria| `filter(age &gt; 40 &amp; treatment == "drug")`|
 |     `arrange()`|    Sort rows| `arrange(date, group)`|
-|     `select()`|    Select columns (and ignore all others)| `select(age, sex)`|
+|     `select()`|    Select columns (and ignore all others)| `select(age, treatment)`|
 |     `rename()`|    Rename columns| `rename(DATE_MONTHS_X24, date`)|
 |     `mutate()`|    Add new columns| `mutate(height.m = height.cm / 100)`|
-|     `case_when()`|    Recode values of a column| `sex.n = case_when(sex == 0 ~ "m", sex == 1 ~ "f")`|
+|     `case_when()`|    Recode values of a column| `treat_char = case_when(treatment == 0 ~ "placebo", treatment == 1 ~ "drug")`|
 |     `group_by(), summarise()`|   Group data and then calculate summary statistics|`group_by(treatment) %&gt;% summarise(...)` |
 
 
@@ -385,8 +1094,8 @@ To change the value of 1 to `"female"`, and 0 to `"male"`, you can use `case_whe
 data &lt;- data %&gt;% 
   mutate(
         sex_new = case_when(
-          sex == 1 ~ "female",
-          sex == 0 ~ "male"
+          arm == 1 ~ "drugX",
+          arm == 0 ~ "placebo"
         )
   )
 ```
@@ -553,16 +1262,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 290    26    205
-## 353    32     41
-## 86      8     50
-## 208    19    157
-## 498    44     51
-## 230    21    307
-## 83      7    288
-## 348    31    138
-## 42      4     87
-## 164    14    227
+## 263    24     70
+## 265    24     72
+## 316    28    233
+## 114    10     89
+## 510    45     78
+## 351    31    235
+## 533    47     66
+## 184    17     51
+## 185    17     61
+## 31      3    115
 ```
 
 ---
