@@ -23,33 +23,40 @@ class: center, middle, inverse, title-slide
 
 # What is Wrangling?
 
-Organisation
+Organise
 - Moving data between columns and rows
 - Merging several dataframes
 - Sorting data by columns
 
-Transformation
+Transform
 - Adding new columns
 - Combining columns
 - Splitting columns
 
 Aggregation
-- Grouping data according to variables
+- Aggregate data according to variables
 - Summarising data across groups
 
 ]
 
 
+.pull-right5[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
 
 ---
 
-
-# dplyr
 .pull-left4[
+# How do we wrangle data in R?
 
-dplyr is a package for managing dataframes.
 
-Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is almost certainly a way to do it in dplyr.
+&lt;font size = 5&gt;Answer: dplyr and tidyr&lt;/font&gt;
+
+Anytime you want to organise, transform, or aggregate data, use a combination of `dplyr` and `tidyr`
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
 
@@ -58,13 +65,8 @@ Anytime you want to slice, dice, aggregate, or manipulate a dataframe, there is 
 
 .pull-right5[
 
-### Questions you can answer with dplyr
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-&gt; *Can you calculate the mean survival times for each treatment separated by gender and time?*
-
-&gt; *I need to know the mean birth rate only for countries in Africa from 1980 to 1980.*
-
-&gt; *What percent of female patients had adverse events to drug X during weeks 5 through 10?*
 
 ]
 
@@ -551,16 +553,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 561    49    152
-## 80      7    174
-## 526    46    156
-## 575    50    205
-## 23      2    209
-## 205    19    106
-## 451    40     66
-## 61      6     41
-## 30      3     99
-## 32      3    138
+## 290    26    205
+## 353    32     41
+## 86      8     50
+## 208    19    157
+## 498    44     51
+## 230    21    307
+## 83      7    288
+## 348    31    138
+## 42      4     87
+## 164    14    227
 ```
 
 ---
