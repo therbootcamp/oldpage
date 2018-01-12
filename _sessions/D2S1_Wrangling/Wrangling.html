@@ -316,48 +316,53 @@ patients_df %&gt;%
 
 .pull-left45[
 
+&lt;font size = 5&gt; Patient basics &lt;/font&gt;
+
 
 ```r
 patients_df
 ```
 
-```
-## # A tibble: 5 x 3
-##      id     b     c
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    13    38     0
-## 2    22    64     1
-## 3     5    55     0
-## 4    67    34     0
-## 5    34    29     1
-```
+
+| id| age| arm|
+|--:|---:|---:|
+| 13|  38|   0|
+| 22|  64|   1|
+|  5|  55|   0|
+| 67|  34|   0|
+| 34|  29|   1|
+
 &lt;br&gt;
 
-&lt;font size = 5&gt;Goal: Add scores_df data to patents_df&lt;/font&gt;
+&lt;font size = 5&gt;Goal: Add study results data to patient data&lt;/font&gt;
 &lt;br3&gt;
-&lt;font size = 5&gt; For each matching id in scores, add time1 and time2 to patients_df
 
 ]
 
 
 .pull-right45[
 
+&lt;font size = 5&gt; Patient results &lt;/font&gt;
+
+
 
 ```r
-scores_df
+results_df
 ```
 
-```
-## # A tibble: 5 x 3
-##      id time1 time2
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    67     2     4
-## 2     5     3     3
-## 3    34     3     5
-## 4    13     4     6
-## 5    22     7     5
-```
+
+| id| time1| time2|
+|--:|-----:|-----:|
+| 67|     2|     4|
+|  5|     3|     3|
+| 34|     3|     5|
+| 13|     4|     6|
+| 22|     7|     5|
+
 &lt;br&gt;
+
+&lt;font size = 5&gt; For each matching id in patients_df and results_df, add results_df data to patients_df.
+
 
 ]
 
@@ -369,15 +374,16 @@ scores_df
 # left_join()
 
 &lt;font size = 5&gt;Use left_join() to combine data from 2 dataframes&lt;br&gt;&lt;br&gt;&lt;/font&gt;
-&lt;font size = 5&gt;Must include one or more 'key' columns used to match rows&lt;br&gt;&lt;br&gt;&lt;/font&gt;
+&lt;font size = 5&gt;Must include at least one 'key' column used to match rows&lt;br&gt;&lt;br&gt;&lt;/font&gt;
 &lt;font size = 5&gt;Example:&lt;br&gt;&lt;br&gt;&lt;/font&gt;
 
 
 ```r
-df %&gt;%
+# Add df2 data to df1
+#   using KEY as the key
+df1 %&gt;%
   left_join(df2, 
-      by = c("KEY1", 
-             "KEY2"))
+      by = c("KEY"))
 ```
 
 
@@ -385,7 +391,7 @@ df %&gt;%
 ]
 
 .pull-right65[
-&lt;font size = 5&gt;4) Merge patients_df with scores_df&lt;/font&gt;
+&lt;font size = 5&gt;4) Merge patients_df with results_df&lt;/font&gt;
 
 
 ```r
@@ -403,8 +409,8 @@ patients_df %&gt;%
                               arm == 1 ~ "drugX")
          ) %&gt;%
   
-  # 3) Add data from scores_df with left_join()
-  left_join(scores_df, by = "id")
+  # 3) Add data from results_df with left_join()
+  left_join(results_df, by = "id")
 ```
 
 ```
@@ -440,7 +446,7 @@ patients_df %&gt;%
 
 .pull-right65[
 &lt;br&gt;&lt;br&gt;
-&lt;font size = 5&gt;patients_df &lt;- patients_df %&gt;% ...&lt;/font&gt;
+&lt;font size = 5&gt;Make sure to assign again using &lt;- to change patients_df&lt;/font&gt;
 
 
 ```r
@@ -458,8 +464,8 @@ patients_df &lt;- patients_df %&gt;%
                               arm == 1 ~ "drugX")
          ) %&gt;%
   
-# 3) Add data from scores_df with left_join()
-  left_join(scores_df, by = "id")
+# 3) Add data from results_df with left_join()
+  left_join(results_df, by = "id")
 ```
 
 
@@ -647,6 +653,7 @@ patients_df %&gt;%
 
 | Function| action|
 |:-------------|:----|
+| `min(), max()`| Minimum, maximum |
 | `mean(), median()` |Mean, Median |
 | `sd()` |Standard deviation|
 | `sum()` | Sum|
@@ -656,11 +663,10 @@ patients_df %&gt;%
 .pull-right55[
 &lt;br&gt;&lt;br&gt;
 
-```r
-patients_df &lt;- patients_df %&gt;%
-  select(id, age, arm_char, time1, time2) %&gt;%
-  rename(arm = arm_char)
 
+
+
+```r
 patients_df
 ```
 
@@ -732,7 +738,7 @@ patients_df %&gt;%
 # summarise() 
 
 &lt;font size = 5&gt;Used to summarise data from groups&lt;br&gt;&lt;br&gt;
-&lt;font size = 5&gt;Within summarise() create new variables using summary functions&lt;font&gt;
+&lt;font size = 5&gt;Works like mutate() to create new variables, but with summary functions&lt;font&gt;
 &lt;br&gt;
 
 
@@ -742,7 +748,7 @@ df %&gt;%
   summarise(
     SUMMARY = FUN(x),       # 
     age_mean = mean(age),   # Ex 1
-    heigh_min = min(height) # Ex 2 
+    height_min = min(height) # Ex 2 
   )
 ```
 
@@ -1262,16 +1268,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 263    24     70
-## 265    24     72
-## 316    28    233
-## 114    10     89
-## 510    45     78
-## 351    31    235
-## 533    47     66
-## 184    17     51
-## 185    17     61
-## 31      3    115
+## 474    42     49
+## 426    38     49
+## 261    24     66
+## 565    49    233
+## 271    25     62
+## 350    31    204
+## 521    46     62
+## 430    38    109
+## 344    31     73
+## 468    41    153
 ```
 
 ---
