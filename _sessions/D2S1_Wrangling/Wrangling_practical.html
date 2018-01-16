@@ -144,11 +144,11 @@ Source: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/<
 <div id="glossary" class="section level3">
 <h3>Glossary</h3>
 <p>Here are the main verbs you will be using in <code>dplyr</code>:</p>
-<table style="width:85%;">
+<table style="width:96%;">
 <colgroup>
 <col width="6%"></col>
-<col width="52%"></col>
-<col width="25%"></col>
+<col width="33%"></col>
+<col width="55%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -193,6 +193,11 @@ Source: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/<
 <td align="left">Group data and then calculate summary statistics</td>
 <td align="left">data %&gt;% group_by(…) %&gt;% summarise(…)</td>
 </tr>
+<tr class="even">
+<td align="left"><code>left_join()</code></td>
+<td align="left">Combine multiple datasets using a key column</td>
+<td align="left">data %&gt;% left_join(data2, by = “id”)</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -213,8 +218,8 @@ chick &lt;- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as ch
 
 chick &lt;- chick %&gt;%
   mutate(
-    weight.kg = weight / 1000,  # Add new column of weight in kilograms
-    time.week = Time / 7        # Add time.week as time in weeks
+    weight_kg = weight / 1000,  # Add new column of weight in kilograms
+    time_week = Time / 7        # Add time_week as time in weeks
   )
 
 # Sort rows with arrange()
@@ -227,7 +232,7 @@ chick &lt;- chick %&gt;%
 
 chick &lt;- chick %&gt;%
   mutate(
-    diet.name = case_when(
+    diet_name = case_when(      # Rename diets with strings
       Diet == 1 ~ &quot;vegetables&quot;,
       Diet == 2 ~ &quot;fruit&quot;,
       Diet == 3 ~ &quot;candy&quot;,
@@ -241,12 +246,12 @@ chick &lt;- chick %&gt;%
 chick %&gt;% 
   group_by(Diet) %&gt;%
   summarise(
-    weight.mean = mean(weight),
-    weight.max = max(weight),
-    time.mean = mean(Time),
+    weight_mean = mean(weight),
+    weight_max = max(weight),
+    time_mean = mean(Time),
     N = n()
   ) %&gt;%
-  arrange(weight.mean)
+  arrange(weight_mean)
 
 
 # Many sequential functions
@@ -255,8 +260,8 @@ chick %&gt;%
   filter(Chick &gt; 10) %&gt;%              # Only chicks with values larger than 10
   group_by(Time, Diet) %&gt;%            # Group by Time and Diet
   summarise(
-    weight.median = median(weight),
-    weight.sd = sd(weight),
+    weight_median = median(weight),
+    weight_sd = sd(weight),
     N = n()                           # Counts of cases
   )</code></pre>
 </div>
@@ -266,9 +271,25 @@ chick %&gt;%
 <h3>Getting the data and project setup</h3>
 <ol style="list-style-type: decimal">
 <li><p>Open an R project (or create a new one). In the main directory where that project is located, create two new empty folders: one called <code>data</code> and one called <code>R</code>. (Hint: You can create, and them rename, new empty folders in the <code>Files</code> pane of RStudio.)</p></li>
-<li><p>Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>datawrangling.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> packages with <code>library()</code></p></li>
-<li><p>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at “<a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>”. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>read_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</p></li>
-<li><p>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created (Hint: the main arguments to <code>write_csv()</code> are <code>x</code>, the object you are writing, and <code>path</code>, the directory and file name you’re saving the object to.)</p></li>
+<li><p>Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>datawrangling.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> packages with <code>library()</code>. Here’s how the top of your script should look:</p></li>
+</ol>
+<pre class="r"><code>## NAME
+## DATE
+## Wrangling Practical
+
+library(tidyverse)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at the following link: <a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>read_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</li>
+</ol>
+<pre class="r"><code># Load data from weblink as a new tibble in R using read_csv
+ACTG175 &lt;- read_csv(file = &quot;LINK)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created (Hint: the main arguments to <code>write_csv()</code> are <code>x</code>, the object you are writing, and <code>path</code>, the directory and file name you’re saving the object to.)</li>
+</ol>
+<pre class="r"><code># Write ACTG175 as a .csv file to your data folder
+
+write_csv(ACTG175, path = &quot;data/ACTG175.csv&quot;)</code></pre>
+<ol start="5" style="list-style-type: decimal">
 <li><p>The <code>ACTG175</code> data is comes from the <code>speff2trial</code> package. If you don’t have the <code>speff2trial</code> package allready, install it using <code>install.packages()</code>. Then, load the package with <code>library()</code> and then look at the help menu for the <code>ACTG175</code> data by running <code>?ACTG175</code>. (Note: If you become really interested in the data, you can also read an article discussing the trial here: <a href="http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article" class="uri">http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article</a>)</p></li>
 <li><p>First thing’s first, take a look at the first few rows of the data by printing the <code>ACTG175</code> object. It should look like this:</p></li>
 </ol>
@@ -332,22 +353,70 @@ chick %&gt;%
 <li><p>For each arm, calculate the mean participant age <em>and</em> the median Karnofsky score</p></li>
 </ol>
 </div>
-</div>
-<div id="checkpoint" class="section level1">
-<h1>Checkpoint!</h1>
+<div id="left_join" class="section level3">
+<h3><code>left_join()</code></h3>
 <ol start="19" style="list-style-type: decimal">
+<li>You can use <code>left_join()</code> to combine multiple dataframes. At the following link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv</a> I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here’s how the first few rows of the data look:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="right">pidnum</th>
+<th align="right">exercise</th>
+<th align="left">education</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10056</td>
+<td align="right">1</td>
+<td align="left">MS</td>
+</tr>
+<tr class="even">
+<td align="right">10059</td>
+<td align="right">4</td>
+<td align="left">BA</td>
+</tr>
+<tr class="odd">
+<td align="right">10089</td>
+<td align="right">1</td>
+<td align="left">BA</td>
+</tr>
+<tr class="even">
+<td align="right">10093</td>
+<td align="right">0</td>
+<td align="left">MS</td>
+</tr>
+<tr class="odd">
+<td align="right">10124</td>
+<td align="right">0</td>
+<td align="left">HS</td>
+</tr>
+<tr class="even">
+<td align="right">10140</td>
+<td align="right">1</td>
+<td align="left">HS</td>
+</tr>
+</tbody>
+</table>
+<p>Using <code>left_join()</code> to add the demographic data to the <code>ACTG175</code> data. To do this, first load the demographic data into R as a new dataframe called <code>ACTG175_demo</code>. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)</p>
+</div>
+<div id="checkpoint" class="section level3">
+<h3>Checkpoint!</h3>
+<ol start="20" style="list-style-type: decimal">
 <li>Separately for male and female patients, calculate the percent who have a history of intravenous drug use.</li>
 </ol>
 <ul>
 <li>To calculate a percent of a binary variable with 0s and 1s, just calculate the mean</li>
 </ul>
-<ol start="20" style="list-style-type: decimal">
+<ol start="21" style="list-style-type: decimal">
 <li><p>Separately for male and female patients (<code>gender</code>), calculate the percent who have a history of intravenous drug use (<code>drugs</code>), and the percent of patients who indicate homosexual activity</p></li>
 <li><p>Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</p></li>
 </ol>
+</div>
 <div id="challenges" class="section level3">
 <h3>Challenges</h3>
-<ol start="22" style="list-style-type: decimal">
+<ol start="23" style="list-style-type: decimal">
 <li>Now let’s check the major differences between the treatment arms. For each arm, calculate the following:</li>
 </ol>
 <ul>
@@ -358,8 +427,8 @@ chick %&gt;%
 <li>Mean <em>change</em> in CD4 T cell count between baseline and 96 weeks</li>
 <li>Number of patients (Hint: use <code>N = n()</code>)</li>
 </ul>
-<ol start="23" style="list-style-type: decimal">
-<li><p>Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of <code>arms</code> to text that reflect what the values actually represent. For example, looking at the help file <code>?ACTG175</code>, I can see that the treatment arm of - is “zidovudine”. I might call this arm <code>&quot;Z&quot;</code>. Do this in the all in the same chunk of code.</p></li>
+<ol start="24" style="list-style-type: decimal">
+<li><p>Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of <code>arms</code> to text that reflect what the values actually represent. For example, looking at the help file <code>?ACTG175</code>, I can see that the treatment arm of 0 is “zidovudine”. I might call this arm <code>&quot;Z&quot;</code>. Do this in the all in the same chunk of code.</p></li>
 <li><p>Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (<code>z30</code>)</p></li>
 </ol>
 </div>

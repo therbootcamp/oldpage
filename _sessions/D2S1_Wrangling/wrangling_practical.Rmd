@@ -27,7 +27,7 @@ If you don't have it already, you can access the dplyr cheatsheet here [https://
 Here are the main verbs you will be using in `dplyr`:
 
 | verb| action| example |
-|:---|:------------------------------------|:----------------|
+|:---|:----------------------|:--------------------------------------|
 |     `filter()`|    Select rows based on some criteria| data %>% filter(age > 40 & sex == "m")|
 |     `arrange()`|    Sort rows| data %>% arrange(date, group)|
 |     `select()`|    Select columns (and ignore all others)| data %>% select(age, sex)|
@@ -35,6 +35,7 @@ Here are the main verbs you will be using in `dplyr`:
 |     `mutate()`|    Add new columns| data %>% mutate(height.m = height.cm / 100)|
 |     `case_when()`|    Recode values of a column| data %>% sex.n = case_when(sex == 0 ~ "m", sex == 1 ~ "f")|
 |     `group_by(), summarise()`|   Group data and then calculate summary statistics|data %>% group_by(...) %>% summarise(...)|
+|     `left_join()`|   Combine multiple datasets using a key column|data %>% left_join(data2, by = "id")|
 
 ### Examples
 
@@ -53,8 +54,8 @@ chick <- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as chick
 
 chick <- chick %>%
   mutate(
-    weight.kg = weight / 1000,  # Add new column of weight in kilograms
-    time.week = Time / 7        # Add time.week as time in weeks
+    weight_kg = weight / 1000,  # Add new column of weight in kilograms
+    time_week = Time / 7        # Add time_week as time in weeks
   )
 
 # Sort rows with arrange()
@@ -67,7 +68,7 @@ chick <- chick %>%
 
 chick <- chick %>%
   mutate(
-    diet.name = case_when(
+    diet_name = case_when(      # Rename diets with strings
       Diet == 1 ~ "vegetables",
       Diet == 2 ~ "fruit",
       Diet == 3 ~ "candy",
@@ -81,12 +82,12 @@ chick <- chick %>%
 chick %>% 
   group_by(Diet) %>%
   summarise(
-    weight.mean = mean(weight),
-    weight.max = max(weight),
-    time.mean = mean(Time),
+    weight_mean = mean(weight),
+    weight_max = max(weight),
+    time_mean = mean(Time),
     N = n()
   ) %>%
-  arrange(weight.mean)
+  arrange(weight_mean)
 
 
 # Many sequential functions
@@ -95,8 +96,8 @@ chick %>%
   filter(Chick > 10) %>%              # Only chicks with values larger than 10
   group_by(Time, Diet) %>%            # Group by Time and Diet
   summarise(
-    weight.median = median(weight),
-    weight.sd = sd(weight),
+    weight_median = median(weight),
+    weight_sd = sd(weight),
     N = n()                           # Counts of cases
   )
 
@@ -109,30 +110,44 @@ chick %>%
 
 1. Open an R project (or create a new one). In the main directory where that project is located, create two new empty folders: one called `data` and one called `R`. (Hint: You can create, and them rename, new empty folders in the `Files` pane of RStudio.)
 
-2. Open a new R script and save it in the `R` folder you just created as a new file called `datawrangling.R`. At the top of the script, using comments, write your name and the date. The, load the set of `tidyverse` packages with `library()`
+2. Open a new R script and save it in the `R` folder you just created as a new file called `datawrangling.R`. At the top of the script, using comments, write your name and the date. The, load the set of `tidyverse` packages with `library()`. Here's how the top of your script should look:
+
+```{r, eval = FALSE, echo = TRUE}
+## NAME
+## DATE
+## Wrangling Practical
+
+library(tidyverse)
+```
+
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, eval = TRUE}
 library(tidyverse)
 ```
 
-3. For this practical, we'll use the `ACTG175` data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at "https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv". Using `read_csv()` load the data into R and store it as a new object called `ACTG175`. (Hint: This is really easy! Just run `read_csv(file = LINK)`, where `LINK` is the file URL.)
+3. For this practical, we'll use the `ACTG175` data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at the following link: [https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv](https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv). Using `read_csv()` load the data into R and store it as a new object called `ACTG175`. (Hint: This is really easy! Just run `read_csv(file = LINK)`, where `LINK` is the file URL.)
+
+```{r, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
+# Load data from weblink as a new tibble in R using read_csv
+ACTG175 <- read_csv(file = "LINK)
+```
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 ACTG175 <- read_csv(file = "https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv")
 ```
 
-
 ```{r, message = FALSE, echo = FALSE, eval = TRUE, warning = FALSE}
 library(tidyverse)
 ```
 
-```{r, eval = FALSE, echo = FALSE}
-library(speff2trial)
-write_csv(ACTG175, path = "tutorials/data/ACTG175.csv")
-```
-
 
 4. Ok you've got the data from the internet into your R session. But let's save a local copy of the data as a `.csv` file so we'll always have access to it. Using `write_csv()`, save a copy of the data as a `.csv` file called `ACTG175.csv`, also make sure to put it in the data folder you just created (Hint: the main arguments to `write_csv()` are `x`, the object you are writing, and `path`, the directory and file name you're saving the object to.)
+
+```{r, eval = FALSE, echo = TRUE}
+# Write ACTG175 as a .csv file to your data folder
+
+write_csv(ACTG175, path = "data/ACTG175.csv")
+```
 
 5. The `ACTG175` data is comes from the `speff2trial` package. If you don't have the `speff2trial` package allready, install it using `install.packages()`. Then, load the package with `library()` and then look at the help menu for the `ACTG175` data by running `?ACTG175`. (Note: If you become really interested in the data, you can also read an article discussing the trial here: [http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article](http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article))
 
@@ -273,9 +288,29 @@ ACTG175 %>%
   )
 ```
 
-# Checkpoint!
 
-19. Separately for male and female patients, calculate the percent who have a history of intravenous drug use.
+### `left_join()`
+
+19. You can use `left_join()` to combine multiple dataframes. At the following link [https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv) I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here's how the first few rows of the data look:
+
+```{r, echo = FALSE, eval = TRUE}
+ACTG175_demo <- read.table("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv", sep = ",", header = TRUE)
+
+knitr::kable(head(ACTG175_demo))
+```
+
+Using `left_join()` to add the demographic data to the `ACTG175` data. To do this, first load the demographic data into R as a new dataframe called `ACTG175_demo`. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)
+
+```{r, eval = FALSE}
+ACTG175 <- ACTG175 %>%
+  left_join(XXX,        # The new dataframe to combine with ACTG175
+            by = XXX)   # The name of the 'key' column(s) that should be matched
+```
+
+
+### Checkpoint!
+
+20. Separately for male and female patients, calculate the percent who have a history of intravenous drug use.
 
    - To calculate a percent of a binary variable with 0s and 1s, just calculate the mean
 
@@ -287,7 +322,7 @@ ACTG175 %>%
   )
 ```
 
-20. Separately for male and female patients (`gender`), calculate the percent who have a history of intravenous drug use (`drugs`), and the percent of patients who indicate homosexual activity
+21. Separately for male and female patients (`gender`), calculate the percent who have a history of intravenous drug use (`drugs`), and the percent of patients who indicate homosexual activity
 
 ```{r}
 ACTG175 %>%
@@ -299,7 +334,7 @@ ACTG175 %>%
 ```
 
 
-21. Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
+22. Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
 
 ```{r}
 ACTG175 %>%
@@ -311,9 +346,10 @@ ACTG175 %>%
 ```
 
 
+
 ### Challenges
 
-22. Now let's check the major differences between the treatment arms. For each arm, calculate the following:
+23. Now let's check the major differences between the treatment arms. For each arm, calculate the following:
 
    - Mean days until a a major negative event (`days`)
    - Mean CD4 T cell count at baseline.
@@ -335,7 +371,7 @@ ACTG175 %>%
   )
 ```
 
-23. Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of `arms` to text that reflect what the values actually represent. For example, looking at the help file `?ACTG175`, I can see that the treatment arm of - is "zidovudine". I might call this arm `"Z"`. Do this in the all in the same chunk of code.
+24. Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of `arms` to text that reflect what the values actually represent. For example, looking at the help file `?ACTG175`, I can see that the treatment arm of 0 is "zidovudine". I might call this arm `"Z"`. Do this in the all in the same chunk of code.
 
 
 ```{r}
@@ -358,7 +394,7 @@ ACTG175 %>%
   )
 ```
 
-24. Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (`z30`)
+25. Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (`z30`)
 
 ```{r}
 ACTG175 %>%
@@ -380,6 +416,7 @@ ACTG175 %>%
     cd4_change = mean(cd496 - cd40, na.rm = TRUE)
   )
 ```
+
 
 
 # Additional reading
