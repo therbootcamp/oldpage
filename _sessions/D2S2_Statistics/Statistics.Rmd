@@ -24,6 +24,7 @@ options(htmltools.dir.version = FALSE)
 # https://github.com/gnab/remark/wiki/Markdown
 options(width=110)
 options(digits = 4)
+library(tidyverse)
 ```
 
 .pull-left45[
@@ -116,158 +117,13 @@ my.test(formula = y ~ a + b, # Formula
 -  `...` additional arguments specific to test
 ]
 
----
 
-.pull-left4[
-
-## Regression example with `glm()`
-
-```{r}
-head(ChickWeight)
-```
-
-**Goal**: Create a regression model predicting `weight` as a function of Time
-
-<br>
-$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$
-]
-
-.pull-right55[
-
-- Function: `glm()`
-- Formula: `formula = weight ~ Time`
-- Data: `data = ChickWeight`
-
-```{r}
-# Create a glm object 
-
-# formula: weight ~ Time
-# data: ChickWeight
-
-chick_glm <- glm(formula = weight ~ Time,
-                 data = ChickWeight)
-
-
-# Print the object
-chick_glm
-```
-]
-
-
----
-
-.pull-left7[
-## Using formulas
-
-You can keep adding terms with `+` 
-
-```{r}
-# Include multiple terms with +
-chick_glm_A <- glm(formula = weight ~ Time + Diet + Chick,
-                   data = ChickWeight)
-```
-
-To include *all* variables, use the generic notation <font color = "blue"> `formula = y ~ .`</font>
-
-```{r}
-# Use  y ~ . to include ALL variables
-chick_glm_B <- glm(formula = weight ~ .,
-                   data = ChickWeight)
-```
-
-To include *interaction terms* use `*`
-
-```{r}
-# Include an interaction term between Time and Diet
-chick_glm_C <- glm(formula = weight ~ Time * Diet + Chick,
-                   data = ChickWeight)
-```
-
-]
-
-
----
-
-.pull-left35[
-
-
-<br><br>
-
-## Exploring statistical objects
-
-You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
-
-
-```{r, eval = FALSE}
-# Create statistical object
-my_obj <- FUN(formula = ...,
-              data = ...)
-
-print(my_obj)       # Print
-summary(my_obj)     # Summary
-plot(my_obj)        # Plotting
-predict(my_obj, ..) # Predict
-
-```
-
-]
-
-.pull-right6[
-<br><br>
-**Apply generic functions to a statistical object**
-
-```{r, eval = TRUE}
-# Create a glm object
-chick_glm <- glm(formula = weight ~ Time,
-                 data = ChickWeight)
-
-# Print the object
-print(chick_glm)
-```
-
-
-
-]
-
----
-
-.pull-left35[
-
-## Exploring statistical objects
-
-The output of a statistical function is always a list with many named elements.
-
-Different statistical #objects have different **classes** with different outputs.
-
-To see what is inside of a statistical object, use the `names()` function:
-
-Once you know the names of the elements, use `$` to access them!
-
-]
-
-.pull-right6[
-
-```{r}
-chick_glm <- glm(formula = weight ~ Time + Diet,
-                 data = ChickWeight)
-
-# What class is this object?
-class(chick_glm)
-
-# What are the named elements?
-names(chick_glm)
-
-# Access the coefficients
-chick_glm$coefficients
-```
-
-]
 
 ---
 ## 1 or 2 sample hypothesis tests
 
 
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/htests.png")
 ```
 
@@ -302,40 +158,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
-```
-
-]
-
----
-## t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-```{r, eval = FALSE}
-ChickWeight
-```
-
-
-```{r, echo = FALSE}
-set.seed(102)
-x <- ChickWeight[sample(nrow(ChickWeight)),]
-rownames(x) <- NULL
-head(x)
-```
-
-]
-
-.pull-right65[
-
-### One sample t-test
-
-> Is the mean weight of the chicks significantly different from 120?
-
-```{r, eval = TRUE}
-t.test(x = ChickWeight$weight,      # Vector of values 
-       alternative = "two.sided",   # Two sided test
-       mu = 120)                    # Null is 120
 ```
 
 ]
@@ -449,14 +271,12 @@ chisq.test(x = table(ChickWeight$Diet)) # Run test on table
 
 
 ---
-# htest objects
+.pull-left45[
 
-.pull-left5[
+## Assigning hypothesis test objects
 
-### Assigning hypothesis test objects
-
-- Most hypothesis tests return an object of class `"htest"` which contain many values
-- You can assign the results of a hypothesis test to an object, and then extract the info you want with the `$` operator:
+- Hypothesis tests return an object of class `"htest"`
+- Can assign a hypothesis test to an object, and then extract info with `$`:
 
 #### Examples of what's in htest objects
 
@@ -474,19 +294,279 @@ chisq.test(x = table(ChickWeight$Diet)) # Run test on table
 ```{r}
 # One-sample t-test
 
-weight.tt <- t.test(x = ChickWeight$weight,
+weight_tt <- t.test(x = ChickWeight$weight,
                     mu = 120,
                     alternative = "two.sided")
 
-class(weight.tt)
-
 # What's in the weight.tt object?
-names(weight.tt)
+names(weight_tt)
+
+# Get the p.value
+weight_tt$p.value
+
+# Get the confidence interval
+weight_tt$conf.int
 
 ```
 
 
 ]
+
+---
+
+.pull-left4[
+
+## Regression example with `glm()`
+
+```{r}
+head(ChickWeight)
+```
+
+**Goal**: Create a regression model predicting `weight` as a function of Time
+
+<br>
+$$\Large weight = \beta_{0} + \beta_{1} \times Time + \epsilon$$
+]
+
+.pull-right55[
+
+- Function: `glm()`
+- Formula: `formula = weight ~ Time`
+- Data: `data = ChickWeight`
+
+```{r}
+# Create a glm object 
+
+# formula: weight ~ Time
+# data: ChickWeight
+
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+
+# Print the object
+chick_glm
+```
+]
+
+
+---
+
+.pull-left7[
+## Using formulas
+
+You can keep adding terms with `+` 
+
+```{r}
+# Include multiple terms with +
+chick_glm_A <- glm(formula = weight ~ Time + Diet + Chick,
+                   data = ChickWeight)
+```
+
+To include *all* variables, use the generic notation <font color = "blue"> `formula = y ~ .`</font>
+
+```{r}
+# Use  y ~ . to include ALL variables
+chick_glm_B <- glm(formula = weight ~ .,
+                   data = ChickWeight)
+```
+
+To include *interaction terms* use `*`
+
+```{r}
+# Include an interaction term between Time and Diet
+chick_glm_C <- glm(formula = weight ~ Time * Diet + Chick,
+                   data = ChickWeight)
+```
+
+]
+
+
+---
+
+.pull-left35[
+
+<br><br>
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+```{r, eval = FALSE}
+# Create statistical object
+my_obj <- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+**Apply the print() function to a statistical object**
+
+```{r, eval = TRUE}
+# Create a glm object
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+print(chick_glm)
+```
+
+]
+
+
+---
+
+.pull-left35[
+
+
+<br><br>
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+```{r, eval = FALSE}
+# Create statistical object
+my_obj <- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+**Apply the names() function to a statistical object**
+
+```{r, eval = TRUE}
+# Create a glm object
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+names(chick_glm)
+```
+
+]
+
+
+
+
+
+
+
+---
+
+.pull-left35[
+
+
+<br><br>
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+```{r, eval = FALSE}
+# Create statistical object
+my_obj <- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+**Apply the predict() function to a statistical object**
+
+```{r, eval = TRUE}
+# Create a glm object
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+NewData <- tibble(Time = c(10, 15, 20, 45, 5))
+
+# Predict weights of NewData
+predict(chick_glm, 
+        newdata = NewData)
+```
+
+]
+
+
+---
+
+## There are tons of statistical packages in R!
+
+
+.pull-left35[
+<br><br>sx
+| Package| Result|
+|------:|:----|
+|     `afex`|   Anovas|
+|     `rpart`|    Decision Trees|
+|     `lme4`|   Mixed effects regression|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Network analyses|
+|     `neuralnet`| Neural networks|
+
+
+]
+
+.pull-right6[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
+```
+
+
+]
+
+
+---
+
+.pull-left45[
+
+### General linear model
+
+
+
+
+]
+
+
+
+.pull-right5[
+
+
+
+]
+
+
 
 
 

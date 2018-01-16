@@ -112,6 +112,280 @@ my.test(formula = y ~ a + b, # Formula
 -  `...` additional arguments specific to test
 ]
 
+
+
+---
+## 1 or 2 sample hypothesis tests
+
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/htests.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+
+.pull-left5[
+
+## Common 1 or 2 sample hypothesis tests
+
+| Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+
+### Check help menus!
+
+- Different statistical functions require different arguments.
+
+- Look at the help menus to know exactly what arguments each function needs.
+
+]
+
+.pull-right5[
+
+#### Always check help menus!
+
+`?t.test`
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+## t-tests with `t.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+```
+## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
+
+]
+
+.pull-right65[
+
+### Two sample t-test
+
+&gt; Is the mean weight of the chicks on Diet 1 different from Diet 2?
+
+
+```r
+t.test(formula = weight ~ Diet,    # Formula
+       data = ChickWeight,         # Data in Chickweight
+       subset = Diet %in% c(1, 2)) # Only Diets 1,2
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  weight by Diet
+## t = -2.6, df = 200, p-value = 0.009
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -34.900  -5.042
+## sample estimates:
+## mean in group 1 mean in group 2 
+##           102.6           122.6
+```
+
+]
+
+---
+## Correlation test with `cor.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+
+```
+## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
+
+]
+
+.pull-right65[
+
+### Correlation Test
+
+&gt; Is there a correlation between weight and Time?
+
+- For `cor.test()`, formula looks like `formula = ~ a + b`
+
+
+```r
+cor.test(formula = ~ weight + Time, # Formula
+         data = ChickWeight)          # Data in Chickweight
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  weight and Time
+## t = 37, df = 580, p-value &lt;2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.8109 0.8599
+## sample estimates:
+##    cor 
+## 0.8371
+```
+
+]
+
+
+---
+## Chi-Square test with `chisq.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+
+```
+## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
+
+
+]
+
+.pull-right65[
+
+### Chi-Square test
+
+&gt; Are there more observations from one Diet than another?
+
+- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
+
+
+```r
+table(ChickWeight$Diet)   # Look at a table of frequencies
+```
+
+```
+## 
+##   1   2   3   4 
+## 220 120 120 118
+```
+
+```r
+chisq.test(x = table(ChickWeight$Diet)) # Run test on table
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  table(ChickWeight$Diet)
+## X-squared = 53, df = 3, p-value = 2e-11
+```
+
+]
+
+
+---
+.pull-left45[
+
+## Assigning hypothesis test objects
+
+- Hypothesis tests return an object of class `"htest"`
+- Can assign a hypothesis test to an object, and then extract info with `$`:
+
+#### Examples of what's in htest objects
+
+| Element| Result|
+|------:|----:|
+|    `x$statistic`|    A test statistic|
+|     `x$parameter`|    Degrees of freedom|
+|     `x$p.value`|   The p-value|
+|     `x$conf.int`|  Confidence interval|
+]
+
+.pull-right5[
+### What's in an htest object?
+
+
+```r
+# One-sample t-test
+
+weight_tt &lt;- t.test(x = ChickWeight$weight,
+                    mu = 120,
+                    alternative = "two.sided")
+
+# What's in the weight.tt object?
+names(weight_tt)
+```
+
+```
+## [1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"    "null.value"  "alternative"
+## [8] "method"      "data.name"
+```
+
+```r
+# Get the p.value
+weight_tt$p.value
+```
+
+```
+## [1] 0.5387
+```
+
+```r
+# Get the confidence interval
+weight_tt$conf.int
+```
+
+```
+## [1] 116.0 127.6
+## attr(,"conf.level")
+## [1] 0.95
+```
+
+
+]
+
 ---
 
 .pull-left4[
@@ -124,6 +398,7 @@ head(ChickWeight)
 ```
 
 ```
+## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     42    0     1    1
 ## 2     51    2     1    1
@@ -210,11 +485,9 @@ chick_glm_C &lt;- glm(formula = weight ~ Time * Diet + Chick,
 ]
 
 
-
 ---
 
 .pull-left35[
-
 
 &lt;br&gt;&lt;br&gt;
 
@@ -229,6 +502,7 @@ You can apply many *generic* functions to statistical objects such as `print()`,
 my_obj &lt;- FUN(formula = ...,
               data = ...)
 
+names(my_obj)       # Elements
 print(my_obj)       # Print
 summary(my_obj)     # Summary
 plot(my_obj)        # Plotting
@@ -239,7 +513,7 @@ predict(my_obj, ..) # Predict
 
 .pull-right6[
 &lt;br&gt;&lt;br&gt;
-**Apply generic functions to a statistical object**
+**Apply the print() function to a statistical object**
 
 
 ```r
@@ -264,15 +538,133 @@ print(chick_glm)
 ## Residual Deviance: 872000 	AIC: 5880
 ```
 
-
-
 ]
+
 
 ---
 
 .pull-left35[
 
+
+&lt;br&gt;&lt;br&gt;
+
 ## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+
+```r
+# Create statistical object
+my_obj &lt;- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+```
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+**Apply the names() function to a statistical object**
+
+
+```r
+# Create a glm object
+chick_glm &lt;- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+names(chick_glm)
+```
+
+```
+##  [1] "coefficients"      "residuals"         "fitted.values"     "effects"           "R"                
+##  [6] "rank"              "qr"                "family"            "linear.predictors" "deviance"         
+## [11] "aic"               "null.deviance"     "iter"              "weights"           "prior.weights"    
+## [16] "df.residual"       "df.null"           "y"                 "converged"         "boundary"         
+## [21] "model"             "call"              "formula"           "terms"             "data"             
+## [26] "offset"            "control"           "method"            "contrasts"         "xlevels"
+```
+
+]
+
+
+
+
+
+
+
+---
+
+.pull-left35[
+
+
+&lt;br&gt;&lt;br&gt;
+
+## Exploring statistical objects
+
+You can apply many *generic* functions to statistical objects such as `print()`, `summary()`, `predict()` and `plot()`.
+
+
+
+```r
+# Create statistical object
+my_obj &lt;- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+```
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+**Apply the predict() function to a statistical object**
+
+
+```r
+# Create a glm object
+chick_glm &lt;- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+NewData &lt;- tibble(Time = c(10, 15, 20, 45, 5))
+
+# Predict weights of NewData
+predict(chick_glm, 
+        newdata = NewData)
+```
+
+```
+##      1      2      3      4      5 
+## 115.50 159.51 203.53 423.60  71.48
+```
+
+]
+
+
+---
+
+.pull-left35[
+
+## There are tons of statistical packages in R!
+
+| Package| Result|
+|------:|----:|
+|     `afex`|   Anova|
+|     `rpart`|    Decision Trees|
+|     `lme4`|   Mixed effects regression|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Network analyses|
+
 
 The output of a statistical function is always a list with many named elements.
 
@@ -328,308 +720,24 @@ chick_glm$coefficients
 
 ---
 
-.pull-left5[
+.pull-left45[
 
-## Common hypothesis tests
+### General linear model
 
-| Test| R Function|
-|------:|----:|
-|     T-test|    `t.test()`|
-|     Correlation Test|    `cor.test()`|
-|     Chi-Square Test|   `chisq.test()`|
 
-### Check help menus!
 
-- Different statistical functions require different arguments.
-
-- Look at the help menus to know exactly what arguments each function needs.
 
 ]
+
 
 
 .pull-right5[
 
-#### Always check help menus!
-
-`?t.test`
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-## t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### One sample t-test
-
-&gt; Is the mean weight of the chicks significantly different from 120?
-
-
-```r
-t.test(x = ChickWeight$weight,      # Vector of values 
-       alternative = "two.sided",   # Two sided test
-       mu = 120)                    # Null is 120
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  ChickWeight$weight
-## t = 0.62, df = 580, p-value = 0.5
-## alternative hypothesis: true mean is not equal to 120
-## 95 percent confidence interval:
-##  116.0 127.6
-## sample estimates:
-## mean of x 
-##     121.8
-```
-
-]
-
----
-## t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### Two sample t-test
-
-&gt; Is the mean weight of the chicks on Diet 1 different from Diet 2?
-
-
-```r
-t.test(formula = weight ~ Diet,    # Formula
-       data = ChickWeight,         # Data in Chickweight
-       subset = Diet %in% c(1, 2)) # Only Diets 1,2
-```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  weight by Diet
-## t = -2.6, df = 200, p-value = 0.009
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -34.900  -5.042
-## sample estimates:
-## mean in group 1 mean in group 2 
-##           102.6           122.6
-```
-
-]
-
----
-## Correlation test with `cor.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### Correlation Test
-
-&gt; Is there a correlation between weight and Time?
-
-- For `cor.test()`, formula looks like `formula = ~ a + b`
-
-
-```r
-cor.test(formula = ~ weight + Time, # Formula
-         data = ChickWeight)          # Data in Chickweight
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  weight and Time
-## t = 37, df = 580, p-value &lt;2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.8109 0.8599
-## sample estimates:
-##    cor 
-## 0.8371
-```
-
-]
-
-
----
-## Chi-Square test with `chisq.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
 
 
 ]
 
-.pull-right65[
 
-### Chi-Square test
-
-&gt; Are there more observations from one Diet than another?
-
-- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
-
-
-```r
-table(ChickWeight$Diet)   # Look at a table of frequencies
-```
-
-```
-## 
-##   1   2   3   4 
-## 220 120 120 118
-```
-
-```r
-chisq.test(x = table(ChickWeight$Diet)) # Run test on table
-```
-
-```
-## 
-## 	Chi-squared test for given probabilities
-## 
-## data:  table(ChickWeight$Diet)
-## X-squared = 53, df = 3, p-value = 2e-11
-```
-
-]
-
-
----
-# htest objects
-
-.pull-left5[
-
-### Assigning hypothesis test objects
-
-- Most hypothesis tests return an object of class `"htest"` which contain many values
-- You can assign the results of a hypothesis test to an object, and then extract the info you want with the `$` operator:
-
-#### Examples of what's in htest objects
-
-| Element| Result|
-|------:|----:|
-|    `x$statistic`|    A test statistic|
-|     `x$parameter`|    Degrees of freedom|
-|     `x$p.value`|   The p-value|
-|     `x$conf.int`|  Confidence interval|
-]
-
-.pull-right5[
-### What's in an htest object?
-
-
-```r
-# One-sample t-test
-
-weight.tt &lt;- t.test(x = ChickWeight$weight,
-                    mu = 120,
-                    alternative = "two.sided")
-
-class(weight.tt)
-```
-
-```
-## [1] "htest"
-```
-
-```r
-# What's in the weight.tt object?
-names(weight.tt)
-```
-
-```
-## [1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"    "null.value"  "alternative"
-## [8] "method"      "data.name"
-```
-
-
-]
 
 
 
@@ -645,6 +753,7 @@ ChickWeight
 
 
 ```
+## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2
@@ -665,104 +774,6 @@ ChickWeight
 
 ]
 
-
-
----
-# ANOVA with `aov()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right6[
-
-### ANOVA
-
-&gt; Is there difference in weights based on Diet?
-
-- Applying `summary()` to an `aov` object prints a nice table.
-
-
-```r
-E &lt;- aov(formula = weight ~ Diet, # Formula
-         data = ChickWeight)      # Data in Chickweight
-
-summary(E)  # Sow a summary of the results
-```
-
-```
-##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)    
-## Diet          3  155863   51954    10.8 6.4e-07 ***
-## Residuals   574 2758693    4806                    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-]
-
----
-# Post-hoc tests with `TukeyHSD()`
-
-.pull-left4[
-
-&gt; Which specific pairs of Diets differed?
-
-### Step 1: Create aov object
-
-- Apply `TukeyHSD()` to an `aov` object to get post-hoc tests.
-
-
-```r
-# Create an aov object called D
-
-D &lt;- aov(formula = weight ~ Diet,
-         data = ChickWeight)
-```
-
-]
-
-.pull-right55[
-
-### Step 2: Apply `TukeyHSD()` to object
-
-```r
-TukeyHSD(D)  # Conduct post-hoc tests
-```
-
-```
-##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = weight ~ Diet, data = ChickWeight)
-## 
-## $Diet
-##       diff      lwr   upr  p adj
-## 2-1 19.971  -0.2998 40.24 0.0552
-## 3-1 40.305  20.0335 60.58 0.0000
-## 4-1 32.617  12.2354 53.00 0.0003
-## 3-2 20.333  -2.7268 43.39 0.1058
-## 4-2 12.646 -10.5116 35.80 0.4954
-## 4-3 -7.687 -30.8450 15.47 0.8278
-```
-
-]
 
 
 ---
@@ -872,6 +883,105 @@ t.test(x = c(4, 3, 6, 5, 3, 2),
 
 
 ---
+
+
+---
+# ANOVA with `aov()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+```
+## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
+
+]
+
+.pull-right6[
+
+### ANOVA
+
+&gt; Is there difference in weights based on Diet?
+
+- Applying `summary()` to an `aov` object prints a nice table.
+
+
+```r
+E &lt;- aov(formula = weight ~ Diet, # Formula
+         data = ChickWeight)      # Data in Chickweight
+
+summary(E)  # Sow a summary of the results
+```
+
+```
+##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)    
+## Diet          3  155863   51954    10.8 6.4e-07 ***
+## Residuals   574 2758693    4806                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+]
+
+---
+# Post-hoc tests with `TukeyHSD()`
+
+.pull-left4[
+
+&gt; Which specific pairs of Diets differed?
+
+### Step 1: Create aov object
+
+- Apply `TukeyHSD()` to an `aov` object to get post-hoc tests.
+
+
+```r
+# Create an aov object called D
+
+D &lt;- aov(formula = weight ~ Diet,
+         data = ChickWeight)
+```
+
+]
+
+.pull-right55[
+
+### Step 2: Apply `TukeyHSD()` to object
+
+```r
+TukeyHSD(D)  # Conduct post-hoc tests
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = weight ~ Diet, data = ChickWeight)
+## 
+## $Diet
+##       diff      lwr   upr  p adj
+## 2-1 19.971  -0.2998 40.24 0.0552
+## 3-1 40.305  20.0335 60.58 0.0000
+## 4-1 32.617  12.2354 53.00 0.0003
+## 3-2 20.333  -2.7268 43.39 0.1058
+## 4-2 12.646 -10.5116 35.80 0.4954
+## 4-3 -7.687 -30.8450 15.47 0.8278
+```
+
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
