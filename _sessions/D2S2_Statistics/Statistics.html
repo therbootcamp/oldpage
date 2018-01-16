@@ -21,27 +21,28 @@ class: center, middle, inverse, title-slide
 
 
 
-# Statistics
-.pull-left4[
+.pull-left45[
 
+### We will cover...
 
-### In this tutorial we will cover
-
-- The basic structure and arguments of most statistical functions
+-  Basic structure and arguments of most statistical functions
     - `formula`, `data`, `subset`
     
 - Simple `htest` objects
 
-- General linear model, ANOVA
+- General linear model 
+    - `glm`, `aov`
 
-- Using different methods
+- Common methods
     - `print()`, `summary()`, `names()`, `predict()`, `plot()`
 
-- Accessing elements from statistical objects
+- Accessing elements from statistical objects with `$`
+
+- Working with statistical distributions
 
 ]
 
-.pull-right6[
+.pull-right5[
 
 ### Examples
 
@@ -62,6 +63,15 @@ summary(weight_glm)
 
 weight_glm$coefficients # Acess coefficients
 weight_glm$coefficients # Access residuals
+
+
+### Generate random data
+x1 &lt;- rnorm(n = 100, mean = 10, sd = 5)
+x2 &lt;- rnorm(n = 100, mean = 5, sd = 1)
+noise &lt;- rnorm(n= 100, mean = 2, sd = 10)
+
+# Create y as a function of x1, x2, and noise
+y &lt;- x1 + x2 + noise
 ```
 
 ]
@@ -130,7 +140,6 @@ head(ChickWeight)
 ]
 
 .pull-right55[
-
 
 - Function: `glm()`
 - Formula: `formula = weight ~ Time`
@@ -267,7 +276,7 @@ print(chick_glm)
 
 The output of a statistical function is always a list with many named elements.
 
-Different statistical objects have different **classes** with different outputs.
+Different statistical #objects have different **classes** with different outputs.
 
 To see what is inside of a statistical object, use the `names()` function:
 
@@ -321,20 +330,15 @@ chick_glm$coefficients
 
 .pull-left5[
 
-## Common statistical modelling functions
+## Common hypothesis tests
 
 | Test| R Function|
 |------:|----:|
 |     T-test|    `t.test()`|
 |     Correlation Test|    `cor.test()`|
 |     Chi-Square Test|   `chisq.test()`|
-|     Simple regression|    `lm()`|
-|     General Linear Model|    `glm()`|
-
-
 
 ### Check help menus!
-
 
 - Different statistical functions require different arguments.
 
@@ -347,158 +351,237 @@ chick_glm$coefficients
 
 #### Always check help menus!
 
-
 `?t.test`
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-
-
 ]
-
-
-
-
-
-
 
 ---
-# Two types of statistics: Descriptive and Inferential
+## t-tests with `t.test()`
 
-.pull-left4[
+.pull-left3[
 
-### Inferential
+### ChickWeight data
 
-- Used to make inferences about a larger population. Typically done in tandem with a *hypothesis test*
+```r
+ChickWeight
+```
 
-#### Examples
 
-| Hypothesis Test| R Function|
-|------:|----:|
-|     T-test|    `t.test()`|
-|     Correlation Test|    `cor.test()`|
-|     Chi-Square Test|   `chisq.test()`|
-|     ANOVA, Post-hoc|    `aov(), TukeyHSD()`|
 
-- Hypothesis tests typically return lists of outputs (e.g.; p-value, test statistic)
-
+```
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
 
 ]
 
-.pull-right55[
-#### R implimentation
+.pull-right65[
+
+### One sample t-test
+
+&gt; Is the mean weight of the chicks significantly different from 120?
 
 
 ```r
-t.test(x = c(4, 3, 6, 5, 3, 2),
-       mu = 0,
-       alternative = "two.sided")
+t.test(x = ChickWeight$weight,      # Vector of values 
+       alternative = "two.sided",   # Two sided test
+       mu = 120)                    # Null is 120
 ```
 
 ```
 ## 
 ## 	One Sample t-test
 ## 
-## data:  c(4, 3, 6, 5, 3, 2)
-## t = 6.4, df = 5, p-value = 0.001
-## alternative hypothesis: true mean is not equal to 0
+## data:  ChickWeight$weight
+## t = 0.62, df = 580, p-value = 0.5
+## alternative hypothesis: true mean is not equal to 120
 ## 95 percent confidence interval:
-##  2.289 5.378
+##  116.0 127.6
 ## sample estimates:
 ## mean of x 
-##     3.833
+##     121.8
+```
+
+]
+
+---
+## t-tests with `t.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
 ```
 
 
-]
-
-
-
-
-
-
----
-# Inferential Statistics
-
-.pull-left6[
-
-### Different tests, different arguments
-
-- A one-sample t-test requires just a vector, while an ANOVA requires more arguments.
-- To see what arguments a test needs, consult the help menu (e.g.; `?t.test`)
-
-#### Examples
-
-| Hypothesis Test| Help code|
-|------:|:----|
-|     T-test|    `?t.test()`|
-|     Correlation Test|    `?cor.test()`|
-|     Chi-Square Test|   `?chisq.test()`|
-|     ANOVA|    `?aov()`|
-]
-
-.pull-right3[
-#### Always check help menus!
-
-`?t.test`
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="80%" style="display: block; margin: auto;" /&gt;
+```
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
 
 ]
 
+.pull-right65[
 
+### Two sample t-test
 
-
----
-# Inferential Statistics
-
-.pull-left5[
-
-### Arguments to hypothesis tests
-
-- Some arguments are manditory, and some are optional.
-    - If you don't specify an optional argument, R will use a *default* value
-
-#### Ex) Arguments to `t.test`
-
-| Argument| Description| Default |
-|------:|----:|:---|
-|    `x`, `formula, data`|Vector OR a formula and data | *Required* |
-|     `mu`|   Null hypothesis| 0 |
-|     `alternative`| Alternative Hyp| `"two.sided"`| 
-]
-
-.pull-right45[
-
-### Specifying arguments to a hypothesis test
+&gt; Is the mean weight of the chicks on Diet 1 different from Diet 2?
 
 
 ```r
-# 0: Won't work!
-t.test()
+t.test(formula = weight ~ Diet,    # Formula
+       data = ChickWeight,         # Data in Chickweight
+       subset = Diet %in% c(1, 2)) # Only Diets 1,2
+```
 
-# 1: Will work and use default arguments
-t.test(x = ChickWeight$weight)
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  weight by Diet
+## t = -2.6, df = 200, p-value = 0.009
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -34.900  -5.042
+## sample estimates:
+## mean in group 1 mean in group 2 
+##           102.6           122.6
+```
 
-# 1b: Same as above
-t.test(x = ChickWeight$weight,
-       mu = 0,
-       alternative = "two.sided")
+]
 
-# 2: Specified arguments
-t.test(x = ChickWeight$weight,
-       mu = 120,
-       alternative = "greater")
+---
+## Correlation test with `cor.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+
+```
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
+```
+
+]
+
+.pull-right65[
+
+### Correlation Test
+
+&gt; Is there a correlation between weight and Time?
+
+- For `cor.test()`, formula looks like `formula = ~ a + b`
+
+
+```r
+cor.test(formula = ~ weight + Time, # Formula
+         data = ChickWeight)          # Data in Chickweight
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  weight and Time
+## t = 37, df = 580, p-value &lt;2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.8109 0.8599
+## sample estimates:
+##    cor 
+## 0.8371
+```
+
+]
+
+
+---
+## Chi-Square test with `chisq.test()`
+
+.pull-left3[
+
+### ChickWeight data
+
+```r
+ChickWeight
+```
+
+
+
+```
+##   weight Time Chick Diet
+## 1     59    4    30    2
+## 2     93    8    26    2
+## 3     79    6    40    3
+## 4    145   12    28    2
+## 5     48    4     5    1
+## 6    148   18    22    2
 ```
 
 
 ]
 
+.pull-right65[
 
+### Chi-Square test
+
+&gt; Are there more observations from one Diet than another?
+
+- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
+
+
+```r
+table(ChickWeight$Diet)   # Look at a table of frequencies
+```
+
+```
+## 
+##   1   2   3   4 
+## 220 120 120 118
+```
+
+```r
+chisq.test(x = table(ChickWeight$Diet)) # Run test on table
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  table(ChickWeight$Diet)
+## X-squared = 53, df = 3, p-value = 2e-11
+```
+
+]
 
 
 ---
-# Inferential Statistics
+# htest objects
 
 .pull-left5[
 
@@ -582,219 +665,7 @@ ChickWeight
 
 ]
 
----
-# t-tests with `t.test()`
 
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-
-]
-
-.pull-right65[
-
-### One sample t-test
-
-&gt; Is the mean weight of the chicks significantly different from 120?
-
-
-```r
-t.test(x = ChickWeight$weight,      # Vector of values 
-       alternative = "two.sided",   # Two sided test
-       mu = 120)                    # Null is 120
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  ChickWeight$weight
-## t = 0.62, df = 580, p-value = 0.5
-## alternative hypothesis: true mean is not equal to 120
-## 95 percent confidence interval:
-##  116.0 127.6
-## sample estimates:
-## mean of x 
-##     121.8
-```
-
-]
-
----
-# t-tests with `t.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right65[
-
-### Two sample t-test
-
-&gt; Is the mean weight of the chicks on Diet 1 different from Diet 2?
-
-
-```r
-t.test(formula = weight ~ Diet,    # Formula
-       data = ChickWeight,         # Data in Chickweight
-       subset = Diet %in% c(1, 2)) # Only Diets 1,2
-```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  weight by Diet
-## t = -2.6, df = 200, p-value = 0.009
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -34.900  -5.042
-## sample estimates:
-## mean in group 1 mean in group 2 
-##           102.6           122.6
-```
-
-]
-
----
-# Correlation test with `cor.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-]
-
-.pull-right6[
-
-### Correlation Test
-
-&gt; Is there a correlation between weight and Time?
-
-- For `cor.test()`, formula looks like `formula = ~ a + b`
-
-
-```r
-cor.test(formula = ~ weight + Time, # Formula
-         data = ChickWeight)          # Data in Chickweight
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  weight and Time
-## t = 37, df = 580, p-value &lt;2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.8109 0.8599
-## sample estimates:
-##    cor 
-## 0.8371
-```
-
-]
-
-
-
----
-# Chi-Square test with `chisq.test()`
-
-.pull-left3[
-
-### ChickWeight data
-
-```r
-ChickWeight
-```
-
-
-
-```
-##   weight Time Chick Diet
-## 1     59    4    30    2
-## 2     93    8    26    2
-## 3     79    6    40    3
-## 4    145   12    28    2
-## 5     48    4     5    1
-## 6    148   18    22    2
-```
-
-
-]
-
-.pull-right6[
-
-### Chi-Square test
-
-&gt; Are there more observations from one Diet than another?
-
-- For `chisq.test()`, main argument should be a table of values created from the `table()` function:
-
-
-```r
-chisq.test(x = table(ChickWeight$Diet))
-```
-
-```
-## 
-## 	Chi-squared test for given probabilities
-## 
-## data:  table(ChickWeight$Diet)
-## X-squared = 53, df = 3, p-value = 2e-11
-```
-
-]
 
 ---
 # ANOVA with `aov()`
@@ -934,6 +805,61 @@ test_A$statistic # Ah ok! Show me the test statistic
 #### Questions?
 
 ]
+
+
+
+
+
+---
+# Two types of statistics: Descriptive and Inferential
+
+.pull-left4[
+
+### Inferential
+
+- Used to make inferences about a larger population. Typically done in tandem with a *hypothesis test*
+
+#### Examples
+
+| Hypothesis Test| R Function|
+|------:|----:|
+|     T-test|    `t.test()`|
+|     Correlation Test|    `cor.test()`|
+|     Chi-Square Test|   `chisq.test()`|
+|     ANOVA, Post-hoc|    `aov(), TukeyHSD()`|
+
+- Hypothesis tests typically return lists of outputs (e.g.; p-value, test statistic)
+
+
+]
+
+.pull-right55[
+#### R implimentation
+
+
+```r
+t.test(x = c(4, 3, 6, 5, 3, 2),
+       mu = 0,
+       alternative = "two.sided")
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  c(4, 3, 6, 5, 3, 2)
+## t = 6.4, df = 5, p-value = 0.001
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  2.289 5.378
+## sample estimates:
+## mean of x 
+##     3.833
+```
+
+
+]
+
 
 
 
