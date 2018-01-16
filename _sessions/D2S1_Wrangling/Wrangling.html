@@ -90,19 +90,95 @@ dplyr is a combination of 3 things:
 
 dplyr is meant to be sequential and work like language
 
-&gt; Take data X, then do Y, then do Z...
-
-Here's the basic structure of `dplyr` in action
-
-
-```r
-data %&gt;%           # Start with data, and THEN
-     FUNCTION1 %&gt;%     # Do FUNCTION1, (and THEN)
-     FUNCTION2 %&gt;% ... # Do FUNCTION2, (and THEN)
-```
 
 ]
 
+
+
+---
+
+.pull-left25[
+&lt;br&gt;
+&lt;font size = 5&gt;Load the tidyverse&lt;/font&gt;
+
+&lt;br2&gt;
+
+&lt;font size = 5&gt;Load data&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Start with data&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Connect multiple functions with pipes %&gt;%&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Result will always be a tibble&lt;/font&gt;
+
+
+]
+
+.pull-right7[
+
+&lt;font size = 5&gt;Here is how dplyr looks in practice &lt;/font&gt;
+
+
+```r
+library(tidyverse) # Load tidyverse (includes dplyr)
+
+# load .csv file as trial_X
+trial_X &lt;- read_csv("data/mydata.csv")
+
+# Start with original dataframe 
+trial_X %&gt;%   # AND THEN
+  
+  # Change column names with rename()
+  rename(...)  %&gt;%  # AND THEN...
+
+  # Select specific rows with filter()
+  filter(...)  %&gt;%  # AND THEN...
+  
+  # Create new columns witb mutate()
+  mutate(...)  %&gt;%  # ...
+  
+  # Group data with group_by()
+  group_by(...) %&gt;%  #...
+  
+  # Calculate summary statistics with summarise()
+  summarise(...) %&gt;% # ...
+
+   #....
+```
+
+
+]
+
+
+
+---
+
+.pull-left4[
+## Functions in dplyr
+
+- There are dozens functions in dplyr that allow you to wrangle data.
+
+- For an overview, look at the cheatsheet.
+
+- We will now show you how to use ~10 of the most common ones
+
+]
+
+
+.pull-right55[
+
+&lt;br&gt;
+### dplyr cheatsheet
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 
@@ -224,7 +300,7 @@ df %&gt;%
 ]
 
 .pull-right65[
-&lt;font size = 5&gt;2) Add new columns with  mutate()&lt;/font&gt;
+&lt;font size = 5&gt;2) Add new columns with mutate()&lt;/font&gt;
 
 
 ```r
@@ -446,7 +522,7 @@ patients_df %&gt;%
 
 .pull-right65[
 &lt;br&gt;&lt;br&gt;
-&lt;font size = 5&gt;Make sure to assign again using &lt;- to change patients_df&lt;/font&gt;
+&lt;font size = 5&gt;Make sure to assign again using &lt;- to change patients_df&lt;/font&gt;
 
 
 ```r
@@ -530,6 +606,9 @@ patients_df
 ]
 
 .pull-right65[
+
+&lt;br&gt;&lt;br&gt;
+
 &lt;font size = 5&gt;1) Sort rows by id then in decending order of age&lt;/font&gt;
 
 
@@ -570,6 +649,8 @@ patients_df %&gt;%
 ]
 
 .pull-right65[
+&lt;br&gt;&lt;br&gt;
+
 &lt;font size = 5&gt;2) Select drugX over 30&lt;/font&gt;
 
 
@@ -612,6 +693,9 @@ patients_df %&gt;%
 ]
 
 .pull-right65[
+
+&lt;br&gt;&lt;br&gt;
+
 &lt;font size = 5&gt;3) Remove age_months and age_decades&lt;/font&gt;
 
 
@@ -689,8 +773,6 @@ patients_df
 ]
 
 
-
-
 ---
 .pull-left3[
 # group_by() 
@@ -705,6 +787,10 @@ patients_df
 ]
 
 .pull-right65[
+
+&lt;br&gt;&lt;br&gt;
+
+
 &lt;font size = 5&gt;1) Group data by arm&lt;/font&gt;
 
 
@@ -756,6 +842,8 @@ df %&gt;%
 ]
 
 .pull-right65[
+&lt;br&gt;&lt;br&gt;
+
 &lt;font size = 5&gt;2) Calculate summary statistics from times&lt;/font&gt;
 
 
@@ -785,6 +873,105 @@ patients_df %&gt;%
 
 ]
 
+
+
+---
+
+.pull-left4[
+
+#dplyr summary
+
+dplyr is great for elegantly performing sequential operations on data.
+
+The 'pipe' operator `%&gt;%` helps you string multiple *objects* (like dataframes) and *verbs* (summarise, order, aggregate...) together.
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right5[
+
+&lt;br&gt;
+&lt;br&gt;
+
+Basic structure of dplyr commands:
+
+
+```r
+data %&gt;%    # Start with data, AND THEN...
+  VERB1 %&gt;% # Do VERB1, AND THEN...
+  VERB2 %&gt;% # Do VERB2, AND THEN...
+  VERB3 %&gt;% # Do VERB3, AND THEN...
+  group_by(x, y) %&gt;%  # Group by variables x, y
+    summarise(
+      VAR_A_New = fun(X),
+      VAR_B_New = fun(Y)
+    )
+  )
+```
+
+]
+
+
+
+---
+
+.pull-left3[
+
+## Important!
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;You can call many dplyr functions directly without the pipe %&gt;%&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;However, we recommend always using the pipe %&gt;% so you can string many operations together&lt;/font&gt;
+
+]
+
+
+.pull-right65[
+
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt; Use the pipes %&gt;%!&lt;/font&gt;
+
+```r
+## Using dplyr functions without pipes %&gt;%
+##     Avoid this if you can
+
+data &lt;- mutate(data, age_years = age_months * 12)
+data &lt;- filter(data, sex == "m")
+
+## Using dplyr functions with pipes %&gt;%
+##    Much better!!!
+
+data &lt;- data %&gt;% mutate(age_years = age_months * 12)
+data &lt;- data %&gt;% filter(sex == "m")
+
+# Why? Because with pipes you can easily put multiple
+#  functions together if you choose.
+
+data &lt;- data %&gt;% 
+          mutate(age_years = age_months * 12) %&gt;%
+          filter(sex == "m") %&gt;%
+   # ....
+```
+
+
+]
+
+
+---
+
+# Questions?
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html"&gt;Link to Wrangling practical&lt;/a&gt;
+
+
+---
+
+# Additional Slides
 
 ---
 # Vector functions
@@ -924,18 +1111,14 @@ dplyr is a combination of 3 things:
 
 dplyr is meant to be sequential and work like language
 
-&gt; Take data X, then do Y, then do Z...
-
-Here's the basic structure of `dplyr` in action
-
-
-```r
-data %&gt;%           # Start with data, and THEN
-     VERB1 %&gt;%     # Do VERB1, (and THEN)
-     VERB2 %&gt;% ... # Do VERB2, (and THEN)
-```
+&gt; Take data X, 
+&gt;   then do Y, 
+&gt;   then do Z,
+&gt;   ...
 
 ]
+
+
 
 ---
 
@@ -1268,16 +1451,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 474    42     49
-## 426    38     49
-## 261    24     66
-## 565    49    233
-## 271    25     62
-## 350    31    204
-## 521    46     62
-## 430    38    109
-## 344    31     73
-## 468    41    153
+## 186    17     72
+## 341    31     42
+## 282    26     48
+## 192    17    123
+## 326    29    230
+## 3       1     59
+## 211    20     54
+## 25      3     43
+## 108    10     41
+## 166    14    259
 ```
 
 ---
@@ -1320,60 +1503,6 @@ head(time_agg)
 ```
 
 ]
-
----
-
-.pull-left4[
-
-#dplyr summary
-
-dplyr is great for elegantly performing sequential operations on data.
-
-The 'pipe' operator `%&gt;%` helps you string multiple *objects* (like dataframes) and *verbs* (summarise, order, aggregate...) together.
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png" width="50%" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right5[
-
-&lt;br&gt;
-&lt;br&gt;
-
-Basic structure of dplyr commands:
-
-
-```r
-data %&gt;%    # Start with data, AND THEN...
-  VERB1 %&gt;% # Do VERB1, AND THEN...
-  VERB2 %&gt;% # Do VERB2, AND THEN...
-  VERB3 %&gt;% # Do VERB3, AND THEN...
-  group_by(x, y) %&gt;%  # Group by variables x, y
-    summarise(
-      VAR_A_New = fun(X),
-      VAR_B_New = fun(Y)
-    )
-  )
-```
-
-]
-
----
-
-## CheatSheet
-
-https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
-
----
-
-## Practical
-
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html"&gt;Link to Wrangling practical&lt;/a&gt;
-
-
----
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

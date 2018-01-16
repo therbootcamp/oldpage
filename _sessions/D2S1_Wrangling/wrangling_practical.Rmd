@@ -18,7 +18,7 @@ knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a53
 
 ### Overview
 
-In this practical you'll practice "data wrangling" with the `dplyr` package. Data wrangling refers to modifying and summarizing data. For example, sorting, adding columns, recoding values, 
+In this practical you'll practice "data wrangling" with the `dplyr` package (part of the `tidyverse collection of packages). Data wrangling refers to modifying and summarizing data. For example, sorting, adding columns, recoding values, 
 
 If you don't have it already, you can access the dplyr cheatsheet here [https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf). This has a nice overview of all the major functions in dplyr.
 
