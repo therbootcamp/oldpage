@@ -27,6 +27,37 @@ options(digits = 4)
 library(tidyverse)
 ```
 
+
+
+## There are tons of statistical packages in R!
+
+
+.pull-left35[
+<br><br>
+
+| Package| Models|
+|------:|:----|
+|     `afex`|   Anovas|
+|     `rpart`|    Decision Trees|
+|     `lme4`|   Mixed effects regression|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Cluster analyses|
+|     `neuralnet`| Neural networks|
+
+
+]
+
+.pull-right6[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
+```
+
+
+]
+
+---
+
 .pull-left45[
 
 ### We will cover...
@@ -82,8 +113,9 @@ y <- x1 + x2 + noise
 
 ]
 
+
 ---
-# Basic structure of statistical tests
+# Basic structure of statistical functions
 
 .pull-left4[
 
@@ -116,8 +148,6 @@ my.test(formula = y ~ a + b, # Formula
 - `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
 -  `...` additional arguments specific to test
 ]
-
-
 
 ---
 ## 1 or 2 sample hypothesis tests
@@ -508,9 +538,10 @@ predict(my_obj, ..) # Predict
 chick_glm <- glm(formula = weight ~ Time,
                  data = ChickWeight)
 
+# Create a dataframe of new data
 NewData <- tibble(Time = c(10, 15, 20, 45, 5))
 
-# Predict weights of NewData
+# Predict weights of NewData using chick_glm
 predict(chick_glm, 
         newdata = NewData)
 ```
@@ -518,29 +549,65 @@ predict(chick_glm,
 ]
 
 
+
 ---
 
-## There are tons of statistical packages in R!
+.pull-left45[
+## Using Statistical Distributions
+
+- R gives you a host of tools for sampling data from common statistical distributions
 
 
-.pull-left35[
-<br><br>sx
-| Package| Result|
-|------:|:----|
-|     `afex`|   Anovas|
-|     `rpart`|    Decision Trees|
-|     `lme4`|   Mixed effects regression|
-|     `BayesFactor`| Bayesian statistics|
-|     `igraph`| Network analyses|
-|     `neuralnet`| Neural networks|
+| Hypothesis Test| R Function|
+|------:|----:|
+|    Normal| `rnorm()`|    
+|      Uniform|`runif()`|
+|      Beta|`rbeta()`|  
+|      Binomial|`rbinom()`|  
+
+- Use these to create simulations and play around with models
+
+]
+
+
+
+.pull-right5[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/distributions_help.png")
+```
+
 
 
 ]
 
-.pull-right6[
+
+
+
+
+---
+
+.pull-left45[
+
+## Summary
+
+
+- There are tons of statistical packages in R
+
+- Most require a formula, data, and other optional arguments
+
+- Use help menus to understand arguments and syntax!
+
+- Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
+
+]
+
+.pull-right5[
+
+`?t.test`
 
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
 ```
 
 
