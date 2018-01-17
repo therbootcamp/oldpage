@@ -38,13 +38,11 @@ class: center, middle, inverse, title-slide
 |     `igraph`| Cluster analyses|
 |     `neuralnet`| Neural networks|
 
-
 ]
 
 .pull-right6[
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png" width="100%" style="display: block; margin: auto;" /&gt;
-
 
 ]
 
@@ -109,52 +107,123 @@ y &lt;- x1 + x2 + noise
 ---
 # Basic structure of statistical functions
 
-.pull-left4[
+.pull-left5[
 
-### Formula
 
-- Most statistical functions require a `formula` argument
+| Test| R Function|
+|:------|:----|
+|     `formula`|The dependent variable and one or more independent variables|
+|     `data`|  The dataframe containing variables|
+|   `subset`  | Optional subset of data to test |
 
-&gt; `formula = y ~ a + b + ...`
-
-Means...
-
-&gt; Model a dependent variable `y` as a function of `a` and `b` and `...`
-
-- Formulas go together with dataframes `data` containing all variables in the formula.
-
-]
-
-.pull-right6[
-
-### General structure of a hypothesis test and formula
 
 
 ```r
-my.test(formula = y ~ a + b, # Formula
-        data = my.data,      # Dataframe
-        ...                  # Additional
-        )
+trial_X
 ```
 
-- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
-- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
--  `...` additional arguments specific to test
+```
+##   id sex age arm y_primary y_secondary
+## 1  1   m  35   1        50           1
+## 2  2   f  42   2        78           1
+## 3  3   f  24   1        46           0
+## 4  4   m  56   2        97           1
+## 5  5   f  49   1        74           1
+```
+
+
 ]
+
+.pull-right45[
+
+
+```r
+TEST(formula = Y ~ X1 + X2 + ...
+     data = DATA,
+     subset = SUBSET,
+     ...)
+```
+
+
+### Examples
+
+
+```r
+# T-test
+# DV = y_primary, IV = arm
+t.test(formula = y_primary ~ arm
+       data = trial_X)
+
+# Regression
+# DV = y_secondary, IV = arm, sex, age
+# Subset = only id &gt; 50
+glm(formula = y_secondary ~ arm + sex + age
+    data = trial_X,
+    subset = id &gt; 50)
+```
+
+]
+
+
+---
+
+.pull-left45[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## Different tests have different arguments
+
+- Individual tests may have many optional arguments (look at help menus!)
+
+- Each of these have *default* values. If you don't specify them, the function will use the default.
+
+- Customise a test by specifying arguments directly.
+
+]
+
+
+.pull-right5[
+
+### Customised t-test
+
+
+
+```rm
+# Additional arguments to t.test
+
+t.test(formula = t_primary ~ arm,
+       data = trial_X,
+       alternative = "greater", # One-sided
+       mu = 10,                 # H0
+       conf.level = .90)        # Conf level
+
+```
+
+### Customised regression
+
+
+```r
+# Additional arguments to glm
+
+glm(formula = y_secondary ~ arm + sex + age,
+    data = trial_X,
+    family = "binomial",     # Logistic Reg
+    intercept = FALSE)       # No intercept
+```
+
+
+]
+
+
 
 ---
 ## 1 or 2 sample hypothesis tests
 
-
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/htests.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-
 
 ---
 
 .pull-left5[
-
+&lt;br&gt;&lt;br&gt;
 ## Common 1 or 2 sample hypothesis tests
 
 | Test| R Function|
@@ -162,12 +231,6 @@ my.test(formula = y ~ a + b, # Formula
 |     T-test|    `t.test()`|
 |     Correlation Test|    `cor.test()`|
 |     Chi-Square Test|   `chisq.test()`|
-
-### Check help menus!
-
-- Different statistical functions require different arguments.
-
-- Look at the help menus to know exactly what arguments each function needs.
 
 ]
 
@@ -194,7 +257,6 @@ ChickWeight
 
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2
@@ -249,7 +311,6 @@ ChickWeight
 
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2
@@ -306,7 +367,6 @@ ChickWeight
 
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2
@@ -426,7 +486,6 @@ head(ChickWeight)
 ```
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     42    0     1    1
 ## 2     51    2     1    1
@@ -679,8 +738,6 @@ predict(chick_glm,
 
 ]
 
-
-
 ---
 
 .pull-left45[
@@ -689,7 +746,7 @@ predict(chick_glm,
 - R gives you a host of tools for sampling data from common statistical distributions
 
 
-| Hypothesis Test| R Function|
+| Distribution| R Function|
 |------:|----:|
 |    Normal| `rnorm()`|    
 |      Uniform|`runif()`|
@@ -698,6 +755,36 @@ predict(chick_glm,
 
 - Use these to create simulations and play around with models
 
+- You can use `sample()` to draw random samples from a vector of values
+
+]
+
+.pull-right5[
+
+&lt;font size = 5&gt;?distributions&lt;/font&gt;
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/distributions_help.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+## Using Statistical Distributions
+
+- R gives you a host of tools for sampling data from common statistical distributions
+
+| Distribution| R Function|
+|------:|----:|
+|    Normal| `rnorm()`|    
+|      Uniform|`runif()`|
+|      Beta|`rbeta()`|  
+|      Binomial|`rbinom()`|  
+
+- Use these to create simulations and play around with models
+
+- You can use `sample()` to draw random samples from a vector of values
+
 ]
 
 
@@ -705,15 +792,46 @@ predict(chick_glm,
 .pull-right5[
 
 
+```r
+# Simulate 10 flips of a fair coin
+sample(x = c("H", "T"), 
+       size = 10, 
+       replace = TRUE)
+```
 
+```
+##  [1] "H" "H" "H" "T" "T" "T" "H" "T" "H" "H"
+```
 
+```r
+# 5 values from a normal distribution
+rand_samp &lt;- rnorm(n = 5, mean = 0, sd = 1)
+rand_samp # Print the sample
+```
+
+```
+## [1]  1.80077  0.05261  0.92688  1.00398 -0.95148
+```
+
+```r
+t.test(x = rand_samp) # Perform 1 sample t-test
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  rand_samp
+## t = 1.2, df = 4, p-value = 0.3
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.7376  1.8707
+## sample estimates:
+## mean of x 
+##    0.5666
+```
 
 ]
-
-
-
-
-
 ---
 
 .pull-left45[
@@ -729,6 +847,8 @@ predict(chick_glm,
 
 - Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
 
+- Use random sampling functions to run simulations
+
 ]
 
 .pull-right5[
@@ -737,8 +857,21 @@ predict(chick_glm,
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-
 ]
+
+
+
+
+---
+
+## Statistics Pratical
+
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html"&gt;Link to Statistics practical&lt;/a&gt;
+
+
+---
+
+
 
 
 ---
@@ -776,7 +909,6 @@ ChickWeight
 
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2
@@ -897,17 +1029,6 @@ t.test(x = c(4, 3, 6, 5, 3, 2),
 
 
 
-
----
-
-## Statistics Pratical
-
-&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html"&gt;Link to Statistics practical&lt;/a&gt;
-
-
----
-
-
 ---
 # ANOVA with `aov()`
 
@@ -921,7 +1042,6 @@ ChickWeight
 
 
 ```
-## Grouped Data: weight ~ Time | Chick
 ##   weight Time Chick Diet
 ## 1     59    4    30    2
 ## 2     93    8    26    2

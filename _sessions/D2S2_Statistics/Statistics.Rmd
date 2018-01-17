@@ -25,6 +25,17 @@ options(htmltools.dir.version = FALSE)
 options(width=110)
 options(digits = 4)
 library(tidyverse)
+ChickWeight <- as.data.frame(ChickWeight)
+
+
+trial_X <- data.frame(id = 1:5,
+           sex = c("m", "f", "f", "m", "f"),
+           age = c(35, 42, 24, 56, 49),
+           arm = c(1, 2, 1, 2, 1),
+           y_primary = c(50, 78, 46, 97, 74),
+           y_secondary = c(1, 1, 0, 1, 1)
+           )
+
 ```
 
 
@@ -44,7 +55,6 @@ library(tidyverse)
 |     `igraph`| Cluster analyses|
 |     `neuralnet`| Neural networks|
 
-
 ]
 
 .pull-right6[
@@ -52,7 +62,6 @@ library(tidyverse)
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
 ```
-
 
 ]
 
@@ -117,53 +126,111 @@ y <- x1 + x2 + noise
 ---
 # Basic structure of statistical functions
 
-.pull-left4[
+.pull-left5[
 
-### Formula
 
-- Most statistical functions require a `formula` argument
+| Test| R Function|
+|:------|:----|
+|     `formula`|The dependent variable and one or more independent variables|
+|     `data`|  The dataframe containing variables|
+|   `subset`  | Optional subset of data to test |
 
-> `formula = y ~ a + b + ...`
 
-Means...
-
-> Model a dependent variable `y` as a function of `a` and `b` and `...`
-
-- Formulas go together with dataframes `data` containing all variables in the formula.
-
-]
-
-.pull-right6[
-
-### General structure of a hypothesis test and formula
-
-```{r, eval = FALSE}
-my.test(formula = y ~ a + b, # Formula
-        data = my.data,      # Dataframe
-        ...                  # Additional
-        )
+```{r}
+trial_X
 ```
 
-- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
-- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
--  `...` additional arguments specific to test
+
 ]
+
+.pull-right45[
+
+```{r, eval = FALSE}
+TEST(formula = Y ~ X1 + X2 + ...
+     data = DATA,
+     subset = SUBSET,
+     ...)
+```
+
+
+### Examples
+
+```{r, eval = FALSE}
+# T-test
+# DV = y_primary, IV = arm
+t.test(formula = y_primary ~ arm
+       data = trial_X)
+
+# Regression
+# DV = y_secondary, IV = arm, sex, age
+# Subset = only id > 50
+glm(formula = y_secondary ~ arm + sex + age
+    data = trial_X,
+    subset = id > 50)
+```
+
+]
+
+
+---
+
+.pull-left45[
+
+<br><br><br>
+## Different tests have different arguments
+
+- Individual tests may have many optional arguments (look at help menus!)
+
+- Each of these have *default* values. If you don't specify them, the function will use the default.
+
+- Customise a test by specifying arguments directly.
+
+]
+
+
+.pull-right5[
+
+### Customised t-test
+
+
+```{rm, eval = FALSE}
+# Additional arguments to t.test
+
+t.test(formula = t_primary ~ arm,
+       data = trial_X,
+       alternative = "greater", # One-sided
+       mu = 10,                 # H0
+       conf.level = .90)        # Conf level
+
+```
+
+### Customised regression
+
+```{r, eval = FALSE}
+# Additional arguments to glm
+
+glm(formula = y_secondary ~ arm + sex + age,
+    data = trial_X,
+    family = "binomial",     # Logistic Reg
+    intercept = FALSE)       # No intercept
+```
+
+
+]
+
+
 
 ---
 ## 1 or 2 sample hypothesis tests
-
 
 ```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/htests.png")
 ```
 
-
-
-
 ---
 
 .pull-left5[
-
+<br><br>
 ## Common 1 or 2 sample hypothesis tests
 
 | Test| R Function|
@@ -171,12 +238,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 |     T-test|    `t.test()`|
 |     Correlation Test|    `cor.test()`|
 |     Chi-Square Test|   `chisq.test()`|
-
-### Check help menus!
-
-- Different statistical functions require different arguments.
-
-- Look at the help menus to know exactly what arguments each function needs.
 
 ]
 
@@ -548,8 +609,6 @@ predict(chick_glm,
 
 ]
 
-
-
 ---
 
 .pull-left45[
@@ -558,7 +617,7 @@ predict(chick_glm,
 - R gives you a host of tools for sampling data from common statistical distributions
 
 
-| Hypothesis Test| R Function|
+| Distribution| R Function|
 |------:|----:|
 |    Normal| `rnorm()`|    
 |      Uniform|`runif()`|
@@ -567,24 +626,61 @@ predict(chick_glm,
 
 - Use these to create simulations and play around with models
 
+- You can use `sample()` to draw random samples from a vector of values
+
+]
+
+.pull-right5[
+
+<font size = 5>?distributions</font>
+
+```{r, echo = FALSE, out.width = "90%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/distributions_help.png")
+```
+
+]
+
+---
+
+.pull-left45[
+## Using Statistical Distributions
+
+- R gives you a host of tools for sampling data from common statistical distributions
+
+| Distribution| R Function|
+|------:|----:|
+|    Normal| `rnorm()`|    
+|      Uniform|`runif()`|
+|      Beta|`rbeta()`|  
+|      Binomial|`rbinom()`|  
+
+- Use these to create simulations and play around with models
+
+- You can use `sample()` to draw random samples from a vector of values
+
 ]
 
 
 
 .pull-right5[
 
-```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/distributions_help.png")
+```{r}
+# Simulate 10 flips of a fair coin
+sample(x = c("H", "T"), 
+       size = 10, 
+       replace = TRUE)
+
+# 5 values from a normal distribution
+rand_samp <- rnorm(n = 5, mean = 0, sd = 1)
+rand_samp # Print the sample
+
+t.test(x = rand_samp) # Perform 1 sample t-test
+
+
+
 ```
 
-
-
 ]
-
-
-
-
-
 ---
 
 .pull-left45[
@@ -600,6 +696,8 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 - Once you've created a statistical object, use generic methods (`print()`, `names()`, `summary()`), to explore it
 
+- Use random sampling functions to run simulations
+
 ]
 
 .pull-right5[
@@ -610,8 +708,21 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ttesthelp_ss.png")
 ```
 
-
 ]
+
+
+
+
+---
+
+## Statistics Pratical
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html">Link to Statistics practical</a>
+
+
+---
+
+
 
 
 ---
@@ -750,17 +861,6 @@ t.test(x = c(4, 3, 6, 5, 3, 2),
 ]
 
 
-
-
-
----
-
-## Statistics Pratical
-
-<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html">Link to Statistics practical</a>
-
-
----
 
 
 ---
