@@ -29,7 +29,7 @@ options(digits = 4)
 
 # Importing and Exporting Data
 
-In this introduction you will learn...
+In this session you will learn...
 
 .pull-left45[
 1. How to import data data from **delimeter separated files** (e.g., .csv)?
