@@ -13,7 +13,7 @@ class: center, middle, inverse, title-slide
 
 # Machine Learning
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
-### September 2017
+### January 2017
 
 ---
 
@@ -78,6 +78,8 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="95%" /&gt;
 
 
+---
+## What kinds of models are there?
 
 
 
@@ -118,8 +120,6 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 ]
 
 
-
-
 ---
 # Training (fitting) vs. Testing (prediction)
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_A.png" width="70%" style="display: block; margin: auto;" /&gt;
@@ -137,33 +137,30 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/fittingpredictiondarts_D.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
-
-
 ---
-# Why do we separate training from prediction?
+## What machine learning algorithms are there?
 
-- Data comes from two processes: *Signal* and *Noise* (aka Error).
-&lt;br&gt;
-
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+.pull-left45[
+### Classification
 
 
+]
 
 
----
-# Why do we separate training from prediction?
 
-- A good model is one that tries to capture the signal and ignore the noise
-- A bad model is one that captures too much unpredictable noise,
-    
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+.pull-right45[
+### Regression
+
+
+]
+
 
 
 
 
 ---
-# What machine learning algorithms are there?
+## What machine learning algorithms are there?
 
 .pull-left6[
 
@@ -448,6 +445,34 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 &lt;!-- - 1995: Tin Kam Ho develops first algorithm for **Random Forests** --&gt;
 
 &lt;!-- Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes. --&gt;
+
+
+
+---
+### Old
+
+
+
+
+---
+# Why do we separate training from prediction?
+
+- Data comes from two processes: *Signal* and *Noise* (aka Error).
+&lt;br&gt;
+
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+# Why do we separate training from prediction?
+
+- A good model is one that tries to capture the signal and ignore the noise
+- A bad model is one that captures too much unpredictable noise,
+    
+
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

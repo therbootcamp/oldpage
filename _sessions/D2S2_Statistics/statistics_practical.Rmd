@@ -171,7 +171,19 @@ sd(samp_B)
 
 ## Tasks
 
-### Gettting started
+### Getting setup
+
+A. Open a new R script and save it in the `R` folder you just created as a new file called `datawrangling.R`. At the top of the script, using comments, write your name and the date. The, load the set of `tidyverse` and `speff2trial` packages with `library()`. Here's how the top of your script should look:
+
+```{r, eval = FALSE, echo = TRUE}
+## NAME
+## DATE
+## Wrangling Practical
+
+library(tidyverse)     # For tidyverse
+library(speff2trial)   # For the ACTG175 data documentation
+```
+
 
 A. For this practical, we'll use the `ACTG175` dataframe from the `speff2trial` package, load the package with the `library()` function. Also load the `tidyverse` as always!
 

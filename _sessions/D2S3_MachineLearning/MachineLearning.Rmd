@@ -2,7 +2,7 @@
 title: "Machine Learning"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2017"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -91,6 +91,8 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 
+---
+## What kinds of models are there?
 
 
 
@@ -129,8 +131,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ]
 
 
-
-
 ---
 # Training (fitting) vs. Testing (prediction)
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
@@ -156,174 +156,35 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 
-
-
 ---
-# Why do we separate training from prediction?
+## Two types of prediction problems
 
-- Data comes from two processes: *Signal* and *Noise* (aka Error).
-<br>
+.pull-left45[
 
-```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
-
-set.seed(100)
-x <- seq(0, 5, length.out = 50)
-noise <- rnorm(50, mean = 0, sd = 2.5)
-
-model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
-
-y <- model_fun(x)
-y_obs <- model_fun(x) + noise
-
-par(mar = c(3, 4, 3, 1))
-
-par(mfrow = c(1, 3))
-
-plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
+```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png")
+```
 
 
-
-# Plot 1
-
-plot(x, y_obs, main = "Signal", xlab = "", ylab = "", col = "lightgray")
-curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
+]
 
 
+.pull-right45[
 
-# Plot 2
-
-plot(x, y_obs, main = "Noise", xlab = "", ylab = "")
- curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-
- segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-# 
-# # Plot 3
-# 
-# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-# 
-# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
-# 
-# 
-# lines(x, y_obs)
-# 
-# # Plot 4
-# 
-# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
-# 
-# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
-
-
-# lines(x, y_obs)
-
-
+```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png")
 ```
 
 
 
+]
 
----
-# Why do we separate training from prediction?
-
-- A good model is one that tries to capture the signal and ignore the noise
-- A bad model is one that captures too much unpredictable noise,
-    
-
-```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
-
-set.seed(100)
-x <- seq(0, 5, length.out = 50)
-noise <- rnorm(50, mean = 0, sd = 2.5)
-
-model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
-
-y <- model_fun(x)
-y_obs <- model_fun(x) + noise
-
-par(mar = c(3, 4, 3, 1))
-
-par(mfrow = c(1, 3))
-
-plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 1
-
-plot(x, y_obs, main = "Good Model", xlab = "", ylab = "", col = "darkgray")
-
-lines(x, y, col = "blue")
-
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
-
-text(.5, 20, "Fitting error = Medium", adj = 0)
-text(.5, 15, "Prediction error = Low", adj = 0)
-
-
-# segments(x, y, x, y_obs)
-
-# lines(y, y = y_obs)
-
-
-
-# Plot 2
-
-plot(x, y_obs, main = "Bad Model", xlab = "", ylab = "")
-
-text(.5, 20, "Fitting error = None", adj = 0)
-text(.5, 15, "Prediction error = High", adj = 0)
-
-
-lines(x, y_obs, col = "red")
-# lines(y, y = y_obs)
-
-
-# 
-# # Plot 3
-# 
-# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
-# 
-# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
-# 
-# 
-# lines(x, y_obs)
-# 
-# # Plot 4
-# 
-# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
-# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
-# 
-# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
-
-
-# lines(x, y_obs)
-
-
-```
 
 
 
 
 ---
-# What machine learning algorithms are there?
+## What machine learning algorithms are there?
 
 .pull-left6[
 
@@ -613,5 +474,175 @@ pred_err_A <- mean(abs(pred_A - data_test$y))
 <!-- - 1995: Tin Kam Ho develops first algorithm for **Random Forests** -->
 
 <!-- Sources: Wikipedia, Bernard Marr, "A Short History of Machine Learning", Forbes. -->
+
+
+
+---
+### Old
+
+
+
+
+---
+# Why do we separate training from prediction?
+
+- Data comes from two processes: *Signal* and *Noise* (aka Error).
+<br>
+
+```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
+
+set.seed(100)
+x <- seq(0, 5, length.out = 50)
+noise <- rnorm(50, mean = 0, sd = 2.5)
+
+model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
+
+y <- model_fun(x)
+y_obs <- model_fun(x) + noise
+
+par(mar = c(3, 4, 3, 1))
+
+par(mfrow = c(1, 3))
+
+plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
+
+# segments(x, y, x, y_obs)
+
+# lines(y, y = y_obs)
+
+
+
+# Plot 1
+
+plot(x, y_obs, main = "Signal", xlab = "", ylab = "", col = "lightgray")
+curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
+
+# segments(x, y, x, y_obs)
+
+# lines(y, y = y_obs)
+
+
+
+# Plot 2
+
+plot(x, y_obs, main = "Noise", xlab = "", ylab = "")
+ curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
+
+ segments(x, y, x, y_obs)
+
+# lines(y, y = y_obs)
+
+
+# 
+# # Plot 3
+# 
+# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
+# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
+# 
+# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
+# 
+# 
+# lines(x, y_obs)
+# 
+# # Plot 4
+# 
+# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
+# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
+# 
+# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
+
+
+# lines(x, y_obs)
+
+
+```
+
+
+
+
+---
+# Why do we separate training from prediction?
+
+- A good model is one that tries to capture the signal and ignore the noise
+- A bad model is one that captures too much unpredictable noise,
+    
+
+```{r, echo = FALSE, fig.width = 7, fig.height = 3, dpi=200, out.width = "80%", fig.align = 'center'}
+
+set.seed(100)
+x <- seq(0, 5, length.out = 50)
+noise <- rnorm(50, mean = 0, sd = 2.5)
+
+model_fun <- function(x) {x ^ 3 - 4 * x ^ 2 + .5 * x + 5}
+
+y <- model_fun(x)
+y_obs <- model_fun(x) + noise
+
+par(mar = c(3, 4, 3, 1))
+
+par(mfrow = c(1, 3))
+
+plot(x, y_obs, main = "Data", xlab = "", ylab = "", col = "black")
+
+# segments(x, y, x, y_obs)
+
+# lines(y, y = y_obs)
+
+
+
+# Plot 1
+
+plot(x, y_obs, main = "Good Model", xlab = "", ylab = "", col = "darkgray")
+
+lines(x, y, col = "blue")
+
+# curve(model_fun, from = 0, to = 5, add = TRUE, col = "green", lwd = 2)
+
+text(.5, 20, "Fitting error = Medium", adj = 0)
+text(.5, 15, "Prediction error = Low", adj = 0)
+
+
+# segments(x, y, x, y_obs)
+
+# lines(y, y = y_obs)
+
+
+
+# Plot 2
+
+plot(x, y_obs, main = "Bad Model", xlab = "", ylab = "")
+
+text(.5, 20, "Fitting error = None", adj = 0)
+text(.5, 15, "Prediction error = High", adj = 0)
+
+
+lines(x, y_obs, col = "red")
+# lines(y, y = y_obs)
+
+
+# 
+# # Plot 3
+# 
+# plot(x, y_obs, main = "A bad model tries to fit everything", xlab = "", ylab = "")
+# curve(model_fun, from = 0, to = 5, add = TRUE, col = "darkgray", lwd = .5)
+# 
+# text(.5, 20, "Hey I can draw a line through all points\nI don't have any error!", adj = 0)
+# 
+# 
+# lines(x, y_obs)
+# 
+# # Plot 4
+# 
+# plot(x, y_obs, main = "A good model will try to focus on the signal", xlab = "", ylab = "")
+# curve(model_fun, from = 0, to = 5, add = TRUE, col = "blue", lwd = 2)
+# 
+# text(.5, 20, "I won't try to fit all points because\nI think there is random error", adj = 0)
+
+
+# lines(x, y_obs)
+
+
+```
+
 
 
