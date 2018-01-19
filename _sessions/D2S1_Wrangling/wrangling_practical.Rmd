@@ -300,8 +300,28 @@ trial_act_C <- trial_act %>%
 
 21. You can use `left_join()` to combine multiple dataframes. At the following link [https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv) I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here's how the first few rows of the data look:
 
+
+```{r, echo = FALSE, eval = FALSE}
+# create trial_act_demo
+
+trial_act_demo <- data.frame(pidnum = ACTG175[,c("pidnum")],
+                             exercise = sample(0:7, 
+                                               size = nrow(ACTG175), 
+                                               replace = TRUE, 
+                                              prob = c(.2, .3, .1, .15, .1, .05, .075, .025)),
+                             education = sample(c("<HS", "HS", "BA", "MS", "PHD"),
+                                                size = nrow(ACTG175), prob = c(.2, .3, .3, .1, .1), replace = TRUE),
+                             stringsAsFactors = FALSE)
+
+trial_act_demo <- trial_act_demo[sample(nrow(trial_act_demo)),]
+
+write_csv(trial_act_demo, path = "_sessions/_data/patient_demo.csv")
+
+```
+
+
 ```{r, echo = FALSE, eval = TRUE}
-trial_act_demo <- read.table("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv", sep = ",", header = TRUE)
+trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv")
 
 trial_act_demo %>% head()
 ```
@@ -309,6 +329,11 @@ trial_act_demo %>% head()
 Using `left_join()` to add the demographic data to the `trial_act` data. To do this, first load the demographic data into R as a new dataframe called `trial_act_demo`. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)
 
 ```{r, eval = FALSE, echo = TRUE}
+
+# Get trial_act_demo data
+
+trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv")
+
 # Combine trial_act and trial_act_demo data
 trial_act <- trial_act %>%
   left_join(XXX,        # The new dataframe to combine with trial_act
@@ -316,7 +341,7 @@ trial_act <- trial_act %>%
 ```
 
 
-22. Using your new `trial_act` data, calculate the mean number of days of exercise that patients reported.
+22. Using your new `trial_act` tibble, which should contain the exercise and education data, calculate the mean number of days of exercise that patients reported.
 
 
 ### `group_by()` and `summarise()`
