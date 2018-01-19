@@ -10,7 +10,7 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval 
 
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "70%", fig.cap= "Source: https://cdn.lynda.com/course/495322/495322-636154038826424503-16x9.jpg"}
-knitr::include_graphics("https://cdn.lynda.com/course/495322/495322-636154038826424503-16x9.jpg")
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/lynda_com_stats.jpg?raw=true")
 ```
 
 
@@ -180,34 +180,36 @@ C. First thing's first, take a look at the data by printing it. It should look l
 ACTG175
 ```
 
-D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the `arms` column is a factor, *not* an integer. We'll also remove the patient id `pidnum` column as we don't need this
+D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the `arms` column is a factor, *not* an integer. Run the following code to make this change.
 
-```{r}
+```{r, echo = TRUE}
 # Data cleaning
 
 ACTG175 <- ACTG175 %>%
-  select(-pidnum) %>%     # Remove pidnum column
   mutate(
+    
+    # Convert arms to a factor
+    
     arms = factor(arms, 
                   levels = c(0, 1, 2, 3),
-                  labels = c("zid", "zid_did", "zid_zal", "did"))   # Convert arms to a factor
+                  labels = c("zid", "zid_did", "zid_zal", "did"))
   )
 ```
 
 
 ### Descriptive statistics
 
-D. What was the mean age of all patients?
+1. What was the mean age (`age) of all patients?
 
-E. What was the median weight of all patients?
+2. What was the median weight (`wtkg`) of all patients?
 
-F. What was the mean CD4 T cell count at baseline? What was it at 20 weeks?
+3. What was the mean CD4 T cell count at baseline (`cd40`) ? What was it at 20 weeks (`cd420`)?
 
-G. How many patients have a history of intraveneous drug use and how many do not? (Hint: use `table()`)
+4. How many patients have a history of intraveneous drug use (`drug`) and how many do not? (Hint: use `table()`)
 
 ### T tests with t.test()
 
-1. Conduct a one-sample t-test comparing the age of the patients versus a null hypothesis of 40 years.
+5. Conduct a one-sample t-test comparing the age (`age`) of the patients versus a null hypothesis of 40 years.
 
 ```{r}
 t.test(x = ACTG175$age,
@@ -215,7 +217,7 @@ t.test(x = ACTG175$age,
        mu = 40)
 ```
 
-2. Now, compare the mean age to a null hypothesis of 35 years. What has changed?
+6. Now, compare the mean age to a null hypothesis of 35 years. What has changed?
 
 ```{r}
 t.test(x = ACTG175$age,
@@ -223,7 +225,7 @@ t.test(x = ACTG175$age,
        mu = 35)
 ```
 
-3. A researcher wants to make sure that men and women in the clinical study are similar in terms of age. Conduct a two-sample t-test comparing the age of men versus women to test if they are indeed similar or not.
+7. A researcher wants to make sure that men and women in the clinical study are similar in terms of age. Conduct a two-sample t-test comparing the age of men versus women to test if they are indeed similar or not.
 
   - Women are coded as 0 in `gender`, and men are coded as 1. 
   - Be sure to use the formula notation `formula = age ~ gender`
@@ -234,7 +236,7 @@ t.test(formula = age ~ gender,
        alternative = "two.sided")
 ```
 
-4. Conduct a two-sample t-test comparing the number of days until the first occurrence of a major negative event (`days`) between those with a history of intravenous drug use (`drugs`) and those without a history of intravenous drug use
+8. Do people with a history of intraveneous drug use have different numbers of `days` than those who do not have a history of intraveneous drug use? Answer this with a two-sample t-test.
 
 ```{r}
 t.test(formula = days ~ drugs,
@@ -244,10 +246,10 @@ t.test(formula = days ~ drugs,
 
 ### Correlation test with cor.test()
 
-5. Do older people tend to weigh more? Conduct a correlation test between weight (`wtkg`) and age (`age`). What is your conclusion?
+5. Do heavier people tend to have fewer days until a major negative event? Conduct a correlation test between weight (`wtkg`) and age (`days`). What is your conclusion?
 
 ```{r}
-cor.test(formula = ~ age + wtkg,
+cor.test(formula = ~ days + wtkg,
          data = ACTG175)
 ```
 
@@ -258,14 +260,7 @@ cor.test(formula = ~ cd40 + cd420,
          data = ACTG175)
 ```
 
-7. Is there a relationship between CD4 T cell count at baseline (`cd40`) and the number of days until the first occurrence of major negative event (`days`)?
-
-```{r}
-cor.test(formula = ~ cd40 + days,
-         data = ACTG175)
-```
-
-8. Only considering men, is there a correlation between CD4 T cell count at baseline (`cd40`)and CD8 T cell count at baseline (`cd80`)?
+7. Only considering men, is there a correlation between CD4 T cell count at baseline (`cd40`)and CD8 T cell count at baseline (`cd80`)?
 
   - Include the argument `subset = gender == 0` to restrict the analysis to men
     
@@ -275,7 +270,7 @@ cor.test(formula = ~ cd40 + cd80,
          subset = gender == 0)
 ```
 
-9. Now, repeat the previous test, but only for women
+8. Now, repeat the previous test, but only for women. Do you get the same or different results?
 
 ```{r}
 cor.test(formula = ~ cd40 + cd80,
@@ -297,12 +292,6 @@ chisq.test(table(ACTG175$gender, ACTG175$race))
 
 ```{r}
 chisq.test(table(ACTG175$hemo, ACTG175$drugs))
-```
-
-12. Is there a relationship between homosexual activity (`homo`) and gender (`gender`)
-
-```{r}
-chisq.test(table(ACTG175$homo, ACTG175$gender))
 ```
 
 ### Linear Model with glm()
@@ -328,9 +317,9 @@ days_A_glm
 
 18. Using the `names()` function, look at what the named elements in the `days_A_glm` object are.
 
-19. Using the `days_A_glm$__` notation, print a vector of the model coefficients (`$coefficients`).
+19. Using the `days_A_glm$` notation, print a vector of the model coefficients (`$coefficients`).
 
-20. Look at the `$data`, `$fitted.values` and `$residuals` elements of the `days_A_glm` object. What do you think these are?
+20. Look at the `$data`, `$fitted.values` and `$residuals` elements of the `days_A_glm` object. What do you think these are? (Bonus: can you calculate the mean squared residual?)
 
 21. Now create a new regression object `days_B_glm` where you predict `days` as a function of the treatment arm (`arms`). Explore the object. Do you find that there was an effect of the treatment arm on `days`?
 
