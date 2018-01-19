@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="BaselRBootcamp 2017" />
+<meta name="author" content="BaselRBootcamp January 2018" />
 
 
 <title>Practical: Data objects and functions</title>
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Practical: Data objects and functions</h1>
-<h4 class="author"><em>BaselRBootcamp 2017</em></h4>
+<h4 class="author"><em>BaselRBootcamp January 2018</em></h4>
 
 </div>
 
@@ -205,11 +205,11 @@ $(document).ready(function () {
 </tr>
 <tr class="even">
 <td align="left"><code>[[ ]]</code></td>
-<td align="left">Double brackets: Select element/variable in <code>list</code> or <code>data.frame</code></td>
+<td align="left">Double brackets: Select element/variable in list or data.frame</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>[[$]]</code></td>
-<td align="left">Dollar: Select named element/variable from <code>list</code> or <code>data.frame</code></td>
+<td align="left">Dollar: Select named element/variable from list or data.frame</td>
 </tr>
 </tbody>
 </table>
@@ -277,7 +277,7 @@ head(my_df)</code></pre>
 <pre class="r"><code>dim(my_df)</code></pre>
 <pre><code>[1] 20  3</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Now, we practice accessing elements from a data.frame. Try to select the first element using (1) double brackets and index, e.g., <code>[[1]]</code>, (2) using double brackets and name <code>[['dbl_vec']]</code>, an our prefered way using the dollar operator and name, e.g., <code>$dbl_vec</code>. To inspect the names of the elements use <code>names(my_df)</code> or <code>str(my_df)</code>, which provides a richer overview over your data object.</li>
+<li>Now, we practice accessing elements from a data.frame. Try to select the first element using (1) double brackets and index, e.g., <code>[[1]]</code>, (2) using double brackets and name <code>[['dbl_vec']]</code>, an our preferred way using the dollar operator and name, e.g., <code>$dbl_vec</code>. To inspect the names of the elements use <code>names(my_df)</code> or <code>str(my_df)</code>, which provides a richer overview over your data object.</li>
 </ol>
 <pre class="r"><code>names(my_df)</code></pre>
 <pre><code>[1] &quot;dbl_vec&quot; &quot;chr_vec&quot; &quot;log_vec&quot;</code></pre>
@@ -391,21 +391,21 @@ names(my_df_from_list)</code></pre>
 <pre class="r"><code>my_mean &lt;- function(vector) {sum(vector) / length(vector)}
 my_mean(dbl_vec)</code></pre>
 <pre><code>[1] 5.5</code></pre>
-<pre class="r"><code># my_mean(chr_vec) # commented because of error</code></pre>
+<pre class="r"><code>#my_mean(chr_vec)</code></pre>
 <ol start="14" style="list-style-type: decimal">
 <li>The <code>character</code> vector produced an error, right? The reason is that R does not interpret the names you use for the arguments. That is, R does not understand that an argument named <em>vector</em> is supposed to be a vector. For R these names are merely placeholders. In the background, are will use these names to pass on the object provided at the respective location. I.e., in the above case, R will take your vector, may it be <code>dbl_vec</code> or <code>chr_vec</code>, name it <code>vector</code> and pass this new object on to the expression. This means that you can choose anything as the argument names. The only thing you need to ensure is that you use the argument names in the expression. Try redefining the your <code>my_mean</code> function using a different argument name, e.g., <code>x</code>.</li>
 </ol>
 <pre class="r"><code>my_mean &lt;- function(x) {sum(x) / length(x)}
 my_mean(dbl_vec)</code></pre>
 <pre><code>[1] 5.5</code></pre>
-<pre class="r"><code># my_mean(chr_vec) # commented because of error</code></pre>
+<pre class="r"><code>#my_mean(chr_vec)</code></pre>
 <p>Note: R literally creates new objects by assigning the object you provide to a function to its argument names. This means that the objects used inside the function are duplicates of the objects that you provide and not the objects themselves. This is why functions never change an object unless you assign the function’s output back to the object or you explicitly tell R to change the object inside the function using the double arrow assignment operator <code>&lt;&lt;-</code>.</p>
 </div>
 <div id="non-flat-objects" class="section level3">
 <h3>Non-flat objects</h3>
 <p>In working with R, we often encounter objects that have a non-flat, nested structure. This means that there is more than one level of elements. Such objects are almost always <code>list</code>s. Lists are the only object type that can store any other object, even themselves. That is we can have a list of lists or a list of data.frames. Working with non-flat, nested objects is easier than it may seem. To access elements from such an object simply combine several double bracket <code>[[]]</code> and/or dollar <code>$</code> operators to descend into the objects structure. Let’s take a look.</p>
 <ol start="15" style="list-style-type: decimal">
-<li>Create a list containing <code>my_df</code> and your three vectors (for a total of four elements). Try to verify (using the list structure) that each of the columns of <code>my_df</code> is equal the respective vector. To access the columns in <code>my_df</code> you have to combine selectors e.g., <code>my_list[[index/name]][[index/name]]</code>, <code>my_list[[index]]$name</code>, or <code>my_list$name$name</code> (the peferred way).</li>
+<li>Create a list containing <code>my_df</code> and your three vectors (for a total of four elements). Try to verify (using the list structure) that each of the columns of <code>my_df</code> is equal the respective vector. To access the columns in <code>my_df</code> you have to combine selectors e.g., <code>my_list[[index/name]][[index/name]]</code>, <code>my_list[[index]]$name</code>, or <code>my_list$name$name</code> (the preferred way).</li>
 </ol>
 <pre class="r"><code>my_list_2 &lt;- list(my_df, dbl_vec, chr_vec, log_vec)
 all(my_list_2[[1]]$dbl_vec == dbl_vec)</code></pre>

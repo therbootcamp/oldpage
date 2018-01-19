@@ -1,6 +1,6 @@
 ---
 title: "Practical: Data I/O"
-author: "BaselRBootcamp 2017"
+author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
@@ -32,7 +32,7 @@ Here are the main read-in functions:
 |     `read_sas()`| Read SAS file|
 |     `read_sav()`| Read SPSS file|
 | `readRDS()`| Read RDS file |
-| `file(...,'r'), readLines`| Read from file conection |
+| `file(...,'r'), readLines`| Read from file connection |
 
 Here are the main export functions:
 
@@ -42,7 +42,7 @@ Here are the main export functions:
 |     `write_sas()`| Write SAS file|
 |     `write_sav()`| Write SPSS file|
 | `saveRDS()`| Save RDS file |
-| `file(...,'w'), readLines`| Write to file conection |
+| `file(...,'w'), readLines`| Write to file connection |
 
 
 ## Tasks
@@ -53,23 +53,29 @@ Later you will be working with a randomly generated artificial data set of mine,
 
 Please download the following data files and save them to an appropriate location on the disc:
 
-<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.csv">titanic.csv</a><br>
-<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sav">titanic.sav</a><br>
-<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sas7bdat">titanic.sas7bdat</a><br>
-<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/my_data.csv">my_data.csv</a>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv">titanic.csv</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.sav">titanic.sav</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.sas7bdat">titanic.sas7bdat</a><br>
+<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/my_data.csv">my_data.csv</a>
 
 If you can, please verify whether the `.sav` and `sas7bdat` are appropriate SPSS and SAS files, respectively.
+
+```{r, eval = T, echo = F}
+# load a package
+library(tidyverse)
+library(haven)
+```
 
 
 ### Identify the (file)path
 
-1. Every read or write function requires that you provide a filepath or source (e.g., an URL) specifying the location of the file. Ways to facilitate finding the right filepath is to either set the working directiory (see `?setwd()`) or, even better, to use projects. You will learn about projects. For now we will try to work with the full filepath, that is beginning from your harddrive or user account. Fortunately, this isn't difficult either, when using RStudio's autocomplete functionality. To find a file path simply write to quotation marks, i.e., `""`, and press *<Tab>* with the cursor being in-between the quotation marks. This will open an auto-complete dialog that allows you to level-by-level search through your folder structure and to identify the correct filepath. The autocomplete will always begin at the current working directory (see ?`getwd()`), which will usually be the level of your user account. Another way to begin at this location is to begin by writing `~/`. Try it out write `"~/"` into an R script, place the cursor after the slash (`/`), and press *<Tab>*. Now, try to find the location of each of the titanic datasets on your harddrive and assign the path (which is a character string) to an object, e.g., `titanic_csv_path` (titanic_path <- "~/folder_1/folder_2/.../titanic.csv").      
+1. Every read or write function requires that you provide a file path or source (e.g., an URL) specifying the location of the file. Ways to facilitate finding the right file path is to either set the working directory (see `?setwd()`) or, even better, to use projects. You will learn about projects. For now we will try to work with the full file path, that is beginning from your hard drive or user account. Fortunately, this isn't difficult either, when using RStudio's auto-complete functionality. To find a file path simply write to quotation marks, i.e., `""`, and press *<Tab>* with the cursor being in-between the quotation marks. This will open an auto-complete dialog that allows you to level-by-level search through your folder structure and to identify the correct file path. The auto-complete will always begin at the current working directory (see ?`getwd()`), which will usually be the level of your user account. Another way to begin at this location is to begin by writing `~/`. Try it out write `"~/"` into an R script, place the cursor after the slash (`/`), and press *<Tab>*. Now, try to find the location of each of the titanic data sets on your hard drive and assign the path (which is a character string) to an object, e.g., `titanic_csv_path` (titanic_path <- "~/folder_1/folder_2/.../titanic.csv").      
 
 ### Read to `tibble`
 
-2. Ok, let's read some datasets. But first we need to load the packages `readr` and `haven` using `library()`, i.e., `library(readr)` and `library(haven)`.
+2. OK, let's read some data sets. But first we need to load the packages `readr` and `haven` using `library()`, i.e., `library(readr)` and `library(haven)`.
 
-3. Now, read in the three titanic data files usig `read_csv()`, `read_sas()`, and `read_sav()` by passing on the respective filepaths from above and assigning the functions' outcomes to `df_csv`, `df_sas`, and `df_sav`, respectively. Inspect each of the imported objects using `print()` and `str()` and `typeof`. 
+3. Now, read in the three titanic data files using `read_csv()`, `read_sas()`, and `read_sav()` by passing on the respective file paths from above and assigning the functions' outcomes to `df_csv`, `df_sas`, and `df_sav`, respectively. Inspect each of the imported objects using `print()` and `str()` and `typeof`. 
 
 ```{r, eval=F, echo=F}
 df_csv <- read_csv('data_files/titanic.csv')
@@ -87,7 +93,7 @@ all(df_csv == df_sav)
 all(df_sas == df_sav)
 ```
 
-5. Received an error? This is because the datasets contain `NA`'s, that is, missing values. One way to see this is via the summary function `summary()`. Try it out.
+5. Received an error? This is because the data sets contain `NA`'s, that is, missing values. One way to see this is via the summary function `summary()`. Try it out.
 
 ```{r, eval=F, echo=F}
 summary(df_csv)
@@ -101,16 +107,16 @@ summary(df_sav)
 
 Every read function in R has a corresponding write functions. In this section we will write data to the three formats we used so far plus R's own `.RData` and `.RDS` data formats. Before we turn to writing we want to take care of an feature of older write functions, namely `rownames`.
 
-5. As you can see, the first column in, e.g., `df_csv` contains row numbers. Older write functions in R would by default add a row number column to the data, when writing data to disk. Newer functions, however, do not show this behavior. Overall, `rownames` have come a bit out of fashion. Thus, we want to eLiminate the first column from `df_csv` using another way to use indices, i.e., deletion by negative indices. Using negtive rather than positive indices in accessing objects via `[]` or `[[]]` means *omit* rather than *select*. E.g., `c(1, 2, 3)[-2]` returns the vector without the second value. Try to apply this to `df_csv` while assigning it to `df_csv_no_rownames`. Should you use single `[]` or double `[[]]` brackets? Try both.
+7. As you can see, the first column in, e.g., `df_csv` contains row numbers. Older write functions in R would by default add a row number column to the data, when writing data to disk. Newer functions, however, do not show this behavior. Overall, `rownames` have come a bit out of fashion. Thus, we want to eliminate the first column from `df_csv` using another way to use indices, i.e., deletion by negative indices. Using negative rather than positive indices in accessing objects via `[]` or `[[]]` means *omit* rather than *select*. E.g., `c(1, 2, 3)[-2]` returns the vector without the second value. Try to apply this to `df_csv` while assigning it to `df_csv_no_rownames`. Should you use single `[]` or double `[[]]` brackets? Try both.
 
 ```{r, eval=F, echo=F}
 df_csv_no_rownames = df_csv[-1]
-df_csv_no_rownames = df_csv[[-1]]
+#df_csv_no_rownames = df_csv[[-1]]
 ```
 
-6. Then write the reduced data frame to disk using `write_csv()`. Use the exact same file path. Observe whether R gives you a warning before (over-)writing the data?
+8. Then write the reduced data frame to disk using `write_csv()`. Try using the exact same file path. Does R gives you a warning? 
 
-6. Determine the file path to `my_data.csv` and read it in using `read_csv()`. Now write the data back to disk using `write_sas`, `write_sav`, and also `saveRDS`. Each of these functions take as the first argument the data frame and as the second argumen the file path. To obtain the latter adapt the filepath of `my_data.csv` by hand to make sure that the file path has the correct file ending, i.e., `.sas7bdat`, `.sav`, and `.RDS`, respectively. While you write the individual data sets pay attention to the speed of execution. 
+9. Now, let's try some other formats using the other data set. First, read in `my_data.csv` (which you downloaded in the beginning of this practical) as assign to `my_data`. Then, write `my_data` to disk using `write_sas`, `write_sav`, and also `saveRDS`. Just as `write_csv`, each of these functions take the data frame as the first argument and the file path as the second. To obtain the latter adapt the file path by hand to make sure that the file path has the correct file ending, i.e., `.sas7bdat`, `.sav`, and `.RDS`, respectively. While you write the individual data sets pay attention to the speed of execution. Which one was fastest? If you didn't make out a difference try again.
 
 ```{r, eval=F, echo=F}
 my_data = read_csv("data_files/my_data.csv")
@@ -119,7 +125,7 @@ write_sav(my_data,"data_files/my_data.sav")
 saveRDS(my_data,"data_files/my_data.RDS")
 ```
 
-7. You may have noticed that the `saveRDS` function was the slowest. This is because `.RDS` generally leads to the highest degree of compression, i.e., the smalles data files. To verify this use the `file.info()` on each of the four files, `my_data.csv`, `my_data.sas7bdat`, `my_data.sav`, and `my_data.RDS` (using the correct path). Look out for the `size` element, which gives the size in `bytes`.
+10. You may have noticed that the `saveRDS` function was the slowest. This is because `.RDS` results in the highest degree of compression, i.e., the smallest file sizes. To verify this use the `file.info()` function on each of the four files, that is, using their file paths. Look out for the `size` element, which gives the size in `bytes`.
 
 ```{r, eval=F, echo=F}
 file.info("data_files/my_data.csv")
@@ -128,31 +134,36 @@ file.info("data_files/my_data.sav")
 file.info("data_files/my_data.RDS")
 ```
 
-### Read from internet
+### Read from url
 
+Most read functions are not limited to reading from the hard drive. Often you can also directly read from url. 
 
+11. Try reading the the *titanic* data set using this link *https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv* and `read_csv`.
 
+```{r, eval=F, echo=F}
+my_data = read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv")
+```
 
 ### File connections
 
-8. The most basic way to handle files is via file connections. The first step of working with file connections is to establish a file connections using, e.g., `file()`. The main arguments to `file` are a location (a file path, url, etc.) and a mode indicator, e.g., `r` for `Open for reading in text mode`. Try opening a connection to the `titanic.csv` dataset. To do this, you must assign the output of `file()` to an object, which then is the connection, e.g., `con = file("my_path","r")`. 
+The most basic way to handle files is via file connections. In this more advanced section we take a look at how this works. 
+
+12.  The first step of working with file connections is to establish a file connections using `file()`. The main arguments to `file` are a location (a file path, URL, etc.) and a mode indicator, e.g., `r` for `Open for reading in text mode`. Try opening a connection to the `titanic.csv` data set. To do this, you must assign the output of `file()` to an object, which then is the connection, e.g., `con = file("my_path","r")`. If you want to use the URL (see previous section) you have to use `url()` instead of `file()`.
 
 ```{r, eval=F, echo=F}
-con = file('data_files/titanic.csv','r')
+con = file('data_files/titanic.csv', 'r')
 ```
 
-9. Now that the connection is open, you can read the file using, e.g., `readLines`. `readLines` iterates through the file line by line and returns each line as a character string. Store the output in an object. Try reading the file. When done close the connection using `close(my_con)` and inspect the data.  
+13. Now that the connection is open, you can read the file using `readLines`. `readLines` iterates through the file line by line and returns each line as a character string. Try reading the file and store the output in an object. When done close the connection using `close(my_con)` and inspect the data.  
 
 ```{r, eval=F, echo=F}
 lin = readLines(con)
 close(con)
 ```
 
-10. As you can see the read in data looks much messier than with using `read_csv()`. If you're up for the challenge you can try to nonetheless parse this data. A good way is to split each line using the `stri_split_fixed` function using the comma `,` (from the `stringi` package). This will return a list of vectors, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using `do.call(rbind,my_list)`. What's then left is transform the matrix to a data frame and to take care of column types and names.  
+14. As you can see the read-in data looks much messier than with using `read_csv()`. This is because `read_csv()` really does a lot of editing and interpreting for you. If you're up for the challenge you can try to process the raw data. One approach is to first split each line using the `stri_split_fixed` function using the comma `,` as a separator. To do this first install and load the `stringi` package. Applying `stri_split_fixed` will return a `list` of `vector`s, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using `do.call(rbind, my_list)`. The only thing left then is coerce the matrix to a data frame (using `as.data.frame` or, better, `as.tibble`) and to take care of column types and names.  
 
 ```{r, eval=F, echo=F}
-lin <- readLines(con)
-close(con)
 require(stringi)
 spl <- stri_split_fixed(lin,',')
 mat <- do.call(rbind,spl)
@@ -162,13 +173,14 @@ df  <- as.tibble(mat)
 
 ### Scraping the internet
 
-11. Finally on to something rather different. Connections can also be established to data located outside one's own disk, such as, for instance, the world wide web. Speicifically, using `url()` we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient `rvest` package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R's Wikipedia page.
+15. Finally on to something completely new. As mentioned, connections can also be established to data located outside one's own disk, such as, for instance, the world wide web. Specifically, using `url()` we can establish a connection to a webpage, which we then can use to retrieve information on the webpage. One package that conveniently streamlines extracting information from webpages based is the very  `rvest` package. To illustrate how easy it can be to scrape (aka extract) information from the internet using R and `rvest`, consider the following code. It downloads and parses the Milestones table of R's Wikipedia page.
 
 ```{r, eval=F, echo=T}
 
 # load package
-install.packages('rvest')
-library(rvest) 
+install.packages('rvest', repos = "https://stat.ethz.ch/CRAN/")
+library(rvest)
+library(tibble)
 library(magrittr)
 
 # get html
@@ -182,7 +194,6 @@ table = page %>% html_node(xpath = '//*[@id="mw-content-text"]/div/table[2]') %>
 # create tibble
 as.tibble(table)
 ```
-
 
 
 # Additional reading

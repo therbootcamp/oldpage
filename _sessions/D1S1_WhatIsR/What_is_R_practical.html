@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="BaselRBootcamp 2017" />
+<meta name="author" content="BaselRBootcamp January 2018" />
 
 
 <title>Practical: What is R</title>
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Practical: What is R</h1>
-<h4 class="author"><em>BaselRBootcamp 2017</em></h4>
+<h4 class="author"><em>BaselRBootcamp January 2018</em></h4>
 
 </div>
 
@@ -137,13 +137,13 @@ $(document).ready(function () {
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
-<p>For this practical you will go through an existing analysis script chunck by chunk to experience how programming and analysing in R works. The idea is that you go through the code, copy the code chunks to the script editor, send the code to the console, and evaluate what happens.</p>
+<p>For this practical you will go through an existing analysis script chunk by chunk to experience how programming and analyzing in R works. The idea is that you go through the code, copy the code chunks to the script editor, send the code to the console, and evaluate what happens.</p>
 <p>While at it try to practice two very useful shortcuts: (1) <code>cmd + enter (MAC)</code> or <code>cntrl + enter (Windows)</code> for running the current line in the console. (2) <code>cmd + shift + p (MAC)</code> or <code>cntrl + shift + p (Windows)</code> for running the same block of code again in the console. The latter is really helpful because you can rerun the a chunk of code after you have made changes to it.</p>
 <p>All of the code used in this tutorial is based on <strong>base-R functions</strong>. While they are already powerful, we will later in the course introduce you to more modern, better options for most of the steps.</p>
 <div id="install-and-load-the-yarrr-package" class="section level3">
 <h3>Install and load the yarrr package</h3>
 <ol style="list-style-type: decimal">
-<li>First we’ll install and load the yarrr package. The yarrr package contains many datasets and functions (created by Nathaniel Phillips).</li>
+<li>First we’ll install and load the yarrr package. The yarrr package contains many data sets and functions (created by Nathaniel Phillips).</li>
 </ol>
 <pre class="r"><code># Install and load the yarrr package
 # 1install.packages('yarrr')
@@ -152,7 +152,7 @@ library(yarrr)</code></pre>
 <div id="explore-the-pirates-dataset" class="section level3">
 <h3>Explore the pirates dataset</h3>
 <ol start="2" style="list-style-type: decimal">
-<li>The pirates dataset contains data from a survey of 1,000 pirates. Inspect it one-by-one using the following functions.</li>
+<li>The pirates data set contains data from a survey of 1,000 pirates. Inspect it one-by-one using the following functions.</li>
 </ol>
 <pre class="r"><code># Get help for pirates data
 ?pirates
@@ -320,11 +320,11 @@ barplot(pirate_heights$height,
         names.arg = pirate_heights$favorite.pirate)
 
 # --- Same, but with customizations
-barplot(pirate.heights$height, 
+barplot(pirate_heights$height, 
         ylim = c(0, 200),
         ylab = &quot;Pirate Height (in cm)&quot;,
         main = &quot;Barplot of mean height by favorite pirate&quot;,
-        names.arg = pirate.heights$favorite.pirate, 
+        names.arg = pirate_heights$favorite.pirate, 
         col = piratepal(&quot;basel&quot;, trans = .2))
 
 abline(h = seq(0, 200, 25), lty = 3, lwd = c(1, .5))</code></pre>

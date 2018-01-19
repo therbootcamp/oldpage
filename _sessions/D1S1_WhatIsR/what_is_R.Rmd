@@ -335,8 +335,9 @@ my_fun(x,y){ x  + y }
 
 ---
 
-.pull-left5[
 # Help
+
+.pull-left5[
 
 R provides extremely helpful **help files** and **vignettes**. 
 >**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).<br>
@@ -356,9 +357,12 @@ vignette(package="name_of_vignette")
 ```
 
 ]
-
 .pull-right45[
-<br><br><iframe src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_html/R_ Arithmetic Mean.htm" height="510" width="800" align="center"></iframe>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"></p>
+
+<!---
+<br><br><iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"></iframe>
+--->
 ]
 
 ---
