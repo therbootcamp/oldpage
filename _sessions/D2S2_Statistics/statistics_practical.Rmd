@@ -9,8 +9,8 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = FALSE, eval 
 ```
 
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "70%", fig.cap= "Source: https://www.slideshare.net/hakeemrehman/8-testing-of-hypothesis-for-variable-amp-attribute-data"}
-knitr::include_graphics("https://image.slidesharecdn.com/8-150928160000-lva1-app6892/95/8-testing-of-hypothesis-for-variable-amp-attribute-data-4-638.jpg?cb=1443456555")
+```{r, echo = FALSE, fig.align = 'center', eval = TRUE, out.width = "70%", fig.cap= "Source: https://cdn.lynda.com/course/495322/495322-636154038826424503-16x9.jpg"}
+knitr::include_graphics("https://cdn.lynda.com/course/495322/495322-636154038826424503-16x9.jpg")
 ```
 
 
@@ -65,30 +65,32 @@ Here are the random sampling functions we will use
 
 ```{r, eval = FALSE, echo = TRUE, message = FALSE, warning = FALSE}
 # -----------------------------------------------
-# Examples of hypothesis tests on the ChickWeight data
+# Examples of hypothesis tests on the diamonds
 # ------------------------------------------------
 library(tidyverse)
 
-chick <- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as a tibble called chick
+# First few rows of the diamonds data
+
+diamonds
 
 # -----
 # Descriptive statistics
 # -----
 
-mean(chick$weight)   # What is the mean weight?
-median(chick$Time)   # What is the median time?
-max(chick$weight)    # What is the maximum weight?
-table(chick$Diet)    # How many observations for each diet?
+mean(diamonds$carat)   # What is the mean carat?
+median(diamonds$price)   # What is the median price?
+max(diamonds$depth)    # What is the maximum depth?
+table(diamonds$color)    # How many observations for each color?
 
 # -----
 # 1-sample hypothesis test
 # -----
 
-# Q: Is the mean weight of chickens different from 110?
+# Q: Is the mean carat of diamonds different from .50?
 
-htest_A <- t.test(x = chick$weight,     # The data
-                   alternative = "two.sided",  # Two-sided test
-                   mu = 110)                   # The null hyopthesis
+htest_A <- t.test(x = diamonds$carat,     # The data
+                  alternative = "two.sided",  # Two-sided test
+                  mu = 0.5)                   # The null hyopthesis
 
 htest_A            # Print result
 names(htest_A)     # See all attributes in object
@@ -100,12 +102,12 @@ htest_A$conf.int   # Get a confidence interval
 # 2-sample hypothesis test
 # -----
 
-# Q: Is there a difference in weights from Diet 1 and Diet 2?
+# Q: Is there a difference in the carats of color = E and color = I diamonds?
 
-htest_B <- t.test(formula = weight ~ Diet,     # DV ~ IV
+htest_B <- t.test(formula = carat ~ color,     # DV ~ IV
                    alternative = "two.sided",  # Two-sided test
-                   data = chick,         # The data
-                   subset = Diet %in% c(1, 2)) # Compare Diet 1 and Diet 2
+                   data = diamonds,         # The data
+                   subset = color %in% c("E", "I")) # Compare Diet 1 and Diet 2
 
 htest_B  # Print result
 
@@ -113,39 +115,42 @@ htest_B  # Print result
 # Correlation test
 # ------
 
-# Q: Is there a correlation between Time and weight?
+# Q: Is there a correlation between carat and price?
 
-htest_C <- cor.test(formula = ~ weight + Time,
-                    data = chick)
+htest_C <- cor.test(formula = ~ carat + price,
+                    data = diamonds)
 
 htest_C
 
-# A: Yes. r = 0.84, t(576) = 36.7, p < .001
-
-
-# Q: Does the result hold when ONLY considering Diets 1 and 2?
-
-htest_D <- cor.test(formula = ~ weight + Time,
-                    data = chick,
-                    subset = Diet %in% c(1, 2))     # Only take data where Diet is 1 or 2
-
-htest_D
-
-# A: Yes. r = 0.81, t(339) = 25.08, p < .001
+# A: Yes. r = 0.92, t(53938) = 551.51, p < .001
 
 # -----
 # Regression
 # ------
 
-# Q: Which variables predict weight?
+# Q: Create regression equation predicting price by carat, depth, table, and x
 
-weight_glm <- glm(formula = weight ~ .
-                  data = chick)
+price_glm <- glm(formula = price ~ carat + depth + table + x,
+                  data = diamonds)
 
-weight_glm
+# Print coefficients
+price_glm
 
-# A: Yes. r = 0.84, t(576) = 36.7, p < .001
+# Show as ANOVA table using the Anova function from the car package
+car::Anova(price_glm)
 
+# Q: Predict the price of the following 3 diamonds:
+
+diamonds_new <- tibble(carat = c(.2, .6, .5),
+                       depth = c(50, 46, 90),
+                       table = c(40, 65, 70),
+                       x = c(3.7, 4.2, 4.3))
+
+predict(price_glm, 
+        newdata = diamonds_new)
+
+#       1         2         3 
+# 4190.453  6088.398 -4471.817 
 
 ```
 
@@ -175,6 +180,20 @@ C. First thing's first, take a look at the data by printing it. It should look l
 ACTG175
 ```
 
+D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the `arms` column is a factor, *not* an integer. We'll also remove the patient id `pidnum` column as we don't need this
+
+```{r}
+# Data cleaning
+
+ACTG175 <- ACTG175 %>%
+  select(-pidnum) %>%     # Remove pidnum column
+  mutate(
+    arms = factor(arms, 
+                  levels = c(0, 1, 2, 3),
+                  labels = c("zid", "zid_did", "zid_zal", "did"))   # Convert arms to a factor
+  )
+```
+
 
 ### Descriptive statistics
 
@@ -188,7 +207,7 @@ G. How many patients have a history of intraveneous drug use and how many do not
 
 ### T tests with t.test()
 
-1. Conduct a one-sample t-test comparing the age of the patients versus a null hypothesis of 40 years. What is the test statistic? What is the p-value? Do you accept or reject the hull hypothesis?
+1. Conduct a one-sample t-test comparing the age of the patients versus a null hypothesis of 40 years.
 
 ```{r}
 t.test(x = ACTG175$age,
@@ -214,7 +233,6 @@ t.test(formula = age ~ gender,
        data = ACTG175,
        alternative = "two.sided")
 ```
-
 
 4. Conduct a two-sample t-test comparing the number of days until the first occurrence of a major negative event (`days`) between those with a history of intravenous drug use (`drugs`) and those without a history of intravenous drug use
 
@@ -287,6 +305,59 @@ chisq.test(table(ACTG175$hemo, ACTG175$drugs))
 chisq.test(table(ACTG175$homo, ACTG175$gender))
 ```
 
+### Linear Model with glm()
+
+15. Which demographic variables predict days until the first occurence of a major negative event (`days`)? To answer this, conduct a linear regression analysis predicting `days` as a function of age (`age`), weight (`wtkg`), race (`race`) and gender (`gender`). Call the object `days_A_glm`.
+
+```{r}
+days_A_glm <- glm(formula = days ~ age + wtkg + race + gender,
+                     data = ACTG175)
+
+summary(arms_cd820_aov)
+
+TukeyHSD(arms_cd820_aov)
+```
+
+16. Print the `days_A_glm` object to see the coefficients.
+
+```{r}
+days_A_glm
+```
+
+17. Using the `summary()` function, explore the `days_A_glm` object to see which coefficients are significant.
+
+18. Using the `names()` function, look at what the named elements in the `days_A_glm` object are.
+
+19. Using the `days_A_glm$__` notation, print a vector of the model coefficients (`$coefficients`).
+
+20. Look at the `$data`, `$fitted.values` and `$residuals` elements of the `days_A_glm` object. What do you think these are?
+
+21. Now create a new regression object `days_B_glm` where you predict `days` as a function of the treatment arm (`arms`). Explore the object. Do you find that there was an effect of the treatment arm on `days`?
+
+```{r}
+days_B_glm <- glm(formula = days ~ arms,
+                  data = ACTG175)
+```
+
+22. Does the effect of treatment arm on days hold if you only consider men (`gender == 1`) above the age of 30 (`age > 30`)? To answer this, repeat your previous regression, but include the appropriate arguments to `subset`
+
+
+
+## Extras and Challenges
+
+### Generating random samples from distributions
+
+19. You can easily generate random samples from statistical distributions in R. To see all of them, run `?distributions`. For example, to generate samples from the well known Normal distribution, you can use `rnorm()`. Look at the help menu for `rnorm()` to see its arguments. 
+
+20. Using `rnorm()`,create a new object `samp_10` which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results? 
+
+21. Evalaute your code for the previous question *exactly* as it is -- that is, don't change *anything*. What are the new values in `samp_10` and the new mean, standard deviation, and t-test result. Why are the new results different?
+
+22. Now, create a new object called `samp_1000` which is 1,000 samples from a Normal distribution (again with mean 12 and standard deviation 5). Print this object to see what it looks like. What should the mean and standard deviation of this sample be? Do the same hypothesis test as you did in the previous question. What is your new p-value?
+
+
+### You choose the test!
+
 13. Only for patients older than 40, is there a relationship between antiretroviral history (`str2`) and race (`race`)?
 
    - Create a new dataframe called `ACTG175.o40 <- subset(ACTG175, age > 40)` and then do your analysis on this new dataframe.
@@ -308,102 +379,6 @@ ACTG175.male <- subset(ACTG175, gender == 0)
 chisq.test(table(ACTG175.male$str2, ACTG175.male$race))
 ```
 
-### ANOVA with aov()
-
-15. One of the main research hypotheses might be that there is an effect of treatment on CD8 T cell count at 20 weeks of treatment. Test this hypothesis to see if there an effect of treatment arms (`arms`) on CD8 T cell count at 20 weeks (`cd820`). If there is a significant effect, conduct post-hoc tests to see which treatment arms differed. 
-
-```{r}
-arms_cd820_aov <- aov(formula = cd820 ~ factor(arms),
-                     data = ACTG175)
-
-summary(arms_cd820_aov)
-
-TukeyHSD(arms_cd820_aov)
-```
-
-
-16. A researcher might be concerned that certain treatments might lead to substantial weight-loss or weight-gain. Answer this question by testing if there an effect of treatment arms (`arms`) on weight (`wtkg`). If the effect is significant, conduct post-hoc tests.
-
-```{r}
-arms_weight_aov <- aov(formula = wtkg ~ factor(arms),
-                     data = ACTG175)
-
-summary(arms_weight_aov)
-
-TukeyHSD(arms_weight_aov)
-```
-
-
-17. The main variable of interest is if there is an effect of treatment arms (`arms`) on the number of days until the occurrence of a major negative event (`days`). Answer this by conducting the appropriate ANOVA (with post-hoc tests if necessary).
-
-    
-```{r}
-arms_days_aov <- aov(formula = days ~ factor(arms),
-                     data = ACTG175)
-
-summary(arms_days_aov)
-
-TukeyHSD(arms_days_aov)
-```
-
-
-18. Does the previous result hold if you only consider patients with a history of intravenous drug use (`drugs`)? Answer this by conducting the same ANOVA *only* on these patients.
-
-   - Create a new dataframe called `ACTG175_drugs = subset(ACTG175, drugs == 1)` and run your analysis on this dataframe
-   
-```{r}
-ACTG175_drugs <- subset(ACTG175, drugs == 1)
-
-arms_days_drugs_aov <- aov(formula = days ~ factor(arms),
-                           data = ACTG175_drugs)
-
-summary(arms_days_drugs_aov)
-
-TukeyHSD(arms_days_drugs_aov)
-```
-
-## Extras and Challenges
-
-### Generating random samples from distributions
-
-19. You can easily generate random samples from statistical distributions in R. To see all of them, run `?distributions`. For example, to generate samples from the well known Normal distribution, you can use `rnorm()`. Look at the help menu for `rnorm()` to see its arguments. 
-
-
-20. Using `rnorm()`,  create a new object `samp_10` which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results? 
-
-21. Evalaute your code for the previous question *exactly* as it is -- that is, don't change *anything*. What are the new values in `samp_10` and the new mean, standard deviation, and t-test result. Why are the new results different?
-
-22. Now, create a new object called `samp_1000` which is 1,000 samples from a Normal distribution (again with mean 12 and standard deviation 5). Print this object to see what it looks like. What should the mean and standard deviation of this sample be? Do the same hypothesis test as you did in the previous question. What is your new p-value?
-
-
-
-### 2 - Way ANOVA
-
-
-23. Conduct a two-way ANOVA testing the effects of *both* hemophilia (`hemo`) and drug use (`drugs`) on the number of days until a major negative event.
-
-   - To include multiple factors in an anova, just include both in the formula such as: `formula = dv ~ factor(x) + factor(y) + ... `. See https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova for an example
-    
-```{r}
-hemo_drugs_days_aov <- aov(formula = days ~ factor(hemo) + factor(drugs),
-                           data = ACTG175)
-
-summary(hemo_drugs_days_aov)
-```
-
-
-24. Repeat the previous ANOVA, but now test if there is an *interaction* between hemophilia and drugs on the number of days until a major negative event.
-
-   - To include interactions in an ANOVA, just include both in the formula using the `*` operator: `formula = dv ~ factor(x) * factor(y)`. See https://bookdown.org/ndphillips/YaRrr/anova.html#ex-two-way-anova for an example
-    
-```{r}
-hemo_drugs_days_aov <- aov(formula = days ~ factor(hemo) * factor(drugs),
-                           data = ACTG175)
-
-summary(hemo_drugs_days_aov)
-```
-
-### You choose the test!
 
 25. Is there a difference in the CD4 T cell count at baseline between whites and non-whites? Answer this by conducting the appropriate hypothesis test.
 
