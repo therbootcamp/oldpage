@@ -320,8 +320,8 @@ write_csv(trial_act_demo, path = "_sessions/_data/patient_demo.csv")
 ```
 
 
-```{r, echo = FALSE, eval = TRUE}
-trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv")
+```{r, echo = FALSE, eval = TRUE, message = FALSE}
+trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv")
 
 trial_act_demo %>% head()
 ```
@@ -332,7 +332,7 @@ Using `left_join()` to add the demographic data to the `trial_act` data. To do t
 
 # Get trial_act_demo data
 
-trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv")
+trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv")
 
 # Combine trial_act and trial_act_demo data
 trial_act <- trial_act %>%

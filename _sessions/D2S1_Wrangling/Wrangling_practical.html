@@ -377,25 +377,19 @@ trial_act</code></pre>
 <ol start="21" style="list-style-type: decimal">
 <li>You can use <code>left_join()</code> to combine multiple dataframes. At the following link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv</a> I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here’s how the first few rows of the data look:</li>
 </ol>
-<pre><code>Parsed with column specification:
-cols(
-  pidnum = col_integer(),
-  exercise = col_integer(),
-  education = col_integer()
-)</code></pre>
 <pre><code># A tibble: 6 x 3
   pidnum exercise education
-   &lt;int&gt;    &lt;int&gt;     &lt;int&gt;
-1      1    10056         1
-2      2    10059         4
-3      3    10089         1
-4      4    10093         0
-5      5    10124         0
-6      6    10140         1</code></pre>
+   &lt;int&gt;    &lt;int&gt;     &lt;chr&gt;
+1 140176        5        BA
+2 580019        4        MS
+3  71367        1       PHD
+4 330267        1        HS
+5  90698        2        HS
+6 320401        1       PHD</code></pre>
 <p>Using <code>left_join()</code> to add the demographic data to the <code>trial_act</code> data. To do this, first load the demographic data into R as a new dataframe called <code>trial_act_demo</code>. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)</p>
 <pre class="r"><code># Get trial_act_demo data
 
-trial_act_demo &lt;- read_csv(&quot;https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv&quot;)
+trial_act_demo &lt;- read_csv(&quot;https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv&quot;)
 
 # Combine trial_act and trial_act_demo data
 trial_act &lt;- trial_act %&gt;%
