@@ -356,9 +356,12 @@ vignette(package="name_of_vignette")
 ```
 
 ]
-
 .pull-right45[
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"></p>
+
+<!---
 <br><br><iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"></iframe>
+--->
 ]
 
 ---
