@@ -154,40 +154,13 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 
 
-
 ---
-## What machine learning algorithms are there?
 
 .pull-left6[
 
-- There are hundreds if not thousands of machine learning algorithms from many different fields.
-    - Computer vision, Natural language processing, reinforcement learning...
+## How do you fit and evaluate models in R?
 
-Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-]
-
-.pull-right4[
-
-We will focus on 4 that apply to both classification and regression
-
-| Algorithm|Complexity?|
-|:------|:----|
-|     Regression| Low / Medium | 
-|     Decision Trees| Low |
-|     Random Forests| High |
-|     Support Vector Machines| High |
-
-]
-
-
-
----
-# How do you fit and evaluate models in R?
-
-.pull-left6[
+&lt;br&gt;
 
 | Step|Description| Note / Example |
 |:------|:---|:------------|
@@ -199,11 +172,14 @@ We will focus on 4 that apply to both classification and regression
 ]
 
 .pull-right35[
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ]
+
+
+
 
 ---
 # How do you fit and evaluate models in R?
@@ -252,6 +228,37 @@ plot(A_model)     # Visualize the model
 ```
 
 ]
+
+
+
+---
+## What machine learning algorithms are there?
+
+.pull-left6[
+
+- There are hundreds if not thousands of machine learning algorithms from many different fields.
+    - Computer vision, Natural language processing, reinforcement learning...
+
+Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right4[
+
+We will focus on 4 that apply to both classification and regression
+
+| Algorithm|Complexity?|
+|:------|:----|
+|     Regression| Low / Medium | 
+|     Decision Trees| Low |
+|     Random Forests| High |
+|     Support Vector Machines| High |
+
+]
+
+
 
 ---
 # Regression with `glm()`

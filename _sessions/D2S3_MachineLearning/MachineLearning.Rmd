@@ -177,42 +177,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 
-
 ---
-## What machine learning algorithms are there?
 
 .pull-left6[
 
-- There are hundreds if not thousands of machine learning algorithms from many different fields.
-    - Computer vision, Natural language processing, reinforcement learning...
+## How do you fit and evaluate models in R?
 
-Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
-
-```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
-```
-
-]
-
-.pull-right4[
-
-We will focus on 4 that apply to both classification and regression
-
-| Algorithm|Complexity?|
-|:------|:----|
-|     Regression| Low / Medium | 
-|     Decision Trees| Low |
-|     Random Forests| High |
-|     Support Vector Machines| High |
-
-]
-
-
-
----
-# How do you fit and evaluate models in R?
-
-.pull-left6[
+<br>
 
 | Step|Description| Note / Example |
 |:------|:---|:------------|
@@ -224,13 +195,16 @@ We will focus on 4 that apply to both classification and regression
 ]
 
 .pull-right35[
-
-```{r, echo = FALSE, eval = TRUE, out.width = "100%", fig.align = 'center'}
+<br>
+```{r, echo = FALSE, eval = TRUE, out.width = "90%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png")
 ```
 
 
 ]
+
+
+
 
 ---
 # How do you fit and evaluate models in R?
@@ -278,8 +252,41 @@ plot(A_model)     # Visualize the model
 
 ]
 
+
+
 ---
-# Regression with `glm()`
+## What machine learning algorithms are there?
+
+.pull-left6[
+
+- There are hundreds if not thousands of machine learning algorithms from many different fields.
+    - Computer vision, Natural language processing, reinforcement learning...
+
+Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
+
+```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
+```
+
+]
+
+.pull-right4[
+
+We will focus on 4 that apply to both classification and regression
+
+| Algorithm|Complexity?|
+|:------|:----|
+|     Regression| Low / Medium | 
+|     Decision Trees| Low |
+|     Random Forests| High |
+|     Support Vector Machines| High |
+
+]
+
+
+
+---
+## Regression with `glm()`
 
 .pull-left5[
 
@@ -326,7 +333,7 @@ loan_glm_pred <- predict(loan_glm_model,
 
 
 ---
-# Decision Trees with `rpart::rpart()`
+## Decision Trees with `rpart::rpart()`
 
 .pull-left5[
 
@@ -361,11 +368,54 @@ loan_rpart_model <- rpart(formula = risk ~ .,
 
 # Predict new data with rpart model
 loan_rpart_pred <- predict(loan_rpart_model,
-                          newdata = data_test)
+                          newdata = loan_test)
 ```
 
 
 ]
+
+
+---
+## Random Forests with `randomForest::randomForest()`
+
+.pull-left5[
+
+A Random Forest is a collection of many (hundreds, thousands) of decision trees
+
+### Example: Default on a loan
+
+```{r, echo = FALSE, eval = TRUE}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest_diagram.png")
+```
+
+
+]
+
+.pull-right5[
+
+Create decision trees using the `randomForest` package
+
+```{r, eval = FALSE}
+# Load the randomforest package
+library(randomForest)
+
+# Calculating a randomForest in R
+randomForest(formula = y ~.,    # Formula 
+             data = data_train, # Training data
+             ntree, mtry)       # Optional
+
+# Train rpart model
+loan_rf_model <- randomForest(formula = risk ~ ., 
+                              data = loan_data)
+
+# Predict new data with model
+loan_rf_pred <- predict(loan_rf_model,
+                        newdata = loan_test)
+```
+
+
+]
+
 
 ---
 # Advanced algorithms
