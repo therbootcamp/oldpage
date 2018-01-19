@@ -1,6 +1,6 @@
 ---
-title: "Practical: Machine Learning"
-author: "BaselRBootcamp 2017"
+title: "Machine Learning"
+author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
@@ -25,8 +25,9 @@ In this practical you'll conduct machine learning analyses on a dataset on heart
 
 1. Create separate training and test data
 2. Fit a model to data
-3. Make predictions from a model
-4. Compare models in how well they can predict new data.
+3. Explore a model
+4. Make predictions from a model
+5. Compare models in how well they can predict new data.
 
 ### Glossary and packages
 
@@ -35,7 +36,7 @@ Here are the main functions and packages you'll be using. For more information a
 | Algorithm| Function| Package | Additional Details |
 |:------|:--------|:----|:----|
 |     Regression|    `glm()`| Base R| https://bookdown.org/ndphillips/YaRrr/regression.html#the-linear-model|
-|     Fast-and-Frugal trees|    `FFTrees()`| FFTrees| https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html|
+|     Fast-and-Frugal decision trees|    `FFTrees()`| FFTrees| https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html|
 |     Decision Trees|    `rpart()`| `rpart` | https://statweb.stanford.edu/~lpekelis/talks/13_datafest_cart_talk.pdf|
 | Random Forests | `randomForest()` | `randomForest` | http://www.blopig.com/blog/2017/04/a-very-basic-introduction-to-random-forests-using-r/|
 
@@ -57,7 +58,6 @@ Here are the main functions and packages you'll be using. For more information a
 # -----------------------
 
 library(tidyverse)      # for dplyr and ggplot2
-library(e1071)          # for svm()
 library(randomForest)   # for randomForest()
 library(rpart)          # for rpart()
 library(FFTrees)        # for FFTrees and the heartdisease data

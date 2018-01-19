@@ -1,6 +1,6 @@
 ---
 title: "Data wrangling with dplyr"
-author: "TheRBootcamp"
+author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
@@ -18,9 +18,19 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ### Overview
 
-In this practical you'll practice "data wrangling" with the `dplyr` package (part of the `tidyverse collection of packages). Data wrangling refers to modifying and summarizing data. For example, sorting, adding columns, recoding values, 
+In this practical you'll practice "data wrangling" with the `dplyr` package (part of the `tidyverse collection of packages). Data wrangling refers to modifying and summarizing data. For example, sorting, adding columns, recoding values, and calculating summary statistics. 
 
-If you don't have it already, you can access the dplyr cheatsheet here [https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf). This has a nice overview of all the major functions in dplyr.
+By the end of this practical you will know how to:
+
+1. Change column names, select specific columns.
+2. Create new columns based on existing ones
+3. Select specific rows of data based on multiple criteria.
+4. Group data and calculate summary statistics
+5. Combine multiple datasets through key columns
+
+### Cheatsheet
+
+- Data wrangling with dplyr Cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
 ### Glossary
 

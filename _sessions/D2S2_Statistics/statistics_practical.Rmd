@@ -1,5 +1,5 @@
 ---
-title: "Practical: Statistics"
+title: "Statistics"
 author: "BaselRBootcamp January 2018"
 output: html_document
 ---
