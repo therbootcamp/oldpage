@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="BaselRBootcamp 2017" />
+<meta name="author" content="BaselRBootcamp January 2018" />
 
 
 <title>Practical: Data I/O</title>
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Practical: Data I/O</h1>
-<h4 class="author"><em>BaselRBootcamp 2017</em></h4>
+<h4 class="author"><em>BaselRBootcamp January 2018</em></h4>
 
 </div>
 
@@ -130,7 +130,6 @@ $(document).ready(function () {
 <h3>Overview</h3>
 <p>In this practical you’ll learn how to read and save data. By the end of this practical you will know how to:</p>
 <ol style="list-style-type: decimal">
-<li>Create a project</li>
 <li>Identify the location of a file</li>
 <li>Read in data of various types</li>
 <li>Use R’s file connections</li>
@@ -207,41 +206,68 @@ $(document).ready(function () {
 <p>The tutorial begins with the titanic data set, which contains records of 1313 passengers on their name (<code>Name</code>), their passenger class (<code>PClass</code>), their age (<code>Age</code>), their sex (<code>Sex</code>), whether they survived (<code>Survived</code>), and finally a numeric coding of their sex (<code>SexCode</code>).</p>
 <p>Later you will be working with a randomly generated artificial data set of mine, which will help demonstrate differences in speed and file size.</p>
 <p>Please download the following data files and save them to an appropriate location on the disc:</p>
-<p><a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.csv">titanic.csv</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sav">titanic.sav</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/titanic.sas7bdat">titanic.sas7bdat</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/data/my_data.csv">my_data.csv</a></p>
+<p><a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv">titanic.csv</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.sav">titanic.sav</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.sas7bdat">titanic.sas7bdat</a><br> <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/my_data.csv">my_data.csv</a></p>
 <p>If you can, please verify whether the <code>.sav</code> and <code>sas7bdat</code> are appropriate SPSS and SAS files, respectively.</p>
+<pre><code>Loading tidyverse: ggplot2
+Loading tidyverse: tibble
+Loading tidyverse: tidyr
+Loading tidyverse: readr
+Loading tidyverse: purrr
+Loading tidyverse: dplyr</code></pre>
+<pre><code>Conflicts with tidy packages ----------------------------------------------</code></pre>
+<pre><code>filter(): dplyr, stats
+lag():    dplyr, stats</code></pre>
+<div id="identify-the-filepath" class="section level3">
+<h3>Identify the (file)path</h3>
+<ol style="list-style-type: decimal">
+<li>Every read or write function requires that you provide a filepath or source (e.g., an URL) specifying the location of the file. Ways to facilitate finding the right filepath is to either set the working directiory (see <code>?setwd()</code>) or, even better, to use projects. You will learn about projects. For now we will try to work with the full filepath, that is beginning from your harddrive or user account. Fortunately, this isn’t difficult either, when using RStudio’s autocomplete functionality. To find a file path simply write to quotation marks, i.e., <code>&quot;&quot;</code>, and press <em><Tab></em> with the cursor being in-between the quotation marks. This will open an auto-complete dialog that allows you to level-by-level search through your folder structure and to identify the correct filepath. The autocomplete will always begin at the current working directory (see ?<code>getwd()</code>), which will usually be the level of your user account. Another way to begin at this location is to begin by writing <code>~/</code>. Try it out write <code>&quot;~/&quot;</code> into an R script, place the cursor after the slash (<code>/</code>), and press <em><Tab></em>. Now, try to find the location of each of the titanic datasets on your harddrive and assign the path (which is a character string) to an object, e.g., <code>titanic_csv_path</code> (titanic_path &lt;- “~/folder_1/folder_2/…/titanic.csv”).</li>
+</ol>
+</div>
 <div id="read-to-tibble" class="section level3">
 <h3>Read to <code>tibble</code></h3>
-<ol style="list-style-type: decimal">
-<li><p>Create a new <strong>project</strong> either in the location of the downloaded data files or its parent folder (one folder higher). To do this go to <em>File/New Project…</em>, select existing directory, and enter the desired folder. This step will ease reading and saving data, as it sets the working directory to the proximity of the data files. Confirm this using <code>getwd()</code>.</p></li>
-<li><p>Identify the filepath (incl. filename) for each of the three data files. RStudio makes it really easy. Simply write quotation marks in your script editor, e.g., <code>&quot;&quot;</code>, move the (text) curser between the marks, and press the tab key. This opens a file menu that allows you to conveniently select the path to the file. The result is a character string that exactly defines the location of the file relative to the current working directory. Oftentimes, it is convenient to do this directly within the read function, e.g., <code>read_csv(&quot;&quot;)</code>.</p></li>
-<li><p>Load the packages <code>readr</code> and <code>haven</code> using <code>library()</code>, and read in the three titanic data files usig <code>read_csv()</code>, <code>read_sas()</code>, and <code>read_sav()</code>. Call them <code>df_csv</code>, <code>df_sas</code>, and <code>df_sav</code>, respectively. Inspect each of the imported objects using <code>print()</code> and <code>str()</code>. What kind of object are they?</p></li>
-<li><p>Try to verify that the three data sets are identical. To do this use the <em>is-equal-to</em> operator <code>==</code> introduced in the last tutorial and the arithmetic mean function <code>mean()</code>. Remember, that logical values can be coerced to 0 and 1. Note, that the data sets contain NA’s, that is missing values. One way to see this is via the summary function <code>summary()</code>. Specifically, the variable <code>Age</code> conains missing values. Use the help file <code>?mean</code> to find out how to compute the mean while ignoring missing values and then use <code>==</code> to verify the equality between the three data sets.</p></li>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Ok, let’s read some datasets. But first we need to load the packages <code>readr</code> and <code>haven</code> using <code>library()</code>, i.e., <code>library(readr)</code> and <code>library(haven)</code>.</p></li>
+<li><p>Now, read in the three titanic data files usig <code>read_csv()</code>, <code>read_sas()</code>, and <code>read_sav()</code> by passing on the respective filepaths from above and assigning the functions’ outcomes to <code>df_csv</code>, <code>df_sas</code>, and <code>df_sav</code>, respectively. Inspect each of the imported objects using <code>print()</code> and <code>str()</code> and <code>typeof</code>.</p></li>
+<li><p>Try to verify that the three data sets are identical. Try to do this using the <em>is-equal-to</em> operator <code>==</code> introduced in the last tutorial and <code>all()</code>.</p></li>
+<li><p>Received an error? This is because the datasets contain <code>NA</code>’s, that is, missing values. One way to see this is via the summary function <code>summary()</code>. Try it out.</p></li>
+<li><p>Fortunately, this isn’t much of a problem. If you inspect <code>?all</code>, you can see that <code>all()</code> has a second argument called <code>na.rm = FALSE</code>. Using this argument, we can tell R to ignore <code>NA</code>’s. Currently, the default is set to <code>FALSE</code>, thus this feature is deactivated. To make use of it we must pass as a second argument <code>na.rm = T</code> on to <code>all()</code>. Try it. Are the data frames now equal?</p></li>
 </ol>
 </div>
 <div id="write-to-disk" class="section level3">
 <h3>Write to disk</h3>
-<ol start="5" style="list-style-type: decimal">
-<li><p>The first column in the titanic set contains row numbers. Older read and write functions in R would by default add a row number column to the data, when writing to disk. Newer functions, however, do not show this behavior. ELiminate the first column from <code>df_csv</code> using a negative index. Negtive indices mean <em>omit</em> rather than <em>select</em>. E.g., c(1, 2, 3)[-2] returns the vector without the second value. Then write the reduced data frame to disk using <code>write_csv()</code>. Use the exact same file path. Observe whether R gives you a warning before (over-)writing the data?</p></li>
-<li><p>Determine the file path to <code>my_data.csv</code> and read it in using <code>read_csv()</code>. Now write the data back to disk using <code>write_sas</code>, <code>write_sav</code>, and also <code>saveRDS</code>. Each of these functions take as the first argument the data frame and as the second argumen the file path. To obtain the latter adapt the filepath of <code>my_data.csv</code> by hand to make sure that the file path has the correct file ending, i.e., <code>.sas7bdat</code>, <code>.sav</code>, and <code>.RDS</code>, respectively. While you write the individual data sets pay attention to the speed of execution.</p></li>
-<li><p>You may have noticed that the <code>saveRDS</code> function was the slowest. This is because <code>.RDS</code> generally leads to the highest degree of compression, i.e., the smalles data files. To verify this use the <code>file.info()</code> on each of the four files, <code>my_data.csv</code>, <code>my_data.sas7bdat</code>, <code>my_data.sav</code>, and <code>my_data.RDS</code> (using the correct path). Look out for the <code>size</code> element, which gives the size in <code>bytes</code>.</p></li>
+<p>Every read function in R has a corresponding write functions. In this section we will write data to the three formats we used so far plus R’s own <code>.RData</code> and <code>.RDS</code> data formats. Before we turn to writing we want to take care of an feature of older write functions, namely <code>rownames</code>.</p>
+<ol start="7" style="list-style-type: decimal">
+<li><p>As you can see, the first column in, e.g., <code>df_csv</code> contains row numbers. Older write functions in R would by default add a row number column to the data, when writing data to disk. Newer functions, however, do not show this behavior. Overall, <code>rownames</code> have come a bit out of fashion. Thus, we want to eLiminate the first column from <code>df_csv</code> using another way to use indices, i.e., deletion by negative indices. Using negtive rather than positive indices in accessing objects via <code>[]</code> or <code>[[]]</code> means <em>omit</em> rather than <em>select</em>. E.g., <code>c(1, 2, 3)[-2]</code> returns the vector without the second value. Try to apply this to <code>df_csv</code> while assigning it to <code>df_csv_no_rownames</code>. Should you use single <code>[]</code> or double <code>[[]]</code> brackets? Try both.</p></li>
+<li><p>Then write the reduced data frame to disk using <code>write_csv()</code>. Try using the exact same file path. Does R gives you a warning?</p></li>
+<li><p>Now, let’s try some other formats using the other data set. First, read in <code>my_data.csv</code> (which you downloaded in the beginning of this practictal) as assign to <code>my_data</code>. Then, write <code>my_data</code> to disk using <code>write_sas</code>, <code>write_sav</code>, and also <code>saveRDS</code>. Just as <code>write_csv</code>, each of these functions take the data frame as the first argument and the file path as the second. To obtain the latter adapt the filepath by hand to make sure that the file path has the correct file ending, i.e., <code>.sas7bdat</code>, <code>.sav</code>, and <code>.RDS</code>, respectively. While you write the individual data sets pay attention to the speed of execution. Which one was fastest? If you didn’t make out a difference try again.</p></li>
+<li><p>You may have noticed that the <code>saveRDS</code> function was the slowest. This is because <code>.RDS</code> results in the highest degree of compression, i.e., the smallest file sizes. To verify this use the <code>file.info()</code> function on each of the four files, that is, using their file paths. Look out for the <code>size</code> element, which gives the size in <code>bytes</code>.</p></li>
+</ol>
+</div>
+<div id="read-from-url" class="section level3">
+<h3>Read from url</h3>
+<p>Most read functions are not limited to reading from the hard drive. Often you can also directly read from url.</p>
+<ol start="11" style="list-style-type: decimal">
+<li>Try reading the the <em>titanic</em> dataset using this link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv</a> and <code>read_csv</code>.</li>
 </ol>
 </div>
 <div id="file-connections" class="section level3">
 <h3>File connections</h3>
-<ol start="8" style="list-style-type: decimal">
-<li><p>The most basic way to handle files is via file connections. The first step of working with file connections is to establish a file connections using, e.g., <code>file()</code>. The main arguments to <code>file</code> are a location (a file path, url, etc.) and a mode indicator, e.g., <code>r</code> for <code>Open for reading in text mode</code>. Try opening a connection to the <code>titanic.csv</code> dataset. To do this, you must assign the output of <code>file()</code> to an object, which then is the connection, e.g., <code>con = file(&quot;my_path&quot;,&quot;r&quot;)</code>.</p></li>
-<li><p>Now that the connection is open, you can read the file using, e.g., <code>readLines</code>. <code>readLines</code> iterates through the file line by line and returns each line as a character string. Store the output in an object. Try reading the file. When done close the connection using <code>close(my_con)</code> and inspect the data.</p></li>
-<li><p>As you can see the read in data looks much messier than with using <code>read_csv()</code>. If you’re up for the challenge you can try to nonetheless parse this data. A good way is to split each line using the <code>stri_split_fixed</code> function using the comma <code>,</code> (from the <code>stringi</code> package). This will return a list of vectors, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using <code>do.call(rbind,my_list)</code>. What’s then left is transform the matrix to a data frame and to take care of column types and names.</p></li>
+<p>The most basic way to handle files is via file connections. In this more advanced section we take a look at how this works.</p>
+<ol start="12" style="list-style-type: decimal">
+<li><p>The first step of working with file connections is to establish a file connections using <code>file()</code>. The main arguments to <code>file</code> are a location (a file path, url, etc.) and a mode indicator, e.g., <code>r</code> for <code>Open for reading in text mode</code>. Try opening a connection to the <code>titanic.csv</code> dataset. To do this, you must assign the output of <code>file()</code> to an object, which then is the connection, e.g., <code>con = file(&quot;my_path&quot;,&quot;r&quot;)</code>. If you want to use the url (see previous section) you have to use <code>url()</code> instead of <code>file()</code>.</p></li>
+<li><p>Now that the connection is open, you can read the file using <code>readLines</code>. <code>readLines</code> iterates through the file line by line and returns each line as a character string. Try reading the file and store the output in an object. When done close the connection using <code>close(my_con)</code> and inspect the data.</p></li>
+<li><p>As you can see the read-in data looks much messier than with using <code>read_csv()</code>. This is because <code>read_csv()</code> really does a lot of editing and interpreting for you. If you’re up for the challenge you can try to process the raw data. One approach is to first split each line using the <code>stri_split_fixed</code> function using the comma <code>,</code> as a separator. To do this first install and load the <code>stringi</code> package. Applying <code>stri_split_fixed</code> will return a <code>list</code> of <code>vector</code>s, where each vector is one row of the data frame. Next step is to bind the rows to a matrix using <code>do.call(rbind, my_list)</code>. The only thing left then is coerce the matrix to a data frame (using <code>as.data.frame</code> or, better, <code>as.tibble</code>) and to take care of column types and names.</p></li>
 </ol>
 </div>
 <div id="scraping-the-internet" class="section level3">
 <h3>Scraping the internet</h3>
-<ol start="11" style="list-style-type: decimal">
-<li>Finally on to something rather different. Connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Speicifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information. This is used, for instance, by the very convenient <code>rvest</code> package. To illustrate how easy it can be, consider the following code that downloads and parses Milestones table of R’s Wikipedia page.</li>
+<ol start="15" style="list-style-type: decimal">
+<li>Finally on to something completely new. As mentioned, connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Speicifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information on the webpage. One package that conveniently streamlines extracting information from webpages based is the very <code>rvest</code> package. To illustrate how easy it can be to scrape (aka extracte) information from the internet using R and <code>rvest</code>, consider the following code. It downloads and parses the Milestones table of R’s Wikipedia page.</li>
 </ol>
 <pre class="r"><code># load package
-install.packages('rvest')
-library(rvest) 
+install.packages('rvest', repos = &quot;https://stat.ethz.ch/CRAN/&quot;)
+library(rvest)
+library(tibble)
 library(magrittr)
 
 # get html
