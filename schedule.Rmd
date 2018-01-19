@@ -26,7 +26,7 @@ output: html_document
 
 
 <p align="center"><br>
-    <a href="http://i.imgur.com/PgtvQar.png"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/assets/img/schedule_Sep2017.png" width=660></a><br>
+    <a href="http://i.imgur.com/PgtvQar.png"><img border="0" alt="W3Schools" src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/schedule_jan2018.png" width=660></a><br>
 
 
 <!---
@@ -54,12 +54,5 @@ YaRrr! The Pirate's Guide to R! [https://bookdown.org/ndphillips/YaRrr/](https:/
 Advanced R by Wickham: [http://adv-r.had.co.nz/](http://adv-r.had.co.nz/) 
 
 --->
-
-
-(2 ** (0:100)) ** (1 / (2** (1:101)))
-
-2 ** (1/4)
-
-
 
 
