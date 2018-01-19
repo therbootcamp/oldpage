@@ -375,17 +375,17 @@ trial_act</code></pre>
 <div id="left_join" class="section level3">
 <h3><code>left_join()</code></h3>
 <ol start="21" style="list-style-type: decimal">
-<li>You can use <code>left_join()</code> to combine multiple dataframes. At the following link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv</a> I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here’s how the first few rows of the data look:</li>
+<li>You can use <code>left_join()</code> to combine multiple dataframes. At the following link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv</a> I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here’s how the first few rows of the data look:</li>
 </ol>
 <pre><code># A tibble: 6 x 3
   pidnum exercise education
    &lt;int&gt;    &lt;int&gt;     &lt;chr&gt;
-1 140176        5        BA
-2 580019        4        MS
-3  71367        1       PHD
-4 330267        1        HS
-5  90698        2        HS
-6 320401        1       PHD</code></pre>
+1 250091        1        HS
+2  70444        3        BA
+3 220425        4        HS
+4  50300        3       PHD
+5 630013        3       &lt;HS
+6  60972        1        MS</code></pre>
 <p>Using <code>left_join()</code> to add the demographic data to the <code>trial_act</code> data. To do this, first load the demographic data into R as a new dataframe called <code>trial_act_demo</code>. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)</p>
 <pre class="r"><code># Get trial_act_demo data
 
@@ -393,8 +393,7 @@ trial_act_demo &lt;- read_csv(&quot;https://raw.githubusercontent.com/therbootca
 
 # Combine trial_act and trial_act_demo data
 trial_act &lt;- trial_act %&gt;%
-  left_join(XXX,        # The new dataframe to combine with trial_act
-            by = XXX)   # The name of the 'key' column(s) that should be matched</code></pre>
+  left_join(XXX)        # The new dataframe to combine with trial_act</code></pre>
 <ol start="22" style="list-style-type: decimal">
 <li>Using your new <code>trial_act</code> tibble, which should contain the exercise and education data, calculate the mean number of days of exercise that patients reported.</li>
 </ol>
@@ -411,7 +410,7 @@ trial_act &lt;- trial_act %&gt;%
 </ul>
 <ol start="26" style="list-style-type: decimal">
 <li><p>Group the data by <code>gender</code>. Then calculate the percent of male and female patients who have a history of intravenous drug use (<code>drugs</code>), and the mean number of days until a major negative event <code>days</code></p></li>
-<li><p>Separately for all combinations of gender and race, calculate the mean agey and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</p></li>
+<li><p>Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</p></li>
 </ol>
 </div>
 <div id="challenges" class="section level3">
@@ -436,8 +435,8 @@ trial_act &lt;- trial_act %&gt;%
 <li>Create a new column called <code>drugs_char</code> that uses strings instead of numbers to indicate drug use</li>
 <li>Filter the data to only include male patients with id numbers greater than 10100</li>
 <li>Group the data by <code>drugs_char</code> and <code>arm</code></li>
-<li>For each group calculate the mean agey, percentagey of patients that are male, and mean number of days until a major negative event.</li>
-<li>Filter the grouped data to only include cases where mean agey is greater than 30.</li>
+<li>For each group calculate the mean age, percentagey of patients that are male, and mean number of days until a major negative event.</li>
+<li>Filter the grouped data to only include cases where mean age is greater than 30.</li>
 </ul></li>
 </ol>
 </div>

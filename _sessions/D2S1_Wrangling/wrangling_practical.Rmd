@@ -298,7 +298,7 @@ trial_act_C <- trial_act %>%
 
 ### `left_join()`
 
-21. You can use `left_join()` to combine multiple dataframes. At the following link [https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv) I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here's how the first few rows of the data look:
+21. You can use `left_join()` to combine multiple dataframes. At the following link [https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/patient_demo.csv) I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here's how the first few rows of the data look:
 
 
 ```{r, echo = FALSE, eval = FALSE}
@@ -336,8 +336,7 @@ trial_act_demo <- read_csv("https://raw.githubusercontent.com/therbootcamp/therb
 
 # Combine trial_act and trial_act_demo data
 trial_act <- trial_act %>%
-  left_join(XXX,        # The new dataframe to combine with trial_act
-            by = XXX)   # The name of the 'key' column(s) that should be matched
+  left_join(XXX)        # The new dataframe to combine with trial_act
 ```
 
 
@@ -392,7 +391,7 @@ trial_act %>%
 ```
 
 
-27. Separately for all combinations of gender and race, calculate the mean agey and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
+27. Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (`cd40`) (Hint: group by `gender` and `race`)
 
 ```{r}
 trial_act %>%
@@ -479,8 +478,8 @@ trial_act %>%
     - Create a new column called `drugs_char` that uses strings instead of numbers to indicate drug use
     - Filter the data to only include male patients with id numbers greater than 10100
     - Group the data by `drugs_char` and `arm`
-    - For each group calculate the mean agey, percentagey of patients that are male, and mean number of days until a major negative event.
-    - Filter the grouped data to only include cases where mean agey is greater than 30.
+    - For each group calculate the mean age, percentagey of patients that are male, and mean number of days until a major negative event.
+    - Filter the grouped data to only include cases where mean age is greater than 30.
 
 
 # Additional reading
