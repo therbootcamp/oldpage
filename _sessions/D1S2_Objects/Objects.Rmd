@@ -2,7 +2,7 @@
 title: "Data objects and functions"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -285,11 +285,11 @@ my_vec[7] <- 1 ; my_vec
 
 .pull-right45[
 ```{r}
-# Use logical comparisons to access vector
+# Use logical comparison to access vector
 my_vec <- c(1, 2, 3, 4, 5)
 my_vec ; my_vec[my_vec < 4]
 
-# retrieve second row from matrix
+# Change vector using logical comparison
 my_vec[my_vec < 4] = my_vec[my_vec < 4] - 5
 my_vec
 

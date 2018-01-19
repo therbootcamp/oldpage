@@ -11,16 +11,15 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 ### Slides
 
-Here a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D1S1_WhatIsR/What_is_R.html"><b>LINK</b></a>
+Here is a link to the lecture slides for this session: <a href="https://therbootcamp.github.io/_sessions/D1S1_WhatIsR/What_is_R.html"><b>LINK</b></a>
 
 ### Overview
 
 In this practical you'll get started with R. By the end of this practical you will:
 
-1. Know your way around R Studio
-2. Know how to run code
-3. Have an impression of R basic functionality
-
+1. Know your way around R Studio.
+2. Know how to run code.
+3. Have an impression of R's basic functionality.
 
 ## Tasks
 
@@ -28,7 +27,7 @@ For this practical you will go through an existing analysis script chunck by chu
 
 While at it try to practice two very useful shortcuts: (1) `cmd + enter (MAC)` or `cntrl + enter (Windows)` for running the current line in the console. (2) `cmd + shift + p (MAC)` or `cntrl + shift + p (Windows)` for running the same block of code again in the console. The latter is really helpful because you can rerun the a chunk of code after you have made changes to it.  
 
-All of the code used in this tutorial is based on basic R functions. While they are already powerful, we will later in the course introduce you to more modern options for several of the steps. 
+All of the code used in this tutorial is based on **base-R functions**. While they are already powerful, we will later in the course introduce you to more modern, better options for most of the steps. 
 
 
 ### Install and load the yarrr package
@@ -59,7 +58,7 @@ str(pirates)
 View(pirates)
 ```
 
-3. Descriptives for numeric data and categorical data.
+3. Descriptive statistics for numeric data and categorical data.
 
 ```{r, eval=T}
 # What is the mean age?
@@ -72,13 +71,13 @@ max(pirates$height)
 table(pirates$sex)
 ```
 
-4. Descriptive tatistics as a function of another categorical variable.
+4. Descriptive statistics as a function of another categorical variable.
 
 ```{r, eval=T}
 # What was the mean age for each sex?
-aggregate(formula = age ~ sex, 
+aggregate(formula = age ~ sex + headband, 
           data = pirates,
-          FUN = mean)
+          FUN = median)
 
 
 # What is the median age of pirates for each combination of sex and headband?
@@ -87,7 +86,7 @@ aggregate(formula = age ~ sex + headband,
           FUN = median)
 ```
 
-### Base plotting (aka high-level plotting)
+### Base plotting
 
 5. Creating a histograms of numeric variables.
 
@@ -163,7 +162,7 @@ plot(x = pirates$height,
      xlab = 'Height (in cm)',
      ylab = 'Weight (in kg)',
      pch = 16,    # Filled circles
-     col = gray(0, .1)) # Transparent gray
+     col = gray(0, .2)) # Transparent gray
      
 # Add gridlines
 grid()
@@ -174,7 +173,7 @@ model <- lm(formula = weight ~ height,
 
 # Add regression to plot
 abline(model,
-       col = 'blue', lty = 2)
+       col = 'skyblue', lwd = 3)
 ```
 
 7. Changing colors
@@ -213,20 +212,21 @@ grid()
 # --- Barpot of mean height by favorite.pirate
 
 # Calculate mean height for each favorite.pirate
-pirate.heights <- aggregate(height ~ favorite.pirate,
+pirate_heights <- aggregate(height ~ favorite.pirate,
                      data = pirates,
                      FUN = mean)
 
-barplot(pirate.heights$height, 
+# Do barplot
+barplot(pirate_heights$height, 
         main = "Barplot of mean height by favorite pirate",
-        names.arg = pirate.heights$favorite.pirate)
+        names.arg = pirate_heights$favorite.pirate)
 
 # --- Same, but with customizations
-barplot(pirate.heights$height, 
+barplot(pirate_heights$height, 
         ylim = c(0, 200),
         ylab = "Pirate Height (in cm)",
         main = "Barplot of mean height by favorite pirate",
-        names.arg = pirate.heights$favorite.pirate, 
+        names.arg = pirate_heights$favorite.pirate, 
         col = piratepal("basel", trans = .2))
 
 abline(h = seq(0, 200, 25), lty = 3, lwd = c(1, .5))
@@ -246,11 +246,11 @@ t.test(formula = beard.length ~ eyepatch,
 # ANOVA on beard.length as a function of sex and college
 
 # Run the ANOVA
-beard.aov <- aov(formula = beard.length ~ sex + college, 
+beard_aov <- aov(formula = beard.length ~ sex + college, 
                    data = pirates)
 
 # Print summary results
-summary(beard.aov)
+summary(beard_aov)
 ```
 
 10. Run a regression analysis.
@@ -259,11 +259,15 @@ summary(beard.aov)
 # regression analysis showing if age, weight, and tattoos predict how many treasure chests a pirate has found
 
 # Run the regression
-chests.lm <- lm(formula = tchests ~ age + weight + tattoos, 
+chests_lm <- lm(formula = tchests ~ age + weight + tattoos, 
                 data = pirates)
 
 # Print summary results
-summary(chests.lm)
+summary(chests_lm)
+
+# Plot regression (continue with <Return>)
+plot(chests_lm)
+
 ```
 
 
