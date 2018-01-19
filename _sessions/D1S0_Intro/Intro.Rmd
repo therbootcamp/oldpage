@@ -160,20 +160,22 @@ options(digits = 4)
  
   <td>
    Base R<br><br>
-  <a href="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" height="180"></a>
+  <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" height="180"></a>
   </td>  
   
   <td> 
    Data Import<br><br>
-  <a href="http://r4ds.had.co.nz/"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" height="180"></a>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" height="180"></a>
   </td>
   
   <td>
-  <a href="https://covers.oreillystatic.com/images/0636920028574/cat.gif"><img border="0" alt="W3Schools" src="https://covers.oreillystatic.com/images/0636920028574/cat.gif" height="180"></a>
+  Data Transformation<br><br>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"><img border="0" alt="W3Schools" src="https://covers.oreillystatic.com/images/0636920028574/cat.gif" height="180"></a>
   </td>
 
   <td>
-  <a href="https://images-na.ssl-images-amazon.com/images/I/51l7gOx3Z-L._SX376_BO1,204,203,200_.jpg"><img border="0" alt="W3Schools" src="https://images-na.ssl-images-amazon.com/images/I/51l7gOx3Z-L._SX376_BO1,204,203,200_.jpg" height="180" ></a>
+  Data Visualization<br><br>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf"><img border="0" alt="W3Schools" src="https://images-na.ssl-images-amazon.com/images/I/51l7gOx3Z-L._SX376_BO1,204,203,200_.jpg" height="180" ></a>
   </td>
   
 
