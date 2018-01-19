@@ -31,26 +31,22 @@ options(digits = 4)
 # Welcome!
 
 .pull-left5[
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/homepage.png" width="500" height="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/homepage_jan18_ss.png" width="500" height="400"></p>
 ]
 
 
 .pull-right5[
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/basel.jpeg" width="500"  height="400"></p>
+<p align="center"><img src="https://therbootcamp.github.io/assets/img/basel_winter.jpg" width="500"  height="400"></p>
 ]
 
 ---
 
-.pull-left3[
-# Schedule
-]
+# Bootcamp Schedule
 
-.pull-right7[
-<p align="center"><br><br>
-<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/schedule_jan2018.png" height="500"><br><br>
-<font size="5" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule.html">therbootcamp.github.io/schedule.html</b>
-</p>
-]
+
+<br><br>
+<font size="7" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule_18Jan.html">therbootcamp.github.io/schedule_18Jan.html</b>
+
 
 
 ---
@@ -79,25 +75,12 @@ options(digits = 4)
 
 ---
 
-# Where can I learn more?
-
-
-<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
-
----
-
-# Schedule <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Schedule.png" height="600" align="right">
+# Schedule <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/schedule_jan2018.png" height="600" align="right">
 
 
 ---
 
-# Survey results
-
-<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/survey.png" height="400">
-
----
-
-# Session
+# Sessions
 
 .pull-left3[
 
@@ -121,13 +104,26 @@ options(digits = 4)
 
 ---
 
+# Additional Resources
+
+
+<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
+
+
+
+---
+
 .pull-left4[
 # Breaks & refreshments
 
-- **No explicit breaks** during the practical, but feel free to take them!<br2>
-- **Refreshments** nearby<br2>
-- **Coffee machine** nearby (1 CHF)<br2>
-- **Lunch** time at local grocery store / restaurant
+<font size = 5>Feel free to take breaks when you need them!</font><br2>
+
+<font size = 5>Help yourself to refreshments</font><br>
+
+<font size = 5>Coffee machine nearby (1 CHF)</font><br>
+
+<font size = 5>Lunch on your own or together at Tibits</font><br>
+
 ]
 
 
@@ -140,29 +136,35 @@ options(digits = 4)
 
 ---
 
-# Questions?
+.pull-left35[
+# Introductions
 
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/questions.jpg" height="500"></p>
-
-
----
-
-# Introduction round
-
-.pull-left3[
-
-1. What is your name?
-
-2. Where are you from?
-
-3. What is your programming experience?
-
-4. Why do you want to learn R?
-
+<font size = 5>1. What is your name?</font>
+<br><br>
+<font size = 5>2. Where are you from?</font>
+<br><br>
+<font size = 5>3. What is your programming experience?</font>
+<br><br>
+<font size = 5>4. Why do you want to learn R?</font>
+<br><br>
+<font size = 5>5. Coffee or tea?</font>
+<br><br>
+<font size = 5>6. Pizza or pasta?</font>
+<br><br>
+<font size = 5>7. Beer or wine?</font>
+<br><br>
+<font size = 5>8. Berlin or Paris?</font>
 ]
 
 .pull-right6[
-
+<br><br>
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/introductions.jpg" height="400"></p>
 
 ]
+
+
+---
+<br>
+<p align="center"><img src="http://www.abetterinterview.com/wp-content/uploads/2012/11/interview-questions.jpg" height="510"></p>
+
+
