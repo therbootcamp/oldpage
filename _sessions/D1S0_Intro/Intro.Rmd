@@ -46,11 +46,36 @@ options(digits = 4)
 <font size="7" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule_18Jan.html">therbootcamp.github.io/schedule_18Jan.html</b>
 
 ---
-.pull-left25[
+
 # Who are we?
+
+.pull-left5[
+<p align="center"><br>
+    <a href="www.dirkwulff.org"><img border="0" alt="W3Schools" src="https://www.mpib-berlin.mpg.de/sites/default/files/imagecache/marginal/dirk_wulff2smallnarrow.jpg" height="240"></a><br>
+
+<p align="center">
+<font size = 5>Dr. Dirk Wulff</font><br><br>
+<a href="www.dirkwulff.org"><b>dirkwulff.org</b></a><br>
+<a href="https://github.com/dwulff"><b>github.com/dwulff</b></a><br>
+<font size=4><i>packages: </i></font> 
+<a href="https://cran.r-project.org/web/packages/cstab/index.html"><b>cstab</b></a>, <br>
+<a href="https://cran.r-project.org/web/packages/mousetrap/index.html"><b>mousetrap</b></a>, <a href="https://github.com/dwulff/choicepp"><b>choicepp</b>
+</p>
 ]
-.pull-right7[
-<p align="left"><br><br><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/aboutus.png" height="500"></p>
+
+.pull-right5[
+<p align="center"><br>
+    <a href="www.nathanieldphillips.com/"><img border="0" alt="W3Schools" src="https://avatars3.githubusercontent.com/u/8480980?v=4&s=460" height="240"></a><br>
+
+<p align="center">
+<font size = 5>Dr. Nathaniel Phillips</font><br><br>
+<a href="www.nathanieldphillips.com/"><b>nathanieldphillips.com</b></a><br>
+<a href="https://github.com/ndphillips"><b>github.com/ndphillips</b></a><br>
+<font size=4><i>packages: </i></font> 
+<a href="https://github.com/ndphillips/yarrr"><b>yarrr</b></a>, <br>
+<a href="https://github.com/ndphillips/FFTrees"><b>FFTrees</b></a>, <a href="https://github.com/ndphillips/ShinyPsych"><b>ShinyPsych</b>
+</p>
+
 ]
 
 ---
@@ -76,34 +101,49 @@ options(digits = 4)
 
 ---
 
+.pull-left4[
+
+
+<br>
 # Sessions
-
-.pull-left3[
-
 <font size = 5>Each session is 2 hours</font><br>
 <font size = 5>20 - 40 min introduction</font><br>
 <font size = 5>80 - 100 min hands-on practical</font><br>
 
-<font size = 5>Starts easy, gets more challenging</font><br>
-<font size = 5>Some elements go beyond the introduction, be bold!</font><br>
-
-    
 ]
 
 
-.pull-right7[
-
+.pull-right55[
+<br><br><br>
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/interactiveprogramming.gif" height="350"></p>
 
 ]
 
-
 ---
 
-# Additional Resources
+.pull-left4[
+
+<br>
+# Practicals
 
 
-<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
+<font size = 5>Start with a brief review and examples</font><br>
+<font size = 5>Anywhere from 10 ~ 30 tasks</font><br>
+<font size = 5>Starts easy, gets more challenging</font><br>
+<font size = 5>Some elements go beyond the introduction, be bold!</font><br>
+<font size = 5>Try to finish <b>50%</b> of the material during the session.</font><br>
+
+]
+
+
+.pull-right45[
+
+<br><br><br>
+
+<p align="center"><img src="https://i0.wp.com/www.4ubodyfitness.com.au/wp-content/uploads/2013/01/IMG_0465.jpg?fit=2048%2C1365&ssl=1" height="400"></p>
+
+
+]
 
 
 
@@ -131,6 +171,10 @@ options(digits = 4)
 <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/tibits.jpg" height="400" vspace="10"></p>
 
 ]
+
+
+
+
 
 ---
 
@@ -164,5 +208,23 @@ options(digits = 4)
 ---
 <br>
 <p align="center"><img src="http://www.abetterinterview.com/wp-content/uploads/2012/11/interview-questions.jpg" height="510"></p>
+
+---
+# Session 1: What is R?
+
+
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D1S1_WhatIsR/What_is_R.html#1">Link to Session 1: What is R?</a>
+
+
+---
+# Backup slides
+
+---
+
+# Additional Resources
+
+
+<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
+
 
 
