@@ -246,28 +246,27 @@ Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens
 ]
 
 .pull-right4[
+&lt;br&gt;&lt;br&gt;
+We will focus on 3 that apply to both classification and regression
 
-We will focus on 4 that apply to both classification and regression
-
-| Algorithm|Complexity?|
+| Algorithm|Complexity|
 |:------|:----|
 |     Regression| Low / Medium | 
 |     Decision Trees| Low |
 |     Random Forests| High |
-|     Support Vector Machines| High |
 
 ]
 
 
 
 ---
-# Regression with `glm()`
+## Regression with `glm()`
 
 .pull-left5[
 
 In regression, the criterion is modeled as the weighted sum of predictors times *weights* `\(\beta_{1}\)`, `\(\beta_{2}\)`
 
-### Example: Default on a loan
+### Loan Default:
 
 One could model the risk of defaulting on a loan as:
 
@@ -307,13 +306,13 @@ loan_glm_pred &lt;- predict(loan_glm_model,
 
 
 ---
-# Decision Trees with `rpart::rpart()`
+## Decision Trees with `rpart::rpart()`
 
 .pull-left5[
 
 In decision trees, the criterion is modeled as a sequence of logical Yes or No questions.
 
-### Example: Default on a loan
+### Loan Default:
 
 ![](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/defaulttree.png)&lt;!-- --&gt;
 
@@ -341,70 +340,59 @@ loan_rpart_model &lt;- rpart(formula = risk ~ .,
 
 # Predict new data with rpart model
 loan_rpart_pred &lt;- predict(loan_rpart_model,
-                          newdata = data_test)
+                          newdata = loan_test)
 ```
 
 
 ]
 
+
 ---
-# Advanced algorithms
+## Random Forests with `randomForest::randomForest()`
 
-.pull-left45[
+.pull-left5[
 
-### Support Vector Machines 
-###`e1071::svm()`
-
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/supportvectormachine.png" width="40%" style="display: block; margin: auto;" /&gt;
+A Random Forest is a collection of many (hundreds, thousands) of decision trees
 
 
-```r
-# Creating support vector machine model
-library(e1071)
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest_diagram.png" width="90%" /&gt;
 
-svm_model &lt;- svm(formula = risk ~ .,
-                 data = loan_data,
-                 ...)
-```
 
 ]
 
 .pull-right5[
 
-### Random Forests
-###`randomForest::randomForest()`
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest.png" width="50%" style="display: block; margin: auto;" /&gt;
+Create decision trees using the `randomForest` package
 
 
 ```r
-# Creating random forest model
+# Load the randomforest package
 library(randomForest)
 
-rf_model &lt;- randomForest(formula = risk ~ .,
-                         data = loan_data,
-                         ...)
+# Calculating a randomForest in R
+randomForest(formula = y ~.,    # Formula 
+             data = data_train, # Training data
+             ntree, mtry)       # Optional
+
+# Train rpart model
+loan_rf_model &lt;- randomForest(formula = risk ~ ., 
+                              data = loan_data)
+
+# Predict new data with model
+loan_rf_pred &lt;- predict(loan_rf_model,
+                        newdata = loan_test)
 ```
 
+
 ]
+
 
 ---
 # How do I do machine learning in R?
 
-.pull-left4[
-
-If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="95%" style="display: block; margin: auto;" /&gt;
+.pull-left6[
 
 
-
-]
-
-
-
-.pull-right6[
 
 In the practical, we will go through the basic steps "by hand" so you can see the process:
 
@@ -427,6 +415,19 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 
 # Compare to Models B, C, D...
 ```
+
+
+
+]
+
+
+
+.pull-right35[
+
+
+If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png" width="95%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -481,7 +482,7 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 - Data comes from two processes: *Signal* and *Noise* (aka Error).
 &lt;br&gt;
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -493,7 +494,7 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 - A bad model is one that captures too much unpredictable noise,
     
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

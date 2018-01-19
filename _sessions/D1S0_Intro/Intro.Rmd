@@ -2,7 +2,7 @@
 title: "Welcome!"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default","my-theme.css"]
@@ -47,7 +47,7 @@ options(digits = 4)
 
 .pull-right7[
 <p align="center"><br><br>
-<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/Schedule.png" height="500"><br><br>
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/schedule_jan2018.png" height="500"><br><br>
 <font size="5" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule.html">therbootcamp.github.io/schedule.html</b>
 </p>
 ]

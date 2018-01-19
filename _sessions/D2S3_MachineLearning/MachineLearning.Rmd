@@ -271,15 +271,14 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ]
 
 .pull-right4[
+<br><br>
+We will focus on 3 that apply to both classification and regression
 
-We will focus on 4 that apply to both classification and regression
-
-| Algorithm|Complexity?|
+| Algorithm|Complexity|
 |:------|:----|
 |     Regression| Low / Medium | 
 |     Decision Trees| Low |
 |     Random Forests| High |
-|     Support Vector Machines| High |
 
 ]
 
@@ -292,7 +291,7 @@ We will focus on 4 that apply to both classification and regression
 
 In regression, the criterion is modeled as the weighted sum of predictors times *weights* $\beta_{1}$, $\beta_{2}$
 
-### Example: Default on a loan
+### Loan Default:
 
 One could model the risk of defaulting on a loan as:
 
@@ -339,7 +338,7 @@ loan_glm_pred <- predict(loan_glm_model,
 
 In decision trees, the criterion is modeled as a sequence of logical Yes or No questions.
 
-### Example: Default on a loan
+### Loan Default:
 
 ```{r, echo = FALSE, eval = TRUE}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/defaulttree.png")
@@ -382,9 +381,8 @@ loan_rpart_pred <- predict(loan_rpart_model,
 
 A Random Forest is a collection of many (hundreds, thousands) of decision trees
 
-### Example: Default on a loan
 
-```{r, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = TRUE, out.width = "90%"}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest_diagram.png")
 ```
 
@@ -418,67 +416,11 @@ loan_rf_pred <- predict(loan_rf_model,
 
 
 ---
-# Advanced algorithms
-
-.pull-left45[
-
-### Support Vector Machines 
-###`e1071::svm()`
-
-
-```{r, echo = FALSE, eval = TRUE, out.width = "40%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/supportvectormachine.png")
-```
-
-```{r, eval = FALSE}
-# Creating support vector machine model
-library(e1071)
-
-svm_model <- svm(formula = risk ~ .,
-                 data = loan_data,
-                 ...)
-```
-
-]
-
-.pull-right5[
-
-### Random Forests
-###`randomForest::randomForest()`
-
-```{r, echo = FALSE, eval = TRUE, out.width = "50%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/randomforest.png")
-```
-
-```{r, eval = FALSE}
-# Creating random forest model
-library(randomForest)
-
-rf_model <- randomForest(formula = risk ~ .,
-                         data = loan_data,
-                         ...)
-```
-
-]
-
----
 # How do I do machine learning in R?
 
-.pull-left4[
-
-If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
-
-```{r, echo = FALSE, eval = TRUE, out.width = "95%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png")
-```
+.pull-left6[
 
 
-
-]
-
-
-
-.pull-right6[
 
 In the practical, we will go through the basic steps "by hand" so you can see the process:
 
@@ -499,6 +441,17 @@ pred_A <- predict(model_A,
 pred_err_A <- mean(abs(pred_A - data_test$y))
 
 # Compare to Models B, C, D...
+```
+
+]
+
+.pull-right35[
+
+
+If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
+
+```{r, echo = FALSE, eval = TRUE, out.width = "95%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png")
 ```
 
 
