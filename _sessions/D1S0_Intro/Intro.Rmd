@@ -42,7 +42,7 @@ options(digits = 4)
 ---
 
 .pull-left3[
-# Schedule and<br>Course links
+# Schedule
 ]
 
 .pull-right7[
