@@ -157,11 +157,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 ---
-## Two types of prediction problems
+## Two types of prediction tasks
 
 .pull-left45[
 
-```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png")
 ```
 
@@ -171,7 +171,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-right45[
 
-```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png")
 ```
 
@@ -189,10 +189,19 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 .pull-left6[
 
 - There are hundreds if not thousands of machine learning algorithms from many different fields.
-    - E.g.; Computer vision, Natural language processing, reinforcement learning, graphical models
+    - Computer vision, Natural language processing, reinforcement learning...
 
+Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
 
-- In this section, we will focus on 4:
+```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
+```
+
+]
+
+.pull-right4[
+
+We will focus on 4 that apply to both classification and regression
 
 | Algorithm|Complexity?|
 |:------|:----|
@@ -203,16 +212,30 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
-.pull-right4[
 
-Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
 
-```{r, echo = FALSE, eval = TRUE}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
-```
+---
+# How do you fit and evaluate models in R?
+
+.pull-left6[
+
+| Step|Description| Note / Example |
+|:------|:---|:------------|
+| 1| Install model packages| `rpart` or `FFTrees` for Decision Trees<br>`randomForest` for Random Forests|
+|     2| Get data |Use your own, or get free online datasets|
+|    3| Train model on data and generate insights|Always look at help menus and online tutorials!|
+|    4| Predict new data, possibly with cross-validation|Packages such as `mlr` and `caret` can really help|
 
 ]
 
+.pull-right35[
+
+```{r, echo = FALSE, eval = TRUE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png")
+```
+
+
+]
 
 ---
 # How do you fit and evaluate models in R?
@@ -258,10 +281,7 @@ predict(A_model,  # Predict test data
 plot(A_model)     # Visualize the model
 ```
 
-
 ]
-
-
 
 ---
 # Regression with `glm()`

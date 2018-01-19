@@ -138,19 +138,20 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 
 ---
-## What machine learning algorithms are there?
+## Two types of prediction tasks
 
 .pull-left45[
-### Classification
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/classification_task.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ]
 
 
-
-
 .pull-right45[
-### Regression
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/regression_task.png" width="100%" style="display: block; margin: auto;" /&gt;
+
 
 
 ]
@@ -165,10 +166,17 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 .pull-left6[
 
 - There are hundreds if not thousands of machine learning algorithms from many different fields.
-    - E.g.; Computer vision, Natural language processing, reinforcement learning, graphical models
+    - Computer vision, Natural language processing, reinforcement learning...
 
+Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
 
-- In this section, we will focus on 4:
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right4[
+
+We will focus on 4 that apply to both classification and regression
 
 | Algorithm|Complexity?|
 |:------|:----|
@@ -179,14 +187,28 @@ Just because an algorithm can fit past (training) data well, does *not* necessar
 
 ]
 
-.pull-right4[
 
-Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
 
-![](https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png)&lt;!-- --&gt;
+---
+# How do you fit and evaluate models in R?
+
+.pull-left6[
+
+| Step|Description| Note / Example |
+|:------|:---|:------------|
+| 1| Install model packages| `rpart` or `FFTrees` for Decision Trees&lt;br&gt;`randomForest` for Random Forests|
+|     2| Get data |Use your own, or get free online datasets|
+|    3| Train model on data and generate insights|Always look at help menus and online tutorials!|
+|    4| Predict new data, possibly with cross-validation|Packages such as `mlr` and `caret` can really help|
 
 ]
 
+.pull-right35[
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearning_r_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
 
 ---
 # How do you fit and evaluate models in R?
@@ -234,10 +256,7 @@ predict(A_model,  # Predict test data
 plot(A_model)     # Visualize the model
 ```
 
-
 ]
-
-
 
 ---
 # Regression with `glm()`
@@ -460,7 +479,7 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 - Data comes from two processes: *Signal* and *Noise* (aka Error).
 &lt;br&gt;
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -472,7 +491,7 @@ pred_err_A &lt;- mean(abs(pred_A - data_test$y))
 - A bad model is one that captures too much unpredictable noise,
     
 
-&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="MachineLearning_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
