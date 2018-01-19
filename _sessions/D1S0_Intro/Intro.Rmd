@@ -155,33 +155,34 @@ options(digits = 4)
   <tr>    
   <td>
   <p align = 'center'>RStudio IDE<br><br>
-  <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf"><img border="0" alt="W3Schools" src="https://bookdown.org/ndphillips/YaRrr/images/YaRrr_Cover.jpg" height="180"></a></p>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/rstudio_cheat_ss.png?raw=true" height="180"></a></p>
   </td>
  
   <td>
-   Base R<br><br>
-  <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf"><img border="0" alt="W3Schools" src="http://static.lulu.com/browse/product_thumbnail.php?productId=22049492&resolution=320" height="180"></a>
+   <p align = 'center'>Base R<br><br>
+  <a href="http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/baser_cheat_ss.png?raw=true" height="180"></a></p>
   </td>  
   
   <td> 
-   Data Import<br><br>
-  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf"><img border="0" alt="W3Schools" src="http://r4ds.had.co.nz/cover.png" height="180"></a>
+   <p align = 'center'>Data Import<br><br>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/dataimport_cheat_ss.png?raw=true" height="180"></a></p>
   </td>
   
   <td>
-  Data Transformation<br><br>
-  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"><img border="0" alt="W3Schools" src="https://covers.oreillystatic.com/images/0636920028574/cat.gif" height="180"></a>
+  <p align = 'center'>Data Transformation<br><br>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/datatransform_cheat_ss.png?raw=true" height="180"></a></p>
   </td>
 
   <td>
-  Data Visualization<br><br>
-  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf"><img border="0" alt="W3Schools" src="https://images-na.ssl-images-amazon.com/images/I/51l7gOx3Z-L._SX376_BO1,204,203,200_.jpg" height="180" ></a>
+  <p align = 'center'>Data Visualization<br><br>
+  <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf"><img border="0" alt="W3Schools" src="https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/datavis_cheat_ss.png?raw=true" height="180" ></a></p>
   </td>
   
 
   </tr>
 </table>
 <br>
+
 
 
 
@@ -258,12 +259,6 @@ options(digits = 4)
 ---
 # Backup slides
 
----
-
-# Additional Resources
-
-
-<p align="center"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rbooks.png" height="350"></p>
 
 
 
