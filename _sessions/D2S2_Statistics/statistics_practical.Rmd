@@ -1,6 +1,6 @@
 ---
 title: "Practical: Statistics"
-author: "BaselRBootcamp 2017"
+author: "BaselRBootcamp"
 output: html_document
 ---
 
@@ -22,12 +22,11 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 
 In this practical you'll conduct hypothesis tests. By the end of this practical you will know how to:
 
-1. Calculate basic descriptive statistics.
+1. Calculate basic descriptive statistics using `mean()`, `median()`, `table()`.
 2. Conduct 1 and 2 sample hypothesis tests with `t.test()`, `cor.test()` and `chisq.test()`
 3. Calculate regression analyses with `glm()`
 4. Explore statistical objects with `names()`, `summary()`, `print()`, `predict()`
-5. Use sampling functions to conduct simulations
-
+5. Use sampling functions such as `rnorm()` to conduct simulations
 
 ### Glossary and Packages
 
@@ -136,9 +135,6 @@ price_glm <- glm(formula = price ~ carat + depth + table + x,
 # Print coefficients
 price_glm
 
-# Show as ANOVA table using the Anova function from the car package
-car::Anova(price_glm)
-
 # Q: Predict the price of the following 3 diamonds:
 
 diamonds_new <- tibble(carat = c(.2, .6, .5),
@@ -152,6 +148,24 @@ predict(price_glm,
 #       1         2         3 
 # 4190.453  6088.398 -4471.817 
 
+
+# -----
+# Simulation
+# ------
+
+# 100 random samples from a normal distribution with mean = 0, sd = 1
+samp_A <- rnorm(n = 100, mean = 0, sd = 1)
+
+# 100 random samples from a Uniform distribution with bounds at 0, 10
+samp_B <- runif(n = 100, min = 0, max = 10)
+
+# Calculate descriptives
+mean(samp_A)
+sd(samp_A)
+
+mean(samp_B)
+sd(samp_B)
+
 ```
 
 
@@ -162,30 +176,33 @@ predict(price_glm,
 A. For this practical, we'll use the `ACTG175` dataframe from the `speff2trial` package, load the package with the `library()` function. Also load the `tidyverse` as always!
 
 ```{r, message = FALSE, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE}
-library(tidyverse)
-library(speff2trial)
+# Load libraries
+
+library(tidyverse)     # Tidyverse as always!
+library(speff2trial)   # For ACTG175 data
 ```
 
 
-B. Convert the data to a tibble (Hint, use assignment and `as_tibble()`)
+B. Convert the data to a tibble called `trial_act` as follows. The reason we're changing the name is so that if we mess up the data, we can always get the original data back from the `ACTG175` object.
 
 ```{r, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE}
-ACTG175 <- as_tibble(ACTG175)
+# Create trial_act, a tibble copy of ACTG175
+trial_act <- as_tibble(ACTG175)
 ```
-
 
 C. First thing's first, take a look at the data by printing it. It should look like this
 
-```{r, eval = TRUE}
-ACTG175
+```{r, eval = TRUE, echo = TRUE}
+# Print trial_act
+trial_act
 ```
 
 D. Before we can analyse the data, we need to make one important change. Specifically. we need to clarify that the `arms` column is a factor, *not* an integer. Run the following code to make this change.
 
 ```{r, echo = TRUE}
-# Data cleaning
+# traial_act data cleaning
 
-ACTG175 <- ACTG175 %>%
+trial_act <- trial_act %>%
   mutate(
     
     # Convert arms to a factor
@@ -196,10 +213,12 @@ ACTG175 <- ACTG175 %>%
   )
 ```
 
+E. (Optional): If you'd like to, try converting other columns such as `race` and `gender` to factors with appropriate labels. Look at the help menu for the `ACTG175` by running `?ACTG175` to see how these columns are coded.
+
 
 ### Descriptive statistics
 
-1. What was the mean age (`age) of all patients?
+1. What was the mean age (`age`) of all patients?
 
 2. What was the median weight (`wtkg`) of all patients?
 
@@ -211,16 +230,10 @@ ACTG175 <- ACTG175 %>%
 
 5. Conduct a one-sample t-test comparing the age (`age`) of the patients versus a null hypothesis of 40 years.
 
-```{r}
-t.test(x = ACTG175$age,
-       alternative = "two.sided",
-       mu = 40)
-```
-
 6. Now, compare the mean age to a null hypothesis of 35 years. What has changed?
 
 ```{r}
-t.test(x = ACTG175$age,
+t.test(x = trial_act$age,
        alternative = "two.sided",
        mu = 35)
 ```
@@ -231,76 +244,77 @@ t.test(x = ACTG175$age,
   - Be sure to use the formula notation `formula = age ~ gender`
 
 ```{r}
-t.test(formula = age ~ gender,
-       data = ACTG175,
-       alternative = "two.sided")
+age_gender_ht <- t.test(formula = age ~ gender,
+                           data = trial_act,
+                           alternative = "two.sided")
+
+age_gender_ht
 ```
 
 8. Do people with a history of intraveneous drug use have different numbers of `days` than those who do not have a history of intraveneous drug use? Answer this with a two-sample t-test.
 
 ```{r}
 t.test(formula = days ~ drugs,
-       data = ACTG175)
+       data = trial_act)
 ```
 
 
 ### Correlation test with cor.test()
 
-5. Do heavier people tend to have fewer days until a major negative event? Conduct a correlation test between weight (`wtkg`) and age (`days`). What is your conclusion?
+9. Do heavier people tend to have fewer days until a major negative event? Conduct a correlation test between weight (`wtkg`) and age (`days`). What is your conclusion?
+
 
 ```{r}
 cor.test(formula = ~ days + wtkg,
-         data = ACTG175)
+         data = trial_act)
 ```
 
-6. We would expect a correlation between CD4 T cell count at baseline (`cd40`) and at 20 weeks (`cd420`). But how strong is the correlation? Answer this question by conducting a correlation test between CD4 T cell count at baseline (`cd40`) and CD4 T cell count at 20 weeks (`cd420`).
+10. We would expect a correlation between CD4 T cell count at baseline (`cd40`) and at 20 weeks (`cd420`). But how strong is the correlation? Answer this question by conducting a correlation test between CD4 T cell count at baseline (`cd40`) and CD4 T cell count at 20 weeks (`cd420`).
 
 ```{r}
 cor.test(formula = ~ cd40 + cd420,
-         data = ACTG175)
+         data = trial_act)
 ```
 
-7. Only considering men, is there a correlation between CD4 T cell count at baseline (`cd40`)and CD8 T cell count at baseline (`cd80`)?
-
-  - Include the argument `subset = gender == 0` to restrict the analysis to men
+11. Only considering men, is there a correlation between CD4 T cell count at baseline (`cd40`)and CD8 T cell count at baseline (`cd80`)? (Hint: Include the argument `subset = gender == 0` to restrict the analysis to men)
     
 ```{r}
 cor.test(formula = ~ cd40 + cd80,
-         data = ACTG175,
+         data = trial_act,
          subset = gender == 0)
 ```
 
-8. Now, repeat the previous test, but only for women. Do you get the same or different results?
+12. Now, repeat the previous test, but only for women. Do you get the same or different results?
 
 ```{r}
 cor.test(formula = ~ cd40 + cd80,
-         data = ACTG175,
+         data = trial_act,
          subset = gender == 1)
 ```
 
 ### Chi-square test with chisq.test()
 
-10. Do men and women (`gender`) have different distributions of race (`race`)? That is, is the percentage of women who are white differ from the percentage of men who are white?
+13. Do men and women (`gender`) have different distributions of race (`race`)? That is, is the percentage of women who are white differ from the percentage of men who are white? Answer this with a chi-square test.
 
-  - Be sure to create a table of gender and race values with `table(ACTG175$gender, ACTG175$race)`
-
-```{r}
-chisq.test(table(ACTG175$gender, ACTG175$race))
-```
-
-11. Is there a relationship between a history of intravenous drug use (`drugs`) and hemophilia (`hemo`)?
+  - Be sure to create a table of gender and race values with `table(trial_act$gender, trial_act$race)`
 
 ```{r}
-chisq.test(table(ACTG175$hemo, ACTG175$drugs))
+chisq.test(table(trial_act$gender, trial_act$race))
 ```
 
-### Linear Model with glm()
+14. Is there a relationship between a history of intravenous drug use (`drugs`) and hemophilia (`hemo`)? Answer this by conducting a chi-square test.
+
+```{r}
+chisq.test(table(trial_act$hemo, trial_act$drugs))
+```
+
+### Linear Regression with glm()
 
 15. Which demographic variables predict days until the first occurence of a major negative event (`days`)? To answer this, conduct a linear regression analysis predicting `days` as a function of age (`age`), weight (`wtkg`), race (`race`) and gender (`gender`). Call the object `days_A_glm`.
 
 ```{r}
 days_A_glm <- glm(formula = days ~ age + wtkg + race + gender,
-                     data = ACTG175)
+                     data = trial_act)
 
 summary(arms_cd820_aov)
 
@@ -321,88 +335,130 @@ days_A_glm
 
 20. Look at the `$data`, `$fitted.values` and `$residuals` elements of the `days_A_glm` object. What do you think these are? (Bonus: can you calculate the mean squared residual?)
 
-21. Now create a new regression object `days_B_glm` where you predict `days` as a function of the treatment arm (`arms`). Explore the object. Do you find that there was an effect of the treatment arm on `days`?
+21. Now create a new regression object `days_B_glm` where you model `days` as a function of the treatment arm (`arms`). Explore the object. Do you find that there was an effect of the treatment arm on `days`?
 
 ```{r}
 days_B_glm <- glm(formula = days ~ arms,
-                  data = ACTG175)
+                  data = trial_act)
 ```
 
 22. Does the effect of treatment arm on days hold if you only consider men (`gender == 1`) above the age of 30 (`age > 30`)? To answer this, repeat your previous regression, but include the appropriate arguments to `subset`
 
+23. Now create a regression object `days_C_glm` that predicts `days` based on *all* variables in the dataset. Explore the object. What do you find?
+
+24. Create a fictional dataset of 10 new patients called `trial_new` by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the `trial_act_random` object to see how it looks
+
+```{r, echo = TRUE}
+# Draw 10 patients at random from trial_act
+#  and store as trial_new
+
+trial_new <- trial_act %>%
+  sample_n(10)
+```
+
+25. Now, using `days_C_glm`, predict the number of days until a major negative event for these 10 randomly selected patients using the following template:
+
+```{r, eval = FALSE, echo = TRUE}
+# Predict days until a major negative event from the trial_new data
+#   using the days_C_glm object
+
+predict(object = ___, 
+        newdata = ___)
+```
+
+```{r}
+predict(days_B_glm, 
+        newdata = new_patients)
+```
 
 
-## Extras and Challenges
+# Checkpoint!
+
+### Logistic regression
+
+26. You can calculate a logistic regression, where the dependent variable is binary (0 or 1) by including the `family = 'binomial'` argument to `glm()`. Using the template below, calculate a logistic regression predicting whether or not someone has taken intraveneous drugs based on their age (`age`), gender (`gender`) and (`race`). Then, explore the object to see if any variables reliably predict drug use.
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Logistic regression predicting intraveneous drug use
+#  based on age, gender, and race
+
+drugs_glm <- glm(formula = ___,
+                 data = ___,
+                 family = "___")
+```
+
+27. A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called `drugs_1000_bin` that is a binary variable indicating whether or not `days > 1000`. You can do this using `mutate()`)
+
 
 ### Generating random samples from distributions
 
-19. You can easily generate random samples from statistical distributions in R. To see all of them, run `?distributions`. For example, to generate samples from the well known Normal distribution, you can use `rnorm()`. Look at the help menu for `rnorm()` to see its arguments. 
+28. You can easily generate random samples from statistical distributions in R. To see all of them, run `?distributions`. For example, to generate samples from the well known Normal distribution, you can use `rnorm()`. Look at the help menu for `rnorm()` to see its arguments. 
 
-20. Using `rnorm()`,create a new object `samp_10` which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results? 
+29. Using `rnorm()`,create a new object `samp_10` which is 10 samples from a Normal distribution with mean 10 and standard deviation 5. Print the object to see what the elements look like. What should the mean and standard deviation of this sample? be? Test it by evaluating its mean and standard deviation directly using the appropriate functions. Then, do a one-sample t-test on this sample against the null hypothesis that the true mean is 12. What are the results? 
 
-21. Evalaute your code for the previous question *exactly* as it is -- that is, don't change *anything*. What are the new values in `samp_10` and the new mean, standard deviation, and t-test result. Why are the new results different?
+30. Look at the code below. Before you run it, what do you expect the value of the `coefficients` of the regression equation will be?  Test your prediction by running the code and exploring the `my_glm` object.
 
-22. Now, create a new object called `samp_1000` which is 1,000 samples from a Normal distribution (again with mean 12 and standard deviation 5). Print this object to see what it looks like. What should the mean and standard deviation of this sample be? Do the same hypothesis test as you did in the previous question. What is your new p-value?
+```{r, echo = TRUE}
+# Generate independent variables
+x1 <- rnorm(n = 100, mean = 10, sd = 1)
+x2 <- rnorm(n = 100, mean = 20, sd = 10)
+x3 <- rnorm(n = 100, mean = -5, sd = 5)
 
+# Generate noise
+noise <- rnorm(n = 100, mean = 0, sd = 1)
+
+# Create dependent variable
+y <- 3 * x1 + 2 * x2 - 5 * x3 + 100 + noise
+
+# Combine all into a tibble
+my_data <- tibble(x1, x2, x3, y)
+
+# Calculate glm
+my_glm <- glm(formula = y ~.,
+              data = my_data)
+```
+
+31. Adjust the code above so that the coefficients for the regression equation will be `(Intercept) = -50`, `x1 = -3`, `x2 = 10`, `x3 = 15`
 
 ### You choose the test!
 
-13. Only for patients older than 40, is there a relationship between antiretroviral history (`str2`) and race (`race`)?
+32. Only for patients older than 40, is there a relationship between antiretroviral history (`str2`) and race (`race`)?
 
-   - Create a new dataframe called `ACTG175.o40 <- subset(ACTG175, age > 40)` and then do your analysis on this new dataframe.
+   - Create a new dataframe called `trial_act_o40 <- trial_act %>% filter(age > 40)` and then do your analysis on this new dataframe.
    
    
 ```{r}
-ACTG175.o40 <- subset(ACTG175, age > 40)
+trial_act.o40 <- subset(trial_act, age > 40)
 
-chisq.test(table(ACTG175.o40$str2, ACTG175.o40$race))
+chisq.test(table(trial_act.o40$str2, trial_act.o40$race))
 ```
 
-14. Now repeat the previous analysis, but only for male patients
-
-  - Create a new dataframe called `ACTG175.male <- subset(ACTG175, gender == 0)` and then do your analysis on this new dataframe.
-
-```{r}
-ACTG175.male <- subset(ACTG175, gender == 0)
-
-chisq.test(table(ACTG175.male$str2, ACTG175.male$race))
-```
-
-
-25. Is there a difference in the CD4 T cell count at baseline between whites and non-whites? Answer this by conducting the appropriate hypothesis test.
-
-```{r}
-t.test(formula = cd40 ~ race,
-       data = ACTG175,
-       alternative = "two.sided")
-```
-
-26. A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.
+33. A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.
     
 ```{r}
 t.test(formula = days ~ arms,
-       data = ACTG175,
+       data = trial_act,
        subset = arms %in% c(0, 3))
 ```
 
-27. A researcher wants to know if the relationship between CD4 T cell count at baseline and age is similar for whites and non-whites. Specifically, she wants to know if both correlations are significant (and in the same direction!) or not. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?
+34. A researcher wants to know if the relationship between CD4 T cell count at baseline and age is similar for whites and non-whites. Specifically, she wants to know if both correlations are significant (and in the same direction!) or not. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?
 
 ```{r}
 cor.test(formula = ~ cd40 + days,
-         data = subset(ACTG175, race == 0))
+         data = subset(trial_act, race == 0))
 
 cor.test(formula = ~ cd40 + days,
-         data = subset(ACTG175, race == 1))
+         data = subset(trial_act, race == 1))
 ```
 
-28. A researcher is concerned that patients were not properly randomly assigned to the different treatment arms. Using the appropriate test(s), see if there is a significant imbalance between treatment arms in terms of gender, drug use, race, and homosexual activity. Do you find evidence for a significant imbalance in any of these domains?
+35. A researcher is concerned that patients were not properly randomly assigned to the different treatment arms. Using the appropriate test(s), see if there is a significant imbalance between treatment arms in terms of gender, drug use, race, and homosexual activity. Do you find evidence for a significant imbalance in any of these domains?
 
 ```{r}
-chisq.test(table(ACTG175$gender, ACTG175$arms))
-chisq.test(table(ACTG175$race, ACTG175$arms))
-chisq.test(table(ACTG175$drugs, ACTG175$arms))
+chisq.test(table(trial_act$gender, trial_act$arms))
+chisq.test(table(trial_act$race, trial_act$arms))
+chisq.test(table(trial_act$drugs, trial_act$arms))
 ```
-
 
 # Additional reading
 
