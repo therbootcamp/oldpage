@@ -1,6 +1,6 @@
 ---
 title: "Practical: Data objects and functions"
-author: "BaselRBootcamp 2017"
+author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
@@ -47,8 +47,8 @@ Here are the main functions for object selection.
 | Function| Description|
 |:------|:--------------------------------------------------------------------------|
 |     `[ ]` | Single brackets: Select individual elements from `vector`|
-|     `[[ ]]` | Double brackets: Select element/variable in `list` or `data.frame` |
-|     `[[$]]` | Dollar: Select named element/variable from `list` or `data.frame` |
+|     `[[ ]]` | Double brackets: Select element/variable in list or data.frame |
+|     `[[$]]` | Dollar: Select named element/variable from list or data.frame |
 
 Here is the function to create a function.
 
@@ -96,7 +96,7 @@ typeof(my_df)
 dim(my_df)
 ```
 
-5. Now, we practice accessing elements from a data.frame. Try to select the first element using (1) double brackets and index, e.g., `[[1]]`, (2) using double brackets and name `[['dbl_vec']]`, an our prefered way using the dollar operator and name, e.g., `$dbl_vec`. To inspect the names of the elements use `names(my_df)` or `str(my_df)`, which provides a richer overview over your data object.  
+5. Now, we practice accessing elements from a data.frame. Try to select the first element using (1) double brackets and index, e.g., `[[1]]`, (2) using double brackets and name `[['dbl_vec']]`, an our preferred way using the dollar operator and name, e.g., `$dbl_vec`. To inspect the names of the elements use `names(my_df)` or `str(my_df)`, which provides a richer overview over your data object.  
 
 ```{r, eval=T, echo=T}
 names(my_df)
@@ -183,7 +183,7 @@ str(my_df_from_list)
 ```{r, eval=T, echo=T}
 my_mean <- function(vector) {sum(vector) / length(vector)}
 my_mean(dbl_vec)
-# my_mean(chr_vec) # commented because of error
+#my_mean(chr_vec)
 ```
 
 14. The `character` vector produced an error, right? The reason is that R does not interpret the names you use for the arguments. That is, R does not understand that an argument named *vector* is supposed to be a vector. For R these names are merely placeholders. In the background, are will use these names to pass on the object provided at the respective location. I.e., in the above case, R will take your vector, may it be `dbl_vec` or `chr_vec`, name it `vector` and pass this new object on to the expression. This means that you can choose anything as the argument names. The only thing you need to ensure is that you use the argument names in the expression. Try redefining the your `my_mean` function using a different argument name, e.g., `x`.   
@@ -191,7 +191,7 @@ my_mean(dbl_vec)
 ```{r, eval=T, echo=T}
 my_mean <- function(x) {sum(x) / length(x)}
 my_mean(dbl_vec)
-# my_mean(chr_vec) # commented because of error
+#my_mean(chr_vec)
 ```
 
 Note: R literally creates new objects by assigning the object you provide to a function to its argument names. This means that the objects used inside the function are duplicates of the objects that you provide and not the objects themselves. This is why functions never change an object unless you assign the function's output back to the object or you explicitly tell R to change the object inside the function using the double arrow assignment operator `<<-`. 
@@ -201,7 +201,7 @@ Note: R literally creates new objects by assigning the object you provide to a f
 
 In working with R, we often encounter objects that have a non-flat, nested structure. This means that there is more than one level of elements. Such objects are almost always `list`s. Lists are the only object type that can store any other object, even themselves. That is we can have a list of lists or a list of data.frames. Working with non-flat, nested objects is easier than it may seem. To access elements from such an object simply combine several double bracket `[[]]` and/or dollar `$` operators to descend into the objects structure. Let's take a look.    
 
-15. Create a list containing `my_df` and your three vectors (for a total of four elements). Try to verify (using the list structure) that each of the columns of `my_df` is equal the respective vector. To access the columns in `my_df` you have to combine selectors e.g., `my_list[[index/name]][[index/name]]`, `my_list[[index]]$name`, or `my_list$name$name` (the peferred way). 
+15. Create a list containing `my_df` and your three vectors (for a total of four elements). Try to verify (using the list structure) that each of the columns of `my_df` is equal the respective vector. To access the columns in `my_df` you have to combine selectors e.g., `my_list[[index/name]][[index/name]]`, `my_list[[index]]$name`, or `my_list$name$name` (the preferred way). 
 
 ```{r, eval=T, echo=T}
 my_list_2 <- list(my_df, dbl_vec, chr_vec, log_vec)

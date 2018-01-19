@@ -165,7 +165,7 @@ $(document).ready(function () {
 </tr>
 <tr class="odd">
 <td align="left"><code>file(...,'r'), readLines</code></td>
-<td align="left">Read from file conection</td>
+<td align="left">Read from file connection</td>
 </tr>
 </tbody>
 </table>
@@ -196,7 +196,7 @@ $(document).ready(function () {
 </tr>
 <tr class="odd">
 <td align="left"><code>file(...,'w'), readLines</code></td>
-<td align="left">Write to file conection</td>
+<td align="left">Write to file connection</td>
 </tr>
 </tbody>
 </table>
@@ -220,14 +220,14 @@ lag():    dplyr, stats</code></pre>
 <div id="identify-the-filepath" class="section level3">
 <h3>Identify the (file)path</h3>
 <ol style="list-style-type: decimal">
-<li>Every read or write function requires that you provide a filepath or source (e.g., an URL) specifying the location of the file. Ways to facilitate finding the right filepath is to either set the working directiory (see <code>?setwd()</code>) or, even better, to use projects. You will learn about projects. For now we will try to work with the full filepath, that is beginning from your harddrive or user account. Fortunately, this isn’t difficult either, when using RStudio’s autocomplete functionality. To find a file path simply write to quotation marks, i.e., <code>&quot;&quot;</code>, and press <em><Tab></em> with the cursor being in-between the quotation marks. This will open an auto-complete dialog that allows you to level-by-level search through your folder structure and to identify the correct filepath. The autocomplete will always begin at the current working directory (see ?<code>getwd()</code>), which will usually be the level of your user account. Another way to begin at this location is to begin by writing <code>~/</code>. Try it out write <code>&quot;~/&quot;</code> into an R script, place the cursor after the slash (<code>/</code>), and press <em><Tab></em>. Now, try to find the location of each of the titanic datasets on your harddrive and assign the path (which is a character string) to an object, e.g., <code>titanic_csv_path</code> (titanic_path &lt;- “~/folder_1/folder_2/…/titanic.csv”).</li>
+<li>Every read or write function requires that you provide a file path or source (e.g., an URL) specifying the location of the file. Ways to facilitate finding the right file path is to either set the working directory (see <code>?setwd()</code>) or, even better, to use projects. You will learn about projects. For now we will try to work with the full file path, that is beginning from your hard drive or user account. Fortunately, this isn’t difficult either, when using RStudio’s auto-complete functionality. To find a file path simply write to quotation marks, i.e., <code>&quot;&quot;</code>, and press <em><Tab></em> with the cursor being in-between the quotation marks. This will open an auto-complete dialog that allows you to level-by-level search through your folder structure and to identify the correct file path. The auto-complete will always begin at the current working directory (see ?<code>getwd()</code>), which will usually be the level of your user account. Another way to begin at this location is to begin by writing <code>~/</code>. Try it out write <code>&quot;~/&quot;</code> into an R script, place the cursor after the slash (<code>/</code>), and press <em><Tab></em>. Now, try to find the location of each of the titanic data sets on your hard drive and assign the path (which is a character string) to an object, e.g., <code>titanic_csv_path</code> (titanic_path &lt;- “~/folder_1/folder_2/…/titanic.csv”).</li>
 </ol>
 </div>
 <div id="read-to-tibble" class="section level3">
 <h3>Read to <code>tibble</code></h3>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Ok, let’s read some datasets. But first we need to load the packages <code>readr</code> and <code>haven</code> using <code>library()</code>, i.e., <code>library(readr)</code> and <code>library(haven)</code>.</p></li>
-<li><p>Now, read in the three titanic data files usig <code>read_csv()</code>, <code>read_sas()</code>, and <code>read_sav()</code> by passing on the respective filepaths from above and assigning the functions’ outcomes to <code>df_csv</code>, <code>df_sas</code>, and <code>df_sav</code>, respectively. Inspect each of the imported objects using <code>print()</code> and <code>str()</code> and <code>typeof</code>.</p></li>
+<li><p>OK, let’s read some data sets. But first we need to load the packages <code>readr</code> and <code>haven</code> using <code>library()</code>, i.e., <code>library(readr)</code> and <code>library(haven)</code>.</p></li>
+<li><p>Now, read in the three titanic data files using <code>read_csv()</code>, <code>read_sas()</code>, and <code>read_sav()</code> by passing on the respective file paths from above and assigning the functions’ outcomes to <code>df_csv</code>, <code>df_sas</code>, and <code>df_sav</code>, respectively. Inspect each of the imported objects using <code>print()</code> and <code>str()</code> and <code>typeof</code>.</p></li>
 </ol>
 <pre class="r"><code>df_csv &lt;- read_csv('data_files/titanic.csv')</code></pre>
 <pre><code>Warning: Missing column names filled in: 'X1' [1]</code></pre>
@@ -350,7 +350,7 @@ print(df_csv) ; print(df_sas) ; print(df_sav)</code></pre>
 <pre class="r"><code>all(df_sas == df_sav)</code></pre>
 <pre><code>[1] NA</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Received an error? This is because the datasets contain <code>NA</code>’s, that is, missing values. One way to see this is via the summary function <code>summary()</code>. Try it out.</li>
+<li>Received an error? This is because the data sets contain <code>NA</code>’s, that is, missing values. One way to see this is via the summary function <code>summary()</code>. Try it out.</li>
 </ol>
 <pre class="r"><code>summary(df_csv)</code></pre>
 <pre><code>       X1           Name              PClass               Age       
@@ -411,13 +411,13 @@ print(df_csv) ; print(df_sas) ; print(df_sav)</code></pre>
 <h3>Write to disk</h3>
 <p>Every read function in R has a corresponding write functions. In this section we will write data to the three formats we used so far plus R’s own <code>.RData</code> and <code>.RDS</code> data formats. Before we turn to writing we want to take care of an feature of older write functions, namely <code>rownames</code>.</p>
 <ol start="7" style="list-style-type: decimal">
-<li>As you can see, the first column in, e.g., <code>df_csv</code> contains row numbers. Older write functions in R would by default add a row number column to the data, when writing data to disk. Newer functions, however, do not show this behavior. Overall, <code>rownames</code> have come a bit out of fashion. Thus, we want to eLiminate the first column from <code>df_csv</code> using another way to use indices, i.e., deletion by negative indices. Using negtive rather than positive indices in accessing objects via <code>[]</code> or <code>[[]]</code> means <em>omit</em> rather than <em>select</em>. E.g., <code>c(1, 2, 3)[-2]</code> returns the vector without the second value. Try to apply this to <code>df_csv</code> while assigning it to <code>df_csv_no_rownames</code>. Should you use single <code>[]</code> or double <code>[[]]</code> brackets? Try both.</li>
+<li>As you can see, the first column in, e.g., <code>df_csv</code> contains row numbers. Older write functions in R would by default add a row number column to the data, when writing data to disk. Newer functions, however, do not show this behavior. Overall, <code>rownames</code> have come a bit out of fashion. Thus, we want to eliminate the first column from <code>df_csv</code> using another way to use indices, i.e., deletion by negative indices. Using negative rather than positive indices in accessing objects via <code>[]</code> or <code>[[]]</code> means <em>omit</em> rather than <em>select</em>. E.g., <code>c(1, 2, 3)[-2]</code> returns the vector without the second value. Try to apply this to <code>df_csv</code> while assigning it to <code>df_csv_no_rownames</code>. Should you use single <code>[]</code> or double <code>[[]]</code> brackets? Try both.</li>
 </ol>
 <pre class="r"><code>df_csv_no_rownames = df_csv[-1]
 #df_csv_no_rownames = df_csv[[-1]]</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li><p>Then write the reduced data frame to disk using <code>write_csv()</code>. Try using the exact same file path. Does R gives you a warning?</p></li>
-<li><p>Now, let’s try some other formats using the other data set. First, read in <code>my_data.csv</code> (which you downloaded in the beginning of this practictal) as assign to <code>my_data</code>. Then, write <code>my_data</code> to disk using <code>write_sas</code>, <code>write_sav</code>, and also <code>saveRDS</code>. Just as <code>write_csv</code>, each of these functions take the data frame as the first argument and the file path as the second. To obtain the latter adapt the filepath by hand to make sure that the file path has the correct file ending, i.e., <code>.sas7bdat</code>, <code>.sav</code>, and <code>.RDS</code>, respectively. While you write the individual data sets pay attention to the speed of execution. Which one was fastest? If you didn’t make out a difference try again.</p></li>
+<li><p>Now, let’s try some other formats using the other data set. First, read in <code>my_data.csv</code> (which you downloaded in the beginning of this practical) as assign to <code>my_data</code>. Then, write <code>my_data</code> to disk using <code>write_sas</code>, <code>write_sav</code>, and also <code>saveRDS</code>. Just as <code>write_csv</code>, each of these functions take the data frame as the first argument and the file path as the second. To obtain the latter adapt the file path by hand to make sure that the file path has the correct file ending, i.e., <code>.sas7bdat</code>, <code>.sav</code>, and <code>.RDS</code>, respectively. While you write the individual data sets pay attention to the speed of execution. Which one was fastest? If you didn’t make out a difference try again.</p></li>
 </ol>
 <pre class="r"><code>my_data = read_csv(&quot;data_files/my_data.csv&quot;)</code></pre>
 <pre><code>Parsed with column specification:
@@ -436,28 +436,28 @@ saveRDS(my_data,&quot;data_files/my_data.RDS&quot;)</code></pre>
 <pre><code>                           size isdir mode               mtime
 data_files/my_data.csv 86932096 FALSE  644 2017-09-09 02:55:14
                                      ctime               atime uid gid
-data_files/my_data.csv 2018-01-19 20:11:54 2018-01-19 20:16:46 502  20
+data_files/my_data.csv 2018-01-19 20:11:54 2018-01-19 20:24:37 502  20
                         uname grname
 data_files/my_data.csv dwulff  staff</code></pre>
 <pre class="r"><code>file.info(&quot;data_files/my_data.sas7bdat&quot;)</code></pre>
 <pre><code>                                size isdir mode               mtime
-data_files/my_data.sas7bdat 40559616 FALSE  644 2018-01-19 20:16:42
+data_files/my_data.sas7bdat 40559616 FALSE  644 2018-01-19 20:24:33
                                           ctime               atime uid
-data_files/my_data.sas7bdat 2018-01-19 20:16:42 2018-01-19 20:16:46 502
+data_files/my_data.sas7bdat 2018-01-19 20:24:33 2018-01-19 20:24:37 502
                             gid  uname grname
 data_files/my_data.sas7bdat  20 dwulff  staff</code></pre>
 <pre class="r"><code>file.info(&quot;data_files/my_data.sav&quot;)</code></pre>
 <pre><code>                           size isdir mode               mtime
-data_files/my_data.sav 48000465 FALSE  644 2018-01-19 20:16:43
+data_files/my_data.sav 48000465 FALSE  644 2018-01-19 20:24:34
                                      ctime               atime uid gid
-data_files/my_data.sav 2018-01-19 20:16:43 2018-01-19 20:16:44 502  20
+data_files/my_data.sav 2018-01-19 20:24:34 2018-01-19 20:24:36 502  20
                         uname grname
 data_files/my_data.sav dwulff  staff</code></pre>
 <pre class="r"><code>file.info(&quot;data_files/my_data.RDS&quot;)</code></pre>
 <pre><code>                           size isdir mode               mtime
-data_files/my_data.RDS 37462133 FALSE  644 2018-01-19 20:16:46
+data_files/my_data.RDS 37462133 FALSE  644 2018-01-19 20:24:37
                                      ctime               atime uid gid
-data_files/my_data.RDS 2018-01-19 20:16:46 2018-01-19 20:16:44 502  20
+data_files/my_data.RDS 2018-01-19 20:24:37 2018-01-19 20:24:36 502  20
                         uname grname
 data_files/my_data.RDS dwulff  staff</code></pre>
 </div>
@@ -465,7 +465,7 @@ data_files/my_data.RDS dwulff  staff</code></pre>
 <h3>Read from url</h3>
 <p>Most read functions are not limited to reading from the hard drive. Often you can also directly read from url.</p>
 <ol start="11" style="list-style-type: decimal">
-<li>Try reading the the <em>titanic</em> dataset using this link *<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv*" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv*</a> and <code>read_csv</code>.</li>
+<li>Try reading the the <em>titanic</em> data set using this link *<a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv*" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv*</a> and <code>read_csv</code>.</li>
 </ol>
 <pre class="r"><code>my_data = read_csv(&quot;https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/titanic.csv&quot;)</code></pre>
 <pre><code>Warning: Missing column names filled in: 'X1' [1]</code></pre>
@@ -484,7 +484,7 @@ cols(
 <h3>File connections</h3>
 <p>The most basic way to handle files is via file connections. In this more advanced section we take a look at how this works.</p>
 <ol start="12" style="list-style-type: decimal">
-<li>The first step of working with file connections is to establish a file connections using <code>file()</code>. The main arguments to <code>file</code> are a location (a file path, url, etc.) and a mode indicator, e.g., <code>r</code> for <code>Open for reading in text mode</code>. Try opening a connection to the <code>titanic.csv</code> dataset. To do this, you must assign the output of <code>file()</code> to an object, which then is the connection, e.g., <code>con = file(&quot;my_path&quot;,&quot;r&quot;)</code>. If you want to use the url (see previous section) you have to use <code>url()</code> instead of <code>file()</code>.</li>
+<li>The first step of working with file connections is to establish a file connections using <code>file()</code>. The main arguments to <code>file</code> are a location (a file path, URL, etc.) and a mode indicator, e.g., <code>r</code> for <code>Open for reading in text mode</code>. Try opening a connection to the <code>titanic.csv</code> data set. To do this, you must assign the output of <code>file()</code> to an object, which then is the connection, e.g., <code>con = file(&quot;my_path&quot;,&quot;r&quot;)</code>. If you want to use the URL (see previous section) you have to use <code>url()</code> instead of <code>file()</code>.</li>
 </ol>
 <pre class="r"><code>con = file('data_files/titanic.csv', 'r')</code></pre>
 <ol start="13" style="list-style-type: decimal">
@@ -509,13 +509,13 @@ is not a multiple of vector length (arg 1)</code></pre>
 <div id="scraping-the-internet" class="section level3">
 <h3>Scraping the internet</h3>
 <ol start="15" style="list-style-type: decimal">
-<li>Finally on to something completely new. As mentioned, connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Speicifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information on the webpage. One package that conveniently streamlines extracting information from webpages based is the very <code>rvest</code> package. To illustrate how easy it can be to scrape (aka extracte) information from the internet using R and <code>rvest</code>, consider the following code. It downloads and parses the Milestones table of R’s Wikipedia page.</li>
+<li>Finally on to something completely new. As mentioned, connections can also be established to data located outside one’s own disk, such as, for instance, the world wide web. Specifically, using <code>url()</code> we can establish a connection to a webpage, which we then can use to retrieve information on the webpage. One package that conveniently streamlines extracting information from webpages based is the very <code>rvest</code> package. To illustrate how easy it can be to scrape (aka extract) information from the internet using R and <code>rvest</code>, consider the following code. It downloads and parses the Milestones table of R’s Wikipedia page.</li>
 </ol>
 <pre class="r"><code># load package
 install.packages('rvest', repos = &quot;https://stat.ethz.ch/CRAN/&quot;)</code></pre>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/4j/gkx0z2kn1b5djq50kwgl2wdc0000gp/T//RtmpXDlhvQ/downloaded_packages</code></pre>
+    /var/folders/4j/gkx0z2kn1b5djq50kwgl2wdc0000gp/T//RtmpoSYVn5/downloaded_packages</code></pre>
 <pre class="r"><code>library(rvest)</code></pre>
 <pre><code>Loading required package: xml2</code></pre>
 <pre><code>

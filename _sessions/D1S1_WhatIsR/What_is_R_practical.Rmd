@@ -23,7 +23,7 @@ In this practical you'll get started with R. By the end of this practical you wi
 
 ## Tasks
 
-For this practical you will go through an existing analysis script chunck by chunk to experience how programming and analysing in R works. The idea is that you go through the code, copy the code chunks to the script editor, send the code to the console, and evaluate what happens.
+For this practical you will go through an existing analysis script chunk by chunk to experience how programming and analyzing in R works. The idea is that you go through the code, copy the code chunks to the script editor, send the code to the console, and evaluate what happens.
 
 While at it try to practice two very useful shortcuts: (1) `cmd + enter (MAC)` or `cntrl + enter (Windows)` for running the current line in the console. (2) `cmd + shift + p (MAC)` or `cntrl + shift + p (Windows)` for running the same block of code again in the console. The latter is really helpful because you can rerun the a chunk of code after you have made changes to it.  
 
@@ -32,7 +32,7 @@ All of the code used in this tutorial is based on **base-R functions**. While th
 
 ### Install and load the yarrr package
 
-1. First we’ll install and load the yarrr package. The yarrr package contains many datasets and functions (created by Nathaniel Phillips).
+1. First we’ll install and load the yarrr package. The yarrr package contains many data sets and functions (created by Nathaniel Phillips).
 
 ```{r, eval=F}
 # Install and load the yarrr package
@@ -42,7 +42,7 @@ library(yarrr)
 
 ### Explore the pirates dataset
 
-2. The pirates dataset contains data from a survey of 1,000 pirates. Inspect it one-by-one using the following functions.
+2. The pirates data set contains data from a survey of 1,000 pirates. Inspect it one-by-one using the following functions.
 
 ```{r, eval=F}
 # Get help for pirates data
@@ -222,11 +222,11 @@ barplot(pirate_heights$height,
         names.arg = pirate_heights$favorite.pirate)
 
 # --- Same, but with customizations
-barplot(pirate.heights$height, 
+barplot(pirate_heights$height, 
         ylim = c(0, 200),
         ylab = "Pirate Height (in cm)",
         main = "Barplot of mean height by favorite pirate",
-        names.arg = pirate.heights$favorite.pirate, 
+        names.arg = pirate_heights$favorite.pirate, 
         col = piratepal("basel", trans = .2))
 
 abline(h = seq(0, 200, 25), lty = 3, lwd = c(1, .5))
