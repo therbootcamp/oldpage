@@ -27,7 +27,6 @@ options(digits = 4)
 ```
 
 
-
 # Welcome!
 
 .pull-left5[
@@ -41,13 +40,10 @@ options(digits = 4)
 
 ---
 
-# Bootcamp Schedule
-
+# Main Bootcamp Link
 
 <br><br>
 <font size="7" color="#F62D73"><b><a href="https://therbootcamp.github.io/schedule_18Jan.html">therbootcamp.github.io/schedule_18Jan.html</b>
-
-
 
 ---
 .pull-left25[
@@ -84,13 +80,13 @@ options(digits = 4)
 
 .pull-left3[
 
-- Each **session** is 2 hours
+<font size = 5>Each session is 2 hours</font><br>
+<font size = 5>20 - 40 min introduction</font><br>
+<font size = 5>80 - 100 min hands-on practical</font><br>
 
-- 20-40 minute **introduction**.
+<font size = 5>Starts easy, gets more challenging</font><br>
+<font size = 5>Some elements go beyond the introduction, be bold!</font><br>
 
-- 80 - 100 minute hands-on, interactive **practical**.
-    - Starts **easy**, gets more **challenging**.
-    - Some elements go **beyond the lecture**, be bold!
     
 ]
 
@@ -114,6 +110,8 @@ options(digits = 4)
 ---
 
 .pull-left4[
+
+<br><br>
 # Breaks & refreshments
 
 <font size = 5>Feel free to take breaks when you need them!</font><br2>
