@@ -91,11 +91,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 
----
-## What kinds of models are there?
-
-
-
 
 ---
 # Why do we separate training from prediction?
