@@ -176,7 +176,7 @@ Source: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/<
 <tr class="even">
 <td align="left"><code>rename()</code></td>
 <td align="left">Rename columns</td>
-<td align="left">data %&gt;% rename(DATE_MONTHS_X24, date)</td>
+<td align="left">data %&gt;% rename(new = old)</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>mutate()</code></td>
@@ -214,85 +214,97 @@ library(tidyverse)         # Load tidyverse
 
 chick &lt;- as_tibble(ChickWeight)   # Save a copy of the ChickWeight data as chick
 
+# Change some column names with rename()
+
+chick &lt;- chick %&gt;%
+  rename(arm = Diet,         # New = arm, old = Diet
+         weight_g = weight)  # new = weight_g, old = weight
+
+# Select rows with filter()
+
+chick %&gt;% 
+  filter(weight_g &gt; 40 &amp; arm == 1)   # Only rows where weight_g &gt; 40 and arm == 1
+
 # Add columns with mutate()
 
 chick &lt;- chick %&gt;%
   mutate(
-    weight_kg = weight / 1000,  # Add new column of weight in kilograms
+    weight_g_kg = weight_g / 1000,  # Add new column of weight_g in kilograms
     time_week = Time / 7        # Add time_week as time in weeks
   )
 
 # Sort rows with arrange()
 
 chick &lt;- chick %&gt;%
-  arrange(Diet, weight)   # sort rows by Diet and then weight
-
+  arrange(arm, weight_g)   # sort rows by arm and then weight_g
 
 # Recode variables with case_when()
 
 chick &lt;- chick %&gt;%
   mutate(
-    diet_name = case_when(      # Rename diets with strings
-      Diet == 1 ~ &quot;vegetables&quot;,
-      Diet == 2 ~ &quot;fruit&quot;,
-      Diet == 3 ~ &quot;candy&quot;,
-      Diet == 4 ~ &quot;meat&quot;
+    arm_name = case_when(      # Rename arms with strings
+      arm == 1 ~ &quot;vegetables&quot;,
+      arm == 2 ~ &quot;fruit&quot;,
+      arm == 3 ~ &quot;candy&quot;,
+      arm == 4 ~ &quot;meat&quot;
       
     )
   )
 
 # Grouped statistics with group_by() and summarise()
 
-chick %&gt;% 
-  group_by(Diet) %&gt;%
-  summarise(
-    weight_mean = mean(weight),
-    weight_max = max(weight),
-    time_mean = mean(Time),
-    N = n()
-  ) %&gt;%
-  arrange(weight_mean)
+chick %&gt;%                             # Start with chick data...
+  group_by(arm) %&gt;%                   # Group by arm...
+  summarise(                          # Summarise the following
+    weight_g_mean = mean(weight_g),   # Mean weight
+    weight_g_max = max(weight_g),     # Max weight
+    time_mean = mean(Time),           # Mean time
+    N = n()) %&gt;%                      # Number of cases...
+  arrange(weight_g_mean)              # Sort by mean weight
 
 
 # Many sequential functions
 
 chick %&gt;%
+  rename(weeks = Time) %&gt;%            # Change column name
   filter(Chick &gt; 10) %&gt;%              # Only chicks with values larger than 10
-  group_by(Time, Diet) %&gt;%            # Group by Time and Diet
-  summarise(
-    weight_median = median(weight),
-    weight_sd = sd(weight),
+  group_by(Time, arm) %&gt;%             # Group by Time and arm
+  summarise(                          # Calculate summary statistics
+    weight_g_median = median(weight_g),
+    weight_g_sd = sd(weight_g),
     N = n()                           # Counts of cases
   )</code></pre>
 </div>
 <div id="tasks" class="section level2">
 <h2>Tasks</h2>
-<div id="getting-the-data-and-project-setup" class="section level3">
-<h3>Getting the data and project setup</h3>
+<div id="getting-setup" class="section level3">
+<h3>Getting setup</h3>
 <ol style="list-style-type: decimal">
-<li><p>Open an R project (or create a new one). In the main directory where that project is located, create two new empty folders: one called <code>data</code> and one called <code>R</code>. (Hint: You can create, and them rename, new empty folders in the <code>Files</code> pane of RStudio.)</p></li>
-<li><p>Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>datawrangling.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> packages with <code>library()</code>. Here’s how the top of your script should look:</p></li>
+<li>Open a new R script and save it in the <code>R</code> folder you just created as a new file called <code>datawrangling.R</code>. At the top of the script, using comments, write your name and the date. The, load the set of <code>tidyverse</code> and <code>speff2trial</code> packages with <code>library()</code>. Here’s how the top of your script should look:</li>
 </ol>
 <pre class="r"><code>## NAME
 ## DATE
 ## Wrangling Practical
 
-library(tidyverse)</code></pre>
+library(tidyverse)     # For tidyverse
+library(speff2trial)   # For the ACTG175 data documentation</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at the following link: <a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>. Using <code>read_csv()</code> load the data into R and store it as a new object called <code>ACTG175</code>. (Hint: This is really easy! Just run <code>read_csv(file = LINK)</code>, where <code>LINK</code> is the file URL.)</li>
+<li>For this practical, we’ll use the <code>ACTG175</code> data, this is the result of a randomized clinical trial comparing the effects of different medications on adults infected with the human immunodeficiency virus. The data are stored at the following link: <a href="https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv</a>. Using the following template, load the data into R and store it as a new object called <code>trial_act</code>.</li>
 </ol>
 <pre class="r"><code># Load data from weblink as a new tibble in R using read_csv
-ACTG175 &lt;- read_csv(file = &quot;LINK)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Ok you’ve got the data from the internet into your R session. But let’s save a local copy of the data as a <code>.csv</code> file so we’ll always have access to it. Using <code>write_csv()</code>, save a copy of the data as a <code>.csv</code> file called <code>ACTG175.csv</code>, also make sure to put it in the data folder you just created (Hint: the main arguments to <code>write_csv()</code> are <code>x</code>, the object you are writing, and <code>path</code>, the directory and file name you’re saving the object to.)</li>
-</ol>
-<pre class="r"><code># Write ACTG175 as a .csv file to your data folder
+# https://raw.githubusercontent.com/therbootcamp/BaselRBootcamp2017/master/tutorials/data/ACTG175.csv
 
-write_csv(ACTG175, path = &quot;data/ACTG175.csv&quot;)</code></pre>
+trial_act &lt;- read_csv(file = &quot;XXX&quot;)</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li><p>The <code>ACTG175</code> data is comes from the <code>speff2trial</code> package. If you don’t have the <code>speff2trial</code> package allready, install it using <code>install.packages()</code>. Then, load the package with <code>library()</code> and then look at the help menu for the <code>ACTG175</code> data by running <code>?ACTG175</code>. (Note: If you become really interested in the data, you can also read an article discussing the trial here: <a href="http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article" class="uri">http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article</a>)</p></li>
-<li><p>First thing’s first, take a look at the first few rows of the data by printing the <code>ACTG175</code> object. It should look like this:</p></li>
+<li>The <code>trial_act</code> data is comes from the <code>speff2trial</code> package where it was originally called <code>ACTG175</code>. Look at the help menu for the <code>ACTG175</code> data by running <code>?ACTG175</code>. (Note: If you become really interested in the data, you can also read an article discussing the trial here: <a href="http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article" class="uri">http://www.nejm.org/doi/full/10.1056/nejm199610103351501#t=article</a>)</li>
 </ol>
+<pre class="r"><code># Look at documentation for ACTG175 data (contained in the speff2trial package)
+?ACTG175</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>First thing’s first, take a look at the first few rows of the data by printing the <code>trial_act</code> object. It should look like this:</li>
+</ol>
+<pre class="r"><code># Print trial_act object
+trial_act</code></pre>
 <pre><code># A tibble: 2,139 x 27
    pidnum   age    wtkg  hemo  homo drugs karnof oprior   z30 zprior
     &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;
@@ -311,112 +323,94 @@ write_csv(ACTG175, path = &quot;data/ACTG175.csv&quot;)</code></pre>
 #   treat &lt;int&gt;, offtrt &lt;int&gt;, cd40 &lt;int&gt;, cd420 &lt;int&gt;, cd496 &lt;int&gt;,
 #   r &lt;int&gt;, cd80 &lt;int&gt;, cd820 &lt;int&gt;, cens &lt;int&gt;, days &lt;int&gt;, arms &lt;int&gt;</code></pre>
 </div>
+<div id="rename" class="section level3">
+<h3><code>rename()</code></h3>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Lets change some of the column names in <code>trial_act</code>. Using <code>rename()</code>, change <code>wtkg</code> to <code>weightkg</code> and <code>age</code> to <code>age_years</code> (to specify that age is in years)</p></li>
+<li><p>Oops, you just learned that your data repository doesn’t allow underscores in column names. Change <code>age_years</code> to <code>agey</code></p></li>
+</ol>
+</div>
 <div id="mutate" class="section level3">
 <h3><code>mutate()</code></h3>
-<ol start="7" style="list-style-type: decimal">
-<li><p>Add a new column to the dataframe called <code>age_months</code> that shows each patient’s age in months instead of years (Hint: do simple arithmetic!).</p></li>
-<li><p>The column <code>karnof</code> shows each patient’s <a href="http://emedicine.medscape.com/article/2172510-overview">Karnofsky score</a> on a scale from 0 to 100, create a new variable called <code>karnof_b</code> that shows the score on a scale from 0 to 1 (hint: just divide the original column by 100)</p></li>
-<li><p>Now, do the previous two questions in one chunk of code. That is, using one call to <code>mutate()</code> create both <code>age_months</code> and <code>karnof_b</code></p></li>
-<li><p>A physician wants to see a new score called the <code>sparrow</code> which is equal to the Karnofsky score divided by a person’s age plus the person’s weight in kg. Add each participant’s sparrow score as a new column called <code>sparrow</code> (Hint: Just take `karnof / age + wtkg)</p></li>
+<ol start="9" style="list-style-type: decimal">
+<li><p>Add a new column to <code>trial_act</code> called <code>agem</code> that shows each patient’s agey in months instead of years (Hint: do simple arithmetic!).</p></li>
+<li><p>The column <code>karnof</code> shows each patient’s <a href="http://emedicine.medscape.com/article/2172510-overview">Karnofsky score</a> on a scale from 0 to 100, add a new column to <code>trial_act</code> called <code>karnof_b</code> that shows the score on a scale from 0 to 1 (hint: just divide the original column by 100)</p></li>
+<li><p>Now, do the previous two questions in one chunk of code. That is, using one call to <code>mutate()</code> add both <code>agem</code> and <code>karnof_b</code> columns to <code>trial_act</code></p></li>
+<li><p>A physician wants to see a new score called the <code>sparrow</code> which is equal to the Karnofsky score divided by a person’s agey plus the person’s weight in kg. Add each participant’s sparrow score as a new column to <code>trial_act</code> called <code>sparrow</code> (Hint: Just take `karnof / agey + weightkg)</p></li>
 </ol>
 </div>
 <div id="arrange" class="section level3">
 <h3><code>arrange()</code></h3>
-<ol start="11" style="list-style-type: decimal">
-<li><p>Arrange the <code>ACTG175</code> data in ascending order of age (from lowest to highest). After, look at the first few rows of the data with <code>head()</code> to make sure it worked.</p></li>
-<li><p>Now arrange the data in <em>descending</em> order of age (from highest to lowest). After, look at the first few rows of the data with <code>head()</code> to make sure it worked.</p></li>
+<ol start="13" style="list-style-type: decimal">
+<li><p>Arrange the <code>trial_act</code> data in ascending order of agey (from lowest to highest). After, look the data to make sure it worked!</p></li>
+<li><p>Now arrange the data in <em>descending</em> order of agey (from highest to lowest). After, look the data to make sure it worked.</p></li>
 </ol>
 <ul>
 <li>To arrange data in descending order, just include <code>desc()</code> around the variable. E.g.; <code>data %&gt;% arrrange(desc(height))</code></li>
 </ul>
-<ol start="13" style="list-style-type: decimal">
-<li>You can sort the rows of dataframes with multiple columns by including many arguments to <code>arrange()</code>. Now sort the data by <code>karnof</code> and then age (<code>age</code>), and then arms (<code>arms</code>)</li>
+<ol start="15" style="list-style-type: decimal">
+<li>You can sort the rows of dataframes with multiple columns by including many arguments to <code>arrange()</code>. Now sort the data by <code>karnof</code> and then agey (<code>agey</code>), and then arms (<code>arms</code>)</li>
 </ol>
 </div>
 <div id="case_when" class="section level3">
 <h3><code>case_when()</code></h3>
-<ol start="14" style="list-style-type: decimal">
+<ol start="16" style="list-style-type: decimal">
 <li>Create a new column <code>gender_char</code> that shows gender as a string.</li>
 </ol>
 <ul>
 <li>Look at the help file with <code>?ACTG175</code> to see how gender is coded.</li>
 </ul>
-<ol start="15" style="list-style-type: decimal">
+<ol start="17" style="list-style-type: decimal">
 <li><p>Create a new column <code>over50</code> that is 1 when patients are older than 50, and 0 when they are younger than or equal to 50</p></li>
 <li><p>Now, repeat the previous two questions, but do them both in the same call to <code>mutate()</code>. That is, in one block of code, create <code>gender_char</code> and <code>over50</code></p></li>
 </ol>
 </div>
-<div id="group_by-and-summarise" class="section level3">
-<h3><code>group_by()</code> and <code>summarise()</code></h3>
-<ol start="17" style="list-style-type: decimal">
-<li><p>For each arm, calculate the mean participant age.</p></li>
-<li><p>For each arm, calculate the mean participant age <em>and</em> the median Karnofsky score</p></li>
+<div id="filter" class="section level3">
+<h3><code>filter()</code></h3>
+<ol start="19" style="list-style-type: decimal">
+<li><p>Create a new tibble called <code>trial_act_B</code> that only contains data from males (<code>gender == 1</code>)</p></li>
+<li><p>Create a new tibble called <code>trial_act_C</code> that only contains data from people who have not used intraveneous drugs (<code>drugs == 0</code>) <em>and</em> are over 40 years old <em>and</em> are female</p></li>
 </ol>
 </div>
 <div id="left_join" class="section level3">
 <h3><code>left_join()</code></h3>
-<ol start="19" style="list-style-type: decimal">
+<ol start="21" style="list-style-type: decimal">
 <li>You can use <code>left_join()</code> to combine multiple dataframes. At the following link <a href="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv" class="uri">https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG157_demo.csv</a> I have some additional (fictional) demographic data about the patients, namely the number of days of exercise they get per week, and their highest level of education. Here’s how the first few rows of the data look:</li>
 </ol>
-<table>
-<thead>
-<tr class="header">
-<th align="right">pidnum</th>
-<th align="right">exercise</th>
-<th align="left">education</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">10056</td>
-<td align="right">1</td>
-<td align="left">MS</td>
-</tr>
-<tr class="even">
-<td align="right">10059</td>
-<td align="right">4</td>
-<td align="left">BA</td>
-</tr>
-<tr class="odd">
-<td align="right">10089</td>
-<td align="right">1</td>
-<td align="left">BA</td>
-</tr>
-<tr class="even">
-<td align="right">10093</td>
-<td align="right">0</td>
-<td align="left">MS</td>
-</tr>
-<tr class="odd">
-<td align="right">10124</td>
-<td align="right">0</td>
-<td align="left">HS</td>
-</tr>
-<tr class="even">
-<td align="right">10140</td>
-<td align="right">1</td>
-<td align="left">HS</td>
-</tr>
-</tbody>
-</table>
-<p>Using <code>left_join()</code> to add the demographic data to the <code>ACTG175</code> data. To do this, first load the demographic data into R as a new dataframe called <code>ACTG175_demo</code>. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)</p>
+<pre><code>  pidnum exercise education
+1  10056        1        MS
+2  10059        4        BA
+3  10089        1        BA
+4  10093        0        MS
+5  10124        0        HS
+6  10140        1        HS</code></pre>
+<p>Using <code>left_join()</code> to add the demographic data to the <code>trial_act</code> data. To do this, first load the demographic data into R as a new dataframe called <code>trial_act_demo</code>. Then, use the following template to combine the data (Hint: Replace XXX with the correct values.)</p>
+<pre class="r"><code># Combine trial_act and trial_act_demo data
+trial_act &lt;- trial_act %&gt;%
+  left_join(XXX,        # The new dataframe to combine with trial_act
+            by = XXX)   # The name of the 'key' column(s) that should be matched</code></pre>
+<ol start="22" style="list-style-type: decimal">
+<li>Using your new <code>trial_act</code> data, calculate the mean number of days of exercise that patients reported.</li>
+</ol>
 </div>
-<div id="checkpoint" class="section level3">
-<h3>Checkpoint!</h3>
-<ol start="20" style="list-style-type: decimal">
-<li>Separately for male and female patients, calculate the percent who have a history of intravenous drug use.</li>
+<div id="group_by-and-summarise" class="section level3">
+<h3><code>group_by()</code> and <code>summarise()</code></h3>
+<ol start="23" style="list-style-type: decimal">
+<li><p>Group the data by <code>arms</code>. Then, for each arm, calculate the mean participant agey.</p></li>
+<li><p>Group the data by <code>arms</code>.For each arm, calculate the mean participant agey <em>and</em> the median Karnofsky score.</p></li>
+<li><p>Group the data by <code>gender</code>. Then, separately for male and female patients, calculate the percent who have a history of intravenous drug use.</p></li>
 </ol>
 <ul>
 <li>To calculate a percent of a binary variable with 0s and 1s, just calculate the mean</li>
 </ul>
-<ol start="21" style="list-style-type: decimal">
-<li><p>Separately for male and female patients (<code>gender</code>), calculate the percent who have a history of intravenous drug use (<code>drugs</code>), and the percent of patients who indicate homosexual activity</p></li>
-<li><p>Separately for all combinations of gender and race, calculate the mean age and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</p></li>
+<ol start="26" style="list-style-type: decimal">
+<li><p>Group the data by <code>gender</code>. Then calculate the percent of male and female patients who have a history of intravenous drug use (<code>drugs</code>), and the mean number of days until a major negative event <code>days</code></p></li>
+<li><p>Separately for all combinations of gender and race, calculate the mean agey and mean CD4 T cell count at baseline (<code>cd40</code>) (Hint: group by <code>gender</code> and <code>race</code>)</p></li>
 </ol>
 </div>
 <div id="challenges" class="section level3">
 <h3>Challenges</h3>
-<ol start="23" style="list-style-type: decimal">
+<ol start="28" style="list-style-type: decimal">
 <li>Now let’s check the major differences between the treatment arms. For each arm, calculate the following:</li>
 </ol>
 <ul>
@@ -427,9 +421,18 @@ write_csv(ACTG175, path = &quot;data/ACTG175.csv&quot;)</code></pre>
 <li>Mean <em>change</em> in CD4 T cell count between baseline and 96 weeks</li>
 <li>Number of patients (Hint: use <code>N = n()</code>)</li>
 </ul>
-<ol start="24" style="list-style-type: decimal">
+<ol start="29" style="list-style-type: decimal">
 <li><p>Repeat the previous analysis, but before you do the grouping and summary statistics, recode the values of <code>arms</code> to text that reflect what the values actually represent. For example, looking at the help file <code>?ACTG175</code>, I can see that the treatment arm of 0 is “zidovudine”. I might call this arm <code>&quot;Z&quot;</code>. Do this in the all in the same chunk of code.</p></li>
 <li><p>Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (<code>z30</code>)</p></li>
+<li>In one block of code, complete the following tasks
+<ul>
+<li>Change the name of the column <code>weightkg</code> to <code>weight</code> (hint: use <code>rename()</code>)</li>
+<li>Create a new column called <code>drugs_char</code> that uses strings instead of numbers to indicate drug use</li>
+<li>Filter the data to only include male patients with id numbers greater than 10100</li>
+<li>Group the data by <code>drugs_char</code> and <code>arm</code></li>
+<li>For each group calculate the mean agey, percentagey of patients that are male, and mean number of days until a major negative event.</li>
+<li>Filter the grouped data to only include cases where mean agey is greater than 30.</li>
+</ul></li>
 </ol>
 </div>
 </div>
@@ -437,8 +440,8 @@ write_csv(ACTG175, path = &quot;data/ACTG175.csv&quot;)</code></pre>
 <h1>Additional reading</h1>
 <ul>
 <li><p>For more details on data wrangling with R, check out the chapter in YaRrr! The Pirate’s Guide to R <a href="https://bookdown.org/ndphillips/YaRrr/advanceddataframe.html">YaRrr! Chapter Link</a></p></li>
-<li><p>Hadley Wickham, the author of dplyr, also has great examples in the dplyr vignette here: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">dplyr vignette link</a></p></li>
-<li><p>The <code>tidyr</code> package is a natural extension to <code>dplyr</code> that allows you to reshape your data into a format that is easier to manage. Check out the <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidyr vignette</a> for examples:</p></li>
+<li><p>Hadley Wickham, the author of dplyr, also has great examples in the dplyr vignette here: <a href="https://cran.r-project.org/web/packageys/dplyr/vignettes/dplyr.html">dplyr vignette link</a></p></li>
+<li><p>The <code>tidyr</code> packagey is a natural extension to <code>dplyr</code> that allows you to reshape your data into a format that is easier to managey. Check out the <a href="https://cran.r-project.org/web/packageys/tidyr/vignettes/tidy-data.html">tidyr vignette</a> for examples.</p></li>
 </ul>
 </div>
 
