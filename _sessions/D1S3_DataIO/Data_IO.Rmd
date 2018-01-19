@@ -29,7 +29,7 @@ options(digits = 4)
 
 # Importing and Exporting Data
 
-In this introduction you will learn...
+In this session you will learn...
 
 .pull-left45[
 1. How to import data data from **delimeter separated files** (e.g., .csv)?
@@ -38,9 +38,9 @@ In this introduction you will learn...
 <br2>
 3. How to save/export data to various formats, including **R's own files types**?
 <br2>
-4. About a new data format called **tibble**.
+4. How to use **file connections** to read data in its rawest possible way? 
 <br2>
-5. How to use **file connections** to read data in its rawest possible way? 
+5. About a new data format called **tibble**.
 ]
 
 .pull-right45[
@@ -49,7 +49,6 @@ In this introduction you will learn...
 <br>
 <img src="http://haven.tidyverse.org/logo.png" width="150">
 <img src="https://www.rstudio.com/wp-content/uploads/2017/05/readxl-259x300.png" width="150">
-
 
 ]
 
@@ -87,7 +86,7 @@ knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b
 
 # An example
 
-Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will automatically identify **(a)** columns and rows, **(b)** column names, **(c)** the type of the columns and finally return a `tibble` (more on that later).
+Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will **automatically identify** (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
 
 .pull-left45[
 ```{r, eval = F}
@@ -126,9 +125,30 @@ read_csv(data)
 
 ---
 
+# Data source
+
+Most of R's read functions allow to load data from a **variety of sources**, including most importantly the computer's hard drive and the internet. When loading from the hard drive, use auto-complete (using *tab*) to find the right **file path**.
+ 
+.pull-left45[
+```{r, eval = T}
+# Loading data from url
+read_csv("https://tinyurl.com/ydgrcyt5")
+```
+]
+
+.pull-right45[
+```{r, eval = T}
+# Loading data from url
+read_csv("https://tinyurl.com/ydgrcyt5")
+```
+]
+
+
+---
+
 # Parsing 
 
-Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **transform the input into the apprpriate format and type**. 
+Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **coerce** the input into the **appropriate format and type**. 
 
 ###Examples
 
@@ -156,7 +176,7 @@ parse_number(c("1.23","$123.209"))
 
 # Locale
 
-How the text input is parsed can largely be controlled using  **arguments** of the respective functions. Otherwise the parsing behavior will be **controlled by settings `locale()`**. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
+If parsing is not controlled using  **arguments**, it's parsing behavior will be controlled by **settings** in `locale()`. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
 
 .pull-left45[
 ```{r, tidy = T, tidy.opts=list(width.cutoff=60)}
@@ -168,14 +188,14 @@ str(locale())
 
 # Error handling
 
-When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` **infers the type of each column** using a heuristic process base on the **first 1,000 rows** (see `guess_parser`). However, that may not always work. In that case consider ...  
+When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` **infers the type** of each column using a heuristic process based on the **first 1,000 rows** (see `guess_parser`). However, that may not always work. In that case consider...  
 
 
 ```{r, eval = F}
 # to inspect the problems
 problems()
 
-# to set the types
+# to set types explicitly
 read_csv(..., col_types = cols(...))
 
 # read in as character and convert later
@@ -239,23 +259,23 @@ read_json()
 
 # Writing data
 
-Most read-in functions have **complementary write** functions to save the specific data format to disk. They usually require as **arguments** the **data frame** and a **file path** on the disk.
+Most read-in functions have **matching write**-functions to save the data to disk. As **arguments** these functions usually expect a **data frame** and a **file path** on the disk.
 
 .pull-left45[
 ### `readr` <img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"> 
 ```{r, eval = F}
 # read fixed width files (can be fast)
-write_csv(my_data_frame,"my_data.csv")
+write_csv(my_data_frame, "my_data.csv")
 write_delim(...)
 
 ```
 ### `haven` <img src="http://haven.tidyverse.org/logo.png" width="50" align="right">
 ```{r, eval = F}
 # read SAS's .sas7bat and sas7bcat files
-write_sas()
+write_sas(...)
 
 # read SPSS's .sav files
-write_sav()
+write_sav(...)
 
 # etc
 ```
@@ -279,13 +299,13 @@ write_json()
 
 # R's data formats
 
-R also has a couple of own data files that can be used to store and retrieve data. The benefits of these data files are that you can store **data as R objects**, as well as substantial **compression** (depending on repetitions/patterns in the data up to about 1% of the original size). 
+R also has data formats of its own to store and retrieve data. They provide the possibility to store **data as R objects**, as well as substantial **compression** (depending on data regularity up to about 1% of the original size). 
 
 .pull-left45[
 ### `.RData`  
 + Bundles several R objects.
 + Loads objects directly to workspace.
-+ Relatively slow.
++ Slow.
 ```{r, eval = F}
 # save data as .RData
 save(object_1, object_2,..., file = "my_data.RData")
@@ -298,8 +318,8 @@ load("my_data.RData")
 .pull-right45[
 ### `.RDS`  
 + Stores individual R objects.
-+ Import can is newly assigned.
-+ Relatively fast.
++ Import is newly assigned.
++ Fast.
 ```{r, eval = F}
 # save data as .RDS
 saveRDS(my_data, file = "my_data.RData")
@@ -312,20 +332,19 @@ my_data <- readRDS("my_data.RData")
 
 # File connections
 
-Under the hood, practically all reading and writing functions rely on R's **file connection** architecture, which is very similar to most other programming languages. To the experienced programmer file connections represent a flexible option to access and manipulate files on **any accessible location** (harddrive, server, www). 
-
+Under the hood, practically all of R's reading and writing functions relies on a **file connection** architecture, just as most other programming languages do. To the experienced programmer file connections represent a flexible option to access and manipulate files on **any accessible location** (harddrive, server, www). 
 
 .pull-left45[
 ### Benefits of file connections
-+ Define access mode (read, write, append)
++ Define access mode (read, write, append).
 <br2>
-+ Read/write as binary or raw
++ Read/write as binary or raw.
 <br2>
-+ Handle encodings directly
++ Handle encodings directly.
 <br2>
-+ Read and write compressed files
++ Read and write compressed files.
 <br2>
-+ Access to www and servers  
++ Access to www and servers.  
 ]
 
 .pull-right45[
@@ -354,15 +373,15 @@ The **output** from most `tidyverse` read functions such as `read_csv` and the p
 
 .pull-left45[
 ### tibbles ...
-+ never change the input's type
++ never change the input's type.
 <br2>
-+ never add row names
++ never add row names.
 <br2>
-+ never change column names
++ never change column names.
 <br2>
-+ look better in `print` 
++ look better in `print`. 
 <br2>
-+ are accessed more consistently
++ are accessed more consistently.
 ]
 
 .pull-right45[

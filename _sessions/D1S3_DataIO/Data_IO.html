@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 
 # Importing and Exporting Data
 
-In this introduction you will learn...
+In this session you will learn...
 
 .pull-left45[
 1. How to import data data from **delimeter separated files** (e.g., .csv)?
@@ -33,9 +33,9 @@ In this introduction you will learn...
 &lt;br2&gt;
 3. How to save/export data to various formats, including **R's own files types**?
 &lt;br2&gt;
-4. About a new data format called **tibble**.
+4. How to use **file connections** to read data in its rawest possible way? 
 &lt;br2&gt;
-5. How to use **file connections** to read data in its rawest possible way? 
+5. About a new data format called **tibble**.
 ]
 
 .pull-right45[
@@ -44,7 +44,6 @@ In this introduction you will learn...
 &lt;br&gt;
 &lt;img src="http://haven.tidyverse.org/logo.png" width="150"&gt;
 &lt;img src="https://www.rstudio.com/wp-content/uploads/2017/05/readxl-259x300.png" width="150"&gt;
-
 
 ]
 
@@ -81,7 +80,7 @@ parse_date()    # parse date -&gt; lubridate package
 
 # An example
 
-Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will automatically identify **(a)** columns and rows, **(b)** column names, **(c)** the type of the columns and finally return a `tibble` (more on that later).
+Assume we have a *flat* data set with variables `id`, `var_1`, and `var_2` and cases as rows. Such data can be conveniently read in using `read_csv()`. Moreover, `read_csv()` will **automatically identify** (a) columns and rows, (b) column names, (c) the type of the columns and finally return a `tibble` (more on that later).
 
 .pull-left45[
 
@@ -123,9 +122,70 @@ read_csv(data)
 
 ---
 
+# Data source
+
+Most of R's read functions allow to load data from a **variety of sources**, including most importantly the computer's hard drive and the internet. When loading from the hard drive, use auto-complete (using *tab*) to find the right **filepath**.
+ 
+.pull-left45[
+
+```r
+# Loading data from url
+read_csv("https://tinyurl.com/ydgrcyt5")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   id = col_character(),
+##   var_1 = col_double(),
+##   var_2 = col_double()
+## )
+```
+
+```
+## # A tibble: 4 x 3
+##      id var_1 var_2
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  DCDL 0.287 0.048
+## 2  FEFK 0.894 0.383
+## 3  ZEWE 1.374 0.623
+## 4  OJEE 0.631 0.826
+```
+]
+
+.pull-right45[
+
+```r
+# Loading data from url
+read_csv("https://tinyurl.com/ydgrcyt5")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   id = col_character(),
+##   var_1 = col_double(),
+##   var_2 = col_double()
+## )
+```
+
+```
+## # A tibble: 4 x 3
+##      id var_1 var_2
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  DCDL 0.287 0.048
+## 2  FEFK 0.894 0.383
+## 3  ZEWE 1.374 0.623
+## 4  OJEE 0.631 0.826
+```
+]
+
+
+---
+
 # Parsing 
 
-Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **transform the input into the apprpriate format and type**. 
+Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **transform** the input into the **apprpriate format and type**. 
 
 ###Examples
 
