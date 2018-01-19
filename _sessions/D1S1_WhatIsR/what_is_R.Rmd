@@ -335,8 +335,9 @@ my_fun(x,y){ x  + y }
 
 ---
 
-.pull-left5[
 # Help
+
+.pull-left5[
 
 R provides extremely helpful **help files** and **vignettes**. 
 >**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).<br>
