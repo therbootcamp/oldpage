@@ -320,10 +320,10 @@ trial_act</code></pre>
 <div id="mutate" class="section level3">
 <h3><code>mutate()</code></h3>
 <ol start="3" style="list-style-type: decimal">
-<li><p>Add a new column to <code>trial_act</code> called <code>agem</code> that shows each patient’s agey in months instead of years (Hint: do simple arithmetic!).</p></li>
+<li><p>Add a new column to <code>trial_act</code> called <code>agem</code> that shows each patient’s age in months instead of years (Hint: do simple arithmetic!).</p></li>
 <li><p>The column <code>karnof</code> shows each patient’s <a href="http://emedicine.medscape.com/article/2172510-overview">Karnofsky score</a> on a scale from 0 to 100, add a new column to <code>trial_act</code> called <code>karnof_b</code> that shows the score on a scale from 0 to 1 (hint: just divide the original column by 100)</p></li>
 <li><p>Now, do the previous two questions in one chunk of code. That is, using one call to <code>mutate()</code> add both <code>agem</code> and <code>karnof_b</code> columns to <code>trial_act</code></p></li>
-<li><p>A physician wants to see a new score called the <code>sparrow</code> which is equal to the Karnofsky score divided by a person’s agey plus the person’s weight in kg. Add each participant’s sparrow score as a new column to <code>trial_act</code> called <code>sparrow</code> (Hint: Just take `karnof / agey + weightkg)</p></li>
+<li><p>A physician wants to see a new score called the <code>sparrow</code> which is equal to the Karnofsky score divided by a person’s age plus the person’s weight in kg. Add each participant’s sparrow score as a new column to <code>trial_act</code> called <code>sparrow</code> (Hint: Just take `karnof / agey + weightkg)</p></li>
 </ol>
 </div>
 <div id="arrange" class="section level3">
@@ -356,7 +356,7 @@ trial_act</code></pre>
 <h3><code>filter()</code></h3>
 <ol start="13" style="list-style-type: decimal">
 <li><p>Create a new tibble called <code>trial_act_B</code> that only contains data from males (<code>gender == 1</code>)</p></li>
-<li><p>Create a new tibble called <code>trial_act_C</code> that only contains data from people who have not used intraveneous drugs (<code>drugs == 0</code>) <em>and</em> are over 40 years old <em>and</em> are female</p></li>
+<li><p>Create a new tibble called <code>trial_act_C</code> that only contains data from people who have not used intravenous drugs (<code>drugs == 0</code>) <em>and</em> are over 40 years old <em>and</em> are female</p></li>
 </ol>
 </div>
 <div id="left_join" class="section level3">
@@ -434,7 +434,7 @@ trial_act &lt;- trial_act %&gt;%
 <ul>
 <li><p>For more details on data wrangling with R, check out the chapter in YaRrr! The Pirate’s Guide to R <a href="https://bookdown.org/ndphillips/YaRrr/advanceddataframe.html">YaRrr! Chapter Link</a></p></li>
 <li><p>Hadley Wickham, the author of dplyr, also has great examples in the dplyr vignette here: <a href="https://cran.r-project.org/web/packageys/dplyr/vignettes/dplyr.html">dplyr vignette link</a></p></li>
-<li><p>The <code>tidyr</code> packagey is a natural extension to <code>dplyr</code> that allows you to reshape your data into a format that is easier to managey. Check out the <a href="https://cran.r-project.org/web/packageys/tidyr/vignettes/tidy-data.html">tidyr vignette</a> for examples.</p></li>
+<li><p>The <code>tidyr</code> package is a natural extension to <code>dplyr</code> that allows you to reshape your data into a format that is easier to manage. Check out the <a href="https://cran.r-project.org/web/packageys/tidyr/vignettes/tidy-data.html">tidyr vignette</a> for examples.</p></li>
 </ul>
 </div>
 

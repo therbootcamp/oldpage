@@ -34,7 +34,7 @@ Organise
 
 Aggregation
 - Aggregate data according to variables
-- Summarising data across groups
+- Summarizing data across groups
 
 ]
 
@@ -54,7 +54,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 <font size = 5>Answer: dplyr</font>
 
-Anytime you want to transform, organise, or aggregate data, use `dplyr`
+Anytime you want to transform, organize, or aggregate data, use `dplyr`
 
 ```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png")
@@ -533,7 +533,7 @@ patients_df
 
 <br><br>
 
-<font size = 5>1) Sort rows by id then in decending order of age</font>
+<font size = 5>1) Sort rows by id then in descending order of age</font>
 
 ```{r}
 
@@ -553,7 +553,7 @@ patients_df %>%
 .pull-left3[
 # filter()
 
-<font size = 5>The filter() funciton is used to select specific rows</font>
+<font size = 5>The filter() function is used to select specific rows</font>
 <br><br>
 <font size = 5>For complex conditions, chain multiple logical comparison operators<br><br>(==, !=, <, >, <=, >=, &, |)</font>
 

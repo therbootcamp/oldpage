@@ -174,7 +174,7 @@ trial_act
 
 ### `mutate()`
 
-3. Add a new column to `trial_act` called `agem` that shows each patient's agey in months instead of years (Hint: do simple arithmetic!).
+3. Add a new column to `trial_act` called `agem` that shows each patient's age in months instead of years (Hint: do simple arithmetic!).
 
 ```{r}
 trial_act <- trial_act %>% mutate(
@@ -201,7 +201,7 @@ trial_act <- trial_act %>%
     )
 ```
 
-6. A physician wants to see a new score called the `sparrow` which is equal to the Karnofsky score divided by a person's agey plus the person's weight in kg. Add each participant's sparrow score as a new column to `trial_act` called `sparrow` (Hint: Just take `karnof / agey + weightkg)
+6. A physician wants to see a new score called the `sparrow` which is equal to the Karnofsky score divided by a person's age plus the person's weight in kg. Add each participant's sparrow score as a new column to `trial_act` called `sparrow` (Hint: Just take `karnof / agey + weightkg)
 
 ```{r}
 trial_act <- trial_act %>% 
@@ -289,7 +289,7 @@ trial_act_B <- trial_act %>%
   filter(gender == 1)
 ```
 
-14.  Create a new tibble called `trial_act_C` that only contains data from people who have not used intraveneous drugs (`drugs == 0`) *and* are over 40 years old *and* are female
+14.  Create a new tibble called `trial_act_C` that only contains data from people who have not used intravenous drugs (`drugs == 0`) *and* are over 40 years old *and* are female
 
 ```{r}
 trial_act_C <- trial_act %>%
@@ -491,7 +491,7 @@ trial_act %>%
 
 - Hadley Wickham, the author of dplyr, also has great examples in the dplyr vignette here: [dplyr vignette link](https://cran.r-project.org/web/packageys/dplyr/vignettes/dplyr.html)
 
-- The `tidyr` packagey is a natural extension to `dplyr` that allows you to reshape your data into a format that is easier to managey. Check out the [tidyr vignette](https://cran.r-project.org/web/packageys/tidyr/vignettes/tidy-data.html) for examples.
+- The `tidyr` package is a natural extension to `dplyr` that allows you to reshape your data into a format that is easier to manage. Check out the [tidyr vignette](https://cran.r-project.org/web/packageys/tidyr/vignettes/tidy-data.html) for examples.
 
 
 
