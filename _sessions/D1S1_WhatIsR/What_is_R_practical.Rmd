@@ -75,9 +75,9 @@ table(pirates$sex)
 
 ```{r, eval=F}
 # What was the mean age for each sex?
-aggregate(formula = age ~ sex + headband, 
+aggregate(formula = age ~ sex, 
           data = pirates,
-          FUN = median)
+          FUN = mean)
 
 
 # What is the median age of pirates for each combination of sex and headband?
