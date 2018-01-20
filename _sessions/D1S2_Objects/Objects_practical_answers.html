@@ -294,7 +294,7 @@ Levels: a b c d e f g h i j</code></pre>
 <pre class="r"><code>my_df$dbl_vec</code></pre>
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5  6  7  8  9 10</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., <code>my_df[&quot;dbl_vec&quot;&quot;]</code>, and name, e.g., <code>my_df[[&quot;dbl_vec&quot;&quot;]]</code> and test their types using <code>typeof()</code>. What kind of object do you get in the first and second case? Understand why we prefer the <code>$</code>-operator?</li>
+<li>Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., <code>my_df[&quot;dbl_vec&quot;]</code>, and name, e.g., <code>my_df[[&quot;dbl_vec&quot;]]</code> and test their types using <code>typeof()</code>. What kind of object do you get in the first and second case? Understand why we prefer the <code>$</code>-operator?</li>
 </ol>
 <pre class="r"><code>typeof(my_df[[&quot;dbl_vec&quot;]])</code></pre>
 <pre><code>[1] &quot;double&quot;</code></pre>
@@ -344,7 +344,7 @@ Levels: a b c d e f g h i j</code></pre>
 <pre class="r"><code>chr_vec[dbl_vec &gt; 2]</code></pre>
 <pre><code> [1] &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
 <ol start="11" style="list-style-type: decimal">
-<li>Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator <code>&amp;</code> and the logical <code>OR</code> operator <code>|</code>. Run out <code>c(1, 4, 7, 2) &gt; 3 &amp; c(1, 4, 7, 2) &lt; 6</code> and <code>c(1, 4, 7, 2) &gt; 3 | c(1, 4, 7, 2) &lt; 6</code> and study the result. Try now combining the logical vector coerced from <code>dbl_vec</code> with <code>log_vec</code> to subset <code>chr_vec</code>.</li>
+<li>Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator <code>&amp;</code> and the logical <code>OR</code> operator <code>|</code>. Run <code>c(1, 4, 7, 2) &gt; 3 &amp; c(1, 4, 7, 2) &lt; 6</code> and <code>c(1, 4, 7, 2) &gt; 3 | c(1, 4, 7, 2) &lt; 6</code> and study the result. Try now combining the logical vector coerced from <code>dbl_vec</code> with <code>log_vec</code> to subset <code>chr_vec</code>.</li>
 </ol>
 <pre class="r"><code>chr_vec[dbl_vec &gt; 2 &amp; log_vec]</code></pre>
 <pre><code> [1] &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>

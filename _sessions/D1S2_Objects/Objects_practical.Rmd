@@ -148,7 +148,7 @@ chr_vec[log_vec]
 chr_vec[dbl_vec > 2]
 ```
 
-11. Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator `&` and the logical `OR` operator `|`. Run out `c(1, 4, 7, 2) > 3 & c(1, 4, 7, 2) < 6` and `c(1, 4, 7, 2) > 3 | c(1, 4, 7, 2) < 6` and study the result. Try now combining the logical vector coerced from `dbl_vec` with `log_vec` to subset `chr_vec`.
+11. Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator `&` and the logical `OR` operator `|`. Run `c(1, 4, 7, 2) > 3 & c(1, 4, 7, 2) < 6` and `c(1, 4, 7, 2) > 3 | c(1, 4, 7, 2) < 6` and study the result. Try now combining the logical vector coerced from `dbl_vec` with `log_vec` to subset `chr_vec`.
 
 ```{r, eval=F, echo=F}
 chr_vec[dbl_vec > 2 & log_vec]
