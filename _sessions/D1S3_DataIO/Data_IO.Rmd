@@ -64,7 +64,7 @@ In this session you will learn...
 # Functions for import
 read_csv()  # for comma-delimited files
 read_csv2() # for semicolon-delimeted file
-read_delim  # for any delimited files
+read_delim()  # for any delimited files
 
 # Functions for parsing
 parse_logical() # parse logical vectors
@@ -322,10 +322,10 @@ load("my_data.RData")
 + Fast.
 ```{r, eval = F}
 # save data as .RDS
-saveRDS(my_data, file = "my_data.RData")
+saveRDS(my_data, file = "my_data.rds")
 
 # load data from .RDS
-my_data <- readRDS("my_data.RData")
+my_data <- readRDS("my_data.rds")
 ```
 ]
 ---
