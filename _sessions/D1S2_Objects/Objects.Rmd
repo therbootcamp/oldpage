@@ -265,7 +265,7 @@ Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix
 
 # Accessing & changing vectors
 
-To access (aka **subset**) and change atomic data objects use **brackets** `[` and provide either **integers**, **logicals**, or  **names** to indicate the relevant vector content. To change content, assign new content of matching size to subset using ´<-´. 
+To access (aka **subset**) and change atomic data objects use **brackets** `[]` and provide either **integers**, **logicals**, or  **names** to indicate the relevant vector content. To change content, assign new content of matching size to subset using ´<-´. 
 
 .pull-left45[
 ```{r}
@@ -290,7 +290,7 @@ my_vec <- c(1, 2, 3, 4, 5)
 my_vec ; my_vec[my_vec < 4]
 
 # Change vector using logical comparison
-my_vec[my_vec < 4] = my_vec[my_vec < 4] - 5
+my_vec[my_vec < 4] <- my_vec[my_vec < 4] - 5
 my_vec
 
 ```
