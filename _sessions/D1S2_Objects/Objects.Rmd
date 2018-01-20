@@ -64,7 +64,7 @@ my_vec <- c(1.343, c(5.232, 2.762))
 
 # naming vectors
 my_vec <- c(t_1 = 1.343, t_2 = 5.232)
-names(my_vec) = c("t_1","t_2")
+names(my_vec) <- c("new_1","new_2")
 
 # evaluting inherent attributes
 names(my_vec)

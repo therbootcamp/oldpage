@@ -47,7 +47,7 @@ class: center, middle, inverse, title-slide
 
 # Vectors
 
-R's most **basic (and most simple) data format** - even single values (aka **scalars**) are implmented as vectors. 
+R's most **basic (and most simple) data format** - even single values (aka **scalars**) are implemented as vectors. 
 
 .pull-left45[
 
@@ -60,7 +60,7 @@ my_vec &lt;- c(1.343, c(5.232, 2.762))
 
 # naming vectors
 my_vec &lt;- c(t_1 = 1.343, t_2 = 5.232)
-names(my_vec) = c("t_1","t_2")
+names(my_vec) &lt;- c("new_1","new_2")
 
 # evaluting inherent attributes
 names(my_vec)
@@ -219,7 +219,7 @@ as.character(c(TRUE, FALSE, 0))
 
 # Factors
 
-Factors are a special case of vector that can contain only **predifined values** socalled `levels`. Factors are rarely useful and sometimes **dangerous**, yet R will often coerce `character` to `factor`.  
+Factors are a special case of vector that can contain only **predifined values** so-called `levels`. Factors are rarely useful and sometimes **dangerous**, yet R will often coerce `character` to `factor`.  
 
 .pull-left45[
 
@@ -316,7 +316,7 @@ Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix
 
 + Lists are R's **swiss army knife**. They often are used for outputs of statistical functions e.g., `lm()`.
 
-+ Lists have **non-flat** structures that take **any object type**, inluding lists, rendering lists **recursive**.
++ Lists have **non-flat** structures that take **any object type**, including lists, rendering lists **recursive**.
 
 + Lists can be understood as a **meta-vector** that includes an **organizational layer**. 
 
@@ -352,7 +352,7 @@ Matrices and arrays are **straightforward extensions** of vectors with 2 (matrix
 
 # Accessing &amp; changing vectors
 
-To access (aka **subset**) and change atomic data objects use **brackets** `[` and provide either **integers**, **logicals**, or  **names** to indicate the relevant vector content. To change content assign ne content of matching size to subset using ´&lt;-´. 
+To access (aka **subset**) and change atomic data objects use **brackets** `[` and provide either **integers**, **logicals**, or  **names** to indicate the relevant vector content. To change content, assign new content of matching size to subset using ´&lt;-´. 
 
 .pull-left45[
 
