@@ -106,7 +106,7 @@ my_df[['chr_vec']]
 my_df$dbl_vec
 ```
 
-6. Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., `my_df["dbl_vec""]`, and  name, e.g., `my_df[["dbl_vec""]]` and test their types using `typeof()`. What kind of object do you get in the first and second case? Understand why we prefer the `$`-operator?
+6. Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., `my_df["dbl_vec"]`, and  name, e.g., `my_df[["dbl_vec"]]` and test their types using `typeof()`. What kind of object do you get in the first and second case? Understand why we prefer the `$`-operator?
 
 ```{r, eval=T, echo=T}
 typeof(my_df[["dbl_vec"]])
