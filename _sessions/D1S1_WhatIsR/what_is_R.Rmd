@@ -99,7 +99,7 @@ R has been build for **statistical computing and graphics** and that is basicall
 2. Handle and process data
 3. Run cutting-edge analyses
 4. Analyze big data
-5. Create publicaton-ready figures
+5. Create publication-ready figures
 6. Prepare reproducible reports
 ]
 
@@ -142,7 +142,7 @@ There are many good reasons to prefer R over superficially more user friendly so
 4. **User base** (e.g., [stackoverflow](https://stackoverflow.com/))
 5. [**Tidyverse**](https://www.tidyverse.org/) (`dplyr`, `ggplot`, etc.)
 6. [**RStudio**](https://www.rstudio.com/)
-7. **Producitivity** options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
+7. **Productivity** options: [Latex](https://www.latex-project.org/), [Markdown](https://daringfireball.net/projects/markdown/), [GitHub](https://github.com/)
 ]
 
 .pull-right45[
@@ -158,7 +158,7 @@ There are many good reasons to prefer R over superficially more user friendly so
 
 # RStudio: R's favorite environment
 
-Next to many useful packages, R users greatly benefit from R's integrated development environment [**RStudio**](https://www.rstudio.com/). Rstudio is a **graphical user interface** that allows you to (a) edit code, (b) run code, (c) access files and history, and (d) create plots. RStudio also helps you with **project managament**, **version control** via [Github](https://github.com/), writing **reports** using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), and many other aspects of working with R.  
+Next to many useful packages, R users greatly benefit from R's integrated development environment [**RStudio**](https://www.rstudio.com/). Rstudio is a **graphical user interface** that allows you to (a) edit code, (b) run code, (c) access files and history, and (d) create plots. RStudio also helps you with **project management**, **version control** via [Github](https://github.com/), writing **reports** using [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) and [knitr](https://yihui.name/knitr/), and many other aspects of working with R.  
 
 <p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/rstudio_plus.png" height="360"></p>
 
