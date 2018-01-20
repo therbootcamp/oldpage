@@ -32,7 +32,7 @@ options(digits = 4)
 In this session you will learn...
 
 .pull-left45[
-1. How to import data data from **delimeter separated files** (e.g., .csv)?
+1. How to import data data from **delimeted separated files** (e.g., .csv)?
 <br2>
 2. How to import data data from **proprietory file formats** (e.g., .sav)?
 <br2>
