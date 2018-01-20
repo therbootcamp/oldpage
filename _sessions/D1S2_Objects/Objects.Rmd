@@ -304,19 +304,20 @@ Data frames (and lists) are best accessed using **names** and the `$`-operator. 
 
 .pull-left45[
 ```{r}
-# retrieve elements from list
-my_df <- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
+# retrieve elements using brackets
+my_df <- data.frame('v_1'=c('A', 'B', 'C'), 
+                    'v_2'=c(1, 2, 3))
 my_df[1] ; my_df[[1]] ; my_df[['v_1']]
 ```
 ]
 
 .pull-right45[
 ```{r}
-# retrieve elements from list
-my_df <- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
-my_df[1,] ; my_df[,1] ; my_df[1,2]
+# retrieve elements using the $-operator
+my_df$v_1
+my_df$v_1 <- c('X', 'Y', 'Z')
+my_df
+
 ```
 ]
 
@@ -473,8 +474,9 @@ my_stat(x = my_vec, method = 'median')
 
 ---
 
-.pull-left5[
 # Help
+
+.pull-left5[
 
 R provides extremely helpful **help files** and **vignettes**. 
 >**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).<br>
@@ -496,9 +498,12 @@ vignette(package = "name_of_vignette")
 ]
 
 .pull-right45[
-<br><br><iframe src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_html/R_ Arithmetic Mean.htm" height="510" width="800" align="center"></iframe>
-]
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"></p>
 
+<!---
+<br><br><iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"></iframe>
+--->
+]
 ---
 
 

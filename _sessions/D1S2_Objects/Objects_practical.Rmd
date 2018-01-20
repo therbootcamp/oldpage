@@ -48,7 +48,7 @@ Here are the main functions for object selection.
 |:------|:--------------------------------------------------------------------------|
 |     `[ ]` | Single brackets: Select individual elements from `vector`|
 |     `[[ ]]` | Double brackets: Select element/variable in list or data.frame |
-|     `[[$]]` | Dollar: Select named element/variable from list or data.frame |
+|     `$` | Dollar: Select named element/variable from list or data.frame |
 
 Here is the function to create a function.
 
