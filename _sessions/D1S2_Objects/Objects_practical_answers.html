@@ -293,8 +293,8 @@ head(my_df)</code></pre>
 Levels: a b c d e f g h i j</code></pre>
 <pre class="r"><code>my_df$dbl_vec</code></pre>
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5  6  7  8  9 10</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., <code>my_df[[&quot;dbl_vec&quot;&quot;]]</code>, and name, e.g., <code>my_df[[&quot;dbl_vec&quot;&quot;]]</code> and test their types using <code>typeof()</code>. What kind of object do you get in the first and second case? Understand why we prefer the <code>$</code>-operator?</li>
+<ol start="6" style="list-style-type: decimal">
+<li>Now, we try what happens when we use single brackets instead of double brackets, when accessing elements from a data.frame. Try, e.g., <code>my_df[&quot;dbl_vec&quot;&quot;]</code>, and name, e.g., <code>my_df[[&quot;dbl_vec&quot;&quot;]]</code> and test their types using <code>typeof()</code>. What kind of object do you get in the first and second case? Understand why we prefer the <code>$</code>-operator?</li>
 </ol>
 <pre class="r"><code>typeof(my_df[[&quot;dbl_vec&quot;]])</code></pre>
 <pre><code>[1] &quot;double&quot;</code></pre>
@@ -303,7 +303,7 @@ Levels: a b c d e f g h i j</code></pre>
 </div>
 <div id="coercion" class="section level3">
 <h3>Coercion</h3>
-<ol start="6" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>As you have heard in the lecture, vectors (or objects in general) can easily be coerced into different data types. Try to coerce each of the vectors into every other format using <code>as.numeric()</code>, <code>as.character()</code>, <code>as.logical()</code>. Can every type be coerced into every other? Which coercion does always work?</li>
 </ol>
 <pre class="r"><code>as.numeric(chr_vec)</code></pre>
@@ -326,24 +326,24 @@ Levels: a b c d e f g h i j</code></pre>
 </div>
 <div id="logical-comparisons" class="section level3">
 <h3>Logical comparisons</h3>
-<ol start="7" style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li>An important tool of working with data are logical comparisons. Logical comparisons can be used to conveniently select parts of the data. They can also be used to conduct checks throughout script. For instance, we could use logical comparisons to compare whether the names of, e.g., <code>my_df</code> are equal to are now equal <code>c(&quot;dbl_vec&quot;, &quot;chr_vec&quot;, &quot;log_vec&quot;)</code>. This can be done using the is-equal-to operator <code>==</code>, e.g., <code>vec_1 == vec_2</code>. In the case of vectors, logical comparisons iterate through the vectors one by one and compare whether the elements at the present location are equal. The result is a logical vector of the same length as the two objects involved in the logical comparison. To evaluate whether all elements are equal one can conveniently use the <code>all()</code> function. Try compare the names of <code>my_df</code> to <code>c(dbl_vec&quot;, &quot;chr_vec&quot;, &quot;log_vec&quot;)</code> and test whether all comparisons resulted in <code>TRUE</code>.</li>
 </ol>
 <pre class="r"><code>all(names(my_df) == c(&quot;dbl_vec&quot;, &quot;chr_vec&quot;, &quot;log_vec&quot;))</code></pre>
 <pre><code>[1] TRUE</code></pre>
-<ol start="8" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li>A second important use for logicals is accessing objects All object accessing using brackets, e.g., <code>[]</code> or <code>[[]]</code>, can take logical vectors as an argument (provided that the dimensions match). E.g., <code>c(1, 2, 3)[c(TRUE, FALSE, TRUE)]</code> returns the first and the third element of the vector. The program thus iterates through every index and returns those elements for which the logical vector is <code>TRUE</code>. Try to use this now on the three vectors. Use <code>log_vec</code> to subset the elements in <code>dbl_vec</code> and <code>chr_vec</code>.</li>
 </ol>
 <pre class="r"><code>dbl_vec[log_vec]</code></pre>
 <pre><code> [1]  1  2  4  7  8  9 10  1  2  4  7  8  9 10</code></pre>
 <pre class="r"><code>chr_vec[log_vec]</code></pre>
 <pre><code> [1] &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
-<ol start="9" style="list-style-type: decimal">
+<ol start="10" style="list-style-type: decimal">
 <li>Logical vectors become especially useful, when they are used to subset based on specific conditions. For instance, we may be interested in retrieving all values in <code>chr_vec</code> for which <code>dbl_vec</code> is larger than some value. This can be easily accomplished by coercing <code>dbl_vec</code> to a logical vector using <code>&gt;</code>. Consider <code>c(1, 4, 7, 2) &gt; 3</code>. Try this for <code>chr_vec</code> and <code>dbl_vec</code> with an appropriate cut-off value.</li>
 </ol>
 <pre class="r"><code>chr_vec[dbl_vec &gt; 2]</code></pre>
 <pre><code> [1] &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
-<ol start="10" style="list-style-type: decimal">
+<ol start="11" style="list-style-type: decimal">
 <li>Another convenient aspect of working with logical vectors is that they can be conveniently combined using the logical AND operator <code>&amp;</code> and the logical <code>OR</code> operator <code>|</code>. Run out <code>c(1, 4, 7, 2) &gt; 3 &amp; c(1, 4, 7, 2) &lt; 6</code> and <code>c(1, 4, 7, 2) &gt; 3 | c(1, 4, 7, 2) &lt; 6</code> and study the result. Try now combining the logical vector coerced from <code>dbl_vec</code> with <code>log_vec</code> to subset <code>chr_vec</code>.</li>
 </ol>
 <pre class="r"><code>chr_vec[dbl_vec &gt; 2 &amp; log_vec]</code></pre>
@@ -351,7 +351,7 @@ Levels: a b c d e f g h i j</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
-<ol start="11" style="list-style-type: decimal">
+<ol start="12" style="list-style-type: decimal">
 <li>Use your three vectors to create a list of length using <code>list()</code>. <code>list()</code> works exactly as <code>c()</code> or <code>data.frame</code>. Call the object <code>my_list</code> and inspect it using <code>str()</code>. Compare the output of <code>str()</code> to the output for <code>str(my_df)</code>. What is different, and why?</li>
 </ol>
 <pre class="r"><code>my_list &lt;- list(dbl_vec,chr_vec,log_vec)
@@ -365,7 +365,7 @@ str(my_list)</code></pre>
  $ dbl_vec: num  1 2 3 4 5 6 7 8 9 10 ...
  $ chr_vec: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
  $ log_vec: logi  TRUE TRUE FALSE TRUE FALSE FALSE ...</code></pre>
-<ol start="12" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li>Coerce <code>my_list</code> into a data frame using <code>as.data.frame()</code> and assign it to <code>my_df_from_list</code>. Inspect again using <code>str()</code>. Rename the columns to the original names of the vectors. To do this assign <code>names(my_df)</code> to <code>names(my_df_from_list)</code>. Confirm that it worked using either <code>names()</code> or <code>str()</code>.</li>
 </ol>
 <pre class="r"><code>my_df_from_list &lt;- as.data.frame(my_list)
@@ -385,14 +385,14 @@ names(my_df_from_list)</code></pre>
 </div>
 <div id="functions-1" class="section level3">
 <h3>Functions</h3>
-<ol start="13" style="list-style-type: decimal">
+<ol start="14" style="list-style-type: decimal">
 <li>So far you have used several functions like <code>c()</code>, <code>typeof()</code>, etc. Now, we are going to practice writing simple functions. Let’s start with programming a function that calculates the arithmetic mean using the functions <code>sum()</code>, which calculates the sum of all values in a (numeric) vector and <code>length()</code>, which determines the length of vectors (and other objects). The basic form of a function is: <code>my_fun &lt;- function(argument) {expression}</code>. The challenge in writing a function is now to determine the argument(s) (aka the function’s input) and the expression (aka the function’s job). In this case both are relatively straightforward to determine. The functions argument is any numeric <code>vector</code> and the functions expression is to be <code>sum(vector)/length(vector)</code>, i.e., <code>my_mean &lt;- function(vector) {sum(vector) / length(vector)}</code>. You may ask now how does R know that <code>vector</code> is supposed to be of type <code>numeric</code>? It doesn’t! R will attempt to execute the function with anything you through at it. Try it out! Define your <code>my_mean</code> function and try it out for your <code>double</code> and <code>character</code> vectors from above.</li>
 </ol>
 <pre class="r"><code>my_mean &lt;- function(vector) {sum(vector) / length(vector)}
 my_mean(dbl_vec)</code></pre>
 <pre><code>[1] 5.5</code></pre>
 <pre class="r"><code>#my_mean(chr_vec)</code></pre>
-<ol start="14" style="list-style-type: decimal">
+<ol start="15" style="list-style-type: decimal">
 <li>The <code>character</code> vector produced an error, right? The reason is that R does not interpret the names you use for the arguments. That is, R does not understand that an argument named <em>vector</em> is supposed to be a vector. For R these names are merely placeholders. In the background, are will use these names to pass on the object provided at the respective location. I.e., in the above case, R will take your vector, may it be <code>dbl_vec</code> or <code>chr_vec</code>, name it <code>vector</code> and pass this new object on to the expression. This means that you can choose anything as the argument names. The only thing you need to ensure is that you use the argument names in the expression. Try redefining the your <code>my_mean</code> function using a different argument name, e.g., <code>x</code>.</li>
 </ol>
 <pre class="r"><code>my_mean &lt;- function(x) {sum(x) / length(x)}
@@ -404,7 +404,7 @@ my_mean(dbl_vec)</code></pre>
 <div id="non-flat-objects" class="section level3">
 <h3>Non-flat objects</h3>
 <p>In working with R, we often encounter objects that have a non-flat, nested structure. This means that there is more than one level of elements. Such objects are almost always <code>list</code>s. Lists are the only object type that can store any other object, even themselves. That is we can have a list of lists or a list of data.frames. Working with non-flat, nested objects is easier than it may seem. To access elements from such an object simply combine several double bracket <code>[[]]</code> and/or dollar <code>$</code> operators to descend into the objects structure. Let’s take a look.</p>
-<ol start="15" style="list-style-type: decimal">
+<ol start="16" style="list-style-type: decimal">
 <li>Create a list containing <code>my_df</code> and your three vectors (for a total of four elements). Try to verify (using the list structure) that each of the columns of <code>my_df</code> is equal the respective vector. To access the columns in <code>my_df</code> you have to combine selectors e.g., <code>my_list[[index/name]][[index/name]]</code>, <code>my_list[[index]]$name</code>, or <code>my_list$name$name</code> (the preferred way).</li>
 </ol>
 <pre class="r"><code>my_list_2 &lt;- list(my_df, dbl_vec, chr_vec, log_vec)
