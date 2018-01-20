@@ -80,8 +80,8 @@ aggregate(formula = age ~ sex,
           FUN = mean)
 
 
-# What is the median age of pirates for each combination of sex and headband?
-aggregate(formula = age ~ sex + headband, 
+# What is the median number of tattoos of pirates for each combination of sex and headband?
+aggregate(formula = tattoos ~ sex + headband, 
           data = pirates,
           FUN = median)
 ```
