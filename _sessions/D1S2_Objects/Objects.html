@@ -688,15 +688,15 @@ Any operation of your data is done by functions. Functions have 3 elements:
 + **Argument(s)**: Objects that the function needs to do its job.
 + **Expression**: R code that is the options job.
     
-.pull-left5[
+.pull-left55[
 
 ```r
 # Defining a function that computes the mean
-my_mean = function(x) return(sum(x) / length(x))
+my_mean &lt;- function(x) return(sum(x) / length(x))
 
 # Defining a function that computes 
 # the mean or median
-my_stat = function(x, method = 'mean'){
+my_stat &lt;- function(x, method = 'mean'){
   
   # detect and run method
   if(method == "mean") return(my_mean(x))
@@ -712,7 +712,7 @@ my_stat = function(x, method = 'mean'){
 
 ```r
 # Runnning our functions
-my_vec = c(1, 4, 6, 3, 7, 5, 12, 9)
+my_vec &lt;- c(1, 4, 6, 3, 7, 5, 12, 9)
 my_mean(x = my_vec)
 ```
 
@@ -756,8 +756,8 @@ help("name_of_function")
 ??name_of_function
 
 # To list and access vignettes
-vignette(package="name_of_package")
-vignette(package="name_of_vignette")
+vignette(package = "name_of_package")
+vignette(package = "name_of_vignette")
 ```
 
 ]
