@@ -4,7 +4,7 @@ author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
-  ```{r, echo = FALSE}
+```{r, echo = FALSE}
 knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE)
 ```
 
@@ -60,7 +60,7 @@ Please download the following data files and save them to an appropriate locatio
 
 If you can, please verify whether the `.sav` and `sas7bdat` are appropriate SPSS and SAS files, respectively.
 
-```{r, eval = T, echo = F}
+```{r, eval = T, echo = F, include = FALSE}
 # load a package
 library(tidyverse)
 library(haven)
