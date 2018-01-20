@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Data I/O?</title>
+    <title>Data I/O</title>
     <meta charset="utf-8">
     <meta name="author" content="The R Bootcamp Twitter: @therbootcamp" />
     <link href="libs/remark-css/example.css" rel="stylesheet" />
@@ -11,9 +11,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Data I/O?
+# Data I/O
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
-### September 2017
+### January 2018
 
 ---
 
@@ -124,7 +124,7 @@ read_csv(data)
 
 # Data source
 
-Most of R's read functions allow to load data from a **variety of sources**, including most importantly the computer's hard drive and the internet. When loading from the hard drive, use auto-complete (using *tab*) to find the right **filepath**.
+Most of R's read functions allow to load data from a **variety of sources**, including most importantly the computer's hard drive and the internet. When loading from the hard drive, use auto-complete (using *tab*) to find the right **file path**.
  
 .pull-left45[
 
@@ -185,7 +185,7 @@ read_csv("https://tinyurl.com/ydgrcyt5")
 
 # Parsing 
 
-Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **transform** the input into the **apprpriate format and type**. 
+Behind the magic of `readr` functions such as `read_csv` are a set of really flexible parsing functions `parse_*()` that **coerce** the input into the **appropriate format and type**. 
 
 ###Examples
 
@@ -241,7 +241,7 @@ parse_number(c("1.23","$123.209"))
 
 # Locale
 
-How the text input is parsed can largely be controlled using  **arguments** of the respective functions. Otherwise the parsing behavior will be **controlled by settings `locale()`**. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
+If parsing is not controlled using  **arguments**, it's parsing behavior will be controlled by **settings** in `locale()`. To change, e.g., the `decimal_mark` use `locale("en", decimal_mark = ",")`.
 
 .pull-left45[
 
@@ -272,7 +272,7 @@ str(locale())
 
 # Error handling
 
-When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` **infers the type of each column** using a heuristic process base on the **first 1,000 rows** (see `guess_parser`). However, that may not always work. In that case consider ...  
+When reading a file using, e.g., `read_csv`, with no specific arguments provided, `readr` **infers the type** of each column using a heuristic process based on the **first 1,000 rows** (see `guess_parser`). However, that may not always work. In that case consider...  
 
 
 
@@ -280,7 +280,7 @@ When reading a file using, e.g., `read_csv`, with no specific arguments provided
 # to inspect the problems
 problems()
 
-# to set the types
+# to set types explicitly
 read_csv(..., col_types = cols(...))
 
 # read in as character and convert later
@@ -346,24 +346,24 @@ read_json()
 
 # Writing data
 
-Most read-in functions have **complementary write** functions to save the specific data format to disk. They usually require as **arguments** the **data frame** and a **file path** on the disk.
+Most read-in functions have **matching write**-functions to save the data to disk. As **arguments** these functions usually expect a **data frame** and a **file path** on the disk.
 
 .pull-left45[
 ### `readr` &lt;img src="http://d33wubrfki0l68.cloudfront.net/66d3133b4a19949d0b9ddb95fc48da074b69fb07/7dfb6/images/hex-readr.png" width="50", align="right"&gt; 
 
 ```r
 # read fixed width files (can be fast)
-write_csv(my_data_frame,"my_data.csv")
+write_csv(my_data_frame, "my_data.csv")
 write_delim(...)
 ```
 ### `haven` &lt;img src="http://haven.tidyverse.org/logo.png" width="50" align="right"&gt;
 
 ```r
 # read SAS's .sas7bat and sas7bcat files
-write_sas()
+write_sas(...)
 
 # read SPSS's .sav files
-write_sav()
+write_sav(...)
 
 # etc
 ```
@@ -388,13 +388,13 @@ write_json()
 
 # R's data formats
 
-R also has a couple of own data files that can be used to store and retrieve data. The benefits of these data files are that you can store **data as R objects**, as well as substantial **compression** (depending on repetitions/patterns in the data up to about 1% of the original size). 
+R also has data formats of its own to store and retrieve data. They provide the possibility to store **data as R objects**, as well as substantial **compression** (depending on data regularity up to about 1% of the original size). 
 
 .pull-left45[
 ### `.RData`  
 + Bundles several R objects.
 + Loads objects directly to workspace.
-+ Relatively slow.
++ Slow.
 
 ```r
 # save data as .RData
@@ -408,8 +408,8 @@ load("my_data.RData")
 .pull-right45[
 ### `.RDS`  
 + Stores individual R objects.
-+ Import can is newly assigned.
-+ Relatively fast.
++ Import is newly assigned.
++ Fast.
 
 ```r
 # save data as .RDS
@@ -423,20 +423,19 @@ my_data &lt;- readRDS("my_data.RData")
 
 # File connections
 
-Under the hood, practically all reading and writing functions rely on R's **file connection** architecture, which is very similar to most other programming languages. To the experienced programmer file connections represent a flexible option to access and manipulate files on **any accessible location** (harddrive, server, www). 
-
+Under the hood, practically all of R's reading and writing functions relies on a **file connection** architecture, just as most other programming languages do. To the experienced programmer file connections represent a flexible option to access and manipulate files on **any accessible location** (harddrive, server, www). 
 
 .pull-left45[
 ### Benefits of file connections
-+ Define access mode (read, write, append)
++ Define access mode (read, write, append).
 &lt;br2&gt;
-+ Read/write as binary or raw
++ Read/write as binary or raw.
 &lt;br2&gt;
-+ Handle encodings directly
++ Handle encodings directly.
 &lt;br2&gt;
-+ Read and write compressed files
++ Read and write compressed files.
 &lt;br2&gt;
-+ Access to www and servers  
++ Access to www and servers.  
 ]
 
 .pull-right45[
@@ -466,15 +465,15 @@ The **output** from most `tidyverse` read functions such as `read_csv` and the p
 
 .pull-left45[
 ### tibbles ...
-+ never change the input's type
++ never change the input's type.
 &lt;br2&gt;
-+ never add row names
++ never add row names.
 &lt;br2&gt;
-+ never change column names
++ never change column names.
 &lt;br2&gt;
-+ look better in `print` 
++ look better in `print`. 
 &lt;br2&gt;
-+ are accessed more consistently
++ are accessed more consistently.
 ]
 
 .pull-right45[
