@@ -412,7 +412,7 @@ trial_act &lt;- trial_act %&gt;%
 <li><p>What was the mean age (<code>age</code>) of all patients?</p></li>
 <li><p>What was the median weight (<code>wtkg</code>) of all patients?</p></li>
 <li><p>What was the mean CD4 T cell count at baseline (<code>cd40</code>) ? What was it at 20 weeks (<code>cd420</code>)?</p></li>
-<li><p>How many patients have a history of intraveneous drug use (<code>drug</code>) and how many do not? (Hint: use <code>table()</code>)</p></li>
+<li><p>How many patients have a history of intravenous drug use (<code>drug</code>) and how many do not? (Hint: use <code>table()</code>)</p></li>
 </ol>
 </div>
 <div id="t-tests-with-t.test" class="section level3">
@@ -427,7 +427,7 @@ trial_act &lt;- trial_act %&gt;%
 <li>Be sure to use the formula notation <code>formula = age ~ gender</code></li>
 </ul>
 <ol start="8" style="list-style-type: decimal">
-<li>Do people with a history of intraveneous drug use have different numbers of <code>days</code> than those who do not have a history of intraveneous drug use? Answer this with a two-sample t-test.</li>
+<li>Do people with a history of intravenous drug use have different numbers of <code>days</code> than those who do not have a history of intravenous drug use? Answer this with a two-sample t-test.</li>
 </ol>
 </div>
 <div id="correlation-test-with-cor.test" class="section level3">
@@ -454,7 +454,7 @@ trial_act &lt;- trial_act %&gt;%
 <div id="linear-regression-with-glm" class="section level3">
 <h3>Linear Regression with glm()</h3>
 <ol start="15" style="list-style-type: decimal">
-<li><p>Which demographic variables predict days until the first occurence of a major negative event (<code>days</code>)? To answer this, conduct a linear regression analysis predicting <code>days</code> as a function of age (<code>age</code>), weight (<code>wtkg</code>), race (<code>race</code>) and gender (<code>gender</code>). Call the object <code>days_A_glm</code>.</p></li>
+<li><p>Which demographic variables predict days until the first occurrence of a major negative event (<code>days</code>)? To answer this, conduct a linear regression analysis predicting <code>days</code> as a function of age (<code>age</code>), weight (<code>wtkg</code>), race (<code>race</code>) and gender (<code>gender</code>). Call the object <code>days_A_glm</code>.</p></li>
 <li><p>Print the <code>days_A_glm</code> object to see the coefficients.</p></li>
 <li><p>Using the <code>summary()</code> function, explore the <code>days_A_glm</code> object to see which coefficients are significant.</p></li>
 <li><p>Using the <code>names()</code> function, look at what the named elements in the <code>days_A_glm</code> object are.</p></li>
@@ -479,13 +479,10 @@ trial_new &lt;- trial_act %&gt;%
 predict(object = ___, 
         newdata = ___)</code></pre>
 </div>
-</div>
-<div id="checkpoint" class="section level1">
-<h1>Checkpoint!</h1>
 <div id="logistic-regression" class="section level3">
 <h3>Logistic regression</h3>
 <ol start="26" style="list-style-type: decimal">
-<li>You can calculate a logistic regression, where the dependent variable is binary (0 or 1) by including the <code>family = 'binomial'</code> argument to <code>glm()</code>. Using the template below, calculate a logistic regression predicting whether or not someone has taken intraveneous drugs based on their age (<code>age</code>), gender (<code>gender</code>) and (<code>race</code>). Then, explore the object to see if any variables reliably predict drug use.</li>
+<li>You can calculate a logistic regression, where the dependent variable is binary (0 or 1) by including the <code>family = 'binomial'</code> argument to <code>glm()</code>. Using the template below, calculate a logistic regression predicting whether or not someone has taken intravenous drugs based on their age (<code>age</code>), gender (<code>gender</code>) and (<code>race</code>). Then, explore the object to see if any variables reliably predict drug use.</li>
 </ol>
 <pre class="r"><code># Logistic regression predicting intraveneous drug use
 #  based on age, gender, and race
@@ -494,7 +491,7 @@ drugs_glm &lt;- glm(formula = ___,
                  data = ___,
                  family = &quot;___&quot;)</code></pre>
 <ol start="27" style="list-style-type: decimal">
-<li>A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called <code>drugs_1000_bin</code> that is a binary variable indicating whether or not <code>days &gt; 1000</code>. You can do this using <code>mutate()</code>)</li>
+<li>A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurrence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called <code>drugs_1000_bin</code> that is a binary variable indicating whether or not <code>days &gt; 1000</code>. You can do this using <code>mutate()</code>)</li>
 </ol>
 </div>
 <div id="generating-random-samples-from-distributions" class="section level3">
@@ -528,7 +525,7 @@ my_glm &lt;- glm(formula = y ~.,
 <div id="you-choose-the-test" class="section level3">
 <h3>You choose the test!</h3>
 <ol start="32" style="list-style-type: decimal">
-<li>Only for patients older than 40, is there a relationship between antiretroviral history (<code>str2</code>) and race (<code>race</code>)?</li>
+<li>Only for patients older than 40, is there a relationship between antiviral history (<code>str2</code>) and race (<code>race</code>)?</li>
 </ol>
 <ul>
 <li>Create a new dataframe called <code>trial_act_o40 &lt;- trial_act %&gt;% filter(age &gt; 40)</code> and then do your analysis on this new dataframe.</li>

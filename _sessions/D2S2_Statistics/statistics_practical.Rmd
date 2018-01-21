@@ -236,7 +236,7 @@ E. (Optional): If you'd like to, try converting other columns such as `race` and
 
 3. What was the mean CD4 T cell count at baseline (`cd40`) ? What was it at 20 weeks (`cd420`)?
 
-4. How many patients have a history of intraveneous drug use (`drug`) and how many do not? (Hint: use `table()`)
+4. How many patients have a history of intravenous drug use (`drug`) and how many do not? (Hint: use `table()`)
 
 ### T tests with t.test()
 
@@ -263,7 +263,7 @@ age_gender_ht <- t.test(formula = age ~ gender,
 age_gender_ht
 ```
 
-8. Do people with a history of intraveneous drug use have different numbers of `days` than those who do not have a history of intraveneous drug use? Answer this with a two-sample t-test.
+8. Do people with a history of intravenous drug use have different numbers of `days` than those who do not have a history of intravenous drug use? Answer this with a two-sample t-test.
 
 ```{r}
 t.test(formula = days ~ drugs,
@@ -322,7 +322,7 @@ chisq.test(table(trial_act$hemo, trial_act$drugs))
 
 ### Linear Regression with glm()
 
-15. Which demographic variables predict days until the first occurence of a major negative event (`days`)? To answer this, conduct a linear regression analysis predicting `days` as a function of age (`age`), weight (`wtkg`), race (`race`) and gender (`gender`). Call the object `days_A_glm`.
+15. Which demographic variables predict days until the first occurrence of a major negative event (`days`)? To answer this, conduct a linear regression analysis predicting `days` as a function of age (`age`), weight (`wtkg`), race (`race`) and gender (`gender`). Call the object `days_A_glm`.
 
 ```{r}
 days_A_glm <- glm(formula = days ~ age + wtkg + race + gender,
@@ -384,11 +384,9 @@ predict(days_B_glm,
 ```
 
 
-# Checkpoint!
-
 ### Logistic regression
 
-26. You can calculate a logistic regression, where the dependent variable is binary (0 or 1) by including the `family = 'binomial'` argument to `glm()`. Using the template below, calculate a logistic regression predicting whether or not someone has taken intraveneous drugs based on their age (`age`), gender (`gender`) and (`race`). Then, explore the object to see if any variables reliably predict drug use.
+26. You can calculate a logistic regression, where the dependent variable is binary (0 or 1) by including the `family = 'binomial'` argument to `glm()`. Using the template below, calculate a logistic regression predicting whether or not someone has taken intravenous drugs based on their age (`age`), gender (`gender`) and (`race`). Then, explore the object to see if any variables reliably predict drug use.
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -400,7 +398,7 @@ drugs_glm <- glm(formula = ___,
                  family = "___")
 ```
 
-27. A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called `drugs_1000_bin` that is a binary variable indicating whether or not `days > 1000`. You can do this using `mutate()`)
+27. A scientist wants to know whether there was an effect of treatment arm on the probability that patients had more than 1000 days before the first occurrence of a major negative event. Answer this question using a logistic regression. (Hint: To do this, you should first create a new column called `drugs_1000_bin` that is a binary variable indicating whether or not `days > 1000`. You can do this using `mutate()`)
 
 
 ### Generating random samples from distributions
@@ -435,7 +433,7 @@ my_glm <- glm(formula = y ~.,
 
 ### You choose the test!
 
-32. Only for patients older than 40, is there a relationship between antiretroviral history (`str2`) and race (`race`)?
+32. Only for patients older than 40, is there a relationship between antiviral history (`str2`) and race (`race`)?
 
    - Create a new dataframe called `trial_act_o40 <- trial_act %>% filter(age > 40)` and then do your analysis on this new dataframe.
    
