@@ -20,7 +20,7 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 
 ### Overview
 
-In this practical you'll conduct hypothesis tests. By the end of this practical you will know how to:
+In this practical you'll do basic statistics in R. By the end of this practical you will know how to:
 
 1. Calculate basic descriptive statistics using `mean()`, `median()`, `table()`.
 2. Conduct 1 and 2 sample hypothesis tests with `t.test()`, `cor.test()` and `chisq.test()`

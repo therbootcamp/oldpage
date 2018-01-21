@@ -194,7 +194,7 @@ $(document).ready(function () {
 <tr class="even">
 <td align="left"><code>case_when()</code></td>
 <td align="left">Recode values of a column</td>
-<td align="left">data %&gt;% sex.n = case_when(sex == 0 ~ “m”, sex == 1 ~ “f”)</td>
+<td align="left">data %&gt;% mutate(sex_n = case_when(sex == 0 ~ “m”, sex == 1 ~ “f”))</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>group_by(), summarise()</code></td>
