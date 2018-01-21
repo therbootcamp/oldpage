@@ -14,7 +14,7 @@ output: html_document
 
 |  | Day 1<br>Essentials | Day 2<br>Statistics | Day 3<br>Plotting | Day 4<br> Productivity |
 |:--|:-------------|:-------------|:-------------|:--------------|
-|0| Welcome!<br>[slides](_sessions/D1S0_Intro/Intro.html) | Recap I<br>[slides](_sessions/D3S0_Recap/Recap_I.html) | Recap II<br>slides| Recap III<br>slides|
+|0| Welcome!<br>[slides](_sessions/D1S0_Intro/Intro.html) | Recap I<br>[slides](_sessions/D2S0_Recap/Recap_I.html) | Recap II<br>slides| Recap III<br>slides|
 |1| What is R?<br>[slides](_sessions/D1S1_WhatIsR/What_is_R.html), [practical](_sessions/D1S1_WhatIsR/What_is_R_practical.html), solutions | Data Wrangling<br> [slides](_sessions/D2S1_Wrangling/Wrangling.html), [practical](_sessions/D2S1_Wrangling/Wrangling_practical.html), solutions |Tidying Projects<br>slides, practical, solutions | Efficient Programming<br>slides, practical, solutions |
 |2|  Objects & Functions<br>[slides](_sessions/D1S2_Objects/Objects.html), [practical](_sessions/D1S2_Objects/Objects_practical.html), [solutions](_sessions/D1S2_Objects/Objects_practical_answers.html) | Statistics<br> [slides](_sessions/D2S2_Statistics/Statistics.html), [practical](_sessions/D2S2_Statistics/Statistics_practical.html), solutions| Plotting 1.0<br> slides, practical, solutions  |  Dynamic Reports<br>slides, practical, .Rmd, .html|
 |3|   Data I/O<br>[slides](_sessions/D1S3_DataIO/Data_IO.html), [practical](_sessions/D1S3_DataIO/Data_IO_practical.html), solutions |Machine Learning<br> [slides](_sessions/D2S3_MachineLearning/MachineLearning.html), [practical](_sessions/D2S3_MachineLearning/MachineLearning_practical.html), solutions | Plotting 2.0<br> slides, practical, solutions | Next Steps<br>slides, survey|
