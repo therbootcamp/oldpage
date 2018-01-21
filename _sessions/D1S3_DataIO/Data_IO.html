@@ -27,7 +27,7 @@ class: center, middle, inverse, title-slide
 In this session you will learn...
 
 .pull-left45[
-1. How to import data data from **delimeter separated files** (e.g., .csv)?
+1. How to import data data from **delimeted separated files** (e.g., .csv)?
 &lt;br2&gt;
 2. How to import data data from **proprietory file formats** (e.g., .sav)?
 &lt;br2&gt;
@@ -60,7 +60,7 @@ In this session you will learn...
 # Functions for import
 read_csv()  # for comma-delimited files
 read_csv2() # for semicolon-delimeted file
-read_delim  # for any delimited files
+read_delim()  # for any delimited files
 
 # Functions for parsing
 parse_logical() # parse logical vectors
@@ -413,10 +413,10 @@ load("my_data.RData")
 
 ```r
 # save data as .RDS
-saveRDS(my_data, file = "my_data.RData")
+saveRDS(my_data, file = "my_data.rds")
 
 # load data from .RDS
-my_data &lt;- readRDS("my_data.RData")
+my_data &lt;- readRDS("my_data.rds")
 ```
 ]
 ---
