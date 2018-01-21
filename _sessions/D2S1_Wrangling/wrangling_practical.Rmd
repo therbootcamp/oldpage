@@ -492,8 +492,14 @@ trial_act %>%
     - Filter the grouped data to only include cases where mean age is greater than 30.
 
 
-26. This is the `diamonds` dataframe, which is included in the `dplyr` package. Print the `diamonds` data to see how it looks. Then, using the `diamonds` data, for each value of `cut` and `color` (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called `diamonds_cut_agg`. What combination of cut and color is at the top of the data as having the highest mean price?
+26. The `diamonds` dataframe is contained in the `dplyr` package (so you should already have it available). Print the `diamonds` data to see how it looks. Then, using the `diamonds` data, for each value of `cut` and `color` (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called `diamonds_cut_agg`. What combination of cut and color is at the top of the data as having the highest mean price?
 
+27. Using the `diamonds` dataframe, do the following in one block of code. And store
+
+    - Recode the values of the `cut` column so there are no spaces.
+    - Remove the columns x, y, z
+    - Remove all rows where diamonds have a price less than 300.
+    - Group the data by clarity, then calculate the mean price, mean depth, and mean carat.
 
 # Additional reading
 
