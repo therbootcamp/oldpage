@@ -456,7 +456,6 @@ If you're really into machine learning, packages such as `mlr` and `caret` can a
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png")
 ```
 
-
 ]
 
 ---
