@@ -438,7 +438,14 @@ trial_act &lt;- trial_act %&gt;%
 <li>For each group calculate the mean age, percentage of patients that are male, and mean number of days until a major negative event.</li>
 <li>Filter the grouped data to only include cases where mean age is greater than 30.</li>
 </ul></li>
-<li><p>This is the <code>diamonds</code> dataframe, which is included in the <code>dplyr</code> package. Print the <code>diamonds</code> data to see how it looks. Then, using the <code>diamonds</code> data, for each value of <code>cut</code> and <code>color</code> (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called <code>diamonds_cut_agg</code>. What combination of cut and color is at the top of the data as having the highest mean price?</p></li>
+<li><p>The <code>diamonds</code> dataframe is contained in the <code>dplyr</code> package (so you should already have it available). Print the <code>diamonds</code> data to see how it looks. Then, using the <code>diamonds</code> data, for each value of <code>cut</code> and <code>color</code> (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called <code>diamonds_cut_agg</code>. What combination of cut and color is at the top of the data as having the highest mean price?</p></li>
+<li><p>Using the <code>diamonds</code> dataframe, do the following in one block of code. And store</p>
+<ul>
+<li>Recode the values of the <code>cut</code> column so there are no spaces.</li>
+<li>Remove the columns x, y, z</li>
+<li>Remove all rows where diamonds have a price less than 300.</li>
+<li>Group the data by clarity, then calculate the mean price, mean depth, and mean carat.</li>
+</ul></li>
 </ol>
 </div>
 </div>
