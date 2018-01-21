@@ -152,6 +152,36 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 ---
+## What machine learning algorithms are there?
+
+.pull-left6[
+
+- There are hundreds if not thousands of machine learning algorithms from many different fields.
+    - Computer vision, Natural language processing, reinforcement learning...
+
+Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
+
+```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
+```
+
+]
+
+.pull-right4[
+<br><br>
+We will focus on 3 that apply to both classification and regression
+
+| Algorithm|Complexity|
+|:------|:----|
+|     Regression| Low / Medium | 
+|     Decision Trees| Low |
+|     Random Forests| High |
+
+]
+
+
+
+---
 ## Two types of prediction tasks
 
 .pull-left45[
@@ -253,34 +283,6 @@ plot(A_model)     # Visualize the model
 ]
 
 
-
----
-## What machine learning algorithms are there?
-
-.pull-left6[
-
-- There are hundreds if not thousands of machine learning algorithms from many different fields.
-    - Computer vision, Natural language processing, reinforcement learning...
-
-Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples
-
-```{r, echo = FALSE, eval = TRUE, out.width = "80%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
-```
-
-]
-
-.pull-right4[
-<br><br>
-We will focus on 3 that apply to both classification and regression
-
-| Algorithm|Complexity|
-|:------|:----|
-|     Regression| Low / Medium | 
-|     Decision Trees| Low |
-|     Random Forests| High |
-
-]
 
 
 
@@ -457,17 +459,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
-
-
-
----
-# Questions?
-
-
-
 ---
 
-## Machine Learning Pratical
+## Machine Learning Live Demo & Pratical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S3_MachineLearning/MachineLearning_practical.html">Link to Machine Learning practical</a>
 

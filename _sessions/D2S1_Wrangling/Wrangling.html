@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Data Wranging</title>
+    <title>Data Wrangling</title>
     <meta charset="utf-8">
     <meta name="author" content="The R Bootcamp Twitter: @therbootcamp" />
     <link href="libs/remark-css/example.css" rel="stylesheet" />
@@ -11,7 +11,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Data Wranging
+# Data Wrangling
 ### The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'><span class="citation">@therbootcamp</span></a>
 ### January 2018
 
@@ -65,7 +65,7 @@ Anytime you want to transform, organize, or aggregate data, use `dplyr`
 
 ---
 
-.pull-left4[
+.pull-left35[
 # dplyr
 
 dplyr is a combination of 3 things:
@@ -80,19 +80,230 @@ dplyr is a combination of 3 things:
 
 ]
 
-.pull-right5[
+.pull-right6[
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+## The pipe %&gt;%
 
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/sequential.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;font size = 5&gt; dplyr makes extensive use of the 'pipe' %&gt;%
 
-dplyr is meant to be sequential and work like language
 
+
+```r
+# Applying function without pipe
+FUN(OBJECT)
+
+# Applying function with pipe
+OBJECT %&gt;% FUN
+```
+
+&lt;font size = 5&gt; Example
+
+
+```r
+# Calculate mean of a vector without pipe
+mean(ToothGrowth$len)
+```
+
+```
+## [1] 18.81
+```
+
+```r
+# Same thing with pipe
+ToothGrowth$len %&gt;% mean()
+```
+
+```
+## [1] 18.81
+```
 
 ]
 
+
+---
+## The pipe
+
+
+
+.pull-left3[
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt; Here is some trial data called X&lt;/font&gt;
+
+
+```r
+# Clinical trial data
+X
+```
+
+```
+##   id sex arm age outcome
+## 1  1   m   1  54       3
+## 2  2   m   1  37       6
+## 3  3   f   2  65       8
+## 4  4   f   2  48       4
+## 5  5   m   1  64       9
+## 6  6   f   2  57       6
+## 7  7   f   1  36       8
+## 8  8   m   2  56      10
+```
+
+&lt;br&gt;
+
+]
+
+
+.pull-right65[
+
+&lt;font size = 5&gt;&lt;i&gt;Task 1: Give me the ids of women above the age of 50 with an outcome greater than 5&lt;/i&gt;&lt;/font&gt;
+
+
+
+```r
+# Base R Method without pipe (%&gt;%)
+
+X$id[X$sex == "f" &amp; X$age &gt; 50 &amp; X$outcome &gt; 5]
+```
+
+```
+## [1] 3 6
+```
+
+
+
+```r
+# dplyr method with pipe (%&gt;%)
+
+X %&gt;%
+  filter(sex == "f" &amp; age &gt; 50 &amp; outcome &gt; 5) %&gt;%
+  select(id)
+```
+
+```
+##   id
+## 1  3
+## 2  6
+```
+
+]
+
+
+---
+## The pipe
+
+
+
+.pull-left3[
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt; Here is some trial data called X&lt;/font&gt;
+
+
+```r
+# Clinical trial data
+X
+```
+
+```
+##   id sex arm age outcome
+## 1  1   m   1  54       3
+## 2  2   m   1  37       6
+## 3  3   f   2  65       8
+## 4  4   f   2  48       4
+## 5  5   m   1  64       9
+## 6  6   f   2  57       6
+## 7  7   f   1  36       8
+## 8  8   m   2  56      10
+```
+
+&lt;br&gt;
+
+]
+
+
+.pull-right65[
+
+&lt;font size = 5&gt;&lt;i&gt;Task 2: Separately for the two arms, calculate mean age and outcome&lt;/i&gt;&lt;/font&gt;
+
+
+
+```r
+# Base R Method without pipe (%&gt;%)
+
+# Get aggregate statistics
+age_agg &lt;- aggregate(age ~ arm, data = X, FUN = mean)
+out_agg &lt;- aggregate(outcome ~ arm, data = X, FUN = mean)
+
+# Combine results
+data.frame(arm = age_agg$arm,
+           age_mean = age_agg$age,
+           outcome_mean = out_agg$outcome)
+```
+
+```
+##   arm age_mean outcome_mean
+## 1   1    47.75          6.5
+## 2   2    56.50          7.0
+```
+]
+
+
+
+---
+## The pipe
+
+
+
+.pull-left3[
+&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt; Here is some trial data called X&lt;/font&gt;
+
+
+```r
+# Clinical trial data
+X
+```
+
+```
+##   id sex arm age outcome
+## 1  1   m   1  54       3
+## 2  2   m   1  37       6
+## 3  3   f   2  65       8
+## 4  4   f   2  48       4
+## 5  5   m   1  64       9
+## 6  6   f   2  57       6
+## 7  7   f   1  36       8
+## 8  8   m   2  56      10
+```
+
+&lt;br&gt;
+
+]
+
+
+.pull-right65[
+
+&lt;font size = 5&gt;&lt;i&gt;Task 2: Separately for the two arms, calculate mean age and outcome&lt;/i&gt;&lt;/font&gt;
+
+
+
+```r
+# dplyr method with pipe (%&gt;%)
+
+X %&gt;%                             # Start with data X
+  group_by(arm) %&gt;%               # Group data by arm
+  summarise(                      # Calculate summary statistics
+    age_mean = mean(age),         # age_mean is...
+    outcome_mean = mean(outcome)  # outcome_mean is...
+  )
+```
+
+```
+## # A tibble: 2 x 3
+##     arm age_mean outcome_mean
+##   &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+## 1     1    47.75          6.5
+## 2     2    56.50          7.0
+```
+]
 
 
 ---
@@ -160,13 +371,16 @@ trial_X %&gt;%   # AND THEN
 ---
 
 .pull-left4[
-## Functions in dplyr
+&lt;br&gt;&lt;br&gt;
+## Wrangling Functions in dplyr
 
-- There are dozens functions in dplyr that allow you to wrangle data.
+- &lt;font size = 5&gt;There are dozens functions in dplyr that allow you to wrangle data.&lt;/font&gt;&lt;br&gt;
 
-- For an overview, look at the cheatsheet.
+- &lt;font size = 5&gt;For an overview, look at the cheatsheet..&lt;/font&gt;&lt;br&gt;
 
-- We will now show you how to use ~10 of the most common ones
+
+- &lt;font size = 5&gt;We will now show you how to use ~10 of the most common ones&lt;/font&gt;&lt;br&gt;
+
 
 ]
 
@@ -174,7 +388,7 @@ trial_X %&gt;%   # AND THEN
 .pull-right55[
 
 &lt;br&gt;
-### dplyr cheatsheet
+### Wrangling / dplyr cheatsheet
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data_wrangling_ss.png" width="600" style="display: block; margin: auto;" /&gt;
 
@@ -262,8 +476,8 @@ patients_df  # Original
 patients_df %&gt;%
   
 # 1) Change column names with rename()
-  rename(age = b,  
-         arm = c)
+  rename(age = b,  # New = Old
+         arm = c)  # New = Old
 ```
 
 ```
@@ -582,7 +796,7 @@ patients_df
 ### Goal:
 
 - Sort rows by `id` then by `age`
-- Select drugX over the age of 30
+- Only use drugX over the age of 30
 - Get rid of the columns `age_months` and `age_decades`
 
 ]
@@ -661,7 +875,7 @@ patients_df %&gt;%
 # 1) Sort by id then age (descending)
   arrange(id, desc(age)) %&gt;%
   
-# 2) Select drugX over 30
+# 2) Only drugX over 30
   filter(arm_char == "drugX" &amp; age &gt; 30)
 ```
 
@@ -706,7 +920,7 @@ patients_df %&gt;%
 # 1) Sort by id then age (descending)
   arrange(id, desc(age)) %&gt;%
   
-# 2) Select drugX over 30
+# 2) Only drugX over 30
   filter(arm_char == "drugX" &amp; age &gt; 30) %&gt;%
   
 # 3) Remove age_months and age_decades
@@ -963,7 +1177,7 @@ data &lt;- data %&gt;%
 
 ---
 
-# Questions?
+# Live Demo &amp; Practical
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S1_Wrangling/Wrangling_practical.html"&gt;Link to Wrangling practical&lt;/a&gt;
@@ -1451,16 +1665,16 @@ ChickWeight %&gt;%
 
 ```
 ##     Chick weight
-## 319    29     59
-## 157    14     49
-## 328    29    309
-## 7       1    106
-## 418    37     83
-## 424    37    178
-## 76      7     71
-## 493    43    197
-## 315    28    212
-## 52      5     60
+## 420    37    112
+## 447    39    250
+## 553    48    303
+## 273    25    102
+## 448    39    272
+## 369    33     96
+## 542    47    205
+## 381    34    107
+## 398    35    332
+## 177    16     45
 ```
 
 ---

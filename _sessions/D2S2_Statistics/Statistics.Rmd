@@ -715,7 +715,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ---
 
-## Statistics Pratical
+## Live Demo & Pratical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S2_Statistics/Statistics_practical.html">Link to Statistics practical</a>
 
