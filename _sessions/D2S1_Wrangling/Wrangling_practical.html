@@ -276,7 +276,7 @@ chick %&gt;%                             # Start with chick data...
 chick %&gt;%
   rename(weeks = Time) %&gt;%            # Change column name
   filter(Chick &gt; 10) %&gt;%              # Only chicks with values larger than 10
-  group_by(Time, arm) %&gt;%             # Group by Time and arm
+  group_by(week, arm) %&gt;%             # Group by Time and arm
   summarise(                          # Calculate summary statistics
     weight_g_median = median(weight_g),
     weight_g_sd = sd(weight_g),

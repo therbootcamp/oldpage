@@ -114,7 +114,7 @@ chick %>%                             # Start with chick data...
 chick %>%
   rename(weeks = Time) %>%            # Change column name
   filter(Chick > 10) %>%              # Only chicks with values larger than 10
-  group_by(Time, arm) %>%             # Group by Time and arm
+  group_by(week, arm) %>%             # Group by Time and arm
   summarise(                          # Calculate summary statistics
     weight_g_median = median(weight_g),
     weight_g_sd = sd(weight_g),
