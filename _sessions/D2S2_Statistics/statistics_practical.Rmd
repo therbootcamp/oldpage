@@ -358,7 +358,7 @@ days_B_glm <- glm(formula = days ~ arms,
 
 23. Now create a regression object `days_C_glm` that predicts `days` based on *all* variables in the dataset. Explore the object. What do you find?
 
-24. Create a fictional dataset of 10 new patients called `trial_new` by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the `trial_act_random` object to see how it looks
+24. Create a fictional dataset of 10 new patients called `trial_new` by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the `trial_new` object to see how it looks
 
 ```{r, echo = TRUE}
 # Draw 10 patients at random from trial_act
@@ -430,45 +430,6 @@ my_glm <- glm(formula = y ~.,
 ```
 
 31. Adjust the code above so that the coefficients for the regression equation will be `(Intercept) = -50`, `x1 = -3`, `x2 = 10`, `x3 = 15`
-
-### You choose the test!
-
-32. Only for patients older than 40, is there a relationship between antiviral history (`str2`) and race (`race`)?
-
-   - Create a new dataframe called `trial_act_o40 <- trial_act %>% filter(age > 40)` and then do your analysis on this new dataframe.
-   
-   
-```{r}
-trial_act.o40 <- subset(trial_act, age > 40)
-
-chisq.test(table(trial_act.o40$str2, trial_act.o40$race))
-```
-
-33. A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.
-    
-```{r}
-t.test(formula = days ~ arms,
-       data = trial_act,
-       subset = arms %in% c(0, 3))
-```
-
-34. A researcher wants to know if the relationship between CD4 T cell count at baseline and age is similar for whites and non-whites. Specifically, she wants to know if both correlations are significant (and in the same direction!) or not. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?
-
-```{r}
-cor.test(formula = ~ cd40 + days,
-         data = subset(trial_act, race == 0))
-
-cor.test(formula = ~ cd40 + days,
-         data = subset(trial_act, race == 1))
-```
-
-35. A researcher is concerned that patients were not properly randomly assigned to the different treatment arms. Using the appropriate test(s), see if there is a significant imbalance between treatment arms in terms of gender, drug use, race, and homosexual activity. Do you find evidence for a significant imbalance in any of these domains?
-
-```{r}
-chisq.test(table(trial_act$gender, trial_act$arms))
-chisq.test(table(trial_act$race, trial_act$arms))
-chisq.test(table(trial_act$drugs, trial_act$arms))
-```
 
 # Additional reading
 

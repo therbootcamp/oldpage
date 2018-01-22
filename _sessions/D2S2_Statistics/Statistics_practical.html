@@ -463,7 +463,7 @@ trial_act &lt;- trial_act %&gt;%
 <li><p>Now create a new regression object <code>days_B_glm</code> where you model <code>days</code> as a function of the treatment arm (<code>arms</code>). Explore the object. Do you find that there was an effect of the treatment arm on <code>days</code>?</p></li>
 <li><p>Does the effect of treatment arm on days hold if you only consider men (<code>gender == 1</code>) above the age of 30 (<code>age &gt; 30</code>)? To answer this, repeat your previous regression, but include the appropriate arguments to <code>subset</code></p></li>
 <li><p>Now create a regression object <code>days_C_glm</code> that predicts <code>days</code> based on <em>all</em> variables in the dataset. Explore the object. What do you find?</p></li>
-<li><p>Create a fictional dataset of 10 new patients called <code>trial_new</code> by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the <code>trial_act_random</code> object to see how it looks</p></li>
+<li><p>Create a fictional dataset of 10 new patients called <code>trial_new</code> by randomly selecting 10 patients from the original dataset. You can do this using the following code. After you run it, print the <code>trial_new</code> object to see how it looks</p></li>
 </ol>
 <pre class="r"><code># Draw 10 patients at random from trial_act
 #  and store as trial_new
@@ -520,20 +520,6 @@ my_glm &lt;- glm(formula = y ~.,
               data = my_data)</code></pre>
 <ol start="31" style="list-style-type: decimal">
 <li>Adjust the code above so that the coefficients for the regression equation will be <code>(Intercept) = -50</code>, <code>x1 = -3</code>, <code>x2 = 10</code>, <code>x3 = 15</code></li>
-</ol>
-</div>
-<div id="you-choose-the-test" class="section level3">
-<h3>You choose the test!</h3>
-<ol start="32" style="list-style-type: decimal">
-<li>Only for patients older than 40, is there a relationship between antiviral history (<code>str2</code>) and race (<code>race</code>)?</li>
-</ol>
-<ul>
-<li>Create a new dataframe called <code>trial_act_o40 &lt;- trial_act %&gt;% filter(age &gt; 40)</code> and then do your analysis on this new dataframe.</li>
-</ul>
-<ol start="33" style="list-style-type: decimal">
-<li><p>A researcher is particularly interested in whether or not there is a difference in the number of days until the first occurrence of a major negative event between patients taking zidovudine and those taking didanosine. Conduct the appropriate test to answer this question.</p></li>
-<li><p>A researcher wants to know if the relationship between CD4 T cell count at baseline and age is similar for whites and non-whites. Specifically, she wants to know if both correlations are significant (and in the same direction!) or not. Conduct the appropriate statistical test separately for both groups. Are the conclusions the same or different?</p></li>
-<li><p>A researcher is concerned that patients were not properly randomly assigned to the different treatment arms. Using the appropriate test(s), see if there is a significant imbalance between treatment arms in terms of gender, drug use, race, and homosexual activity. Do you find evidence for a significant imbalance in any of these domains?</p></li>
 </ol>
 </div>
 </div>
