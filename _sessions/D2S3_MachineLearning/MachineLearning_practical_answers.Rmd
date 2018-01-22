@@ -1,6 +1,6 @@
 ---
-title: "Practical: Machine Learning"
-author: "BaselRBootcamp 2017"
+title: "Machine Learning"
+author: "BaselRBootcamp January 2018"
 output: html_document
 ---
 
@@ -10,7 +10,7 @@ knitr::include_graphics("https://uploads.toptal.io/blog/image/443/toptal-blog-im
 
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, fig.align = 'center')
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=4, echo = TRUE, eval = TRUE, fig.align = 'center')
 ```
 
 
@@ -18,14 +18,16 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 
 - [Here are the introduction slides for this practical on machine learning!](https://therbootcamp.github.io/_sessions/D2S3_MachineLearning/MachineLearning.html)
 
+
 ### Overview
 
 In this practical you'll conduct machine learning analyses on a dataset on heart disease. You will see how well many different machine learning models can predict new data. By the end of this practical you will know how to:
 
 1. Create separate training and test data
 2. Fit a model to data
-3. Make predictions from a model
-4. Compare models in how well they can predict new data.
+3. Explore a model
+4. Make predictions from a model
+5. Compare models in how well they can predict new data.
 
 ### Glossary and packages
 
@@ -34,27 +36,16 @@ Here are the main functions and packages you'll be using. For more information a
 | Algorithm| Function| Package | Additional Details |
 |:------|:--------|:----|:----|
 |     Regression|    `glm()`| Base R| https://bookdown.org/ndphillips/YaRrr/regression.html#the-linear-model|
-|     Fast-and-Frugal trees|    `FFTrees()`| FFTrees| https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html|
-|     Support Vector Machines|    `svm()`| `e1071` |https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html |
+|     Fast-and-Frugal decision trees|    `FFTrees()`| FFTrees| https://cran.r-project.org/web/packages/FFTrees/vignettes/guide.html|
 |     Decision Trees|    `rpart()`| `rpart` | https://statweb.stanford.edu/~lpekelis/talks/13_datafest_cart_talk.pdf|
 | Random Forests | `randomForest()` | `randomForest` | http://www.blopig.com/blog/2017/04/a-very-basic-introduction-to-random-forests-using-r/|
-
-
-```{r, echo = FALSE, message = FALSE, warning = FALSE, eval = TRUE}
-library(e1071)          # for svm()
-library(randomForest)   # for randomForest()
-library(rpart)          # for rpart()
-library(yarrr)          # for pirateplot()
-library(tidyverse)      # for datawrangling and ggplot2
-library(FFTrees)        # for the heartdisease data
-```
 
 
 ### Examples
 
 - The following examples will take you through all steps of the machine learning process, from creating training and test data, to fitting models, to making predictions. Follow along and try to see how piece of code works!
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, eval = FALSE, echo = TRUE}
 # -----------------------------------------------
 # A step-by-step tutorial for conducting machine learning
 # In this tutorial, we'll see how well 3 different models can
@@ -66,49 +57,30 @@ library(FFTrees)        # for the heartdisease data
 # Load libraries
 # -----------------------
 
-library(e1071)          # for svm()
+library(tidyverse)      # for dplyr and ggplot2
 library(randomForest)   # for randomForest()
 library(rpart)          # for rpart()
-library(yarrr)          # for pirateplot()
-library(tidyverse)      # for datawrangling and ggplot2
-library(FFTrees)        # for the heartdisease data
+library(FFTrees)        # for FFTrees and the heartdisease data
 
 # -----------------------
 # Part B: Create datasets
 #  heart_train, heart_test
-#  heart_train_fac, heart_test_fac
 # -----------------------
 
 heart <- heartdisease   # Save a copy of the heartdisease data as heart
 
-set.seed(101)   # To fix the training / test randomization
+set.seed(100)           # To fix the training / test randomization
 
-# Randomly sort rows
 heart <- heart %>%
-  arrange(rnorm(nrow(heart)))
+   mutate_if(is.character, factor) %>%   # Convert character to factor
+   sample_frac(1)                        # Randomly sort rows
 
-# Savew first 125 rows as heart_train and remaining as heart_test
-heart_train <- heart %>% slice(1:100)
-heart_test <- heart %>% slice(101:nrow(heart))
+# Savew first 100 rows as heart_train and remaining as heart_test
+heart_train <- heart %>% 
+                slice(1:100)
 
-
-# Create heart_train_fact, heart_test_fact
-#  Just heart_train and hear_test with factors
-#  We're only doing this because the randomForest() function
-#   requires factors!!!!
-
-heart_train_fac <- heart_train
-heart_test_fac <- heart_test
-
-for(i in 1:ncol(heart_train_fac)) {  # Convert character columns and diagnosis to factor
-  
-  if(class(heart_train_fac[[i]]) == "character") {
-    
-    heart_train_fac[[i]] <- factor(heart_train_fac[[i]])
-    heart_test_fac[[i]] <- factor(heart_test_fac[[i]])
-
-  }}
-
+heart_test <- heart %>% 
+                slice(101:nrow(heart))
 
 # ------------------------------
 # Part I: Build Models
@@ -125,8 +97,7 @@ glm_model <- glm(formula = factor(sex) ~ .,
 
 # Build randomForest model
 randomForest_model <- randomForest(formula = factor(sex) ~ ., 
-                                   data = heart_train_fac)
-
+                                   data = heart_train)
 
 # ------------------------------
 # Part II: Explore Models
@@ -146,14 +117,17 @@ summary(randomForest_model)
 # ------------------------------
 
 # FFTrees training decisions
-FFTrees_fit <- predict(FFTrees_model, heart_train)
+FFTrees_fit <- predict(object = FFTrees_model, 
+                       newdata = heart_train)
 
 # Regression training decisions
 #  Positive values are predicted to be 1, negative values are 0
-glm_fit <- predict(glm_model, heart_train) > 0
+glm_fit <- predict(object = glm_model, 
+                   newdata = heart_train) > 0
 
 # randomForest training decisions
-randomForest_fit <- predict(randomForest_model, heart_train_fac)
+randomForest_fit <- predict(object = randomForest_model, 
+                            newdata = heart_train)
 
 # Now calculate fitting accuracies and put in dataframe
 
@@ -161,15 +135,19 @@ randomForest_fit <- predict(randomForest_model, heart_train_fac)
 train_truth <- heart_train$sex
 
 # Put training results together
-training_results <- data_frame(FFTrees = mean(FFTrees_fit == train_truth),
-                              glm = mean(glm_fit == train_truth),
-                              randomForest = mean(randomForest_fit == train_truth))
+training_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
+                          result = c(mean(FFTrees_fit == train_truth),
+                                     mean(glm_fit == train_truth),
+                                     mean(randomForest_fit == train_truth)))
 
 # Plot training results
-barplot(height = unlist(training_results), 
-        main = "Training Results", 
-        ylim = c(0, 1), 
-        col = c("palegreen3", "wheat2", "orchid3"))
+
+ggplot(data = training_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Training Accuracy",
+       y = "Correct Classifications")
 
 # ------------------------------
 # Part IV: Prediction Accuacy!
@@ -178,32 +156,37 @@ barplot(height = unlist(training_results),
 # Calculate predictions for each model for heart_test
 
 # FFTrees testing decisions
-FFTrees_pred <- predict(FFTrees_model, heart_test)
+FFTrees_pred <- predict(object = FFTrees_model, 
+                        newdata = heart_test)
 
 # Regression testing decisions
 #  Positive values are predicted to be 1, negative values are 0
-glm_pred <- predict(glm_model, heart_test) >= 0
+glm_pred <- predict(object = glm_model, 
+                    newdata = heart_test) >= 0
 
 # randomForest testing decisions
-randomForest_pred <- predict(randomForest_model, heart_test_fac)
+randomForest_pred <- predict(object = randomForest_model, 
+                             newdata = heart_test)
 
 # Now calculate testing accuracies and put in dataframe
 
 # Truth value for test data is heart_test$sex
 test_truth <- heart_test$sex
 
-testing_results <- data_frame(FFTrees = mean(FFTrees_pred == test_truth),
-                              glm = mean(glm_pred == test_truth),
-                              randomForest = mean(randomForest_pred == test_truth))
+testing_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
+                          result = c(mean(FFTrees_pred == test_truth),
+                                     mean(glm_pred == test_truth),
+                                     mean(randomForest_pred == test_truth)))
 
 # Plot testing results
-barplot(height = unlist(testing_results), 
-        main = "Testing Results", 
-        ylim = c(0, 1),
-        col = c("palegreen3", "wheat2", "orchid3"))
 
+ggplot(data = testing_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Testing Accuracy",
+       y = "Correct Classifications")
 ```
-
 
 ## Tasks
 
@@ -219,14 +202,70 @@ A. Load all of the necessary packages. For this practical, we'll need `FFTrees`,
 
 B. Now run the code in Part B to save a copy of the data as a tibble called `heart`. Afterwards, print it to make sure it looks ok.
 
-C. Create separate training dataframes `heart_train` (and `heart_train_fac`) for model training and `heart_test` (and `heart_test_fac`) for model testing. Print each of these dataframes to make sure they look ok.
+C. Create separate training dataframes `heart_train` for model training and `heart_test` for model testing. Print each of these dataframes to make sure they look ok.
 
 #### Part I: Train models on `diagnosis`
 
 1. In our analyses, we will try to predict each patient's diagnosis `diagnosis`. Look at the help menu for `heartdisease` to see what this, and the other variables, mean. Then, Create three new model objects `FFTrees_model`, `glm_model`, and `randomForest_model`, each predicting `diagnosis`.
 
+```{r, eval = FALSE}
+# Just change all formulas so that diagnosis is the criterion
+# For example....
 
-```{r}
+
+# Build FFTrees_model
+FFTrees_model <- FFTrees(formula = diagnosis ~ ., 
+                         data = heart_train)
+```
+
+#### Part II: Calculate fits for training data
+
+2. Calculate fits for each model with `predict()`, then create `training_results` containing the fitting accuracy of each model in a dataframe. The code will be almost identical to what is in the Example. All you need to do is change the value of `truth_train` to the correct column in `heart_train`. Afterwards, plot the results using `ggplot`. Which model had the best training accuracy?
+
+
+```{r, eval = FALSE}
+# Change value of truth_train to diagnosis
+truth_train <- heartdisease$diagnosis
+```
+
+*Here's the plot I got for training accuracy. It looks like random forests are almost perfect!*
+
+```{r, echo = FALSE, message = FALSE, fig.width = 6, fig.height = 4, warning = FALSE}
+
+# -----------------------
+# Part A:
+# Load libraries
+# -----------------------
+
+library(tidyverse)      # for dplyr and ggplot2
+library(randomForest)   # for randomForest()
+library(rpart)          # for rpart()
+library(FFTrees)        # for FFTrees and the heartdisease data
+
+# -----------------------
+# Part B: Create datasets
+#  heart_train, heart_test
+# -----------------------
+
+heart <- heartdisease   # Save a copy of the heartdisease data as heart
+
+set.seed(100)           # To fix the training / test randomization
+
+heart <- heart %>%
+   mutate_if(is.character, factor) %>%   # Convert character to factor
+   sample_frac(1)                        # Randomly sort rows
+
+# Savew first 100 rows as heart_train and remaining as heart_test
+heart_train <- heart %>% 
+                slice(1:100)
+
+heart_test <- heart %>% 
+                slice(101:nrow(heart))
+
+# ------------------------------
+# Part I: Build Models
+# ------------------------------
+
 # Build FFTrees_model
 FFTrees_model <- FFTrees(formula = diagnosis ~ ., 
                          data = heart_train)
@@ -238,240 +277,177 @@ glm_model <- glm(formula = factor(diagnosis) ~ .,
 
 # Build randomForest model
 randomForest_model <- randomForest(formula = factor(diagnosis) ~ ., 
-                                   data = heart_train_fac)
-
-```
-
-
-#### Part II: Calculate fits for training data
-
-2. Calculate fits for each model with `predict()`, then create `training_results` containing the fitting accuracy of each model in a dataframe. The code will be almost identical to what is in the Example. All you need to do is change the value of `truth_train` to the correct column in `heart_train`. Afterwards, plot the results using `barplot()`. Which model had the best training accuracy?
-
-```{r}
-# FFTrees training decisions
-FFTrees_fit <- predict(FFTrees_model, heart_train)
-
-# Regression training decisions
-#  Positive values are predicted to be 1, negative values are 0
-glm_fit <- predict(glm_model, heart_train) > 0
-
-# randomForest training decisions
-randomForest_fit <- predict(randomForest_model, heart_train_fac)
-
-# Now calculate fitting accuracies and put in dataframe
-
-# Truth value for training data is heart_train$sex
-train_truth <- heart_train$diagnosis
-
-# Put training results together
-training_results <- data_frame(FFTrees = mean(FFTrees_fit == train_truth),
-                              glm = mean(glm_fit == train_truth),
-                              randomForest = mean(randomForest_fit == train_truth))
-
-# Plot training results
-barplot(height = unlist(training_results), 
-        main = "Training Results", 
-        ylim = c(0, 1), 
-        col = c("palegreen3", "wheat2", "orchid3"))
-
-```
-
-
-#### Part III: Explore models
-
-3. Explore each of the three models by applying `print()` and `summary()`. Can you interpret any of them?
-
-```{r}
-
-print(FFTrees_model)
-summary(FFTrees_model)
-
-print(glm_model)
-summary(glm_model)
-
-print(randomForest_model)
-summary(randomForest_model)
-```
-
-
-#### Part IV: Calculate predictions for test data
-
-4. Calculate predictions for each model based on `heart_test`, and then calculate the prediction accuracies. Don't forget to change the value of `truth_test` to reflect the true value for the current analysis! Then plot the results. Which model predicted each patient's diagnosis the best?
-
-```{r}
-# ------------------------------
-# Part IV: Prediction Accuacy!
-# ------------------------------
-
-# Calculate predictions for each model for heart_test
-
-# FFTrees testing decisions
-FFTrees_pred <- predict(FFTrees_model, heart_test)
-
-# Regression testing decisions
-#  Positive values are predicted to be 1, negative values are 0
-glm_pred <- predict(glm_model, heart_test) >= 0
-
-# randomForest testing decisions
-randomForest_pred <- predict(randomForest_model, heart_test_fac)
-
-# Now calculate testing accuracies and put in dataframe
-
-# Truth value for test data is heart_test$sex
-test_truth <- heart_test$diagnosis
-
-testing_results <- data_frame(FFTrees = mean(FFTrees_pred == test_truth),
-                              glm = mean(glm_pred == test_truth),
-                              randomForest = mean(randomForest_pred == test_truth))
-
-# Plot testing results
-barplot(height = unlist(testing_results), 
-        main = "Testing Results", 
-        ylim = c(0, 1),
-        col = c("palegreen3", "wheat2", "orchid3"))
-```
-
-
-## Extras and Challenges
-
-5. A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the `svm()` function from the `e1071` package in all of your analyses. You'll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?
-
-```{r}
-
-# Build svm model
-svm_model <- svm(formula = factor(diagnosis) ~ ., 
-                data = heart_train_fac)
-
-print(svm_model)
-summary(svm_model)
-
-# svm training decisions
-svm_fit <- predict(svm_model, heart_train_fac)
-
-# Now calculate fitting accuracies and put in dataframe
-
-# Truth value for training data is heart_train$sex
-train_truth <- heart_train$diagnosis
-
-# Put training results together
-training_results <- data_frame(FFTrees = mean(FFTrees_fit == train_truth),
-                              glm = mean(glm_fit == train_truth),
-                              randomForest = mean(randomForest_fit == train_truth),
-                              svm = mean(svm_fit == train_truth))
-
-# Plot training results
-barplot(height = unlist(training_results), 
-        main = "Training Results", 
-        ylim = c(0, 1), 
-        col = c("palegreen3", "wheat2", "orchid3"))
-
-# svm testing decisions
-svm_pred <- predict(svm_model, heart_test_fac)
-
-# Now calculate testing accuracies and put in dataframe
-
-# Truth value for test data is heart_test$sex
-test_truth <- heart_test$diagnosis
-
-testing_results <- data_frame(FFTrees = mean(FFTrees_pred == test_truth),
-                              glm = mean(glm_pred == test_truth),
-                              randomForest = mean(randomForest_pred == test_truth),
-                              svm = mean(svm_pred == test_truth))
-
-# Plot testing results
-barplot(height = unlist(testing_results), 
-        main = "Testing Results", 
-        ylim = c(0, 1),
-        col = c("palegreen3", "wheat2", "orchid3"))
-
-```
-
-
-6. You'll notice in Part C that we trained the models on 125 cases (out of the 303) in the full dataset. In other words, we trained the data on about half of the total cases. Try repeating the same machine learning process as above (for either cholesterol or resting heart rate), but instead of training the models on 125 cases, try training it on only 50 cases (about 15% of the data). How do you think having fewer cases in the training data will affect accuracy in fitting and prediction? When you are done, try training the models based on 250 cases (over 80% of the data) and then making predictions on the remaining cases. 
-
-```{r}
-# Savew first 125 rows as heart_train and remaining as heart_test
-heart_train <- heart %>% slice(1:250)
-heart_test <- heart %>% slice(251:nrow(heart))
-
-# Create heart_train_fact, heart_test_fact
-#  Just heart_train and hear_test with factors
-#  We're only doing this because the randomForest() function
-#   requires factors!!!!
-
-heart_train_fac <- heart_train
-heart_test_fac <- heart_test
-
-for(i in 1:ncol(heart_train_fac)) {  # Convert character columns and diagnosis to factor
-  
-  if(class(heart_train_fac[[i]]) == "character") {
-    
-    heart_train_fac[[i]] <- factor(heart_train_fac[[i]])
-    heart_test_fac[[i]] <- factor(heart_test_fac[[i]])
-
-  }}
-
-
-# ------------------------------
-# Part I: Build Models
-# ------------------------------
-
-# Build FFTrees_model
-FFTrees_model <- FFTrees(formula = sex ~ ., 
-                         data = heart_train)
-
-# Build glm_model
-glm_model <- glm(formula = factor(sex) ~ ., 
-                 data = heart_train, 
-                 family = "binomial")  # For predicting a binary variable
-
-# Build randomForest model
-randomForest_model <- randomForest(formula = factor(sex) ~ ., 
-                                   data = heart_train_fac)
-
-
-# ------------------------------
-# Part II: Explore Models
-# ------------------------------
-
-print(FFTrees_model)
-summary(FFTrees_model)
-
-print(glm_model)
-summary(glm_model)
-
-print(randomForest_model)
-summary(randomForest_model)
+                                   data = heart_train)
 
 # ------------------------------
 # Part III: Training Accuracy
 # ------------------------------
 
 # FFTrees training decisions
-FFTrees_fit <- predict(FFTrees_model, heart_train)
+FFTrees_fit <- predict(object = FFTrees_model, 
+                       newdata = heart_train)
 
 # Regression training decisions
 #  Positive values are predicted to be 1, negative values are 0
-glm_fit <- predict(glm_model, heart_train) > 0
+glm_fit <- predict(object = glm_model, 
+                   newdata = heart_train) > 0
 
 # randomForest training decisions
-randomForest_fit <- predict(randomForest_model, heart_train_fac)
+randomForest_fit <- predict(object = randomForest_model, 
+                            newdata = heart_train)
 
 # Now calculate fitting accuracies and put in dataframe
 
 # Truth value for training data is heart_train$sex
-train_truth <- heart_train$sex
+train_truth <- heart_train$diagnosis
 
 # Put training results together
-training_results <- data_frame(FFTrees = mean(FFTrees_fit == train_truth),
-                              glm = mean(glm_fit == train_truth),
-                              randomForest = mean(randomForest_fit == train_truth))
+training_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
+                          result = c(mean(FFTrees_fit == train_truth),
+                                     mean(glm_fit == train_truth),
+                                     mean(randomForest_fit == train_truth)))
+
+# Plot testing results
+
+ggplot(data = training_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Training Accuracy",
+       y = "Correct Classifications")
+```
+
+
+#### Part III: Explore models
+
+3. Explore each of the three models by applying `print()`, `summary()`, `plot()`, and `names()` to the objects. Which of these methods work for each object? Can you interpret any of the outputs?
+
+```{r}
+
+FFTrees_model
+
+glm_model
+
+randomForest_model
+
+```
+
+
+4. You can look at a variable's *importance* in each of these models in different ways. In the decision tree, you can look at which variables show up in the tree. In regression, you can look at the significance of the predictors. In random forests, you can look at look at a variable's importance in terms of what is called *mean decrease in gini*. Using the following template, explore how each model rates the importance of variables.
+
+```{r, eval = TRUE, echo = TRUE}
+# ----------------------
+# Explore the importance of different variables in models
+# ----------------------
+
+# Print the elements of the FFTrees model
+FFTrees_model
+
+# Look at significance of regression 
+summary(glm_model)
+
+# Look at importance of variables in randomforests
+randomForest_model$importance
+```
+
+#### Part IV: Calculate predictions for test data
+
+5. Calculate predictions for each model based on `heart_test`, and then calculate the prediction accuracies. Don't forget to change the value of `truth_test` to reflect the true value for the current analysis! Then plot the results. Which model predicted each patient's diagnosis the best?
+
+
+*Here's what I got, in the test data, all three models are pretty much the same*
+```{r, echo = FALSE, fig.width = 6, fig.height = 4}
+# ------------------------------
+# Part IV: Prediction Accuacy!
+# ------------------------------
+
+# Calculate predictions for each model for heart_test
+
+# FFTrees testing decisions
+FFTrees_pred <- predict(object = FFTrees_model, 
+                        newdata = heart_test)
+
+# Regression testing decisions
+#  Positive values are predicted to be 1, negative values are 0
+glm_pred <- predict(object = glm_model, 
+                    newdata = heart_test) >= 0
+
+# randomForest testing decisions
+randomForest_pred <- predict(object = randomForest_model, 
+                             newdata = heart_test)
+
+# Now calculate testing accuracies and put in dataframe
+
+# Truth value for test data is heart_test$sex
+test_truth <- heart_test$sex
+
+testing_results <- tibble(model = c("FFTrees", "glm", "randomForest"),
+                          result = c(mean(FFTrees_pred == test_truth),
+                                     mean(glm_pred == test_truth),
+                                     mean(randomForest_pred == test_truth)))
+
+# Plot testing results
+
+ggplot(data = testing_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Testing Accuracy",
+       y = "Correct Classifications")
+```
+
+
+### Extra Challenges
+
+6. By default, random forests creates 500 trees. You can change this using the `ntree` argument in `randomForest()`. Try creating 2 new randomForest objects, one based on either a small number of trees (e.g. 10), and one based on 10,000 trees. How much better (or worse) do these models do compared to the default model with 500 trees?
+
+```{r, fig.width = 6, fig.height = 4}
+
+# ------------------------------
+# Part I: Build Models
+# ------------------------------
+
+randomForest_10_model <- randomForest(formula = factor(diagnosis) ~ ., 
+                                   data = heart_train,
+                                   ntree = 10)
+
+randomForest_10000_model <- randomForest(formula = factor(diagnosis) ~ ., 
+                                   data = heart_train,
+                                   ntree = 10000)
+
+# ------------------------------
+# Part III: Training Accuracy
+# ------------------------------
+
+randomForest_10_fit <- predict(object = randomForest_10_model, 
+                            newdata = heart_train)
+
+randomForest_10000_fit <- predict(object = randomForest_10000_model, 
+                            newdata = heart_train)
+
+# Now calculate fitting accuracies and put in dataframe
+
+# Truth value for training data is heart_train$sex
+train_truth <- heart_train$diagnosis
+
+# Put training results together
+training_results <- tibble(model = c("FFTrees", "glm", "randomForest", "rf10", "rf10000"),
+                          result = c(mean(FFTrees_fit == train_truth),
+                                     mean(glm_fit == train_truth),
+                                     mean(randomForest_fit == train_truth),
+                                     mean(randomForest_10_fit == train_truth),
+                                     mean(randomForest_10000_fit == train_truth)))
 
 # Plot training results
-barplot(height = unlist(training_results), 
-        main = "Training Results", 
-        ylim = c(0, 1), 
-        col = c("palegreen3", "wheat2", "orchid3"))
+
+ggplot(data = training_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Training Accuracy",
+       y = "Correct Classifications")
+
+
 
 # ------------------------------
 # Part IV: Prediction Accuacy!
@@ -480,55 +456,155 @@ barplot(height = unlist(training_results),
 # Calculate predictions for each model for heart_test
 
 # FFTrees testing decisions
-FFTrees_pred <- predict(FFTrees_model, heart_test)
+FFTrees_pred <- predict(object = FFTrees_model, 
+                        newdata = heart_test)
 
 # Regression testing decisions
 #  Positive values are predicted to be 1, negative values are 0
-glm_pred <- predict(glm_model, heart_test) >= 0
+glm_pred <- predict(object = glm_model, 
+                    newdata = heart_test) >= 0
 
 # randomForest testing decisions
-randomForest_pred <- predict(randomForest_model, heart_test_fac)
+randomForest_pred <- predict(object = randomForest_model, 
+                             newdata = heart_test)
+
+# randomForest testing decisions
+randomForest_10_pred <- predict(object = randomForest_10_model, 
+                                newdata = heart_test)
+
+randomForest_10000_pred <- predict(object = randomForest_10000_model, 
+                                   newdata = heart_test)
+
 
 # Now calculate testing accuracies and put in dataframe
 
 # Truth value for test data is heart_test$sex
 test_truth <- heart_test$sex
 
-testing_results <- data_frame(FFTrees = mean(FFTrees_pred == test_truth),
-                              glm = mean(glm_pred == test_truth),
-                              randomForest = mean(randomForest_pred == test_truth))
+testing_results <- tibble(model = c("FFTrees", "glm", "randomForest", "rf10", "rf10000"),
+                          result = c(mean(FFTrees_pred == test_truth),
+                                     mean(glm_pred == test_truth),
+                                     mean(randomForest_pred == test_truth),
+                                     mean(randomForest_10_pred == test_truth),
+                                     mean(randomForest_10000_pred == test_truth)))
 
 # Plot testing results
-barplot(height = unlist(testing_results), 
-        main = "Testing Results", 
-        ylim = c(0, 1),
-        col = c("palegreen3", "wheat2", "orchid3"))
 
+ggplot(data = testing_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Testing Accuracy",
+       y = "Correct Classifications")
 ```
 
-   
-7. In all of our machine learning, we have allowed all models to use all data in the `heartdisease` dataset. What do you think would happen if we only let the models use a single predictor like `age`? Test your prediction by replicating the machine learning process, but *only* allow the models to make predictions based on `age`, `cp` and `slope`. (Hint: You can easily tell a model what specific variables to include using the `formula` argument. For example, `formula = y ~ a + b` will tell a model to model a variable y, but *only* using variables a and b.)
-  
+
+7. A colleague of yours thinks that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the `svm()` function from the `e1071` package in all of your analyses. You'll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?
+
 
 ```{r}
-# Just use formula = diagnosis ~ age + cp + slope in fitting the models.
+library(e1071)    
+
+# ------------------------------
+# Part I: Build Models
+# ------------------------------
+
+# Build svm model
+svm_model <- svm(formula = factor(diagnosis) ~ ., 
+                                   data = heart_train)
+
+# ------------------------------
+# Part III: Training Accuracy
+# ------------------------------
+
+
+# randomForest training decisions
+svm_fit <- predict(object = svm_model, 
+                  newdata = heart_train)
+
+# Now calculate fitting accuracies and put in dataframe
+train_truth <- heart_train$diagnosis
+
+# Put training results together
+training_results <- tibble(model = c("FFTrees", "glm", "randomForest", "svm"),
+                          result = c(mean(FFTrees_fit == train_truth),
+                                     mean(glm_fit == train_truth),
+                                     mean(randomForest_fit == train_truth),
+                                     mean(svm_fit == train_truth)))
+
+# Plot training results
+
+ggplot(data = training_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Training Accuracy",
+       y = "Correct Classifications")
+
+# ------------------------------
+# Part IV: Prediction Accuacy!
+# ------------------------------
+
+
+# svm testing decisions
+svm_pred <- predict(object = svm_model, 
+                    newdata = heart_test)
+
+# Now calculate testing accuracies and put in dataframe
+
+test_truth <- heart_test$diagnosis
+
+testing_results <- tibble(model = c("FFTrees", "glm", "randomForest", "svm"),
+                          result = c(mean(FFTrees_pred == test_truth),
+                                     mean(glm_pred == test_truth),
+                                     mean(randomForest_pred == test_truth),
+                                     mean(svm_pred == test_truth)))
+
+# Plot testing results
+
+ggplot(data = testing_results, 
+       aes(x = model, y = result, fill = model)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "Testing Accuracy",
+       y = "Correct Classifications")
 ```
 
-  
-8. How do you think these algorithms would perform on a randomly generated dataset? Let's test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called `random` to `heart_train` and `heart_test`. Then, run your machine learning analysis, but now train and test the models on the new random data column. How well do the models do in training and testing?
+
+
+8. In all of our machine learning, we have allowed all models to use all data in the `heartdisease` dataset. However, some of the data is more expensive to collect than other data. What do you think would happen if we only let the models use a few cheap predictors like `age`, `sex` and `chol`? Test your prediction by replicating the machine learning process, but *only* allow the models to make predictions based on the three variables `age`, `sex` and `chol`. Does one model substantially outperform the others? (Hint: You can easily tell a model what specific variables to include using the `formula` argument. For example, `formula = y ~ a + b` will tell a model to model a variable y, but *only* using variables a and b.)
+
+```{r}
+# Try on your own
+```
+
+9. How do you think these algorithms would perform on a randomly generated dataset? Let's test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called `random` to `heart_train` and `heart_test`. Then, run your machine learning analysis, but now train and test the models on the new random data column. How well do the models do in training and testing?
 
 ```{r, eval = FALSE}
 # Add a new column random to heart_train and heart_test
 
-heart_train$random <- sample(c(0, 1), size = nrow(heart_train), replace = TRUE)
+heart_train <- heart_train %>%
+  mutate(
+    random = sample(c(0, 1), size = nrow(.), replace = TRUE)
+  )
 
-heart_test$random <- sample(c(0, 1), size = nrow(heart_test), replace = TRUE)
+heart_test <- heart_test %>%
+  mutate(
+    random = sample(c(0, 1), size = nrow(.), replace = TRUE)
+  )
 ```
 
-9. So far we've only looked at the `heartdisease` data. Try conducting a similar analysis on the `ACTG175` data from the `speff2trial` package. For example, you could try to predict whether or not a patient was a intravenous drug user. Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren't present in the `heartdisease` data?
+```{r}
+# Try on your own, you should find that the more complex models have above chance fitting performance, but all models have change level prediction performance
+```
+
+10. So far we've only looked at the `heartdisease` data. Try conducting a similar analysis on the `ACTG175` data from the `speff2trial` package. Specifically, try creating models predicting whether or not the number of days until the first occurence of a major negative event is less than 1,000 days. Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren't present in the `heartdisease` data?
+
+    - To predict whether the number of days is greater than 1,000, you'll need to create a new column called `days_gt1000` that indicates this. You can do this with `ACTG175 <- ACTG175 %>% mutate(days_gt1000 = days > 1000)`
+    - You may wish to exclude the `pidnum` column from the data when fitting the models as the patient id is meaningless and should not be included in any models.
 
 ```{r}
-# Try on your own!
+# Try on your own, you should find similar results as our previous analyses
 ```
 
 

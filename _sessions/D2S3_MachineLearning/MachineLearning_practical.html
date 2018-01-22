@@ -292,7 +292,7 @@ training_results &lt;- tibble(model = c(&quot;FFTrees&quot;, &quot;glm&quot;, &q
                                      mean(glm_fit == train_truth),
                                      mean(randomForest_fit == train_truth)))
 
-# Plot testing results
+# Plot training results
 
 ggplot(data = training_results, 
        aes(x = model, y = result, fill = model)) + 
@@ -395,9 +395,8 @@ randomForest_model$importance</code></pre>
 <div id="extra-challenges" class="section level3">
 <h3>Extra Challenges</h3>
 <ol start="6" style="list-style-type: decimal">
-<li><p>So far, we have created decision trees using <code>FFTrees</code>. This package (written by Nathaniel!), also allows you to plot visualise the tree and its performance statistics. Using <code>plot()</code>, visualise your <code>FFTrees_model</code> object!</p></li>
 <li><p>By default, random forests creates 500 trees. You can change this using the <code>ntree</code> argument in <code>randomForest()</code>. Try creating 2 new randomForest objects, one based on either a small number of trees (e.g. 10), and one based on 10,000 trees. How much better (or worse) do these models do compared to the default model with 500 trees?</p></li>
-<li><p>A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the <code>svm()</code> function from the <code>e1071</code> package in all of your analyses. You’ll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?</p></li>
+<li><p>A colleague of yours thinks that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the <code>svm()</code> function from the <code>e1071</code> package in all of your analyses. You’ll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?</p></li>
 <li><p>In all of our machine learning, we have allowed all models to use all data in the <code>heartdisease</code> dataset. However, some of the data is more expensive to collect than other data. What do you think would happen if we only let the models use a few cheap predictors like <code>age</code>, <code>sex</code> and <code>chol</code>? Test your prediction by replicating the machine learning process, but <em>only</em> allow the models to make predictions based on the three variables <code>age</code>, <code>sex</code> and <code>chol</code>. Does one model substantially outperform the others? (Hint: You can easily tell a model what specific variables to include using the <code>formula</code> argument. For example, <code>formula = y ~ a + b</code> will tell a model to model a variable y, but <em>only</em> using variables a and b.)</p></li>
 <li><p>How do you think these algorithms would perform on a randomly generated dataset? Let’s test this by creating a random training and test dataset, and then see how well the algorithms do. Run the code below to add a random column of data called <code>random</code> to <code>heart_train</code> and <code>heart_test</code>. Then, run your machine learning analysis, but now train and test the models on the new random data column. How well do the models do in training and testing?</p></li>
 </ol>
@@ -412,7 +411,7 @@ heart_test &lt;- heart_test %&gt;%
   mutate(
     random = sample(c(0, 1), size = nrow(.), replace = TRUE)
   )</code></pre>
-<ol start="11" style="list-style-type: decimal">
+<ol start="10" style="list-style-type: decimal">
 <li><p>So far we’ve only looked at the <code>heartdisease</code> data. Try conducting a similar analysis on the <code>ACTG175</code> data from the <code>speff2trial</code> package. Specifically, try creating models predicting whether or not the number of days until the first occurence of a major negative event is less than 1,000 days. Which of the different machine learning algorithms performs the best in predicting new data from this dataset? Do you discover any challenges in working with dataset that weren’t present in the <code>heartdisease</code> data?</p>
 <ul>
 <li>To predict whether the number of days is greater than 1,000, you’ll need to create a new column called <code>days_gt1000</code> that indicates this. You can do this with <code>ACTG175 &lt;- ACTG175 %&gt;% mutate(days_gt1000 = days &gt; 1000)</code></li>
