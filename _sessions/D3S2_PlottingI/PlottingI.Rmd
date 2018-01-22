@@ -1164,7 +1164,7 @@ ggplot(data = mpg,
 
 ---
 
-.pull-left4[
+.pull-left65[
 
 ## Themes
 
@@ -1172,23 +1172,29 @@ ggplot(data = mpg,
 <font size = 5>You can customise specific elements of themes in the `theme()` function</font><br>
 
 
-```{r, eval = FALSE}
+
+```{r, eval = TRUE, out.width = "60%", fig.width = 8, fig.height = 4}
 ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy)) +
   geom_point() +
-  theme(panel.grid.major.y = ..., # Major gridline
-        # Gridline width
-        # Plot margin spacing)
+  theme(plot.background = element_rect(fill = "skyblue"),
+        panel.background = element_rect(fill = "skyblue"),
+        title = element_text(colour = "white", size = 20),
+        axis.title = element_text(colour = "white")) +
+    labs(title = "White Title")
 ```
 
 
-<font size = 5>To see all of the arguments, look at the help menu or check out the ggplot2.tidyverse.org
-
 ]
 
-.pull-right55[
+.pull-right3[
 
-```{r, echo = FALSE, out.width = "80%", fig.align = 'center', eval = TRUE}
+<br><br><br>
+
+<font size = 5>Look at the theme help menu with ?theme() to see all possible theme adjustments</font>
+
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center', eval = TRUE}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/theme_help_ss.png")
 ```
 
@@ -1216,8 +1222,19 @@ ggplot(data = mpg,
 ## Facetting with `facet_wrap()`
 
 .pull-left4[
-- *Facetting* = Create different plots for different groups
-- To facet plots, use `facet_wrap()`
+<br>
+<font size = 5><i>Facetting</i> = Create different plots for different groups</font><br>
+
+<font size = 5>To facet plots, use `facet_wrap()`</font><br>
+
+
+```{r, fig.width = 6, fig.height = 4, out.width = "70%", echo = TRUE}
+# No faceting
+ggplot(data = mpg, 
+       mapping = aes(x = displ, 
+                     y = hwy)) + 
+  geom_point()
+```
 
 
 ]
@@ -1225,12 +1242,13 @@ ggplot(data = mpg,
 .pull-right55[
 
 ```{r, fig.width = 7, fig.height = 5, out.width = "80%", echo = TRUE}
+# With faceting
+
 ggplot(data = mpg, 
        mapping = aes(x = displ, 
-                     y = hwy, 
-                     color = class)) + 
+                     y = hwy)) + 
   geom_point()  +
-  facet_wrap(~ class)
+  facet_wrap(~ class)  # Tilde first!
 ```
 
 ]
@@ -1278,14 +1296,12 @@ myplot # Evaluate myplot
 
 .pull-left35[
 
-<font size = 5>ggplot returns an object of the class "gg"</font><br>
 
-<font size = 5>You can assign the result of `ggplot` to an object.</font><br>
 
-<font size = 5>Evaluating the object will show the plot</font><br>
-
-<font size = 5>You can even edit existing `ggplot` objects</font><br>
-
+```{r, fig.width = 6, fig.height = 4, out.width = "100%"}
+# Original plot
+myplot
+```
 
 ]
 
@@ -1297,7 +1313,7 @@ myplot # Evaluate myplot
 # Take the existing plot and add elements
 myplot + 
   facet_wrap(~trans) +
-  theme_light()
+  theme_dark()
 ```
 
 
@@ -1305,7 +1321,46 @@ myplot +
 ]
 
 ---
-## Saving plots to image
+## Saving plots to image with ggsave()
+
+.pull-left5[
+
+<br><br>
+
+<font size = 5>To save plots to a file (e.g.; .jpg, .pdf, .png), use the ggsave() function</font><br>
+
+
+|Argument| Definition|
+|:-------|:----------|
+|`filename`|File name|
+|`plot`|Plotting object|
+|`device`|File type (e.g.; "pdf", "jpeg", "png")|
+|`path`|File path to save plot|
+|`width`|Plot width (inches)|
+|`height`|Plot height (inches)|
+
+]
+
+
+.pull-right45[
+
+<font size = 5>Save ggplot object called myplot to a pdf file</font><br>
+```{r, eval = FALSE}
+# Create myplot object
+myplot <- ggplot(...)
+
+# Create "myplot.pdf", from myplot
+ggsave(filename = "myplot.pdf",
+       plot = myplot,
+       device = "pdf",
+       path = "figures",
+       width = 6, 
+       height = 4)
+```
+
+
+
+]
 
 
 ---
