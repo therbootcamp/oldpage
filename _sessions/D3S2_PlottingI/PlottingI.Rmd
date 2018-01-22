@@ -2,7 +2,7 @@
 title: "Plotting Part I"
 subtitle: "ggplot2"
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -309,16 +309,6 @@ library(ggplot2)
 
 ]
 
-
-
----
-
-# Cheat Sheet!
-https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
-
-```{r, echo = FALSE, out.width="600", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplot_cheatsheet_ss.png")
-```
 
 
 
@@ -899,7 +889,8 @@ ggplot(data = mpg,
                      y = hwy, 
                      col = class)) +
   geom_point() +
-  geom_smooth(col = "blue",  method = "lm")
+  geom_smooth(col = "blue",  
+              method = "lm")
 ```
 
 
@@ -1172,6 +1163,38 @@ ggplot(data = mpg,
 
 
 ---
+
+.pull-left4[
+
+## Themes
+
+
+<font size = 5>You can customise specific elements of themes in the `theme()` function</font><br>
+
+
+```{r, eval = FALSE}
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  theme(panel.grid.major.y = ..., # Major gridline
+        # Gridline width
+        # Plot margin spacing)
+```
+
+
+<font size = 5>To see all of the arguments, look at the help menu or check out the ggplot2.tidyverse.org
+
+]
+
+.pull-right55[
+
+```{r, echo = FALSE, out.width = "80%", fig.align = 'center', eval = TRUE}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/theme_help_ss.png")
+```
+
+]
+
+---
 ## Final result!
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "40%"}
@@ -1192,15 +1215,97 @@ ggplot(data = mpg,
 ---
 ## Facetting with `facet_wrap()`
 
+.pull-left4[
 - *Facetting* = Create different plots for different groups
 - To facet plots, use `facet_wrap()`
 
-```{r, fig.width = 5, fig.height = 5, out.width = "30%", echo = TRUE}
+
+]
+
+.pull-right55[
+
+```{r, fig.width = 7, fig.height = 5, out.width = "80%", echo = TRUE}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, color = class)) + 
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     color = class)) + 
   geom_point()  +
   facet_wrap(~ class)
 ```
+
+]
+
+---
+## Assigning a ggplot to an object
+
+
+.pull-left35[
+<br><br>
+
+<font size = 5>ggplot returns an object of the class "gg"</font><br>
+
+<font size = 5>You can assign the result of `ggplot` to an object.</font><br>
+
+<font size = 5>Evaluating the object will show the plot</font><br>
+
+<font size = 5>You can even edit existing `ggplot` objects</font><br>
+
+
+]
+
+
+.pull-right6[
+
+```{r, out.width = "60%", fig.width = 6, fig.height = 4}
+# Create myplot
+myplot <- ggplot(data = mpg,
+                 aes(x = cty, y = hwy)) + 
+              geom_point() + 
+              theme_bw()
+
+class(myplot)
+
+myplot # Evaluate myplot
+```
+
+]
+
+
+
+---
+## Assigning a ggplot to an object
+
+
+.pull-left35[
+
+<font size = 5>ggplot returns an object of the class "gg"</font><br>
+
+<font size = 5>You can assign the result of `ggplot` to an object.</font><br>
+
+<font size = 5>Evaluating the object will show the plot</font><br>
+
+<font size = 5>You can even edit existing `ggplot` objects</font><br>
+
+
+]
+
+
+.pull-right6[
+
+```{r,  out.width = "70%"}
+
+# Take the existing plot and add elements
+myplot + 
+  facet_wrap(~trans) +
+  theme_light()
+```
+
+
+
+]
+
+---
+## Saving plots to image
 
 
 ---
@@ -1215,6 +1320,19 @@ ggplot(data = mpg,
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/plotting_books.png")
 ```
+
+
+
+---
+
+# Cheat Sheet!
+https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+```{r, echo = FALSE, out.width="600", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplot_cheatsheet_ss.png")
+```
+
+
 
 ---
 ## Questions?
