@@ -327,7 +327,7 @@ trial_act</code></pre>
 <h3><code>rename()</code></h3>
 <ol style="list-style-type: decimal">
 <li><p>Lets change some of the column names in <code>trial_act</code>. Using <code>rename()</code>, change <code>wtkg</code> to <code>weightkg</code> and <code>age</code> to <code>age_years</code> (to specify that age is in years)</p></li>
-<li><p>Oops, you just learned that your data repository doesn’t allow underscores in column names. Change <code>age_years</code> to <code>agey</code></p></li>
+<li><p>Oops, you just learned that your company’s data repository doesn’t allow underscores in column names. Change <code>age_years</code> to <code>agey</code></p></li>
 </ol>
 </div>
 <div id="mutate" class="section level3">
@@ -431,20 +431,12 @@ trial_act &lt;- trial_act %&gt;%
 <li><p>Repeat the previous analysis, but only include patients with a Karnofsky score equal to 100, and who did not use zidovudine in the 30 days prior to the treatment initiation (<code>z30</code>)</p></li>
 <li>In one block of code, complete the following tasks
 <ul>
-<li>Change the name of the column <code>weightkg</code> to <code>weight</code> (hint: use <code>rename()</code>)</li>
+<li>Change the name of the column <code>weightkg</code> to <code>weight</code></li>
 <li>Create a new column called <code>drugs_char</code> that uses strings instead of numbers to indicate drug use</li>
 <li>Filter the data to only include male patients with id numbers greater than 10100</li>
-<li>Group the data by <code>drugs_char</code> and <code>arm</code></li>
+<li>Group the data by <code>drugs_char</code> and <code>arms</code></li>
 <li>For each group calculate the mean age, percentage of patients that are male, and mean number of days until a major negative event.</li>
 <li>Filter the grouped data to only include cases where mean age is greater than 30.</li>
-</ul></li>
-<li><p>The <code>diamonds</code> dataframe is contained in the <code>dplyr</code> package (so you should already have it available). Print the <code>diamonds</code> data to see how it looks. Then, using the <code>diamonds</code> data, for each value of <code>cut</code> and <code>color</code> (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called <code>diamonds_cut_agg</code>. What combination of cut and color is at the top of the data as having the highest mean price?</p></li>
-<li><p>Using the <code>diamonds</code> dataframe, do the following in one block of code. And store</p>
-<ul>
-<li>Recode the values of the <code>cut</code> column so there are no spaces.</li>
-<li>Remove the columns x, y, z</li>
-<li>Remove all rows where diamonds have a price less than 300.</li>
-<li>Group the data by clarity, then calculate the mean price, mean depth, and mean carat.</li>
 </ul></li>
 </ol>
 </div>

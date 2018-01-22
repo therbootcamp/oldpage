@@ -242,7 +242,6 @@ randomForest_model$importance
 
 6. So far, we have created decision trees using `FFTrees`. This package (written by Nathaniel!), also allows you to plot visualise the tree and its performance statistics. Using `plot()`, visualise your `FFTrees_model` object!
 
-
 7. By default, random forests creates 500 trees. You can change this using the `ntree` argument in `randomForest()`. Try creating 2 new randomForest objects, one based on either a small number of trees (e.g. 10), and one based on 10,000 trees. How much better (or worse) do these models do compared to the default model with 500 trees?
 
 8. A fellow colleague things that support vector machines should perform better than the models you used. Is she right? Test her prediction by including support vector machines using the `svm()` function from the `e1071` package in all of your analyses. You'll need to add code for support vector machines at each stage of the machine learning process, model building, data fitting, and data prediction. Was she right?

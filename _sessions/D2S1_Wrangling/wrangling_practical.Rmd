@@ -180,7 +180,7 @@ trial_act
 
 1. Lets change some of the column names in `trial_act`. Using `rename()`, change `wtkg` to `weightkg` and `age` to `age_years` (to specify that age is in years)
 
-2. Oops, you just learned that your data repository doesn't allow underscores in column names. Change `age_years` to `agey`
+2. Oops, you just learned that your company's data repository doesn't allow underscores in column names. Change `age_years` to `agey`
 
 ### `mutate()`
 
@@ -484,22 +484,13 @@ trial_act %>%
 
 
 25. In one block of code, complete the following tasks
-    - Change the name of the column `weightkg` to `weight` (hint: use `rename()`)
+    - Change the name of the column `weightkg` to `weight`
     - Create a new column called `drugs_char` that uses strings instead of numbers to indicate drug use
     - Filter the data to only include male patients with id numbers greater than 10100
-    - Group the data by `drugs_char` and `arm`
+    - Group the data by `drugs_char` and `arms`
     - For each group calculate the mean age, percentage of patients that are male, and mean number of days until a major negative event.
     - Filter the grouped data to only include cases where mean age is greater than 30.
 
-
-26. The `diamonds` dataframe is contained in the `dplyr` package (so you should already have it available). Print the `diamonds` data to see how it looks. Then, using the `diamonds` data, for each value of `cut` and `color` (i.e.; group the data by these two variables), calculate the minimum, mean, and maximum price. Then, arrange the data by mean price (in descending order). Store the result as a new tibble called `diamonds_cut_agg`. What combination of cut and color is at the top of the data as having the highest mean price?
-
-27. Using the `diamonds` dataframe, do the following in one block of code. And store
-
-    - Recode the values of the `cut` column so there are no spaces.
-    - Remove the columns x, y, z
-    - Remove all rows where diamonds have a price less than 300.
-    - Group the data by clarity, then calculate the mean price, mean depth, and mean carat.
 
 # Additional reading
 
