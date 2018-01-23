@@ -23,7 +23,7 @@ In this practical you'll practice creating interactive graphics with `shiny`.
 
 ###Cheatsheet
 
-```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "http://shiny.rstudio.com/../_image/shiny-cheatsheet.pdf", out.width = "60%"}
+```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "http://shiny.rstudio.com/images/shiny-cheatsheet.pdf", out.width = "60%"}
 knitr::include_graphics("../_image/shiny_cheatsheet_ss.png")
 ```
 
@@ -369,13 +369,67 @@ output$summary <- renderPrint({
 ## Challenges
 
 C1. Now that you have multiple datasets, try removing the Plot title and X-axis label inputs (`input$main`, `input$xlab`), and instead have the plot automatically adjust the plot title and axis label based on the dataset the users selects. Just like we did with `x_reactive()`, you'll need to assign the main title and x label as reactive values.
-   
-C2. Instead of a histogram, try creating a scatterplot as the main plotting output. Keep in mind that you'll now need to create two reactive values: `x_reactive()` for the data on the x-axis and `y_reactive()` for the y-axis. Then, as an optional argument (using a `checkboxInput`), allow the user to add a regression line to the plot.
+  
+C2. Add a new panel called "Table" where the user can view their selected dataset. To do this, in the server code, you'll need to create a new output called `output$tbl` which is is a rendered version of the data. Then in the UI, you'll need to include
 
-C3. Check out the [RStudio Shiny Gallery](https://shiny.rstudio.com/gallery/) at [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/) and look for a Shiny app you really like. Find the code, copy it, and paste it into a new app in RStudio. See if you can get the app to run. Then, customise it!
+```{r, eval = FALSE, echo = TRUE}
+#### SERVER
 
+# Send a rendered data table to output
+#  DATASET should the the data as a dataframe
+
+output$tbl <- renderUI({
+    
+  output$mytbl <- DT::renderDataTable(expr = DATASET, 
+                                      options = list(lengthChange = FALSE))
+    
+    DT::dataTableOutput('mytbl')
+    
+})
+
+#### UI
+
+# Add the new Table tabpanel
+tabsetPanel(type = "tabs",
+            tabPanel("Histogram", plotOutput("distPlot")),
+            tabPanel("Summary", verbatimTextOutput("summary")),  
+            tabPanel("Description"),
+            tabPanel("Table", uiOutput('tbl')))  # <- HERE!!!
+```
+
+
+C3. Try adding a new panel called `Test` where people can conduct a one-sample t-test on their data and view the results. To do this, you'll need to create a new output in the server called `output$printttest` which is a call to `renderPrint()`. Inside of `renderPrint()` you'll create the code for your test, and print the result. Next, in the UI, you'll need to add a new tab panel, and show the results by running `verbatimTextOutput('printttest')`. Look at the template below for help. If you'd like, you could also add a new user input that allows the user to customise the main arguments for the t.test, like `mu` and `alternative`.
+
+```{r, eval = FALSE, echo = TRUE}
+#### SERVER
+
+# Send results of t-test to output
+#  DATASET should the the data as a dataframe
+
+# Print Test output
+
+output$printttest <- renderPrint({
+    
+  mytest <- t.test(x = DATA, mu = 0, alternative = "two.sided")
+  
+    print(mytest)
+    
+  })
+  
+
+#### UI
+
+# Add the new Table tabpanel
+tabsetPanel(type = "tabs",
+            tabPanel("Histogram", plotOutput("distPlot")),
+            tabPanel("Summary", verbatimTextOutput("summary")),  
+            tabPanel("Description"),
+            tabPanel("Test", verbatimTextOutput('printttest')))  # <- HERE!!!
+```
+
+
+C4. So far we've used base plotting functions (e.g.; `hist()`, `abline()`). Try replacing these functions with ggplot code. For example, you could use `ggplot(data, aes(x)) + geom_hist()` to create a histogram. Note that because of the way you build on plots in ggplot, using the `addmean` functionality will be a bit tricky, so you may wish to remove it.
+
+C5. In the [RStudio Shiny Gallery](https://shiny.rstudio.com/gallery/) at [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/), you'll see a really cool Shiny App called Google Charts Demo. Click on the app, and then look at the underlying code. Try replicating this app yourself by creating a new app, and copying and pasting the Google Charts demo code into your app. Make sure the app runs. Then, try customising it! For example, you could change the default colors, or include the option for an additional filter in addition to the main "year" filter. Alternatively, you could try applying the chart to a dataset we've used in the bootcamp (like `mpg` or `diamonds`)
 
 ### References
-
-
-- For more examples of apps in action, check out the [RStudio Shiny Gallery](https://shiny.rstudio.com/gallery/) at [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)

@@ -97,11 +97,10 @@ https://econpsychbasel.shinyapps.io/shinypsych_bart/
 
 https://econpsychbasel.shinyapps.io/shinyfftrees/
 ---
-## GlioVis
+## ggplotgui
 
-<iframe src="gliovis.htm" width="1200" height="750"></iframe>
+<iframe src="http://shiny.gmw.rug.nl/ggplotgui/" width="1200" height="750"></iframe>
 
-http://gliovis.bioinfo.cnio.es/
 
 ---
 ## Shiny

@@ -21,7 +21,7 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 In this practical you'll practice plotting data with the `ggplot2` package. 
 
-###Cheatsheet
+### Cheatsheet
 
 ```{r, echo = FALSE, fig.align = 'center', eval = TRUE, fig.cap= "https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf", out.width = "60%"}
 knitr::include_graphics("../_image/ggplot_cheatsheet_ss.png")
@@ -101,10 +101,11 @@ ggplot(data = mpg,
   geom_smooth(col = "blue", method = "lm")
 
 
-
 # Facet by class
 ggplot(data = mpg,
-       mapping = aes(x = displ, y = hwy, color = factor(cyl))) + 
+       mapping = aes(x = displ, 
+                     y = hwy, 
+                     color = factor(cyl))) + 
   geom_point() +
   facet_wrap(~ class) 
 
