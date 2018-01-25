@@ -1,6 +1,6 @@
 ---
-title: "Plotting Part I"
-subtitle: "ggplot2"
+title: "Plotting"
+subtitle: "With ggplot2"
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "January 2018"
 output:
@@ -43,20 +43,19 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-left45[
 
-## Base-R Plotting
+## Base R Plotting
 
 There are different frameworks for doing plotting in R.
 
-The classic framework is known as `base-R` plotting.
+The classic framework is known as `Base R` plotting.
 
-In Base-R plotting, there is a separate function for each 'type' of plot
+In Base R plotting, there is a separate function for each 'type' of plot
 
 | Plot type| Function|
 |:------|:----|
 |     Bar plot| `barplot()`|
 |     Box plot|   `boxplot()`|
 |     Scatterplot|    `plot()`|
-|     Pirateplot|    `pirateplot()`|
 
 
 ]
@@ -80,21 +79,20 @@ hist(x = ChickWeight$weight,
 
 .pull-left45[
 
-## Base-R Plotting
+## Base R Plotting
 
 
 There are different frameworks for doing plotting in R.
 
 The classic framework is known as `base R` plotting.
 
-In Base-R plotting, there is a separate function for each 'type' of plot
+In Base R plotting, there is a separate function for each 'type' of plot
 
 | Plot type| Function|
 |:------|:----|
 |     Bar plot| `barplot()`|
 |     Box plot|   `boxplot()`|
 |     Scatterplot|    `plot()`|
-|     Pirateplot|    `pirateplot()`|
 
 ]
 
@@ -107,7 +105,7 @@ boxplot(formula = cty ~ trans,
         data = mpg,
         xlab = "Transmission",
         ylab = "City miles per gallon",
-        main = "Boxplot in Base-R")
+        main = "Boxplot in Base R")
 ```
 
 ]
@@ -118,20 +116,19 @@ boxplot(formula = cty ~ trans,
 
 .pull-left45[
 
-## Base-R Plotting
+## Base R Plotting
 
 There are different frameworks for doing plotting in R.
 
 The classic framework is known as `base R` plotting.
 
-In Base-R plotting, there is a separate function for each 'type' of plot
+In Base R plotting, there is a separate function for each 'type' of plot
 
 | Plot type| Function|
 |:------|:----|
 |     Bar plot| `barplot()`|
 |     Box plot|   `boxplot()`|
 |     Scatterplot|    `plot()`|
-|     Pirateplot|    `pirateplot()`|
 
 
 ]
@@ -154,7 +151,7 @@ plot(x = economics$date,
 ---
 
 .pull-left5[
-## Problems with Base-R plotting
+## Problems with Base R plotting
 <br>
 <font size = 5>Complex plots can quickly require a <b>LOT of code</b>.</font><br><br>
 
@@ -167,16 +164,14 @@ plot(x = economics$date,
 ]
 
 .pull-right5[
-
-<font size = 5>These plots would take a <b>lot</b> of code in base R</font>
+<br><br><br>
+<font size = 5>This plot would take a <b>lot</b> of code in Base R</font>
 
 ```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/complexplot1.png")
 ```
 
-```{r, echo = FALSE, out.width="100%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/complexplot2.png")
-```
+
 ]
 
 
@@ -187,11 +182,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 .pull-left4[
 
-How do we make elegant, easy to program plots according to the grammar of graphics in R?
+<font size = 5>How do we make elegant, easy to program plots according to the grammar of graphics in R?</font><br><br>
 
-###Answer: ggplot2
+## ggplot2 Package
 
-By far one of the most popular R packages, used to generate the vast majority of plots from R.
+<br>
+
+<font size = 5>One of the most widely used R packages, used to generate the vast majority of plots from R.</font>
 
 
 
@@ -1298,9 +1295,7 @@ ggplot(data = mpg,
 
 <font size = 5>You can even edit existing `ggplot` objects</font><br>
 
-
 ]
-
 
 .pull-right6[
 
@@ -1318,10 +1313,8 @@ myplot # Evaluate myplot
 
 ]
 
-
-
 ---
-## Assigning a ggplot to an object
+## Assigning ggplot() to an object
 
 
 .pull-left35[
@@ -1396,7 +1389,7 @@ ggsave(filename = "myplot.pdf",
 ---
 ## So much more
 
-- We have only touched the surface of what you can do with `ggplot`
+- We have only touched the surface of what you can do with `ggplot2`
 
 - http://ggplot2.tidyverse.org/index.html
 - http://r4ds.had.co.nz/data-visualization.html
@@ -1430,44 +1423,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 ---
-
-
-<!-- --- -->
-<!-- ## Extra slides -->
-
-
-<!-- --- -->
-
-<!-- ## Why are these two different? -->
-
-<!-- .pull-leftEven[ -->
-
-<!-- ### Plot A -->
-
-<!-- ```{r, fig.width = 7, fig.height = 4, out.width = "90%"} -->
-<!-- ggplot(data = mpg,  -->
-<!--        mapping = aes(x = displ, y = hwy,  -->
-<!--                      col = class)) + -->
-<!--   geom_point() +  -->
-<!--   geom_smooth(col = "blue") -->
-<!-- ``` -->
-
-<!-- ] -->
-
-
-<!-- .pull-rightEven[ -->
-
-<!-- ### Plot B -->
-
-<!-- ```{r, fig.width = 7, fig.height = 4, out.width = "90%"} -->
-<!-- ggplot(data = mpg,  -->
-<!--        mapping = aes(x = displ, y = hwy,  -->
-<!--                      col = class)) + -->
-<!--   geom_point() +  -->
-<!--   geom_smooth() -->
-<!-- ``` -->
-
-<!-- ] -->
 
 
 
