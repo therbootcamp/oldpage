@@ -63,6 +63,7 @@ ggplot(data = mpg,
        geom_count()   
 
 # Again, but with some additional arguments
+# Also using a new theme temporarily
 
 ggplot(data = mpg, 
        mapping = aes(x = displ, y = hwy)) +
@@ -71,7 +72,8 @@ ggplot(data = mpg,
                   alpha = .5,                   # Transparent points
                   position = "jitter") +        # Jitter the points         
          scale_x_continuous(limits = c(1, 15)) +  # Axis limits
-         scale_y_continuous(limits = c(0, 50))
+         scale_y_continuous(limits = c(0, 50)) +
+  theme_minimal()
 
 
 # Assign class to the color aesthetic and add labels with labs()
@@ -135,16 +137,9 @@ ggplot(data = mpg,
 
 ### Getting the data and project setup
 
-1. For this practical we'll play around with a few different datasets that are contained in different packages. The datasets, and the packages that contain them, are listed below. If you don't have any of these packages already, make sure to install them!
+1. Open a new R script and save it under the name `plotting_practical.R`
 
-| Dataset| Package|
-|:------|:----|
-|     `ACTG175`|    `speff2trial`  |
-|     `diamonds`|   `ggplot2` |
-|     `Davis`|   `car` |
-| `heartdisease` | `FFTrees` | 
-
-2. Load the `tidyverse` package.
+2. Load the `tidyverse` package (which includes ggplot2).
 
 ```{r, eval = TRUE, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -161,14 +156,14 @@ library(FFTrees)
 diamonds
 ```
 
-4. Create the following blank plot
+4. Using `ggplot()`, create the following blank plot using the `data` and `mapping` arguments (but no geom).
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = diamonds, 
        mapping = aes(x = carat, y = price))
 ```
 
-5. Now add points showing the relationship between the number of carats in the diamonds (`carat`) and its price (`price`)
+5. Now, using `geom_point()`, add points showing the relationship between the number of carats in the diamonds (`carat`) and its price (`price`)
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = diamonds, 
@@ -184,7 +179,7 @@ ggplot(data = diamonds,
   geom_point(alpha = .05)
 ```
 
-7. Color the points by their cut
+7. Using the `color` aesthetic maping, color the points by their cut.
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = diamonds, 
@@ -192,7 +187,7 @@ ggplot(data = diamonds,
   geom_point(alpha = .05)
 ```
 
-8. Create different plots for each value of `cut` using the `facet_wrap` function:
+8. Using the `facet_wrap()` function, create different plots for each value of `cut`.
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 8, fig.height = 2}
 ggplot(data = diamonds, 
@@ -201,7 +196,7 @@ ggplot(data = diamonds,
   facet_wrap(~ cut, nrow = 1)
 ```
 
-9. Add a black, smoothed mean line to each plot using `geom_smooth()` (You can also try turning the line into a regression line using the `method` argument)
+9. Using the `geom_smooth()` funciton, add a black, smoothed mean line to each plot (You can also try turning the line into a regression line using the `method` argument)
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 8, fig.height = 2}
 ggplot(data = diamonds, 
@@ -223,7 +218,7 @@ ggplot(data = diamonds,
 vignette("ggthemes", package = "ggthemes")
 ```
 
-12. Now, create the following plot from the `mpg` data using the using the Five Thirty Eight theme 
+12. Now, create the following plot from the `mpg` data using the using the Five Thirty Eight theme. Note that `cty` is on the x axis, and `hwy` is on the y axis.
 
 ```{r, echo = FALSE, eval = TRUE, fig.width = 6, fig.height = 6}
 library(ggthemes)
@@ -242,7 +237,7 @@ ggplot(data = mpg, aes(x = cty, y = hwy)) +
 
    - Set the `data` argument to `diamonds`
    - Map `carat` to the x aesthetic
-   - Add a density geom with `geom_density()` and set the fill to `"tomato1"`
+   - Add a density geom with `geom_density()` and set the fill color to `"tomato1"`
    - Add labels
    - Use the minimal theme with `theme_minimal()`
 
@@ -545,13 +540,13 @@ ggplot(data = economics,
   theme_bw()
 ```
 
-28. Make the following plot from the `ACTG175` dataset. To do this, you'll need to use both `geom_boxplot()` and `geom_point()`. To jitter the points, use the `position` argument to `geom_point()`, as well as the `position_jitter()` function to control how much to jitter the points.
+28. Make the following plot from the `ACTG175` dataset (the dataset is contained in the `speff2trial` package). To do this, you'll need to use both `geom_boxplot()` and `geom_point()`. To jitter the points, use the `position` argument to `geom_point()`, as well as the `position_jitter()` function to control how much to jitter the points.
 
 ```{r, eval = TRUE, echo = FALSE, fig.width = 10, fig.height = 6}
 ggplot(data = ACTG175,
        aes(x = factor(arms), y = days, fill = factor(arms))) +
    facet_wrap(~ drugs, nrow = 1, labeller = label_both) +
-  geom_boxplot(outlier.size = 0, alpha = .2) + 
+  geom_boxplot(outlier.size = 0) + 
   labs(title = "Number of days until a major negative event",
        subtitle = "For different treatment arms and separated by drug users and non drug users",
        caption = "Source: ACTG175 dataset from the speff2trial package",
@@ -626,7 +621,7 @@ ggplot(midwest_IL, aes(x = county, y = popdensity_z)) +
 ```
 
 
-31.  The code to create `mpg_agg`, a dataframe containing aggregated data from the `mpg` dataframe, is below. Once you've created `mpg_agg`, create the following heat plot using `geom_tile()`
+31. Create the following heat plot using `geom_tile()`. To do this, you'll first need to create the aggregated data `mpg_agg` (see code below).
 
 ```{r, echo = TRUE, eval = FALSE}
 # Calculate mean highway miles per gallon for each combination of
@@ -657,8 +652,10 @@ ggplot(mpg_agg,
  
 ```
 
-### References
+### References and Further Reading
 
 - Many of the plots in this practical were taken from Selva Prabhakaran's website [http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
 
-- For making maps with ggplot, check out Eric Anderson's tutorial at [http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
+- The main `ggplot2` webpage at [http://ggplot2.tidyverse.org/](http://ggplot2.tidyverse.org/) has great tutorials and examples.
+
+- `ggplot2` is also great for making maps. For exmaples, check out Eric Anderson's page at [http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
