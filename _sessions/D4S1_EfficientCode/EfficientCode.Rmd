@@ -164,7 +164,9 @@ Almost always your problem has been solved by someone else.
 
 **Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
-Use **tailor-made** functions, e.g., `data.table::fread`.
+Use **tailor-made** functions, e.g., `data.table::fread()`.
+
+Use **primitive** functions, e.g., `sum(x)/length(x)` rather than `mean(x)`.
 
 **Be specific**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
 ]

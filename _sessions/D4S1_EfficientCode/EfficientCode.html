@@ -46,6 +46,8 @@ class: center, middle, inverse, title-slide
 .pull-right45[
 &lt;font size = 5&gt;*Reasons for R being slow*&lt;br&gt;&lt;br&gt;
 **Extreme dynamism** - allows you to code flexibly.
++copy-on-modify semantics
++weak dynamic typing
 &lt;br2&gt;
 **Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
 ]
@@ -153,13 +155,14 @@ Almost always your problem has been solved by someone else.
 # Do as little as possible
 
 .pull-left35[
-### Or be as clear and specific as possible
 
 **Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
-Use **tailor-made** functions, e.g., `data.table::fread`.
+Use **tailor-made** functions, e.g., `data.table::fread()`.
 
-**Provide focus**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
+Use **primitive** functions, e.g., `sum(x)/length(x)` rather than `mean(x)`.
+
+**Be specific**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
 ]
 
 .pull-right65[
@@ -182,11 +185,11 @@ microbenchmark(
 ```
 
 ```
-## Unit: microseconds
-##   expr    min     lq    mean  median      uq     max neval cld
-##    web 845607 991413 2186940 1303390 3455173 5584816    10   b
-##  local   4411   5055   23300    5728   10205  134661    10  a 
-##  fread    972   1110    1534    1322    1662    3448    10  a
+## Unit: milliseconds
+##   expr    min     lq   mean median      uq     max neval cld
+##    web 713.40 852.33 947.81 943.61 1014.06 1241.14    10   b
+##  local   4.70   4.99   5.63   5.31    5.75    8.33    10  a 
+##  fread   1.14   1.17   1.66   1.24    1.59    4.74    10  a
 ```
 ]
 
@@ -218,8 +221,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   890  1068  1331   1310   1499   1829    10  a 
-##     apply 13417 15211 52167  17341 130792 138343    10   b
+##  colMeans   789   798   874    830    867   1273    10  a 
+##     apply 14490 15374 48753  17633 122472 124246    10   b
 ```
 ]
 
@@ -262,11 +265,11 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##     expr     min      lq   mean  median      uq     max neval cld
-##   loop10   21.01   24.12   28.3   25.40   28.29  103.21   100  a 
-##  loop100 1263.99 1306.92 1461.7 1355.42 1479.67 3677.55   100   b
-##    vec10    1.78    2.23    2.7    2.42    2.86    7.52   100  a 
-##   vec100    9.70   10.24   12.8   11.35   12.67   35.60   100  a
+##     expr     min      lq    mean  median      uq     max neval cld
+##   loop10   21.87   24.12   27.44   25.57   28.04   56.36   100  a 
+##  loop100 1199.73 1312.52 1477.09 1369.31 1547.59 3484.53   100   b
+##    vec10    1.84    2.21    2.77    2.48    2.99    8.98   100  a 
+##   vec100    9.79   10.32   12.82   11.50   12.80   37.38   100  a
 ```
 
 ]
@@ -297,9 +300,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq  mean median   uq     max neval cld
-##    my_fun(x, is.null) 1.09 1.14 21.25   1.21 1.31 1998.84   100   a
-##  my_fun_c(x, is.null) 1.08 1.17  1.29   1.23 1.33    3.19   100   a
+##                  expr   min   lq  mean median   uq     max neval cld
+##    my_fun(x, is.null) 0.974 1.06 17.84   1.16 1.27 1666.03   100   a
+##  my_fun_c(x, is.null) 0.985 1.06  1.17   1.14 1.23    2.74   100   a
 ```
 
 ```r
@@ -309,9 +312,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr   min   lq mean median   uq   max neval cld
-##    my_fun(x, is.null) 0.955 1.05 1.32   1.17 1.31 11.80   100   a
-##  my_fun_c(x, is.null) 0.964 1.03 1.19   1.11 1.25  3.81   100   a
+##                  expr  min   lq mean median   uq   max neval cld
+##    my_fun(x, is.null) 1.03 1.08 1.29   1.15 1.26 10.73   100   a
+##  my_fun_c(x, is.null) 1.03 1.08 1.33   1.17 1.30  9.75   100   a
 ```
 ]
 ---
@@ -352,9 +355,9 @@ microbenchmark(vectorz = colMeans(data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.92 8.32 8.96   8.66 9.35 11.6   100   b
-##  cluster 4.02 4.42 4.81   4.69 5.00  6.8   100  a
+##     expr  min   lq mean median   uq   max neval cld
+##  vectorz 7.82 8.10 8.50   8.30 8.60 11.37   100   b
+##  cluster 4.03 4.36 4.64   4.55 4.85  6.52   100  a
 ```
 ]
 ---
@@ -399,8 +402,8 @@ microbenchmark(vectorz = colMeans(my_data),
 ```
 ## Unit: milliseconds
 ##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.92 8.59 9.21   8.90 9.50 12.9   100   a
-##     Rcpp 7.91 8.46 9.05   8.86 9.41 12.2   100   a
+##  vectorz 7.60 8.11 8.60   8.39 8.81 11.4   100   a
+##     Rcpp 7.73 8.08 8.71   8.35 9.17 11.6   100   a
 ```
 ]
 ---
@@ -411,10 +414,18 @@ from &lt;a href="http://adv-r.had.co.nz/Performance.html"&gt; **Advanced R**&lt;
 
 | R implementation| Author | Description| 
 |:------|:------|:------------|
-| `pqR`  |Radford Neal|Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.|
-| `Renjin`  |BeDataDriven| Renjin uses the Java virtual machine, and has an extensive test suite.|
-| `FastR`  |Purdue University| FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.|
-| `Riposte`  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+| [`pqR`](http://www.pqr-project.org/)  |Radford Neal|This *p*retty *q*uick version of *R* builds on R 2.15.0; it fixes several performance issues, provides better memory management and some support for automatic multithreading.|
+| [`Renjin`](http://www.renjin.org/)  |BeDataDriven| Renjin uses the Java virtual machine.|
+| [`FastR`](http://www.oracle.com/technetwork/java/jvmls2013vitek-2013524.pdf)  |Purdue University| FastR is similar to Renjin. Optimisation is more ambitious, but at this point less mature.|
+| [`Riposte`](https://research.tableau.com/sites/default/files/pact2012-talbot-riposte.pdf)  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. It's work in progress, but the existing implementations are extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+
+---
+
+# Microsoft R Open
+
+Microsoft [R Open](https://mran.microsoft.com/) is the enhanced distribution of R from Microsoft Corporation.
+
+
 
 ---
 
