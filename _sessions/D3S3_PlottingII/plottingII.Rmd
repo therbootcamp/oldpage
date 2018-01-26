@@ -14,7 +14,6 @@ output:
       ratio: '16:9'
 ---
 
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 # see: https://github.com/yihui/xaringan
@@ -41,7 +40,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## This is Shiny
 
-<iframe src="movie_explorer.htm" width="1200" height="800"></iframe>
+# [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+# [https://www.showmeshiny.com/](https://www.showmeshiny.com/)
 
 ---
 ## What is Shiny?
@@ -49,7 +50,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```{r, echo = FALSE, fig.align = 'center', fig.cap = '<a href=http://shiny.rstudio.com/https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny-cheatsheet.pdf>R Studio</a>', out.width = "90%"}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny_definition.png")
 ```
-
 
 
 ---
@@ -83,12 +83,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 <iframe src="https://econpsychbasel.shinyapps.io/geyser_app/" width="1200" height="7500"></iframe>
 
----
-## Balloon Analogue Risk Task
-
-<iframe src="https://econpsychbasel.shinyapps.io/shinypsych_bart/" width="1200" height="750"></iframe>
-
-https://econpsychbasel.shinyapps.io/shinypsych_bart/
 
 ---
 ## FFTrees Example
@@ -96,11 +90,13 @@ https://econpsychbasel.shinyapps.io/shinypsych_bart/
 <iframe src="https://econpsychbasel.shinyapps.io/shinyfftrees/" width="1200" height="750"></iframe>
 
 https://econpsychbasel.shinyapps.io/shinyfftrees/
+
 ---
-## ggplotgui
+## Balloon Analogue Risk Task
 
-<iframe src="http://shiny.gmw.rug.nl/ggplotgui/" width="1200" height="750"></iframe>
+<iframe src="https://econpsychbasel.shinyapps.io/shinypsych_bart/" width="1200" height="750"></iframe>
 
+https://econpsychbasel.shinyapps.io/shinypsych_bart/
 
 ---
 ## Shiny
@@ -255,7 +251,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## Server
 
-- All R code that creates plots, does machine learning, accesses databases, searches twitter data (really anything!) goes in the `server()` function.
+<font size = 4>All R code that creates plots, does machine learning, accesses databases, searches twitter data (really anything!) goes in the `server()` function.</font>
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = "55%"}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/serverdescription.png")
@@ -264,20 +260,19 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## Server
 
-.pull-left45[
+.pull-left4[
 
-> ###How does the server communicate with the user interface?
 
 <br>
 <br>
 
-- To present output (e.g.; a plot), it must be *rendered* in the server using a special rendering function `renderXX()`, 
+<font size = 5>To present output (e.g.; a plot), it must be *rendered* in the server using a special rendering function renderXX()</font><br><br>
 
-- Once it is rendered, it is sent to the `output` and displayed in the user interface using an `xxOutput()` function.
+<font size = 5>Once it is rendered, it is sent to the `output` and displayed in the user interface using an xxOutput() function.</font>
 
 ]
 
-.pull-right45[
+.pull-right55[
 
 ### To send output to the user interface, you must use a render function
 
@@ -391,3 +386,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S3_PlottingII/PlottingII_practical.html">Link to Plotting II practical</a>
 
 ---
+
+## ggplotgui
+
+<iframe src="http://shiny.gmw.rug.nl/ggplotgui/" width="1200" height="750"></iframe>

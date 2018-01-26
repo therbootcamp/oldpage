@@ -23,7 +23,6 @@ class: center, middle, inverse, title-slide
 
 
 
-
 ## Shiny
 
 
@@ -33,7 +32,9 @@ class: center, middle, inverse, title-slide
 ---
 ## This is Shiny
 
-&lt;iframe src="movie_explorer.htm" width="1200" height="800"&gt;&lt;/iframe&gt;
+# [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+# [https://www.showmeshiny.com/](https://www.showmeshiny.com/)
 
 ---
 ## What is Shiny?
@@ -42,7 +43,6 @@ class: center, middle, inverse, title-slide
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny_definition.png" alt="&amp;lt;a href=http://shiny.rstudio.com/https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny-cheatsheet.pdf&amp;gt;R Studio&amp;lt;/a&amp;gt;" width="90%" /&gt;
 &lt;p class="caption"&gt;&lt;a href=http://shiny.rstudio.com/https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/shiny-cheatsheet.pdf&gt;R Studio&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-
 
 
 ---
@@ -72,12 +72,6 @@ class: center, middle, inverse, title-slide
 
 &lt;iframe src="https://econpsychbasel.shinyapps.io/geyser_app/" width="1200" height="7500"&gt;&lt;/iframe&gt;
 
----
-## Balloon Analogue Risk Task
-
-&lt;iframe src="https://econpsychbasel.shinyapps.io/shinypsych_bart/" width="1200" height="750"&gt;&lt;/iframe&gt;
-
-https://econpsychbasel.shinyapps.io/shinypsych_bart/
 
 ---
 ## FFTrees Example
@@ -85,11 +79,13 @@ https://econpsychbasel.shinyapps.io/shinypsych_bart/
 &lt;iframe src="https://econpsychbasel.shinyapps.io/shinyfftrees/" width="1200" height="750"&gt;&lt;/iframe&gt;
 
 https://econpsychbasel.shinyapps.io/shinyfftrees/
+
 ---
-## ggplotgui
+## Balloon Analogue Risk Task
 
-&lt;iframe src="http://shiny.gmw.rug.nl/ggplotgui/" width="1200" height="750"&gt;&lt;/iframe&gt;
+&lt;iframe src="https://econpsychbasel.shinyapps.io/shinypsych_bart/" width="1200" height="750"&gt;&lt;/iframe&gt;
 
+https://econpsychbasel.shinyapps.io/shinypsych_bart/
 
 ---
 ## Shiny
@@ -219,27 +215,26 @@ The user interface typically contains two main components: Widgets and
 ---
 ## Server
 
-- All R code that creates plots, does machine learning, accesses databases, searches twitter data (really anything!) goes in the `server()` function.
+&lt;font size = 4&gt;All R code that creates plots, does machine learning, accesses databases, searches twitter data (really anything!) goes in the `server()` function.&lt;/font&gt;
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/serverdescription.png" width="55%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Server
 
-.pull-left45[
+.pull-left4[
 
-&gt; ###How does the server communicate with the user interface?
 
 &lt;br&gt;
 &lt;br&gt;
 
-- To present output (e.g.; a plot), it must be *rendered* in the server using a special rendering function `renderXX()`, 
+&lt;font size = 5&gt;To present output (e.g.; a plot), it must be *rendered* in the server using a special rendering function renderXX()&lt;/font&gt;&lt;br&gt;&lt;br&gt;
 
-- Once it is rendered, it is sent to the `output` and displayed in the user interface using an `xxOutput()` function.
+&lt;font size = 5&gt;Once it is rendered, it is sent to the `output` and displayed in the user interface using an xxOutput() function.&lt;/font&gt;
 
 ]
 
-.pull-right45[
+.pull-right55[
 
 ### To send output to the user interface, you must use a render function
 
@@ -348,6 +343,10 @@ The Shiny cheatsheet explains the most common functions for rendering and presen
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D2S3_PlottingII/PlottingII_practical.html"&gt;Link to Plotting II practical&lt;/a&gt;
 
 ---
+
+## ggplotgui
+
+&lt;iframe src="http://shiny.gmw.rug.nl/ggplotgui/" width="1200" height="750"&gt;&lt;/iframe&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
