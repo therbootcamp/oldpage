@@ -258,68 +258,50 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 
 ---
-## Managing working directories in projects
+## Managing working directories with RMarkdown
 
 .pull-left4[
 
 <br>
 <br>
 
-When you knit a Markdown file, the working directory will be temporarily changed to the location of that file.
+When you knit a \*.Rmd file, the working directory will be *temporarily changed to the location of that file*.
 
-This can cause issues when your Markdown file is not in the root directory of your project, but in a sub-folder.
+If your Markdown file is not in the root directory of your project (i.e., is in a folder), then your code may no longer work
 
 ]
 
 .pull-right55[
 
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/error_wd.png")
+```
+
 ]
-
-
 
 ---
-## Managing working directories in projects
+## Managing working directories with RMarkdown
 
-.pull-left4[
 
-<br>
-<br>
-
-2 Solutions to the working directory issue
-
-1: Include `knitr::opts_knit$set(root.dir = '')` in your first chunk. This will move the working directory when the document is knitted.
-
-2: Use the `here()` function from the `here` package. This always returns the project root directory.
-
-]
-
-.pull-right55[
-
-### Solution 1:
-
-```{r, eval = FALSE}
-# Root directory is one folder up
-knitr::opts_knit$set(root.dir = '../')
-
-mydata <- read_csv(file = "data/mydata.csv")
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_A.png")
 ```
 
-### Solution 2:
+---
+## Managing working directories with RMarkdown
 
-```{r, message = FALSE, eval = TRUE, echo = TRUE}
-library(here)
 
-# Show me the root directory
-here()
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_B.png")
 ```
 
-```{r, eval = FALSE}
-# Read in data relative to root directory
-mydata <- read_csv(file = paste0(here(), "/data/mydata.csv"))
+---
+## Managing working directories with RMarkdown
+
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_C.png")
 ```
-
-]
-
 
 
 ---

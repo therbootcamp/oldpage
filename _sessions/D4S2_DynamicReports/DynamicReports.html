@@ -226,75 +226,42 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 
 
 ---
-## Managing working directories in projects
+## Managing working directories with RMarkdown
 
 .pull-left4[
 
 &lt;br&gt;
 &lt;br&gt;
 
-When you knit a Markdown file, the working directory will be temporarily changed to the location of that file.
+When you knit a \*.Rmd file, the working directory will be *temporarily changed to the location of that file*.
 
-This can cause issues when your Markdown file is not in the root directory of your project, but in a sub-folder.
+If your Markdown file is not in the root directory of your project (i.e., is in a folder), then your code may no longer work
 
 ]
 
 .pull-right55[
 
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/error_wd.png" width="90%" style="display: block; margin: auto;" /&gt;
+
 ]
-
-
 
 ---
-## Managing working directories in projects
-
-.pull-left4[
-
-&lt;br&gt;
-&lt;br&gt;
-
-2 Solutions to the working directory issue
-
-1: Include `knitr::opts_knit$set(root.dir = '')` in your first chunk. This will move the working directory when the document is knitted.
-
-2: Use the `here()` function from the `here` package. This always returns the project root directory.
-
-]
-
-.pull-right55[
-
-### Solution 1:
+## Managing working directories with RMarkdown
 
 
-```r
-# Root directory is one folder up
-knitr::opts_knit$set(root.dir = '../')
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_A.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-mydata &lt;- read_csv(file = "data/mydata.csv")
-```
-
-### Solution 2:
+---
+## Managing working directories with RMarkdown
 
 
-```r
-library(here)
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_B.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-# Show me the root directory
-here()
-```
-
-```
-[1] "/Users/nphillips/Dropbox/therbootcamp/therbootcamp.github.io"
-```
+---
+## Managing working directories with RMarkdown
 
 
-```r
-# Read in data relative to root directory
-mydata &lt;- read_csv(file = paste0(here(), "/data/mydata.csv"))
-```
-
-]
-
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/markdown_wd_C.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 
 ---
