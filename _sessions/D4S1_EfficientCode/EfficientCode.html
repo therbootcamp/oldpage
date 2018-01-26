@@ -73,11 +73,10 @@ The first step to making your code efficient is to **identify critical parts** o
 
 Often some small part of your code takes orders of magnitudes longer than everything else. Profiling is about figuring out which parts of your code take so long.
 
-.pull-left4[
+.pull-left45[
 
 ```r
   profvis({
-
   # load data
   data &lt;- read_csv('data/happiness.csv')
 
@@ -86,8 +85,7 @@ Often some small part of your code takes orders of magnitudes longer than everyt
     mutate(happy_num = case_when(
       happy == 'not too happy' ~ 0,
       happy == 'pretty happy' ~ 1,
-      happy == 'very happy' ~ 2,
-    ))
+      happy == 'very happy' ~ 2))
 
   # multiple regression 
   model &lt;- lm(happy_num ~ tvhours + owngun, 
@@ -95,7 +93,6 @@ Often some small part of your code takes orders of magnitudes longer than everyt
   
   # evaluate model
   summary(model)
-
   }, interval = .005)
 ```
 ]
@@ -160,7 +157,7 @@ Almost always your problem has been solved by someone else.
 
 # Do as little as possible
 
-.pull-left35[
+.pull-left3[
 
 **Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
@@ -191,11 +188,11 @@ microbenchmark(
 ```
 
 ```
-## Unit: milliseconds
+## Unit: microseconds
 ##   expr    min     lq    mean median     uq     max neval cld
-##    web 759.14 802.89 1233.29 900.03 997.05 3077.10    10   b
-##  local   5.07   5.53    5.78   5.72   5.86    7.00    10  a 
-##  fread   1.01   1.03    1.30   1.09   1.19    2.83    10  a
+##    web 730906 782970 1215352 843183 954274 4401568    10   b
+##  local   4536   5077    8504   5379   5611   37321    10  a 
+##  fread    874    968    1239   1044   1210    2899    10  a
 ```
 ]
 
@@ -207,7 +204,9 @@ microbenchmark(
 .pull-left35[
 Whenever possible **use vector operations** or functions that do vectorized operations. 
 
-In other words, **don't use loops**, stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc., and use functions that have been implemented in C/C++. 
+In other words, **don't use loops**, stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc.
+
+Yet in other words, **use functions** that have been **implemented in C/C++**. 
 ]
 
 .pull-right6[
@@ -227,8 +226,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   855   923  1184   1014   1564   1828    10  a 
-##     apply 14311 15556 50091  19244 121543 131692    10   b
+##  colMeans   777   828   917    879    952   1214    10  a 
+##     apply 13878 15394 47182  16552 118950 121735    10   b
 ```
 ]
 
@@ -271,10 +270,10 @@ microbenchmark(
 ```
 ## Unit: nanoseconds
 ##     expr   min    lq  mean median    uq     max neval cld
-##   loop10  2330  2818 30275   3042  3238 2725692   100  ab
-##  loop100 32579 52792 56090  54708 58462   89803   100   b
-##    vec10   125   187   297    206   264    6464   100  a 
-##   vec100   317   352   733    401   530    2937   100  a
+##   loop10  2405  2898  3171   3164  3421    4596   100  a 
+##  loop100 30594 51338 81689  53252 56000 2880509   100   b
+##    vec10   123   183   311    206   262    9199   100  a 
+##   vec100   314   360   659    407   506    2470   100  a
 ```
 
 ]
@@ -282,9 +281,9 @@ microbenchmark(
 .pull-left2[
 # Byte-code&lt;br&gt;compilation
 
-Using the base R package `compiler` code can be compiled to byte-code, a faster, **lower-level version of the code**.
+R can be compiled to byte-code, to create a faster, **lower-level version of the code**.
 
-As R compiles functions anyway after the first execution, this is **often not useful**. 
+R does this automatically with the first execution of a function. Thus, the second time a function is executed it will be faster.  
 
 ]
 .pull-right7[
@@ -303,9 +302,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq  mean median   uq    max neval cld
-##    my_fun(x, is.null) 7.44 7.83 19.30   8.08 8.56 1069.4   100   a
-##  my_fun_c(x, is.null) 7.44 7.76  8.29   8.01 8.34   19.3   100   a
+##                  expr  min   lq mean median   uq    max neval cld
+##    my_fun(x, is.null) 7.97 8.62 20.9   9.07 9.77 1171.4   100   a
+##  my_fun_c(x, is.null) 7.72 8.54  9.9   9.16 9.78   63.2   100   a
 ```
 
 ```r
@@ -316,8 +315,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 7.85 8.57 12.8   10.5 17.6 35.4   100   a
-##  my_fun_c(x, is.null) 7.68 8.39 13.2   10.7 17.5 61.2   100   a
+##    my_fun(x, is.null) 9.67 10.3 11.3   10.6 11.1 36.6   100   a
+##  my_fun_c(x, is.null) 9.12 10.2 11.5   10.7 11.7 64.8   100   a
 ```
 ]
 ---
@@ -325,9 +324,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 .pull-left2[
 # Parallel&lt;br&gt;computing
 
-When working with large data one of the **best way to speed up** execution is parallel execution. 
+When working with large data one of the **best ways to speed up** execution is parallel execution. 
 
-Parallel execution splits the data in many **jobs** and then has many **workers** (separate R instances) working on them in parallel. 
+Parallel execution means splitting the data in many **jobs** and having many **workers** (separate R instances equipped with a worker function) complete the jobs in parallel. 
 ]
 
 .pull-right7[
@@ -359,8 +358,8 @@ microbenchmark(vectorz = colMeans(data),
 ```
 ## Unit: milliseconds
 ##     expr  min   lq mean median   uq   max neval cld
-##  vectorz 7.62 7.99 8.48   8.16 8.69 12.27   100   b
-##  cluster 4.03 4.44 4.68   4.57 4.82  6.96   100  a
+##  vectorz 7.57 8.02 8.40   8.20 8.52 11.91   100   b
+##  cluster 4.02 4.53 4.79   4.66 4.94  7.41   100  a
 ```
 
 
@@ -371,9 +370,9 @@ microbenchmark(vectorz = colMeans(data),
 .pull-left2[
 # Rcpp
 
-Another very effective, but highly advanced option is to write the essential code using Rcpp - **R's C++ interface**.
+Another very effective, but quite advanced option is to write essential code chunks in C++ using Rcpp - **R's C++ interface**.
 
-As many functions are already implemented in C++ or Fortran in the background, this works well **only for non-standard operations**. 
+Many functions are already implemented in C++ or Fortran. Thus, large benefits will only be seen for **for custom functions**. 
 
 &lt;a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf"&gt;**Quick-Guide**&lt;/a&gt;
 
@@ -392,9 +391,7 @@ NumericVector colMeans_c(NumericMatrix&amp; mat) {
   NumericVector means(n_cols);
   for(int j = 0; j &lt; n_cols; ++j) {
     double sum = 0;
-    for(int i = 0; i &lt; n_rows; ++i){
-      sum += mat(i, j);
-      }
+    for(int i = 0; i &lt; n_rows; ++i) sum += mat(i, j);
     means[j] = sum / n_rows;  
     }
   return means;
@@ -410,9 +407,9 @@ microbenchmark(vectorz = colMeans(as.data.frame(my_data)),
 
 ```
 ## Unit: milliseconds
-##     expr   min     lq   mean median     uq   max neval cld
-##  vectorz 222.0 228.67 233.13 232.09 236.65 275.3   100   b
-##     rcpp   7.8   8.37   9.14   8.89   9.73  12.2   100  a
+##     expr    min     lq   mean median     uq   max neval cld
+##  vectorz 218.38 229.61 233.61 233.16 237.31 260.9   100   b
+##     rcpp   7.64   8.56   9.26   9.08   9.76  11.5   100  a
 ```
 ]
 ---
@@ -432,9 +429,9 @@ from &lt;a href="http://adv-r.had.co.nz/Performance.html"&gt; **Advanced R**&lt;
 
 # Microsoft R Open
 
+.pull-left4[
 Microsoft [R Open](https://mran.microsoft.com/) is the enhanced distribution of R from Microsoft Corporation.
 
-.pull-left4[
 Open R interfaces with the high-performance, multi-threaded [**BLAS/LAPACK**](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries for superior performance. 
 
 **Maximize reproducibility** by freezing the set of base packages with every version of Open R. 
@@ -442,7 +439,7 @@ Sort of R's Matlab.
 ]
 
 .pull-right45[
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/profvis.png" width="500"&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/openr.png" width="350"&gt;
 ]
 
 ---
@@ -477,6 +474,7 @@ library(  dplyr)
 ## mean of x mean of y 
 ##      69.2      64.1
 ```
+]
 
 .pull-right45[
 

@@ -78,11 +78,10 @@ The first step to making your code efficient is to **identify critical parts** o
 
 Often some small part of your code takes orders of magnitudes longer than everything else. Profiling is about figuring out which parts of your code take so long.
 
-.pull-left4[
+.pull-left45[
 ```{r, eval = F}
 
   profvis({
-
   # load data
   data <- read_csv('data/happiness.csv')
 
@@ -91,8 +90,7 @@ Often some small part of your code takes orders of magnitudes longer than everyt
     mutate(happy_num = case_when(
       happy == 'not too happy' ~ 0,
       happy == 'pretty happy' ~ 1,
-      happy == 'very happy' ~ 2,
-    ))
+      happy == 'very happy' ~ 2))
 
   # multiple regression 
   model <- lm(happy_num ~ tvhours + owngun, 
@@ -100,7 +98,6 @@ Often some small part of your code takes orders of magnitudes longer than everyt
   
   # evaluate model
   summary(model)
-
   }, interval = .005)
   
 ```
@@ -166,7 +163,7 @@ Almost always your problem has been solved by someone else.
 
 # Do as little as possible
 
-.pull-left35[
+.pull-left3[
 
 **Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
@@ -210,7 +207,9 @@ microbenchmark(
 .pull-left35[
 Whenever possible **use vector operations** or functions that do vectorized operations. 
 
-In other words, **don't use loops**, stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc., and use functions that have been implemented in C/C++. 
+In other words, **don't use loops**, stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc.
+
+Yet in other words, **use functions** that have been **implemented in C/C++**. 
 ]
 
 .pull-right6[
@@ -267,9 +266,9 @@ microbenchmark(
 .pull-left2[
 # Byte-code<br>compilation
 
-Using the base R package `compiler` code can be compiled to byte-code, a faster, **lower-level version of the code**.
+R can be compiled to byte-code, to create a faster, **lower-level version of the code**.
 
-As R compiles functions anyway after the first execution, this is **often not useful**. 
+R does this automatically with the first execution of a function. Thus, the second time a function is executed it will be faster.  
 
 ]
 .pull-right7[
@@ -293,9 +292,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 .pull-left2[
 # Parallel<br>computing
 
-When working with large data one of the **best way to speed up** execution is parallel execution. 
+When working with large data one of the **best ways to speed up** execution is parallel execution. 
 
-Parallel execution splits the data in many **jobs** and then has many **workers** (separate R instances) working on them in parallel. 
+Parallel execution means splitting the data in many **jobs** and having many **workers** (separate R instances equipped with a worker function) complete the jobs in parallel. 
 ]
 
 .pull-right7[
@@ -333,9 +332,9 @@ stopCluster(clu)
 .pull-left2[
 # Rcpp
 
-Another very effective, but highly advanced option is to write the essential code using Rcpp - **R's C++ interface**.
+Another very effective, but quite advanced option is to write essential code chunks in C++ using Rcpp - **R's C++ interface**.
 
-As many functions are already implemented in C++ or Fortran in the background, this works well **only for non-standard operations**. 
+Many functions are already implemented in C++ or Fortran. Thus, large benefits will only be seen for **for custom functions**. 
 
 <a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf">**Quick-Guide**</a>
 
@@ -353,9 +352,7 @@ NumericVector colMeans_c(NumericMatrix& mat) {
   NumericVector means(n_cols);
   for(int j = 0; j < n_cols; ++j) {
     double sum = 0;
-    for(int i = 0; i < n_rows; ++i){
-      sum += mat(i, j);
-      }
+    for(int i = 0; i < n_rows; ++i) sum += mat(i, j);
     means[j] = sum / n_rows;  
     }
   return means;
@@ -386,9 +383,9 @@ from <a href="http://adv-r.had.co.nz/Performance.html"> **Advanced R**</a>
 
 # Microsoft R Open
 
+.pull-left4[
 Microsoft [R Open](https://mran.microsoft.com/) is the enhanced distribution of R from Microsoft Corporation.
 
-.pull-left4[
 Open R interfaces with the high-performance, multi-threaded [**BLAS/LAPACK**](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries for superior performance. 
 
 **Maximize reproducibility** by freezing the set of base packages with every version of Open R. 
@@ -396,7 +393,7 @@ Sort of R's Matlab.
 ]
 
 .pull-right45[
-<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/profvis.png" width="500">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/openr.png" width="350">
 ]
 
 ---
@@ -418,6 +415,7 @@ library(  dplyr)
         t.test(a,b) 
 
 ```
+]
 
 .pull-right45[
 ```{r, message=F, warning=F, eval = T}

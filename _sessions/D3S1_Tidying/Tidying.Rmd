@@ -32,6 +32,8 @@ options(digits = 4)
 .pull-left4[
 In this introduction you will learn...
 
+><font size = 5>...more about R projects.
+><br2>
 ><font size = 5>...how to write clean, documented code.
 ><br2>
 ><font size = 5>...to understand errors (and warnings).
@@ -48,7 +50,7 @@ In this introduction you will learn...
 .pull-left4[
 # Project structure
 
-<font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
+<font size = 6>Good, clean, well-documented projects begins with a **project** and a **folder structure**.
 ]
 .pull-right5[
 <br><br>
