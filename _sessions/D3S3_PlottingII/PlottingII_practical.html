@@ -470,11 +470,8 @@ tabsetPanel(type = &quot;tabs&quot;,
             tabPanel(&quot;Summary&quot;, verbatimTextOutput(&quot;summary&quot;)),  
             tabPanel(&quot;Description&quot;),
             tabPanel(&quot;Test&quot;, verbatimTextOutput('printttest')))  # &lt;- HERE!!!</code></pre>
-<p>C4. So far we’ve used base plotting functions (e.g.; <code>hist()</code>, <code>abline()</code>). Try replacing these functions with ggplot code. For example, you could use <code>ggplot(data, aes(x)) + geom_hist()</code> to create a histogram. Note that because of the way you build on plots in ggplot, using the <code>addmean</code> functionality will be a bit tricky, so you may wish to remove it.</p>
+<p>C4. So far we’ve used base plotting functions (e.g.; <code>hist()</code>, <code>abline()</code>). Try replacing these functions with ggplot code. For example, you could use <code>ggplot(data, aes(x)) + geom_hist()</code> to create a histogram. Note that because of the way you build on plots in ggplot, some parts of the code, such as the <code>addmean</code> functionality will be a bit tricky, so you may wish to remove it.</p>
 <p>C5. In the <a href="https://shiny.rstudio.com/gallery/">RStudio Shiny Gallery</a> at <a href="https://shiny.rstudio.com/gallery/" class="uri">https://shiny.rstudio.com/gallery/</a>, you’ll see a really cool Shiny App called Google Charts Demo. Click on the app, and then look at the underlying code. Try replicating this app yourself by creating a new app, and copying and pasting the Google Charts demo code into your app. Make sure the app runs. Then, try customising it! For example, you could change the default colors, or include the option for an additional filter in addition to the main “year” filter. Alternatively, you could try applying the chart to a dataset we’ve used in the bootcamp (like <code>mpg</code> or <code>diamonds</code>)</p>
-<div id="references" class="section level3">
-<h3>References</h3>
-</div>
 </div>
 
 

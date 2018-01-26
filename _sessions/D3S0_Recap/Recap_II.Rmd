@@ -2,7 +2,7 @@
 title: "Recap II"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -25,6 +25,27 @@ options(htmltools.dir.version = FALSE)
 # https://github.com/gnab/remark/wiki/Markdown
 options(width=110)
 options(digits = 4)
+
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+library(tidyverse)
+ChickWeight <- as.data.frame(ChickWeight)
+
+
+trial_X <- data.frame(id = 1:5,
+           sex = c("m", "f", "f", "m", "f"),
+           age = c(35, 42, 24, 56, 49),
+           arm = c(1, 2, 1, 2, 1),
+           y_primary = c(50, 78, 46, 97, 74),
+           y_secondary = c(1, 1, 0, 1, 1)
+           )
+
 ```
 
 
@@ -176,133 +197,277 @@ knitr::include_graphics("http://d33wubrfki0l68.cloudfront.net/f55c43407ae8944b98
 ```
 
 
+
+
 ---
 
 .pull-left4[
+# How do we wrangle data in R?
+
+<font size = 5>Answer: dplyr</font>
+
+Anytime you want to transform, organize, or aggregate data, use `dplyr`
+
+```{r, echo = FALSE, out.width = "50%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/dplyr_hex.png")
+```
+
+]
+
+.pull-right5[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/organise_transform_aggregate.png")
+```
+
+]
+
+
+---
+
+.pull-left35[
 # dplyr
 
 dplyr is a combination of 3 things:
 
 1. **`objects`** like dataframes
-2. **`verbs`** that **do** things to objects.
+2. **`functions`** that **do** things to objects.
 3. **`pipes`** `%>%` that string together objects and verbs
 
 <br>
-
 
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/pipe.jpg")
 ```
 
+]
+
+.pull-right6[
+
+## The pipe %>%
+
+<font size = 5> dplyr makes extensive use of the 'pipe' %>% which passes objects between functions</font>
+
+
+```{r, eval = FALSE}
+data %>%    # Start with data, AND THEN...
+  VERB1 %>% # Do VERB1, AND THEN...
+  VERB2 %>% # Do VERB2, AND THEN...
+  VERB3 %>% # Do VERB3, AND THEN...
+  group_by(x, y) %>%  # Group by variables x, y
+    summarise(
+      VAR_A_New = fun(X),
+      VAR_B_New = fun(Y)
+    )
+  )
+```
 
 ]
 
 
-.pull-right5[
 
-<br>
-<br>
-<br>
+
+---
+
+## There are tons of statistical packages in R!
+
+
+.pull-left35[
+<br><br>
+
+| Package| Models|
+|------:|:----|
+|     `afex`|   Anovas|
+|     `rpart`|    Decision Trees|
+|     `lme4`|   Mixed effects regression|
+|     `BayesFactor`| Bayesian statistics|
+|     `igraph`| Cluster analyses|
+|     `neuralnet`| Neural networks|
+
+]
+
+.pull-right6[
+
+```{r, echo = FALSE, out.width = "100%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/statistical_procedures.png")
+```
+
+]
+
+
+---
+
+# Statistics
+
+.pull-left5[
+
+
+| Test| R Function|
+|:------|:----|
+|     `formula`|The dependent variable and one or more independent variables|
+|     `data`|  The dataframe containing variables|
+|   `subset`  | Optional subset of data to test |
+
+
+```{r}
+trial_X
+```
+
+
+]
+
+.pull-right45[
+
+```{r, eval = FALSE}
+TEST(formula = Y ~ X1 + X2 + ...
+     data = DATA,
+     subset = SUBSET,
+     ...)
+```
+
+
+### Examples
+
+```{r, eval = FALSE}
+# T-test
+# DV = y_primary, IV = arm
+t.test(formula = y_primary ~ arm
+       data = trial_X)
+
+# Regression
+# DV = y_secondary, IV = arm, sex, age
+# Subset = only id > 50
+glm(formula = y_secondary ~ arm + sex + age
+    data = trial_X,
+    subset = id > 50)
+```
+
+]
+
+
+
+---
+
+.pull-left35[
+
+
+<br><br>
+
+## Exploring statistical objects
+
+Assign the results of a statistical function to a new object, then use *generic* functions such as `print()`, `summary()`, `predict()` and `plot()` to explore it.
+
+
+```{r, eval = FALSE}
+# Create statistical object
+my_obj <- FUN(formula = ...,
+              data = ...)
+
+names(my_obj)       # Elements
+print(my_obj)       # Print
+summary(my_obj)     # Summary
+plot(my_obj)        # Plotting
+predict(my_obj, ..) # Predict
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+
+
+```{r, eval = TRUE}
+# Create a glm object
+chick_glm <- glm(formula = weight ~ Time,
+                 data = ChickWeight)
+
+# Print the object
+names(chick_glm)
+
+## Access elements
+chick_glm$coefficients
+```
+
+]
+
+
+---
+
+# What is machine learning?
+
+.pull-left6[
+
+
+### Algorithms autonomously learning from data.
+
+Given data, an algorithm tunes its *parameters* to match the data, understand how it works, and make predictions for what will occur in the future.
+
+```{r, echo = FALSE, out.width = "80%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mldiagram_A.png")
+```
+
+]
+
+.pull-right4[
 
 ```{r, echo = FALSE, out.width = "70%", fig.align = 'center'}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/sequential.png")
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/machinelearningcartoon.png")
 ```
 
 
-dplyr is meant to be sequential and work like language
+]
 
-> Take data X, then do Y, then do Z...
+---
+# What is the basic machine learning process?
 
-Here's the basic structure of `dplyr` in action
+```{r, echo = FALSE, out.width = "95%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png")
+```
+
+
+
+
+---
+# How do I do machine learning in R?
+
+.pull-left6[
+
+In principle, it's a lot like evaluating statistical functions.
+
+Install the necessary package, evaluate the model function, explore the results.
 
 ```{r, eval = FALSE}
-data %>%           # Start with data, and THEN
-     VERB1 %>%     # Do VERB1, (and THEN)
-     VERB2 %>% ... # Do VERB2, (and THEN)
+# Create training and test data
+data_train <- ...
+data_test <- ...
+
+# Train models on training data
+model_A <- A_fun(formula = y ~ ., 
+                 data = data_train)
+
+# Model A predictions
+pred_A <- predict(model_A, 
+                  newdata = data_test)
+
+# Calculate Model A error
+pred_err_A <- mean(abs(pred_A - data_test$y))
+
+# Compare to Models B, C, D...
 ```
 
 ]
 
-
----
-
-# Common dplyr verbs
-
-| verb| action| example |
-|:---|:----|:----------------|
-|     `filter()`|    Select rows based on some criteria| `filter(age > 40 & sex == "m")`|
-|     `arrange()`|    Sort rows| `arrange(date, group)`|
-|     `select()`|    Select columns (and ignore all others)| `select(age, sex)`|
-|     `rename()`|    Rename columns| `rename(DATE_MONTHS_X24, date`)|
-|     `mutate()`|    Add new columns| `mutate(height.m = height.cm / 100)`|
-|     `case_when()`|    Recode values of a column| `sex.n = case_when(sex == 0 ~ "m", sex == 1 ~ "f")`|
-|     `group_by(), summarise()`|   Group data and then calculate summary statistics|`group_by(treatment) %>% summarise(...)` |
-
----
-# Inferential Statistics
-
-.pull-left45[
-
-### Formula
-
-- Many tests allow you to include a `formula` argument
-
-> `formula = y ~ a + b + ...`
-
-Means...
-
-> Model a dependent variable `y` as a function of `a` and `b` and `...`
-
-- Formulas go together with dataframes `data` containing all variables in the formula, and optional `subset` arguments to specify which cases in `data` to include. 
+.pull-right35[
 
 
-]
+If you're really into machine learning, packages such as `mlr` and `caret` can automate much of the the machine learning process.
 
-.pull-right45[
-
-### General structure of a hypothesis test and formula
-
-```{r, eval = FALSE}
-my.test(formula = y ~ a + b, # Formula
-        data = my.data,      # Dataframe
-        ...                  # Additional
-        )
-```
-
-- `y` is the dependent variable (e.g.; age), `a` and `b` are independent variables
-- `data` is a dataframe containing the variables in `formula`; (`y`, `a`, `b`)
--  `...` additional arguments specific to test
-]
-
----
-# What machine learning algorithms are there?
-
-.pull-left45[
-
-- There are hundreds of **machine learning algorithms** from many different fields.
-    - E.g.; Computer vision, natural language processing, reinforcement learning, graphical models, etc.
-
-
-- In this section, we will focus on 4:
-
-| Algorithm|Complexity?|
-|:------|:----|
-|     Regression| Low / Medium | 
-|     Decision Trees| Low |
-|     Random Forests| High |
-|     Support Vector Machines| High |
-
-]
-
-.pull-right45[
-
-- Wikipedia lists 57 *Categories* of machine learning algorithms, each with dozens of examples.
-
-```{r, echo = FALSE, eval = TRUE, out.width=450}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wikipediaml.png")
+```{r, echo = FALSE, eval = TRUE, out.width = "95%", fig.align = 'center'}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mlrcaret.png")
 ```
 
 ]
-
-
+---
+# Questions?
 

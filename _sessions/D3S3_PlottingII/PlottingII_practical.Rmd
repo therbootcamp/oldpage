@@ -368,6 +368,7 @@ output$summary <- renderPrint({
 
 ## Challenges
 
+
 C1. Now that you have multiple datasets, try removing the Plot title and X-axis label inputs (`input$main`, `input$xlab`), and instead have the plot automatically adjust the plot title and axis label based on the dataset the users selects. Just like we did with `x_reactive()`, you'll need to assign the main title and x label as reactive values.
   
 C2. Add a new panel called "Table" where the user can view their selected dataset. To do this, in the server code, you'll need to create a new output called `output$tbl` which is is a rendered version of the data. Then in the UI, you'll need to include
@@ -427,9 +428,7 @@ tabsetPanel(type = "tabs",
             tabPanel("Test", verbatimTextOutput('printttest')))  # <- HERE!!!
 ```
 
-
-C4. So far we've used base plotting functions (e.g.; `hist()`, `abline()`). Try replacing these functions with ggplot code. For example, you could use `ggplot(data, aes(x)) + geom_hist()` to create a histogram. Note that because of the way you build on plots in ggplot, using the `addmean` functionality will be a bit tricky, so you may wish to remove it.
+C4. So far we've used base plotting functions (e.g.; `hist()`, `abline()`). Try replacing these functions with ggplot code. For example, you could use `ggplot(data, aes(x)) + geom_hist()` to create a histogram. Note that because of the way you build on plots in ggplot, some parts of the code, such as the `addmean` functionality will be a bit tricky, so you may wish to remove it.
 
 C5. In the [RStudio Shiny Gallery](https://shiny.rstudio.com/gallery/) at [https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/), you'll see a really cool Shiny App called Google Charts Demo. Click on the app, and then look at the underlying code. Try replicating this app yourself by creating a new app, and copying and pasting the Google Charts demo code into your app. Make sure the app runs. Then, try customising it! For example, you could change the default colors, or include the option for an additional filter in addition to the main "year" filter. Alternatively, you could try applying the chart to a dataset we've used in the bootcamp (like `mpg` or `diamonds`)
 
-### References
