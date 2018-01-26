@@ -162,7 +162,7 @@ data_mice  <- complete(mice_model)
 
 ### Begin new project
 
-Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
+If you haven't already. Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
 
 ### Clean code
 

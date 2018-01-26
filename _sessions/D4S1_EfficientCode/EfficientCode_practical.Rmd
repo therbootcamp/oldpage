@@ -578,8 +578,9 @@ NumericVector col_means_cpp(DataFrame& df) {
 ```
 
 
-15. Now, let's try to load our C++ function. To do this, we use `sourceCpp()` from the `Rcpp` package. Provide to `sourceCpp` the file path to our function and execute it. If there is no error, this means that we can now use `col_means_cpp()`, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use `system.time()` to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to `colMeans()`, which is R's own "high-performance" version of this function. Who wins?  
+15. Now, let's try to load our C++ function. To do this, we use `sourceCpp()` from the `Rcpp` package. Provide to `sourceCpp` the file path to our function and execute it. If there is no error, this means that we can now use `col_means_cpp()`, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use `system.time()` to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to `colMeans()`, which is R's own "high-performance" version of this function. Who wins?
 
+Why do the results of this comparison differ from those in the slides?
 
 ```{r, eval=F, echo=F}
 
@@ -597,6 +598,7 @@ system.time(col_means_cpp(my_df))
 system.time(colMeans(my_df))
 
 ```
+
 
 16. Finally, I want to show you another example that illustrates that these tools can also be used to make statistical tests faster. Below is a piece of code that provides a faster implementation of the general linear model (aka regression). Follow the same steps as above to load it into R and then compare it to R's own `lm` function. To see how, take a look at the R code below. Note: before you can load this function you must `install.packages(RcppArmadillo)`.
 
@@ -648,7 +650,7 @@ microbenchmark(
 
 #### Microsoft R Open
 
-Lastly, I want to touch upon yet another option to speed up code, namely to use a different implementations of R. One such implementation is Microsoft Open R. Open R features a high-performance, multi-threaded [BLAS/LAPACK](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries. plus several other features that aim to maximize reproducibility. 
+Lastly, I want to touch upon yet another option to speed up code, namely to use a different implementations of R. One such implementation is Microsoft Open R. Open R features a high-performance, multi-threaded [BLAS/LAPACK](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries plus several other features that aim to maximize reproducibility. 
 
 In this exercise, you will be comparing to chunks of code in R and Open R to see where the performance benefits of Open R lie and where not. To do this first install [Open R](https://mran.microsoft.com/open).  This will create a separate R instance called Open R. Start it and run the code examples below, once in Open R and once in your regular R. You can see that one of the examples runs dramatically faster, although it is already very efficiently implemented in regular R. However, the other one doesn't. This implies that Open R provides not yet substantial benefits for regular users of R.
 
