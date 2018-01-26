@@ -256,6 +256,72 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
+
+---
+## Managing working directories in projects
+
+.pull-left4[
+
+<br>
+<br>
+
+When you knit a Markdown file, the working directory will be temporarily changed to the location of that file.
+
+This can cause issues when your Markdown file is not in the root directory of your project, but in a sub-folder.
+
+]
+
+.pull-right55[
+
+]
+
+
+
+---
+## Managing working directories in projects
+
+.pull-left4[
+
+<br>
+<br>
+
+2 Solutions to the working directory issue
+
+1: Include `knitr::opts_knit$set(root.dir = '')` in your first chunk. This will move the working directory when the document is knitted.
+
+2: Use the `here()` function from the `here` package. This always returns the project root directory.
+
+]
+
+.pull-right55[
+
+### Solution 1:
+
+```{r, eval = FALSE}
+# Root directory is one folder up
+knitr::opts_knit$set(root.dir = '../')
+
+mydata <- read_csv(file = "data/mydata.csv")
+```
+
+### Solution 2:
+
+```{r, message = FALSE, eval = TRUE, echo = TRUE}
+library(here)
+
+# Show me the root directory
+here()
+```
+
+```{r, eval = FALSE}
+# Read in data relative to root directory
+mydata <- read_csv(file = paste0(here(), "/data/mydata.csv"))
+```
+
+]
+
+
+
 ---
 ## Rendering output with `knitr`
 

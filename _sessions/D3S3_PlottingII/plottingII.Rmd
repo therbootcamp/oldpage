@@ -1,5 +1,5 @@
 ---
-title: "Plotting Part 2.0"
+title: "Plotting: 2.0"
 subtitle: "Shiny"
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "January 2018"

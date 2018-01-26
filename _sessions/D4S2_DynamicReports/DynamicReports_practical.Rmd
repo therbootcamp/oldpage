@@ -167,20 +167,22 @@ ggplot(data = XX,
 
 ## Slideshow
 
-19. Now it's time to create a slideshow! To do this, we'll start with one of the templates in RStudio. Click File -- New File -- R Markdown. Then select "Presentation". Give the presentation a title and your name as the author. Then click ok.
-
-20. You should see a new .Rmd document open. Save the document in your main directory as `slideshow.Rmd`.
-
-21. Knit the document to see the outline of the presentation!
-
-*Note:* If you don't like the look of the default presentation, you can also try a Ninja presentation [click here for a demo](https://slides.yihui.name/xaringan/#1) from the `xaringan` package (that's what we use for all of our BaselRBootcamp slides). To install the `xaringan` package from GitHub, run the following code. Then open a new template with File -- New File -- R Markdown -- From Template -- Ninja Presentation.
+19. Now it's time to create a slideshow! To do this, we'll use the Ninja template [click here for a demo](https://slides.yihui.name/xaringan/#1)from the `xaringan` package (that's what we use for all of our BaselRBootcamp slides). To install the `xaringan` package from GitHub, run the following code. 
 
 ```{r, eval = FALSE}
 # Install the xaringan package from github
 devtools::install_github("yihui/xaringan")
 ```
 
-22. Play around with the presentation a bit. Change the existing content a bit and add a few slides. Try adding an image (maybe this one: https://actgnetwork.org/sites/default/files/../_image/ACTG_logo_2007_color.jpg) by saving the image to your `3_Materials` folder, and then loading the image into your document with `include_graphics()`.
+Once you've installed `xaringan`, open a new template with File -- New File -- R Markdown -- From Template -- Ninja Presentation. Give the presentation a title and your name as the author. Then click ok.
+
+20. You should see a new .Rmd document open. Save the document in your main directory as `slideshow.Rmd`.
+
+21. Knit the document to see the outline of the presentation!
+
+*Note:* If you don't like the look of the default presentation, you can also try a Ninja presentation from the `xaringan` package (that's what we use for all of our BaselRBootcamp slides). To install the `xaringan` package from GitHub, run the following code. Then open a new template with File -- New File -- R Markdown -- From Template -- Ninja Presentation.
+
+22. Play around with the presentation a bit. Change the existing content a bit and add a few slides. Try adding an image (maybe this one: https://actgnetwork.org/sites/all/themes/actg/images/actg_logo_275.png) by saving the image to your `3_Materials` folder, and then loading the image into your document with `include_graphics()`.
 
 23. Now, try to customize the presentation to include all of main analyses, outputs, and plots you have in your `speffanalysis.Rmd` document! Of course, there won't be room for all of the text, so treat it like a normal presentation and put in what's important.
 
