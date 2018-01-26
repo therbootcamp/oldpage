@@ -2,7 +2,7 @@
 title: "Recap III"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -208,3 +208,17 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/exampleapp_B.png?raw=true")
 ```
 
+---
+# Today
+
+## Efficient Programming
+
+> <font size = 5>How can I make my code faster and more efficient?<font>
+
+## Dynamic Reports
+
+> <font size = 5>How can I create automated reports?<font>
+
+## Next Steps
+
+> <font size = 5>What else can I do with R?<font>

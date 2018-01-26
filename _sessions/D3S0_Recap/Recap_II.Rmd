@@ -468,6 +468,18 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ]
----
-# Questions?
 
+---
+# Today
+
+## Tidy Projects
+
+> <font size = 5>How can I write readable, well-formatted code?<font>
+
+## Plotting 1.0
+
+> <font size = 5>How can I easily create publication--ready plots?<font>
+
+## Plotting 2.0
+
+> <font size = 5>Can I make interactive websites with R?<font>
