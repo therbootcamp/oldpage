@@ -127,7 +127,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## What is Markdown?
 
-- Markdown is a simple, readible **markup language** that allows you to easily write text with special formatting **tags**, which are then converted to formatted outputs.
+- Markdown is a simple, readable **markup language** that allows you to easily write text with special formatting **tags**, which are then converted to formatted outputs.
 
 - **R Markdown** is a combination of Markdown and R code.
 

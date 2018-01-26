@@ -202,7 +202,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wickham_portrait.png")
 ```
 
-
 ]
 
 ---
@@ -210,7 +209,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ## Grammar of Graphics
 
 .pull-left5[
-
 
 <br>
 <br>
@@ -221,9 +219,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 <font size = 5>3. Plots that look superficially different, can actually be created with very similar code.</font><br><br>
 
-
 ]
-
 
 .pull-right5[
 
@@ -232,7 +228,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ]
-
 
 ---
 
