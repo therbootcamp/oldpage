@@ -267,11 +267,25 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 When you knit a \*.Rmd file, the working directory will be *temporarily changed to the location of that file*.
 
-If your Markdown file is not in the root directory of your project (i.e., is in a folder), then your code may no longer work
+If your Markdown file is located in the root working directory of your project (is next to the *.Rproj file), then everything will work fine.
+
+If your Markdown file is **not** in the root working directory of your project (is in a folder), then your code may no longer work.
+
+```{r, echo = FALSE, out.width = "70%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wd_ss.png")
+```
 
 ]
 
 .pull-right55[
+
+This code might work when you evaluate it directly in your RStudio session
+
+```{r, eval = FALSE}
+mydata <- read_csv(file = "data/mydata.csv")
+```
+
+But when you **knit** the document, you might see an error like this:
 
 ```{r, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/error_wd.png")

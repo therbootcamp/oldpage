@@ -235,11 +235,24 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 
 When you knit a \*.Rmd file, the working directory will be *temporarily changed to the location of that file*.
 
-If your Markdown file is not in the root directory of your project (i.e., is in a folder), then your code may no longer work
+If your Markdown file is located in the root working directory of your project (is next to the *.Rproj file), then everything will work fine.
+
+If your Markdown file is **not** in the root working directory of your project (is in a folder), then your code may no longer work.
+
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/wd_ss.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right55[
+
+This code might work when you evaluate it directly in your RStudio session
+
+
+```r
+mydata &lt;- read_csv(file = "data/mydata.csv")
+```
+
+But when you **knit** the document, you might see an error like this:
 
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/error_wd.png" width="90%" style="display: block; margin: auto;" /&gt;
 
