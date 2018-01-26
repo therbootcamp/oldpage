@@ -545,9 +545,9 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, fill = class)) + 
-  geom_boxplot()  + 
-  theme_bw()
+  mapping = aes(x = class, y = hwy, 
+                fill = class)) + 
+  geom_boxplot()
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-23-1.png" width="75%" style="display: block; margin: auto;" /&gt;
@@ -563,9 +563,9 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = hwy, fill = class)) + 
-  geom_density()  + 
-  theme_bw()
+  mapping = aes(x = hwy, 
+                fill = class)) + 
+  geom_density()
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /&gt;
@@ -584,9 +584,9 @@ ggplot(data = mpg,
 
 ```r
 ggplot(data = mpg,
-  mapping = aes(x = class, fill = class)) + 
-  geom_bar()  + 
-  theme_bw()
+  mapping = aes(x = class, 
+                fill = class)) + 
+  geom_bar()
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" /&gt;
@@ -654,7 +654,7 @@ ggplot(nba_long,
   coord_flip()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-29-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 

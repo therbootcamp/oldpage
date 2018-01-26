@@ -567,11 +567,11 @@ ggplot(data = mpg,
 
 ### geom_boxplot()
 
-```{r, out.width= "75%"}
+```{r, out.width= "75%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = class, y = hwy, fill = class)) + 
-  geom_boxplot()  + 
-  theme_bw()
+  mapping = aes(x = class, y = hwy, 
+                fill = class)) + 
+  geom_boxplot()
 ```
 
 
@@ -582,11 +582,11 @@ ggplot(data = mpg,
 
 ### geom_density()
 
-```{r, out.width= "70%"}
+```{r, out.width= "70%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = hwy, fill = class)) + 
-  geom_density()  + 
-  theme_bw()
+  mapping = aes(x = hwy, 
+                fill = class)) + 
+  geom_density()
 ```
 
 
@@ -600,11 +600,11 @@ ggplot(data = mpg,
 
 ### geom_bar()
 
-```{r, out.width= "80%", echo = TRUE}
+```{r, out.width= "80%", echo = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = class, fill = class)) + 
-  geom_bar()  + 
-  theme_bw()
+  mapping = aes(x = class, 
+                fill = class)) + 
+  geom_bar()
 ```
 
 
@@ -615,7 +615,7 @@ ggplot(data = mpg,
 
 ### geom_count()
 
-```{r, out.width= "80%", echo = TRUE}
+```{r, out.width= "80%", echo = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
   mapping = aes(x = displ, y = hwy)) + 
   geom_count()
@@ -633,7 +633,7 @@ ggplot(data = mpg,
 
 > From the `ggjoy` package
 
-```{r, out.width= "60%", echo = TRUE}
+```{r, out.width= "60%", echo = TRUE, fig.width = 6, fig.height = 4}
 library(ggjoy) # Load the ggjoy package
 
 ggplot(data = midwest,
@@ -663,7 +663,7 @@ ggplot(nba_long,
   coord_flip()
 ```
 
-```{r, out.width= "50%", echo = FALSE}
+```{r, out.width= "60%", echo = FALSE}
 # Read in nba data
 nba_long <- read.csv("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/nba_long.csv")
 
