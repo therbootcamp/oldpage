@@ -215,11 +215,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 <br>
 <br>
 
->###1. A plot is built of simple building blocks
+<font size = 5>1. A plot is built of simple building blocks</font><br><br>
 
->###2. By combining different building blocks, plots of any complexity can be created.
+<font size = 5>2. By combining different building blocks, plots of any complexity can be created.</font><br><br>
 
->###3. Plots that look superficially different, can actually be created with very similar code
+<font size = 5>3. Plots that look superficially different, can actually be created with very similar code.</font><br><br>
 
 
 ]
