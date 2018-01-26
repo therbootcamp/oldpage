@@ -343,7 +343,7 @@ system.time(my_chunkfun_fast3())
 
 ```
 
-### Speeding up code pt 2 (advanced)
+### (advanced) Speeding up code: Parallel R
 
 9. In 95% of all cases the above steps will produce efficient-enough code. Sometimes, however, one is interested in even faster code execution. This is particularly the case when dealing with large data sets. One reason for this is that run time can be a super-linear function of data size, i.e., a twice as large data sets requires more than twice as much computation time. To see this, program a simple function that identifies the smallest value of a vector (passed on as the argument) using `sort()` and selecting the first element of the sorted vector, i.e., `sort(my_vector)[1]`. Then feed it random vectors (using `runif()`) of length either 1e5+, 1e+6, 1e+7, 1e+8, and 1e+9  and evalute the computation time (using `system.time()`). Does it increase by more or less than 10 times each step? You want to repeat this a couple of times.
 
@@ -391,8 +391,147 @@ my_fun(unlist(result))
 
 ```
 
+### (advanced) Speeding up code: R Open
+
+Another option to speed up certain parts of R, in particular anything related to linear algebra (e.g., matrix multiplication), is to use a different implementation R. One such implementation is Microsoft Open R. Open R features a high-performance, multi-threaded [BLAS/LAPACK](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries. Another feature of Open R is reproducibility. With every version of, Open R freeezes its basic collection of packages in a repository in order to avoid any issues arising from package versioning. 
+
+In this exercise, you will be comparing to chunks of code in R and Open R to see where the performance benefits of Open R lie and where not. To do this first install [Open R](https://mran.microsoft.com/open). This will create a separate R instance called Open R. Start it and run the code examples below, once in Open R and once in your regular R. You can see that one of the examples runs dramatically faster, although it is already very efficiently implemented in regular R. That the other one, however, isn't any faster implies that Open R provides hardly any benefits for regular users of R.        
+
+```{r, eval=F, echo=T}
+# function that times functions
+timer <- function(expr){ 
+  t <- proc.time()[3]
+  expr
+  proc.time()[3] - t
+  }
+  
+# ---- Matrix multiplication
+
+# create matrix
+m <- matrix(1:1000000, ncol = 100)
+
+# function that mutliplies matrix with itself
+m_square <- function(m) a = m %*% t(m)
+
+# time m_square
+timer(m_square(m))
+
+# ---- Regression
+
+# create matrix
+d = data.frame(
+	a = rnorm(1000000,0,1),
+	b = rnorm(1000000,0,1),
+	c = rnorm(1000000,0,1)
+	)
+
+# time m_square
+timer(lm(a ~ b * c, data = d))
+
+
+```
+
+### (advanced) Speeding up code: Rcpp
+
+A universal option to speed up run time in R is to implement essential code chunks in C++ using Rcpp. C++ is a compiled language, meaning that any C++ code will be translated in to highly efficient machine code, before its execution. For this reason, implementing R code in C++ and importing it using Rcpp regularly means 10-100x faster code execution. When using high performance libraries such as, e.g., [RcppArmadillo](),      
+
+Example 1
+
+
+```{r, eval=F, echo=T}
+# install 
+
+#include <RcppArmadillo.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+List fastLm(const arma::mat& X, const arma::colvec& y) {
+    int n = X.n_rows, k = X.n_cols;
+        
+    arma::colvec coef = arma::solve(X, y);    // fit model y ~ X
+    arma::colvec res  = y - X*coef;           // residuals
+
+    // std.errors of coefficients
+    double s2 = std::inner_product(res.begin(), res.end(), res.begin(), 0.0)/(n - k);
+                                                        
+    arma::colvec std_err = arma::sqrt(s2 * arma::diagvec(arma::pinv(arma::trans(X)*X)));
+
+    return List::create(Named("coefficients") = coef,
+                        Named("stderr")       = std_err,
+                        Named("df.residual")  = n - k);
+  }
+
+```
+
+
+Example 2 
+
+
+
+```{r, eval=F, echo=T}
+# install Rccp Armadillo
+
+
+#include <RcppArmadillo.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+List fastLm(const arma::mat& X, const arma::colvec& y) {
+    int n = X.n_rows, k = X.n_cols;
+        
+    arma::colvec coef = arma::solve(X, y);    // fit model y ~ X
+    arma::colvec res  = y - X*coef;           // residuals
+
+    // std.errors of coefficients
+    double s2 = std::inner_product(res.begin(), res.end(), res.begin(), 0.0)/(n - k);
+                                                        
+    arma::colvec std_err = arma::sqrt(s2 * arma::diagvec(arma::pinv(arma::trans(X)*X)));
+
+    return List::create(Named("coefficients") = coef,
+                        Named("stderr")       = std_err,
+                        Named("df.residual")  = n - k);
+  }
+
+
+sourceCpp('~/Dropbox (2.0)/Work/Software/webpage_bootcamp/_sessions/D4S1_EfficientCode/C++ code/fast_lm.cpp')
+
+
+timer <- function(expr){ 
+  t <- proc.time()[3]
+  expr
+  proc.time()[3] - t
+  }
+
+# create matrix
+d = data.frame(
+  a = rnorm(1000000,0,1),
+  b = rnorm(1000000,0,1),
+  c = rnorm(1000000,0,1)
+  )
+
+# time m_square
+timer(lm(a ~ b + c, data = d))
+
+# time m_square
+timer(fast_lm(as.matrix(d[,c(2,3)]),d$a))
+
+# evaluate coefficients
+fast_lm(as.matrix(d[,c(2,3)]),d$a)
+lm(a ~ b + c, data = d)
+
+
+```
+
+
+
+
 # Additional reading
 
 - For more details check out check out Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/).
 
-- For more on parallel computing see [Parallel R](https://www.amazon.com/dp/B005Z29QT4/ref=cm_sw_su_dp) by McCallum and Weston.
+- For more details on parallel computing see [Parallel R](https://www.amazon.com/dp/B005Z29QT4/ref=cm_sw_su_dp) by McCallum and Weston.
+
+- For more details R's C++ interface see [Rccp](http://www.rcpp.org/) by McCallum and Weston.
+
+- For more details on the fundamentals check out [R Internals](https://cran.r-project.org/doc/manuals/r-patched/R-ints.html).
+

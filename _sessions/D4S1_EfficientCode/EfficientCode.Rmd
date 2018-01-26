@@ -51,6 +51,8 @@ options(digits = 4)
 .pull-right45[
 <font size = 5>*Reasons for R being slow*<br><br>
 **Extreme dynamism** - allows you to code flexibly.
++copy-on-modify semantics
++weak dynamic typing
 <br2>
 **Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
 ]
@@ -159,13 +161,12 @@ Almost always your problem has been solved by someone else.
 # Do as little as possible
 
 .pull-left35[
-### Or be as specific as possible
 
-Use **tailor-made** functions, e.g., `.subset2()`.
+**Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
-**Provide focus**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
+Use **tailor-made** functions, e.g., `data.table::fread`.
 
-**Don't repeat** code.
+**Be specific**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
 ]
 
 .pull-right65[
@@ -363,10 +364,18 @@ from <a href="http://adv-r.had.co.nz/Performance.html"> **Advanced R**</a>
 
 | R implementation| Author | Description| 
 |:------|:------|:------------|
-| `pqR`  |Radford Neal|Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.|
-| `Renjin`  |BeDataDriven| Renjin uses the Java virtual machine, and has an extensive test suite.|
-| `FastR`  |Purdue University| FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.|
-| `Riposte`  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+| [`pqR`](http://www.pqr-project.org/)  |Radford Neal|This *p*retty *q*uick version of *R* builds on R 2.15.0; it fixes several performance issues, provides better memory management and some support for automatic multithreading.|
+| [`Renjin`](http://www.renjin.org/)  |BeDataDriven| Renjin uses the Java virtual machine.|
+| [`FastR`](http://www.oracle.com/technetwork/java/jvmls2013vitek-2013524.pdf)  |Purdue University| FastR is similar to Renjin. Optimisation is more ambitious, but at this point less mature.|
+| [`Riposte`](https://research.tableau.com/sites/default/files/pact2012-talbot-riposte.pdf)  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. It's work in progress, but the existing implementations are extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+
+---
+
+# Microsoft R Open
+
+Microsoft [R Open](https://mran.microsoft.com/) is the enhanced distribution of R from Microsoft Corporation.
+
+
 
 ---
 
