@@ -409,7 +409,7 @@ my_df$x[is.na(my_df$x)] <- mean(my_df$x, na.rm = TRUE)
 
 # Impute using regression (package: mice)
 model <- mice(my_df, method = 'norm', printFlag = FALSE)
-my_df <- complete(model)
+my_df <- mice::complete(model)
 
 # print
 my_df

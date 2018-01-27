@@ -284,7 +284,7 @@ data_mice  &lt;- complete(mice_model)</code></pre>
 <div id="clean-code" class="section level3">
 <h3>Clean code</h3>
 <ol style="list-style-type: decimal">
-<li>Below you see some ‘dirty’ code. Go through it and clean it according to the above principles (incl. commenting). Then download all of the data files referenced in the code, store them in <code>1_data</code>, and change the filepaths in the code to this location. When ready save the code in the <code>2_code</code> folder as <code>cleaned_code_2018Jan27.R</code>.</li>
+<li>Below you see some ‘dirty’ code. Go through it and clean it according to the above principles (incl. commenting). Then, write the data file that the code reads in and write it to your <code>1_data</code> folder using <code>write_csv()</code>. Finally, change in the code the URL its loading the data from to the new file path on your computer. When ready save the code in the <code>2_code</code> folder as <code>cleaned_code_2018Jan27.R</code>.</li>
 </ol>
 <p>Note: The code is using a data set by Sir Francis Galton on the heights of parents and their children, illustrating one of the most classic cases of <a href="https://en.wikipedia.org/wiki/Regression_toward_the_mean">regression toward the mean</a>.</p>
 <pre class="r"><code>library(readr   )

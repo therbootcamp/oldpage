@@ -46,7 +46,7 @@ In this introduction you will learn...
 .pull-left4[
 # Projects
 
-### Help access files
+### Help access files (paths)
 
 ### Set options
 - "Workspace, history saving
@@ -69,9 +69,7 @@ And more...
 &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/projects_2.png" height="280" vspace="10"&gt;
 ]
 
-
 ---
-
 
 # [**Git**](https://git-scm.com/) &amp; [**GitHub**](https://github.com/)
 
@@ -79,7 +77,9 @@ And more...
 
 ### Git
 
-Highly effificent system for **version control** and **collaboration**. 
+Highly efficient system for **version control** and **collaboration**. 
+
+- `pull`, `commit`, `push`
 
 ### GitHub
 
@@ -340,7 +340,7 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 | Error| Example| Description|
 |:------|:------------|:--------------------------------------------|
-|     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
+|     `'could not find function'`|legth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
 |     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if`-clause is non-logical or NA.|
 |     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
 | `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing file path.|
@@ -354,8 +354,8 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 .pull-left3[
 &lt;font size=5&gt;A pervasive problem in working with data is missing values. 
-
-&lt;font size=5&gt;In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
+&lt;font size=5&gt;Only to become more important in the days of Big Data. 
+&lt;font size=5&gt;In R, there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
 ]
 
 .pull-right6[
@@ -421,7 +421,7 @@ my_vec_1 &lt;- c(1, 2, 3,  4, NA)
 my_vec_2 &lt;- c(4, 2, NA, 3, 5)
 
 # Functions examples that include handlers
-mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
+mean(my_vec_1) ; cor(my_vec_1, my_vec_2)
 ```
 
 ```
@@ -474,12 +474,11 @@ my_df &lt;- data.frame('x' = c(1, 2,  3, 4, NA),
                     )
 
 # Impute using mean
-my_df[[1]][is.na(my_df[[1]])] &lt;- 
-  mean(my_df[[1]], na.rm = TRUE)
+my_df$x[is.na(my_df$x)] &lt;- mean(my_df$x, na.rm = TRUE)
 
 # Impute using regression (package: mice)
 model &lt;- mice(my_df, method = 'norm', printFlag = FALSE)
-my_df &lt;- complete(model)
+my_df &lt;- mice::complete(model)
 
 # print
 my_df
@@ -498,7 +497,7 @@ my_df
 
 ---
 
-# Live Demo: Projects &amp; Practical
+# Live Demo &amp; Practical
 
 &lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/_sessions/D3S1_Tidying/Tidying_practical.html"&gt;Link to practical&lt;/a&gt;
     </textarea>

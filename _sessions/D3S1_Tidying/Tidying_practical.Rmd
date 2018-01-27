@@ -165,7 +165,7 @@ If you haven't already, begin a new project in a new folder. Within the folder, 
 
 ### Clean code
 
-1. Below you see some 'dirty' code. Go through it and clean it according to the above principles (incl. commenting). Then download all of the data files referenced in the code, store them in `1_data`, and change the filepaths in the code to this location. When ready save the code in the `2_code` folder as `cleaned_code_2018Jan27.R`.
+1. Below you see some 'dirty' code. Go through it and clean it according to the above principles (incl. commenting). Then, write the data file that the code reads in and write it to your `1_data` folder using `write_csv()`. Finally, change in the code the URL its loading the data from to the new file path on your computer. When ready save the code in the `2_code` folder as `cleaned_code_2018Jan27.R`.
 
 Note: The code is using a data set by Sir Francis Galton on the heights of parents and their children, illustrating one of the most classic cases of [regression toward the mean](https://en.wikipedia.org/wiki/Regression_toward_the_mean).
 
