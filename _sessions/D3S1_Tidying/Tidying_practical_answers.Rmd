@@ -172,7 +172,7 @@ Begin a new project in a new folder. Within the folder, create two new folders c
 library(readr   )
 library(      magrittr)
 library(  dplyr)
-  syc =   read_csv('http://tinyurl.com/galton-dataset')
+  syc =   read_csv('https://tinyurl.com/y8gqcht3')
   syc = syc%>%mutate(fcm=father/2.54,mcm=mother/2.54)
     a   = syc$father
       b = syc[['mother']]
@@ -186,7 +186,7 @@ library(magrittr)
 library(dplyr)
 
 # read galton data
-galton_data <- read_csv('http://tinyurl.com/galton-dataset')
+galton_data <- read_csv('https://tinyurl.com/y8gqcht3')
 
 # transform to metric system
 galton_data = galton_data %>% 

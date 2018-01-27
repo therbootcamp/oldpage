@@ -2,7 +2,7 @@
 title: "Tidying"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "January 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -32,6 +32,8 @@ options(digits = 4)
 .pull-left4[
 In this introduction you will learn...
 
+><font size = 5>...more about R projects.
+><br2>
 ><font size = 5>...how to write clean, documented code.
 ><br2>
 ><font size = 5>...to understand errors (and warnings).
@@ -43,28 +45,132 @@ In this introduction you will learn...
 <img src="https://build2be.com/sites/build2be.com/files/shutterstock_232639537.jpg" width="500">
 <p align="center"><font size=3>source<a href="https://build2be.com/"> https://build2be.com/</a>
 ]
+
 ---
 
 .pull-left4[
-# Project structure
+# Projects
 
-<font size = 6>Good, clean, documented code begins with a **project** and a **folder structure**.
+### Help access files (paths)
+
+### Set options
+- "Workspace, history saving
+- Text encoding
+- Tab or space
+- Code wrapping
+- etc.
+
+### Support version control
+  - [**Git**](https://git-scm.com/) & [**GitHub**](https://github.com/)
+
+### Facilitate package building, shiny, markdown, and C++
+
+And more...
+
+
+]
+.pull-right45[
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/projects_1.png" height="280" vspace="10">
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/projects_2.png" height="280" vspace="10">
+]
+
+---
+
+# [**Git**](https://git-scm.com/) & [**GitHub**](https://github.com/)
+
+.pull-left4[
+
+### Git
+
+Highly effificent system for **version control** and **collaboration**. 
+
+- `pull`, `commit`, `push`
+
+### GitHub
+
+Server-space + GUI + Facebook for git. 
+
+Check out: [**GitHub pages**](https://pages.github.com/)
+
+]
+.pull-right55[
+<img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/my_github.png" height="450" vspace="10">
+
+]
+
+
+---
+
+.pull-left4[
+# Folder structure
+
+<font size = 6>Good, clean, well-documented projects begins with a **project** and a **folder structure**.
 ]
 .pull-right5[
 <br><br>
 <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/folder_structure.png" height="400" vspace="25">
 ]
 
+
 ---
 
-# Naming files
+# Style
+
+Check out the [**Google's R style guide**](https://google.github.io/styleguide/Rguide.xml) & [**Tidyverse style guide**](http://style.tidyverse.org/index.html)
+
+
+```{r, eval = T, echo = F}
+set.seed(1)
+```
+
+### Bad
+```{r, eval = F}
+mean(subset((data.frame(c('a','b'),runif(1000,0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
+```
+
+```{r, eval = T, echo = F}
+set.seed(1)
+```
+
+### Good
+```{r, eval = F}
+# create my data.frame
+my_data <- data.frame('group' = c('a','b'), 
+                      'value' = runif(1000,0,1))
+
+# subset data
+my_data %>% 
+  filter(group == 'a') %>%
+  summarize(mean(value))
+```
+
+
+---
+
+# Naming files & objects
 
 .pull-left4[
-<font size = 6>**Filenames** should be **meaningful**. If you like, **order them by prefixing** them with numbers.
+
+### Files
+- **Filenames** should be **meaningful**. 
+- If you like, **order them by prefixing** them with numbers.
+
+### Objects
+- **Object names** should be lowercase.
+<br2>
+- Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
+<br2>
+- Use **nouns** for variables and **verbs** for functions.
+<br2>
+- Use **meaningful** names.
+<br2>
+- Avoid using names of **existing objects**
 ]
 
 .pull-right5[
 ```{r, eval = F}
+# ---- Files
+
 # Good
 analyze_my_data.R
 0_read_my_data.R
@@ -73,39 +179,23 @@ analyze_my_data.R
 # Bad
 stuff.r
 code.r
-```
 
-]
+# ---- Objects
 
----
-
-# Naming objects
-
-.pull-left45[
-- <font size=5>**Object names** should be lowercase.
-<br2>
-- <font size=5>Use `_` rather than `.` or 'camelCase' (using capitalization) for multi-word names. 
-<br2>
-- <font size=5>Use **nouns** for variables and **verbs** for functions.
-<br2>
-- <font size=5>Use **meaningful** names.
-<br2>
-- <font size=5>Avoid using names of **existing objects**
-]
-
-.pull-right45[
-```{r, eval = F}
 # Good
 trial_id
 trial_1
 
 # Bad
-name_of_trial
-trialID
-tid
-t1
+nameOFtrial
+trial.object
+t
+ekfjw
+
 ```
+
 ]
+
 
 ---
 
@@ -153,17 +243,17 @@ list(
 ```{r, eval = F}
 # Good
 if (my_dbl < 2){
-  message('my_dbl is smaller 2')
+  mean(c(1, 2, 3, 4, 5))
 } else {
-  message('my_dbl is larger or equal 2')
+  median(c(1, 2, 3, 4, 5))
 }
 
 # Bad
 if (my_dbl < 2)
 {
-message('my_dbl is smaller 2')
+mean(c(1, 2, 3, 4, 5))
 } else {
-message('my_dbl is smaller 2')  
+median(c(1, 2, 3, 4, 5))
 }
 
 ```
@@ -174,7 +264,7 @@ message('my_dbl is smaller 2')
 # Assignments & Comments
 
 .pull-left45[
-<font size=5>For **assignments** use `<-`, not `=`. However, to specify arguments in functions use `=`.
+<font size=5>For **assignments** use `<-`, not `=`, unless when specifying arguments in functions.
 ```{r, eval = F}
 # Good
 x <- 24324
@@ -185,7 +275,7 @@ x = 24324
 ]
 
 .pull-right45[
-<font size=5>**Comment each line** of your code. To break up your code in chunks use `-` or `=`.
+<font size=5>**Comment each line** of your code. To break up your code in chunks use `-` or `=`
 ```{r, eval = F}
 # Plot data ----------------------------
 
@@ -209,16 +299,16 @@ R has different categories for telling you something has happened depending on t
 <br><br><br>
 <font size=5>**Warnings** indicate that **something potentially worrying** has happened. Warnings do not stop the code.
 <br>
-<font size=5>**Messages** indicate that **something noteworthy** has happened, e.g., completition of an analysis step. 
+<font size=5>**Messages** indicate that **something noteworthy** has happened, e.g., completion of an analysis step. 
 ]
 
 .pull-right6[
 ```{r, error = T}
 # Error
-stop('This is an error') ; men(c(1, 2, 3))
+men(c(1, 2, 3))
 
 # Warning
-warning('This is an error') #; c(1, 2) + c(2, 3, 4)
+c(1, 2) + c(2, 3, 4)
 
 # Message
 message('This is a message')
@@ -234,12 +324,12 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 | Error| Example| Description|
 |:------|:------------|:--------------------------------------------|
 |     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
-|     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if` clause is non-logical or NA.|
+|     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if`-clause is non-logical or NA.|
 |     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
-| `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing filepath.|
+| `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing file path.|
 | `'no applicable method'`|predict('efwe')| A 'generic function' has not been defined for this type/class |
 | `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
-| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
+| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software in the background is missing. |
 
 ---
 
@@ -247,8 +337,8 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 .pull-left3[
 <font size=5>A pervasive problem in working with data is missing values. 
-
-<font size=5>In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
+<font size=5>Only to become more important in the days of Big Data. 
+<font size=5>In R, there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
 ]
 
 .pull-right6[
@@ -269,7 +359,7 @@ is.nan(my_vec[5]) ; is.nan(0/0)
 # Handling missing data
 
 .pull-left3[
-<font size=5>Many functions have **inbuilt handlers** for missing data. 
+<font size=5>Many functions have inbuilt **handlers** for missing data. 
 
 <font size=5>In most cases, however, missing values have to and should be dealt with **before the analysis**.    
 ]
@@ -315,8 +405,7 @@ my_df <- data.frame('x' = c(1, 2,  3, 4, NA),
                     )
 
 # Impute using mean
-my_df[[1]][is.na(my_df[[1]])] <- 
-  mean(my_df[[1]], na.rm = TRUE)
+my_df$x[is.na(my_df$x)] <- mean(my_df$x, na.rm = TRUE)
 
 # Impute using regression (package: mice)
 model <- mice(my_df, method = 'norm', printFlag = FALSE)
@@ -330,7 +419,7 @@ my_df
 
 ---
 
-# Practical
+# Live Demo & Practical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D3S1_Tidying/Tidying_practical.html">Link to practical</a>
 

@@ -46,6 +46,9 @@ class: center, middle, inverse, title-slide
 .pull-right45[
 &lt;font size = 5&gt;*Reasons for R being slow*&lt;br&gt;&lt;br&gt;
 **Extreme dynamism** - allows you to code flexibly.
+- copy-on-modify semantics
+- weak dynamic typing
+
 &lt;br2&gt;
 **Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
 ]
@@ -61,7 +64,8 @@ The first step to making your code efficient is to **identify critical parts** o
 | `proc.time()`  |`base`|Returns the time.|
 | `system.time()`| `base`|Runs one expression once and returns elapsed CPU time|
 | `microbenchmark()`|`microbenchmark`| Runs one or many expressions multiple times and returns statistics on elapsed time.|
-| `lineprof(), shine()`|`lineprof`| Evaluates entire scripts. (From Hadley's Github)|
+| `profvis()`|`profvis`| Evaluates larger code chunks and entire scripts.|
+| `lineprof(), shine()`|`lineprof`| Similar to `profvis` but deprecated (From Hadley's Github)|
 
 ---
 
@@ -69,31 +73,32 @@ The first step to making your code efficient is to **identify critical parts** o
 
 Often some small part of your code takes orders of magnitudes longer than everything else. Profiling is about figuring out which parts of your code take so long.
 
-.pull-left4[
+.pull-left45[
 
 ```r
+  profvis({
   # load data
-  data &lt;- read_csv('titanic.csv')
-  
-  # remove first column
-  data &lt;- data[,-1]
-  
+  data &lt;- read_csv('data/happiness.csv')
+
   # mutate
   data &lt;- data %&gt;% 
-    mutate(months = Age * 12)
+    mutate(happy_num = case_when(
+      happy == 'not too happy' ~ 0,
+      happy == 'pretty happy' ~ 1,
+      happy == 'very happy' ~ 2))
 
   # multiple regression 
-  model &lt;- glm(Survived ~ Sex * Age, 
-              data = data, 
-              family = 'binomial')
+  model &lt;- lm(happy_num ~ tvhours + owngun, 
+              data = data)
   
   # evaluate model
   summary(model)
+  }, interval = .005)
 ```
 ]
 
 .pull-right5[
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/lineprof.png" width="500"&gt;
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/profvis.png" width="500"&gt;
 ]
 
 ---
@@ -152,14 +157,15 @@ Almost always your problem has been solved by someone else.
 
 # Do as little as possible
 
-.pull-left35[
-### Or be as clear and specific as possible
+.pull-left3[
 
 **Do everything only once** (or exactly as often as needed). Don't repeated yourself. 
 
-Use **tailor-made** functions, e.g., `data.table::fread`.
+Use **tailor-made** functions, e.g., `data.table::fread()`.
 
-**Provide focus**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
+Use **primitive** functions, e.g., `sum(x)/length(x)` rather than `mean(x)`.
+
+**Be specific**, e.g., `unlist(x, use.names = F)` vs. `unlist()`.
 ]
 
 .pull-right65[
@@ -183,10 +189,10 @@ microbenchmark(
 
 ```
 ## Unit: microseconds
-##   expr    min     lq    mean  median      uq     max neval cld
-##    web 845607 991413 2186940 1303390 3455173 5584816    10   b
-##  local   4411   5055   23300    5728   10205  134661    10  a 
-##  fread    972   1110    1534    1322    1662    3448    10  a
+##   expr    min     lq    mean median     uq     max neval cld
+##    web 730906 782970 1215352 843183 954274 4401568    10   b
+##  local   4536   5077    8504   5379   5611   37321    10  a 
+##  fread    874    968    1239   1044   1210    2899    10  a
 ```
 ]
 
@@ -196,9 +202,11 @@ microbenchmark(
 # Vectorise
 
 .pull-left35[
-Whenever possible **use vector operations** or functions do vectorized operations. 
+Whenever possible **use vector operations** or functions that do vectorized operations. 
 
-In other words, **don't use loops** and stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc.
+In other words, **don't use loops**, stay away from all **apply idoms**, such as `apply()`, `sapply()`, `tapply()`, etc.
+
+Yet in other words, **use functions** that have been **implemented in C/C++**. 
 ]
 
 .pull-right6[
@@ -218,8 +226,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   890  1068  1331   1310   1499   1829    10  a 
-##     apply 13417 15211 52167  17341 130792 138343    10   b
+##  colMeans   777   828   917    879    952   1214    10  a 
+##     apply 13878 15394 47182  16552 118950 121735    10   b
 ```
 ]
 
@@ -239,34 +247,33 @@ whenever using c(), cbind(), rbind(), paste() R creates a copy large enough to c
 .pull-right65[
 
 
-
 ```r
-# define character vectors
-letters10  &lt;- LETTERS[sample(1:26, 10, replace = T)]
-letters100 &lt;- LETTERS[sample(1:26, 100, replace = T)] 
+# define vectors
+short_vec  &lt;- runif(10)
+long_vec   &lt;- runif(100)
 
 # define collapse function
-collapse &lt;- function(x) {
-  my_string &lt;- ''
-  for(i in 1:length(x)) paste(my_string, x, sep = "")
-}
+combine &lt;- function(x) {
+  my_vec = c()
+  for(i in 1:length(x)) my_vec = c(my_vec, x[i])
+  }
 
 # microbenchmark
 microbenchmark(
-  loop10  = collapse(letters10),
-  loop100 = collapse(letters100),
-  vec10   = paste(letters10, collapse = ""),
-  vec100  = paste(letters100, collapse = "")
+  loop10  = combine(short_vec),
+  loop100 = combine(long_vec),
+  vec10   = c(short_vec),
+  vec100  = c(long_vec)
 )
 ```
 
 ```
-## Unit: microseconds
-##     expr     min      lq   mean  median      uq     max neval cld
-##   loop10   21.01   24.12   28.3   25.40   28.29  103.21   100  a 
-##  loop100 1263.99 1306.92 1461.7 1355.42 1479.67 3677.55   100   b
-##    vec10    1.78    2.23    2.7    2.42    2.86    7.52   100  a 
-##   vec100    9.70   10.24   12.8   11.35   12.67   35.60   100  a
+## Unit: nanoseconds
+##     expr   min    lq  mean median    uq     max neval cld
+##   loop10  2405  2898  3171   3164  3421    4596   100  a 
+##  loop100 30594 51338 81689  53252 56000 2880509   100   b
+##    vec10   123   183   311    206   262    9199   100  a 
+##   vec100   314   360   659    407   506    2470   100  a
 ```
 
 ]
@@ -274,18 +281,16 @@ microbenchmark(
 .pull-left2[
 # Byte-code&lt;br&gt;compilation
 
-Using the base R package `compiler` code can be compiled to byte-code, a faster, **lower-level version of the code**.
+R can be compiled to byte-code, to create a faster, **lower-level version of the code**.
 
-As R compiles functions anyway after the first execution, this is **often not useful**. 
+R does this automatically with the first execution of a function. Thus, the second time a function is executed it will be faster.  
 
 ]
 .pull-right7[
 
 ```r
 # define unneccessarily complex function and compile
-my_fun &lt;- function(x, f, ...) {
-  for (i in seq_along(x)) f(x[[i]], ...)
-  }
+my_fun &lt;- function(x, f) sapply(x, f)
 my_fun_c &lt;- compiler::cmpfun(my_fun)
 
 # define some awfully complex data
@@ -297,9 +302,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq  mean median   uq     max neval cld
-##    my_fun(x, is.null) 1.09 1.14 21.25   1.21 1.31 1998.84   100   a
-##  my_fun_c(x, is.null) 1.08 1.17  1.29   1.23 1.33    3.19   100   a
+##                  expr  min   lq mean median   uq    max neval cld
+##    my_fun(x, is.null) 7.97 8.62 20.9   9.07 9.77 1171.4   100   a
+##  my_fun_c(x, is.null) 7.72 8.54  9.9   9.16 9.78   63.2   100   a
 ```
 
 ```r
@@ -309,9 +314,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr   min   lq mean median   uq   max neval cld
-##    my_fun(x, is.null) 0.955 1.05 1.32   1.17 1.31 11.80   100   a
-##  my_fun_c(x, is.null) 0.964 1.03 1.19   1.11 1.25  3.81   100   a
+##                  expr  min   lq mean median   uq  max neval cld
+##    my_fun(x, is.null) 9.67 10.3 11.3   10.6 11.1 36.6   100   a
+##  my_fun_c(x, is.null) 9.12 10.2 11.5   10.7 11.7 64.8   100   a
 ```
 ]
 ---
@@ -319,9 +324,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 .pull-left2[
 # Parallel&lt;br&gt;computing
 
-When working with large data one of the **best way to speed up** execution is parallel execution. 
+When working with large data one of the **best ways to speed up** execution is parallel execution. 
 
-Parallel execution splits the data in many **jobs** and then has many **workers** (separate R instances) working on them in parallel. 
+Parallel execution means splitting the data in many **jobs** and having many **workers** (separate R instances equipped with a worker function) complete the jobs in parallel. 
 ]
 
 .pull-right7[
@@ -352,19 +357,22 @@ microbenchmark(vectorz = colMeans(data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.92 8.32 8.96   8.66 9.35 11.6   100   b
-##  cluster 4.02 4.42 4.81   4.69 5.00  6.8   100  a
+##     expr  min   lq mean median   uq   max neval cld
+##  vectorz 7.57 8.02 8.40   8.20 8.52 11.91   100   b
+##  cluster 4.02 4.53 4.79   4.66 4.94  7.41   100  a
 ```
+
+
+
 ]
 ---
 
 .pull-left2[
 # Rcpp
 
-Another very effective, but highly advanced option is to write the essential code using Rcpp - **R's C++ interface**.
+Another very effective, but quite advanced option is to write essential code chunks in C++ using Rcpp - **R's C++ interface**.
 
-As many functions are already implemented in C++ or Fortran in the background, this works well **only for non-standard operations**. 
+Many functions are already implemented in C++ or Fortran. Thus, large benefits will only be seen for **for custom functions**. 
 
 &lt;a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-quickref.pdf"&gt;**Quick-Guide**&lt;/a&gt;
 
@@ -378,29 +386,30 @@ my_data &lt;- matrix(rnorm(10000000),ncol = 10)
 
 # define function
 my_Rcpp_fun = "
-NumericVector colMeans_c(NumericMatrix x){
-  NumericVector out(x.ncol());
-  for(int j = 0; j &lt; x.ncol(); ++j){
-    double m = 0;
-    for(int i = 0; i &lt; x.nrow(); ++i) m += x(i, j);
-  out[j] = m / x.nrow(); 
-  }
-return out;
-}"
+NumericVector colMeans_c(NumericMatrix&amp; mat) {
+  int n_rows = mat.nrow(), n_cols= mat.ncol() ;
+  NumericVector means(n_cols);
+  for(int j = 0; j &lt; n_cols; ++j) {
+    double sum = 0;
+    for(int i = 0; i &lt; n_rows; ++i) sum += mat(i, j);
+    means[j] = sum / n_rows;  
+    }
+  return means;
+  }"
 
 # compile function
 require(Rcpp) ; cppFunction(my_Rcpp_fun)
 
 # microbenchmark
-microbenchmark(vectorz = colMeans(my_data),
-               Rcpp = colMeans_c(my_data))
+microbenchmark(vectorz = colMeans(as.data.frame(my_data)),
+               rcpp = colMeans_c(my_data))
 ```
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.92 8.59 9.21   8.90 9.50 12.9   100   a
-##     Rcpp 7.91 8.46 9.05   8.86 9.41 12.2   100   a
+##     expr    min     lq   mean median     uq   max neval cld
+##  vectorz 218.38 229.61 233.61 233.16 237.31 260.9   100   b
+##     rcpp   7.64   8.56   9.26   9.08   9.76  11.5   100  a
 ```
 ]
 ---
@@ -411,10 +420,96 @@ from &lt;a href="http://adv-r.had.co.nz/Performance.html"&gt; **Advanced R**&lt;
 
 | R implementation| Author | Description| 
 |:------|:------|:------------|
-| `pqR`  |Radford Neal|Built on top of R 2.15.0, it fixes many obvious performance issues, and provides better memory management and some support for automatic multithreading.|
-| `Renjin`  |BeDataDriven| Renjin uses the Java virtual machine, and has an extensive test suite.|
-| `FastR`  |Purdue University| FastR is similar to Renjin, but it makes more ambitious optimisations and is somewhat less mature.|
-| `Riposte`  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. For the parts of R it implements, it is extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+| [`pqR`](http://www.pqr-project.org/)  |Radford Neal|This *p*retty *q*uick version of *R* builds on R 2.15.0; it fixes several performance issues, provides better memory management and some support for automatic multithreading.|
+| [`Renjin`](http://www.renjin.org/)  |BeDataDriven| Renjin uses the Java virtual machine.|
+| [`FastR`](http://www.oracle.com/technetwork/java/jvmls2013vitek-2013524.pdf)  |Purdue University| FastR is similar to Renjin. Optimisation is more ambitious, but at this point less mature.|
+| [`Riposte`](https://research.tableau.com/sites/default/files/pact2012-talbot-riposte.pdf)  |Justin Talbot and Zachary DeVito| Riposte is experimental and ambitious. It's work in progress, but the existing implementations are extremely fast. Riposte is described in more detail in Riposte: A Trace-Driven Compiler and Parallel VM for Vector Code in R.|
+
+---
+
+# Microsoft R Open
+
+.pull-left4[
+Microsoft [R Open](https://mran.microsoft.com/) is the enhanced distribution of R from Microsoft Corporation.
+
+Open R interfaces with the high-performance, multi-threaded [**BLAS/LAPACK**](http://www.netlib.org/lapack/lug/node11.html) linear algebra libraries for superior performance. 
+
+**Maximize reproducibility** by freezing the set of base packages with every version of Open R. 
+Sort of R's Matlab.
+]
+
+.pull-right45[
+&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/openr.png" width="350"&gt;
+]
+
+---
+
+# Efficient code is readable and maintainable 
+
+A lot of time in programming is consumed by reading, understanding, debugging your own code and that of others, and this time often far outweighs the benefits of making code faster. 
+
+.pull-left45[
+
+```r
+library(readr   )
+library(      magrittr)
+library(  dplyr)
+  syc =   read_csv('https://tinyurl.com/y8gqcht3')
+  syc = syc%&gt;%mutate(fcm=father/2.54,mcm=mother/2.54)
+    a   = syc$father
+      b = syc[['mother']]
+        t.test(a,b) 
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  a and b
+## t = 50, df = 2000, p-value &lt;2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  4.93 5.37
+## sample estimates:
+## mean of x mean of y 
+##      69.2      64.1
+```
+]
+
+.pull-right45[
+
+```r
+# load packages
+library(readr)
+library(magrittr)
+library(dplyr)
+
+# read galton data
+galton_data &lt;- read_csv('https://tinyurl.com/y8gqcht3')
+
+# transform to metric system
+galton_data = galton_data %&gt;% 
+  mutate(father_cm = father / 2.54, mother_cm = mother / 2.54)
+
+#conduct t-test
+father &lt;- galton_data$father
+mother &lt;- galton_data$father
+t.test(father, mother) 
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  father and mother
+## t = 0, df = 2000, p-value = 1
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.229  0.229
+## sample estimates:
+## mean of x mean of y 
+##      69.2      69.2
+```
 
 ---
 
