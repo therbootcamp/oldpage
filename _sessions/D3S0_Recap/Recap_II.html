@@ -65,16 +65,141 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# Accessing &amp; changing **complex** objects
+# Vectors
 
-Data frames can be accessed **exactly like lists**. In addition, data frames allow for a matrix-like access using **single bracket** `[`. Note however that selecting rows using single bracket returns a data frame, whereas for selecting columns returns a vector.
+R's most **basic (and most simple) data format** - even single values (aka **scalars**) are implemented as vectors. 
 
 .pull-left45[
 
 ```r
-# retrieve elements from list
-my_df &lt;- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
+# creating a vector (incl. names)
+my_vec &lt;- c(t_1 = 1.343, t_2 = 5.232)
+
+# vectors are always flat
+my_vec &lt;- c(1.343, c(5.232, 2.762))
+
+# naming vectors
+my_vec &lt;- c(t_1 = 1.343, t_2 = 5.232)
+names(my_vec) &lt;- c("new_1","new_2")
+
+# evaluting inherent attributes
+names(my_vec)
+length(my_vec)
+typeof(my_vec)
+```
+]
+
+.pull-right5[
+&lt;p align="left"&gt;&lt;br&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector.png" width="628px" height="190px"&gt;&lt;/p&gt;
+]
+
+
+---
+
+# Types
+
+A vector contains elements of one of four **basic types**: `integer`, `double`, `numeric`, and `character`. You can **test** the type using `typeof()` or the type-specific `is.*()`, e.g., `is.integer()`.
+
+
+.pull-left45[
+
+```r
+# numeric vectors
+my_vec &lt;- c(1.343, 5.232)
+typeof(my_vec) ; is.integer(my_vec)
+```
+
+```
+## [1] "double"
+```
+
+```
+## [1] FALSE
+```
+
+```r
+# integer vectors (overruled by R)
+my_vec &lt;- c(1, 7, 2)
+typeof(my_vec) ; is.integer(my_vec)
+```
+
+```
+## [1] "double"
+```
+
+```
+## [1] FALSE
+```
+]
+
+.pull-right45[
+
+```r
+# logical vectors
+my_vec &lt;- c(TRUE, FALSE)
+typeof(my_vec) ; is.logical(my_vec)
+```
+
+```
+## [1] "logical"
+```
+
+```
+## [1] TRUE
+```
+
+
+```r
+# character vectors
+my_vec &lt;- c('a', 'hello', 'world')
+typeof(my_vec) ; is.character(my_vec)
+```
+
+```
+## [1] "character"
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+
+# `data.frame`s
+
+.pull-left45[
+
+* Data frames (and its variants, e.g., **tibble**s) are R's **main data format**. 
+
+* **Data frames are lists** with specific **requirements**:
+
+  + Every element must be a vector.
+
+  + The lengths of the vectors must be equal (or multiples of another).  
+
+* Use `data.frame()` and `as.data.frame` to create or to coerce to data frame.
+]
+
+.pull-right45[
+&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data.frame.png" width="409px" height="266px"&gt;&lt;/p&gt;
+]
+
+
+
+
+---
+
+# Accessing &amp; changing data frames (and lists)
+
+Data frames (and lists) are best accessed using **names** and the `$`-operator. This, of course, implies that you followed good practice and named the individual elements in the data object. 
+
+.pull-left45[
+
+```r
+# retrieve elements using brackets
+my_df &lt;- data.frame('v_1'=c('A', 'B', 'C'), 
+                    'v_2'=c(1, 2, 3))
 my_df[1] ; my_df[[1]] ; my_df[['v_1']]
 ```
 
@@ -99,15 +224,8 @@ my_df[1] ; my_df[[1]] ; my_df[['v_1']]
 .pull-right45[
 
 ```r
-# retrieve elements from list
-my_df &lt;- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
-my_df[1,] ; my_df[,1] ; my_df[1,2]
-```
-
-```
-##   v_1 v_2
-## 1   A   1
+# retrieve elements using the $-operator
+my_df$v_1
 ```
 
 ```
@@ -115,8 +233,16 @@ my_df[1,] ; my_df[,1] ; my_df[1,2]
 ## Levels: A B C
 ```
 
+```r
+my_df$v_1 &lt;- c('X', 'Y', 'Z')
+my_df
 ```
-## [1] 1
+
+```
+##   v_1 v_2
+## 1   X   1
+## 2   Y   2
+## 3   Z   3
 ```
 ]
 
@@ -174,10 +300,13 @@ my_out &lt;- my_fun(my_data, 5)
 
 ---
 
-.pull-left5[
 # Help
 
-An facilitator for using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). Don't worry if help files may appear cryptical, however, over time you will realise how helpful they are. **Vignettes** are long tutorials sometimes provided by the authors of a package.     
+.pull-left5[
+
+R provides extremely helpful **help files** and **vignettes**. 
+&gt;**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).&lt;br&gt;
+&gt;**Vignettes** are long tutorials sometimes provided by the authors of a package.     
 
 
 ```r
@@ -189,14 +318,18 @@ help("name_of_function")
 ??name_of_function
 
 # To list and access vignettes
-vignette(package="name_of_package")
-vignette(package="name_of_vignette")
+vignette(package = "name_of_package")
+vignette(package = "name_of_vignette")
 ```
 
 ]
 
 .pull-right45[
-&lt;br&gt;&lt;br&gt;&lt;iframe src="R_ Arithmetic Mean.htm" height="510" width="800" align="center"&gt;&lt;/iframe&gt;
+&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"&gt;&lt;/p&gt;
+
+&lt;!---
+&lt;br&gt;&lt;br&gt;&lt;iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"&gt;&lt;/iframe&gt;
+---&gt;
 ]
 
 ---
@@ -242,7 +375,7 @@ Anytime you want to transform, organize, or aggregate data, use `dplyr`
 .pull-left35[
 # dplyr
 
-dplyr is a combination of 3 things:
+`dplyr` is a combination of 3 things:
 
 1. **`objects`** like dataframes
 2. **`functions`** that **do** things to objects.
@@ -255,11 +388,12 @@ dplyr is a combination of 3 things:
 ]
 
 .pull-right6[
-
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 ## The pipe %&gt;%
+&lt;br2&gt;
 
-&lt;font size = 5&gt; dplyr makes extensive use of the 'pipe' %&gt;% which passes objects between functions&lt;/font&gt;
-
+`dplyr` makes extensive use of the 'pipe' `%&gt;%` which passes objects between functions.
+&lt;br&gt;&lt;br&gt;
 
 
 ```r
@@ -270,7 +404,8 @@ data %&gt;%    # Start with data, AND THEN...
   group_by(x, y) %&gt;%  # Group by variables x, y
     summarise(
       VAR_A_New = fun(X),
-      VAR_B_New = fun(Y)
+      VAR_B_New = fun(Y),
+      VAR_C_New = fun(Z),
     )
   )
 ```
@@ -454,13 +589,6 @@ Given data, an algorithm tunes its *parameters* to match the data, understand ho
 
 ]
 
----
-# What is the basic machine learning process?
-
-&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png" width="95%" /&gt;
-
-
-
 
 ---
 # How do I do machine learning in R?
@@ -505,17 +633,7 @@ If you're really into machine learning, packages such as `mlr` and `caret` can a
 ---
 # Today
 
-## Tidy Projects
-
-&gt; &lt;font size = 5&gt;How can I write readable, well-formatted code?&lt;font&gt;
-
-## Plotting 1.0
-
-&gt; &lt;font size = 5&gt;How can I easily create publication--ready plots?&lt;font&gt;
-
-## Plotting 2.0
-
-&gt; &lt;font size = 5&gt;Can I make interactive websites with R?&lt;font&gt;
+&lt;p&gt;&lt;font size=6&gt;&lt;b&gt;&lt;a href="https://therbootcamp.github.io/schedule_18Jan"&gt;Schedule&lt;/a&gt;
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

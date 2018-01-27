@@ -91,25 +91,115 @@ trial_X <- data.frame(id = 1:5,
 
 ---
 
-# Accessing & changing **complex** objects
+# Vectors
 
-Data frames can be accessed **exactly like lists**. In addition, data frames allow for a matrix-like access using **single bracket** `[`. Note however that selecting rows using single bracket returns a data frame, whereas for selecting columns returns a vector.
+R's most **basic (and most simple) data format** - even single values (aka **scalars**) are implemented as vectors. 
+
+.pull-left45[
+```{r, eval = F}
+# creating a vector (incl. names)
+my_vec <- c(t_1 = 1.343, t_2 = 5.232)
+
+# vectors are always flat
+my_vec <- c(1.343, c(5.232, 2.762))
+
+# naming vectors
+my_vec <- c(t_1 = 1.343, t_2 = 5.232)
+names(my_vec) <- c("new_1","new_2")
+
+# evaluting inherent attributes
+names(my_vec)
+length(my_vec)
+typeof(my_vec)
+
+```
+]
+
+.pull-right5[
+<p align="left"><br><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/vector.png" width="628px" height="190px"></p>
+]
+
+
+---
+
+# Types
+
+A vector contains elements of one of four **basic types**: `integer`, `double`, `numeric`, and `character`. You can **test** the type using `typeof()` or the type-specific `is.*()`, e.g., `is.integer()`.
+
 
 .pull-left45[
 ```{r}
-# retrieve elements from list
-my_df <- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
+# numeric vectors
+my_vec <- c(1.343, 5.232)
+typeof(my_vec) ; is.integer(my_vec)
+
+# integer vectors (overruled by R)
+my_vec <- c(1, 7, 2)
+typeof(my_vec) ; is.integer(my_vec)
+
+```
+]
+
+.pull-right45[
+```{r}
+# logical vectors
+my_vec <- c(TRUE, FALSE)
+typeof(my_vec) ; is.logical(my_vec)
+```
+
+```{r}
+# character vectors
+my_vec <- c('a', 'hello', 'world')
+typeof(my_vec) ; is.character(my_vec)
+```
+]
+
+---
+
+# `data.frame`s
+
+.pull-left45[
+
+* Data frames (and its variants, e.g., **tibble**s) are R's **main data format**. 
+
+* **Data frames are lists** with specific **requirements**:
+
+  + Every element must be a vector.
+
+  + The lengths of the vectors must be equal (or multiples of another).  
+
+* Use `data.frame()` and `as.data.frame` to create or to coerce to data frame.
+]
+
+.pull-right45[
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/data.frame.png" width="409px" height="266px"></p>
+]
+
+
+
+
+---
+
+# Accessing & changing data frames (and lists)
+
+Data frames (and lists) are best accessed using **names** and the `$`-operator. This, of course, implies that you followed good practice and named the individual elements in the data object. 
+
+.pull-left45[
+```{r}
+# retrieve elements using brackets
+my_df <- data.frame('v_1'=c('A', 'B', 'C'), 
+                    'v_2'=c(1, 2, 3))
 my_df[1] ; my_df[[1]] ; my_df[['v_1']]
 ```
 ]
 
 .pull-right45[
 ```{r}
-# retrieve elements from list
-my_df <- data.frame('v_1'=c('A','B','C'), 
-                    'v_2'=c(1,2,3))
-my_df[1,] ; my_df[,1] ; my_df[1,2]
+# retrieve elements using the $-operator
+my_df$v_1
+my_df$v_1 <- c('X', 'Y', 'Z')
+my_df
+
 ```
 ]
 
@@ -150,10 +240,13 @@ my_out <- my_fun(my_data, 5)
 
 ---
 
-.pull-left5[
 # Help
 
-An facilitator for using R are **help files** and **vignettes**. Help files are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/). Don't worry if help files may appear cryptical, however, over time you will realise how helpful they are. **Vignettes** are long tutorials sometimes provided by the authors of a package.     
+.pull-left5[
+
+R provides extremely helpful **help files** and **vignettes**. 
+>**Help files** are required documentations for every R function and package published on [**CRAN**](https://cran.r-project.org/).<br>
+>**Vignettes** are long tutorials sometimes provided by the authors of a package.     
 
 ```{r, eval = F}
 # To access help files
@@ -164,14 +257,18 @@ help("name_of_function")
 ??name_of_function
 
 # To list and access vignettes
-vignette(package="name_of_package")
-vignette(package="name_of_vignette")
+vignette(package = "name_of_package")
+vignette(package = "name_of_vignette")
 ```
 
 ]
 
 .pull-right45[
-<br><br><iframe src="R_ Arithmetic Mean.htm" height="510" width="800" align="center"></iframe>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/mean_help.png" width="500"></p>
+
+<!---
+<br><br><iframe src="http://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html" height="510" width="800" align="center"></iframe>
+--->
 ]
 
 ---
@@ -228,7 +325,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 .pull-left35[
 # dplyr
 
-dplyr is a combination of 3 things:
+`dplyr` is a combination of 3 things:
 
 1. **`objects`** like dataframes
 2. **`functions`** that **do** things to objects.
@@ -243,11 +340,12 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ]
 
 .pull-right6[
-
+<br><br><br><br>
 ## The pipe %>%
+<br2>
 
-<font size = 5> dplyr makes extensive use of the 'pipe' %>% which passes objects between functions</font>
-
+`dplyr` makes extensive use of the 'pipe' `%>%` which passes objects between functions.
+<br><br>
 
 ```{r, eval = FALSE}
 data %>%    # Start with data, AND THEN...
@@ -257,7 +355,8 @@ data %>%    # Start with data, AND THEN...
   group_by(x, y) %>%  # Group by variables x, y
     summarise(
       VAR_A_New = fun(X),
-      VAR_B_New = fun(Y)
+      VAR_B_New = fun(Y),
+      VAR_C_New = fun(Z),
     )
   )
 ```
@@ -418,15 +517,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ]
 
----
-# What is the basic machine learning process?
-
-```{r, echo = FALSE, out.width = "95%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/MLdiagram.png")
-```
-
-
-
 
 ---
 # How do I do machine learning in R?
@@ -472,14 +562,4 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 # Today
 
-## Tidy Projects
-
-> <font size = 5>How can I write readable, well-formatted code?<font>
-
-## Plotting 1.0
-
-> <font size = 5>How can I easily create publication--ready plots?<font>
-
-## Plotting 2.0
-
-> <font size = 5>Can I make interactive websites with R?<font>
+<p><font size=6><b><a href="https://therbootcamp.github.io/schedule_18Jan">Schedule</a>
