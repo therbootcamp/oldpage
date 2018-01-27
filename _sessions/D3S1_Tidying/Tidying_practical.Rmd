@@ -180,7 +180,7 @@ library(  dplyr)
         t.test(a,b) 
 ```
 
-2. Now that you have done all the work, I can tell you that R actually has a function to tidy up code. Let's see what it does. Start again with the 'dirty' code and copied into a new script. Save it in your `2_code` folder. Now, install and load the `formatR` package (`install.packages(formatR)` and `library(formatR)`) and apply it to the file path of the 'dirty code' using the `tidy_source(file_path)` function. Did it do a good job? What did it miss?
+2. Now that you have done all the work, I can tell you that R actually has a function to tidy up code. Let's see what it does. Start again with the 'dirty' code and copied into a new script. Save it in your `2_code` folder. Now, install and load the `formatR` package (`install.packages("formatR")` and `library("formatR")`) and apply it to the file path of the 'dirty code' using the `tidy_source(file_path)` function. Did it do a good job? What did it miss?
 
 ### Correct code
 
