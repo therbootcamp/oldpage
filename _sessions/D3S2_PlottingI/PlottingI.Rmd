@@ -982,10 +982,9 @@ You can add labels to a plot with the `labs()` function
 
 | Arguments| Description|
 |:------|:----|
-|     `title`| How should the line be generated?|
-|     `subtitle`|    Confidence|
-|     `caption`| Caption|
-| `col, size`, ...| Other plotting aesthetics|
+|     `title`|Main Title|
+|     `subtitle`| Subtitle|
+|     `caption`| Caption below plot|
 
 ]
 
@@ -1248,6 +1247,48 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ```
 
 ]
+
+
+---
+## Set a global theme with theme_set()
+
+.pull-left45[
+<br>
+<font size = 5>You can set a <b>global theme</b> with the theme_set() function</font>
+
+<br>
+
+```{r}
+# Set global theme to minimal
+theme_set(theme_bw())
+
+
+# All fugure plots will now use theme_bw()!
+```
+
+
+<br>
+
+<font size = 5>When you do, all future plots will use that theme!</font>
+
+]
+
+.pull-right5[
+
+```{r, fig.width = 6, fig.height = 4, out.width = "90%"}
+#Set global theme to theme_dark()
+theme_set(theme_dark())
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point()
+
+
+```
+
+
+]
+
 
 ---
 ## Final result!

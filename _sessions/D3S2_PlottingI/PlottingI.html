@@ -433,7 +433,7 @@ ggplot(data = mpg)
 |    `shape`|  Shape|
 
 - Add aesthetics with the `aes()` function
-- Arguments can be &lt;b&gt;columns&lt;/b&gt; in your dataframe, or in some cases &lt;b&gt;string&lt;/b&gt; values
+- Arguments can be &lt;b&gt;columns&lt;/b&gt; in your dataframe, or in some cases &lt;b&gt;fixed&lt;/b&gt; (i.e.; string or integer) values
 
 
 ]
@@ -976,10 +976,9 @@ You can add labels to a plot with the `labs()` function
 
 | Arguments| Description|
 |:------|:----|
-|     `title`| How should the line be generated?|
-|     `subtitle`|    Confidence|
-|     `caption`| Caption|
-| `col, size`, ...| Other plotting aesthetics|
+|     `title`|Main Title|
+|     `subtitle`| Subtitle|
+|     `caption`| Caption below plot|
 
 ]
 
@@ -1234,6 +1233,50 @@ ggplot(data = mpg,
 
 ]
 
+
+---
+## Set a global theme with theme_set()
+
+.pull-left45[
+&lt;br&gt;
+&lt;font size = 5&gt;You can set a &lt;b&gt;global theme&lt;/b&gt; with the theme_set() function&lt;/font&gt;
+
+&lt;br&gt;
+
+
+```r
+# Set global theme to minimal
+theme_set(theme_bw())
+
+
+# All fugure plots will now use theme_bw()!
+```
+
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;When you do, all future plots will use that theme!&lt;/font&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+#Set global theme to theme_dark()
+theme_set(theme_dark())
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-58-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
 ---
 ## Final result!
 
@@ -1251,7 +1294,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-57-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-59-1.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1273,7 +1316,7 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-58-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-60-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -1291,7 +1334,7 @@ ggplot(data = mpg,
   facet_wrap(~ class)  # Tilde first!
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1333,7 +1376,7 @@ class(myplot)
 myplot # Evaluate myplot
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-60-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-62-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1351,7 +1394,7 @@ myplot # Evaluate myplot
 myplot
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-61-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1366,7 +1409,7 @@ myplot +
   theme_dark()
 ```
 
-&lt;img src="PlottingI_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="PlottingI_files/figure-html/unnamed-chunk-64-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
