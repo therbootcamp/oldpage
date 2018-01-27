@@ -77,6 +77,13 @@ A social graph of package Co-authors using `tidyverse` plus `ggraph`, an extensi
 
 ---
 
+# Semantic networks - [**www.swow.me**](www.swow.me)
+
+<p align="center"><a href="http://www.swow.me">
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/semantic_space.png" width=720></a></p>
+
+---
+
 # Stats packages
 
 >"If there is a new statistical method, it is first implemented in R" <br>
@@ -159,7 +166,7 @@ Another area were R has seen much development is **text analysis**. New packages
 
 ---
 
-# Text analysis: Applications
+# Text analysis: Applications I
 
 .pull-left4[
 <p align="center">
@@ -176,6 +183,16 @@ Another area were R has seen much development is **text analysis**. New packages
 
 ]
 
+---
+
+# Text analysis: Applications II
+
+
+### Shiny app: [**http://hedonometer.org/books/v1/**](http://hedonometer.org/books/v1/)
+### Paper: [**http://hedonometer.org/books/v1/**](https://arxiv.org/pdf/1606.07772.pdf)
+
+<p align="center"><a href="http://www.swow.me">
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/harry_potter.png" width=720></a></p>
 
 ---
 
