@@ -29,13 +29,9 @@ options(digits = 4)
 knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE, fig.align = 'center')
 ```
 
-## Shiny
-
-
-```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/matrix_shiny.png")
 ```
-
 
 ---
 ## This is Shiny
