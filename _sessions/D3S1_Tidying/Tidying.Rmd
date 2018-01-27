@@ -51,7 +51,7 @@ In this introduction you will learn...
 .pull-left4[
 # Projects
 
-### Help access files
+### Help access files (paths)
 
 ### Set options
 - "Workspace, history saving
@@ -74,9 +74,7 @@ And more...
 <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/projects_2.png" height="280" vspace="10">
 ]
 
-
 ---
-
 
 # [**Git**](https://git-scm.com/) & [**GitHub**](https://github.com/)
 
@@ -85,6 +83,8 @@ And more...
 ### Git
 
 Highly effificent system for **version control** and **collaboration**. 
+
+- `pull`, `commit`, `push`
 
 ### GitHub
 
@@ -337,8 +337,8 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 .pull-left3[
 <font size=5>A pervasive problem in working with data is missing values. 
-
-<font size=5>In R there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
+<font size=5>Only to become more important in the days of Big Data. 
+<font size=5>In R, there are **two kinds of missing values**: the more general and frequent `NA`, and the more specific `NaN`. 
 ]
 
 .pull-right6[
@@ -405,8 +405,7 @@ my_df <- data.frame('x' = c(1, 2,  3, 4, NA),
                     )
 
 # Impute using mean
-my_df[[1]][is.na(my_df[[1]])] <- 
-  mean(my_df[[1]], na.rm = TRUE)
+my_df$x[is.na(my_df$x)] <- mean(my_df$x, na.rm = TRUE)
 
 # Impute using regression (package: mice)
 model <- mice(my_df, method = 'norm', printFlag = FALSE)
@@ -420,7 +419,7 @@ my_df
 
 ---
 
-# Live Demo: Projects & Practical
+# Live Demo & Practical
 
 <p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D3S1_Tidying/Tidying_practical.html">Link to practical</a>
 
