@@ -42,10 +42,10 @@ trial_id
 trial_1
 
 # Bad
-name_of_trial
-trialID
-tid
-t1
+nameOFtrial
+trial.object
+t
+ekfjw
 ```
 
 Place **spaces** around all operators, such as, `=`, `+`, `-`, `<-`, etc. Also applies for defining arguments in functions. Always put a space after, never before a comma.
@@ -68,7 +68,6 @@ list(
 )
 
 ```
-
 
 An opening **curly bracket** should never be on its own line. Always indent within curly brackets. To **indent** code use two spaces. Don't use tabs.
 
@@ -113,7 +112,7 @@ x = 24324
 R's error messages are not always very intuitive, but over time you will learn to understand them. In the beginning it helps to focus on the part after the colon. E.g., 
 
 ```{r, error = TRUE}
-sapply(1:10,'fefkl')
+sapply(1:10, 'fefkl')
 ```
 
 Here the key message is `'function' was not found`. I.e., R is interpreting `'fekl'` as a function but cannot find an instance of this function anywhere (because it doesn't exist).
@@ -128,7 +127,7 @@ According to an analysis of <a href="https://stackoverflow.com/">stackoverflow.c
 | `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing filepath.|
 | `'no applicable method'`|predict('efwe')| A 'generic function' has not been defined for this type/class |
 | `'subsscript out of bounds'`|a <- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
-| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
+| package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software in the background is missing. |
 
 For more information visit <a href="https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md">here</a>.<br>
 
@@ -142,7 +141,7 @@ library(readr)
 library(mice)
 
 # read and duplicate in titanic data
-data <- read_csv('https://therbootcamp.github.io/_slides/data/titanic.csv')
+data <- read_csv('https://tinyurl.com/y99aj5ed')
 data_mean <- data
 data_median <- data
 data_mice <- data
@@ -162,7 +161,7 @@ data_mice  <- complete(mice_model)
 
 ### Begin new project
 
-If you haven't already. Begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
+If you haven't already, begin a new project in a new folder. Within the folder, create two new folders called `1_data` and `2_code`. 
 
 ### Clean code
 
