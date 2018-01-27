@@ -29,13 +29,9 @@ options(digits = 4)
 knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE, fig.align = 'center')
 ```
 
-## Shiny
-
-
-```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
-knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/whatisshiny.png")
+```{r, echo = FALSE, fig.align = 'center', out.width = "100%"}
+knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/matrix_shiny.png")
 ```
-
 
 ---
 ## This is Shiny
@@ -266,9 +262,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 <br>
 <br>
 
-<font size = 5>To present output (e.g.; a plot), it must be *rendered* in the server using a special rendering function renderXX()</font><br><br>
+<font size = 5>To present output (e.g.; a plot), it must be <b>rendered</b> in the server using a special rendering function renderXX()</font><br><br>
 
-<font size = 5>Once it is rendered, it is sent to the `output` and displayed in the user interface using an xxOutput() function.</font>
+<font size = 5>Once it is rendered, it is sent to the <b>output</b> and displayed in the user interface using an <b>xxOutput()</b> function.</font>
 
 ]
 

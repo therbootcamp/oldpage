@@ -82,7 +82,7 @@ And more...
 
 ### Git
 
-Highly effificent system for **version control** and **collaboration**. 
+Highly efficient system for **version control** and **collaboration**. 
 
 - `pull`, `commit`, `push`
 
@@ -323,7 +323,7 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 | Error| Example| Description|
 |:------|:------------|:--------------------------------------------|
-|     `'could not find function'`|lenth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
+|     `'could not find function'`|legth(my_vec)| There is a typo in the function name or that a package has not been loaded.|
 |     `'error in if'`|if(NA == 2) 2 + 2| The object in the `if`-clause is non-logical or NA.|
 |     `'error in eval'`|lm(fefq~wzfe)| An object is used that does not exist.|
 | `'cannot open()'`|read_csv('hjht.txt')| The file does not exist. Could be a typo or a missing file path.|
@@ -371,7 +371,7 @@ my_vec_1 <- c(1, 2, 3,  4, NA)
 my_vec_2 <- c(4, 2, NA, 3, 5)
 
 # Functions examples that include handlers
-mean(my_vec_1) ; cor(my_vec_1,my_vec_2)
+mean(my_vec_1) ; cor(my_vec_1, my_vec_2)
 
 # Actually using the handlers
 mean(my_vec_1, na.rm = TRUE)
