@@ -180,11 +180,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 ---
 ## ggplot2
 
-.pull-left4[
-
+.pull-left45[
+<br>
 <font size = 5>How do we make elegant, easy to program plots according to the grammar of graphics in R?</font><br><br>
 
-## ggplot2 Package
+<font size = 5></b>Answer: ggplot2</b></font><br>
 
 <br>
 
@@ -417,7 +417,7 @@ ggplot(data = mpg,
 
 
 ---
-## `data`
+## ggplot(data)
 
 
 .pull-left5[
@@ -445,29 +445,26 @@ ggplot(data = mpg)
 
 
 ---
-## Aesthetics
+## ggplot(mapping = aes())
 
 
 .pull-left4[
 
-- An **aesthetic** is a visual property of the objects in your plot. 
+- An **aesthetic mapping** is a visual property of the objects in your plot. 
 
 ### Common aesthetics
 
 | aesthetics| Description|
 |:------|:----|
-|     `x`|    Data mapped to x-coordinate|
-|     `y`|    Data mapped to y-coordinate|
-|     `color`, `fill`|    Color and filling|
-|     `alpha`|    Transparency|
-|     `shape`| Overall shape|
+|     `x`, `y`|    Data mapped to coordinates|
+|     `color`, `fill`|    Border and fill colors|
+|     `alpha`| Transparency|
 |    `size`|  Size|
+|    `shape`|  Shape|
 
-- Add plotting aesthetics with the `aes()` function
-
+- Add aesthetics with the `aes()` function
 
 ]
-
 
 .pull-right5[
 
@@ -476,14 +473,12 @@ ggplot(data = mpg,
        mapping = aes(x = displ, y = hwy))
 ```
 
-
 ]
-
 
 ---
 ## Adding elements to plots with '+'
 
-.pull-left4[
+.pull-left45[
 
 - Once you have specified data with `data` argument, and global aesthetics with `mapping = aes()`, you can add additional elements to the plot with `+`
 
@@ -492,7 +487,8 @@ ggplot(data = mpg,
 
 ```{r, eval = FALSE}
 ggplot(data = mpg,
-       mapping = aes(x = displ, y = hwy)) +  # and then...
+       mapping = aes(x = displ, 
+                     y = hwy)) +  # and then...
        # MORE    + (and then...)
        # MORE    + (and then...)
 ```
@@ -527,13 +523,13 @@ ggplot(data = mpg,
 
 ### Common geoms
 
-| geom| plot type|
+| geom| output|
 |:------|:----|
-|     `geom_point()`|    Scatterplot|
-|     `geom_bar()`|    barplot|
-|     `geom_boxplot()`| A boxplot
-|     `geom_count()`| Points representing counts|
-|     `geom_smooth()`|    Regression line|
+|     `geom_point()`|    Points|
+|     `geom_bar()`|    Bar|
+|     `geom_boxplot()`| Boxplot
+|     `geom_count()`| Points with size reflecting frequency|
+|     `geom_smooth()`|  Smoothed line|
 
 
 
@@ -556,13 +552,12 @@ ggplot(data = mpg,
 
 
 ---
-## Additional geoms
 
 .pull-left45[
 
 ### geom_boxplot()
 
-```{r, out.width= "75%", fig.width = 6, fig.height = 4}
+```{r, out.width= "100%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
   mapping = aes(x = class, y = hwy, 
                 fill = class)) + 
@@ -575,13 +570,13 @@ ggplot(data = mpg,
 
 .pull-right45[
 
-### geom_density()
+### geom_violin()
 
-```{r, out.width= "70%", fig.width = 6, fig.height = 4}
+```{r, out.width= "100%", fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
-  mapping = aes(x = hwy, 
+  mapping = aes(x = class, y = hwy, 
                 fill = class)) + 
-  geom_density()
+  geom_violin()
 ```
 
 
@@ -610,7 +605,7 @@ ggplot(data = mpg,
 
 ### geom_count()
 
-```{r, out.width= "80%", echo = TRUE, fig.width = 6, fig.height = 4}
+```{r, out.width= "100%", echo = TRUE, fig.width = 6, fig.height = 4}
 ggplot(data = mpg,
   mapping = aes(x = displ, y = hwy)) + 
   geom_count()
@@ -622,20 +617,17 @@ ggplot(data = mpg,
 
 ---
 
+
 .pull-left45[
 
-### geom_joy()
 
-> From the `ggjoy` package
+### geom_density()
 
-```{r, out.width= "60%", echo = TRUE, fig.width = 6, fig.height = 4}
-library(ggjoy) # Load the ggjoy package
-
-ggplot(data = midwest,
-       mapping = aes(percollege, 
-                     y = state, 
-                     fill = state)) + 
-  geom_joy(col = "white")
+```{r, out.width= "100%", fig.width = 6, fig.height = 4}
+ggplot(data = mpg,
+  mapping = aes(x = hwy, 
+                fill = class)) + 
+  geom_density()
 ```
 
 
@@ -675,14 +667,24 @@ ggplot(nba_long,
 
 
 ---
-## Geometric objects (geoms)
+## Aesthetics
 
-.pull-left4[
+.pull-left45[
 
-<br>
-<br>
 
-*How do we get points to be shown in different colors like the plot below?*
+> What plotting aesthetic is missing from the code below to make our plot on the right?
+
+```{r, out.width = "80%", fig.width = 5, fig.height = 4}
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) + 
+  geom_point()
+```
+
+
+
+]
+
+.pull-right5[
 
 ```{r, out.width = "100%", fig.width = 6, fig.height = 4, echo = FALSE}
 ggplot(data = mpg,
@@ -690,17 +692,6 @@ ggplot(data = mpg,
   geom_point()
 ```
 
-]
-
-.pull-right5[
-
-> What plotting aesthetic is missing from ths code below to make our plot on the left?
-
-```{r, out.width = "80%", fig.width = 5, fig.height = 4}
-ggplot(data = mpg,
-       mapping = aes(x = displ, y = hwy)) + 
-  geom_point()
-```
 
 ]
 
@@ -753,7 +744,6 @@ ggplot(data = mpg,
 
 .pull-left45[
 
-> Where are are at
 
 ```{r, out.width = "90%", fig.width = 6, fig.height = 4, echo = TRUE}
 ggplot(data = mpg,
@@ -790,30 +780,31 @@ ggplot(data = mpg,
 
 ]
 
+
 ---
 ### Smoothed lines with `geom_smooth()`
 
 .pull-left45[
 
-To add a smoothed line to a plot, use `geom_smooth()`
+To add a smoothed line to a plot, use geom_smooth()
 
-### `geom_smooth()` arguments
+Main geom_smooth() arguments<br><br>
+
 
 | Arguments| Description|
 |:------|:----|
-|     `method`| How should the line be generated?|
-|     `level`|    Confidence|
-| `col, size`, ...| Other plotting aesthetics|
+|     method|    What function does the line represent?|
+|     col, size, ...|    Other plotting aesthetics|
 
 
-- If you add additional plotting aesthetics, they will *override* the general plotting aesthetics
+<br><font size = 5>If you add additional plotting aesthetics, they will <b>override</b> the general plotting aesthetics</font>
 
 
 ]
 
 .pull-right45[
 
-<font size =5>Add a blue smoothed line</font>
+<font size =5>method = "lm"</font>
 
 ```{r, fig.width = 7, fig.height = 4}
 ggplot(data = mpg, 
@@ -826,6 +817,43 @@ ggplot(data = mpg,
 
 
 
+
+---
+### Smoothed lines with `geom_smooth()`
+
+.pull-left45[
+
+To add a smoothed line to a plot, use geom_smooth()
+
+Main geom_smooth() arguments<br><br>
+
+
+| Arguments| Description|
+|:------|:----|
+|     method|    What function does the line represent?|
+|     col, size, ...|    Other plotting aesthetics|
+
+
+<br><font size = 5>If you add additional plotting aesthetics, they will <b>override</b> the general plotting aesthetics</font>
+
+
+]
+
+.pull-right45[
+
+<font size =5>method = "lm"</font>
+
+```{r, fig.width = 7, fig.height = 4}
+ggplot(data = mpg, 
+       mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point() + 
+  geom_smooth(col = "blue",
+              method = "lm") # regression
+```
+
+]
+
+
 ---
 ## Overriding aesthetics
 
@@ -836,7 +864,7 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "50%"}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy, col = class)) + # Global aesthetics
   geom_point() + 
   geom_smooth(col = "blue") # geom_smooth IGNORES global col aesthetic
 ```
@@ -847,7 +875,7 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "60%"}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy, col = class)) + # Global aesthetics
   geom_point() + # geom_point RESPECTS global col aesthetic (class)
   geom_smooth()  # geom_smooth RESPECTS global col aesthetic (class)
 ```
@@ -858,7 +886,7 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "60%"}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy, col = class)) + # Global aesthetics
   geom_point() +            # 
   geom_smooth(col = "blue") # Overrides global col aesthetic (class)
 ```
@@ -868,7 +896,7 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "60%"}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy, col = class)) + # Global aesthetics
   geom_point(col = "pink") + # Overrides global col aesthetic (class)
   geom_smooth(col = "blue")  # Overrides global col aesthetic (class)
 ```
@@ -878,9 +906,9 @@ ggplot(data = mpg,
 
 ```{r, fig.width = 7, fig.height = 4, out.width = "60%"}
 ggplot(data = mpg, 
-       mapping = aes(x = displ, y = hwy, col = class)) +
+       mapping = aes(x = displ, y = hwy, col = class)) + # Global aesthetics
   geom_point(col = "pink") + # Overrides global col aesthetic (class)
-  geom_smooth()              #
+  geom_smooth()
 ```
 
 
@@ -966,8 +994,7 @@ You can add labels to a plot with the `labs()` function
 
 
 ```{r, echo = TRUE, eval = FALSE}
-ggplot(data = mpg +
-      # Past code +
+ggplot(...) +
   labs(x = "Engine Displ...",
        y = "Highway miles...",
        title = "MPG data",
@@ -1067,7 +1094,7 @@ A plotting *theme* controls many aspects of its overall look, from the backgroun
 
 ]
 
-.pull-right45[
+.pull-right5[
 
 <font size = 5>No theme specified </font>
 
@@ -1101,7 +1128,7 @@ A plotting *theme* controls many aspects of its overall look, from the backgroun
 
 ]
 
-.pull-right45[
+.pull-right5[
 
 <font size = 5>+ theme_bw()</font>
 
@@ -1135,7 +1162,7 @@ A plotting *theme* controls many aspects of its overall look, from the backgroun
 
 ]
 
-.pull-right45[
+.pull-right5[
 
 <font size = 5>+ theme_dark()</font>
 
@@ -1169,7 +1196,7 @@ A plotting *theme* controls many aspects of its overall look, from the backgroun
 
 ]
 
-.pull-right45[
+.pull-right5[
 
 <font size = 5>+ theme_light()</font>
 
@@ -1384,10 +1411,10 @@ ggsave(filename = "myplot.pdf",
 ---
 ## So much more
 
-- We have only touched the surface of what you can do with `ggplot2`
+<font size 5>Check these links for more in depth ggplot2 guides</font>
 
-- http://ggplot2.tidyverse.org/index.html
-- http://r4ds.had.co.nz/data-visualization.html
+- ggplot2 main page: http://ggplot2.tidyverse.org/index.html
+- Wickham's data visualization guide: http://r4ds.had.co.nz/data-visualization.html
 
 
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
@@ -1404,11 +1431,6 @@ https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 ```{r, echo = FALSE, out.width="600", fig.align = 'center'}
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/ggplot_cheatsheet_ss.png")
 ```
-
-
-
----
-## Questions?
 
 ---
 
