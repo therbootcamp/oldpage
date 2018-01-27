@@ -38,7 +38,7 @@ class: center, middle, inverse, title-slide
 
 There are different frameworks for doing plotting in R.
 
-The classic framework is known as `Base R` plotting.
+The classic framework is known as &lt;b&gt;Base R&lt;/b&gt; plotting.
 
 In Base R plotting, there is a separate function for each 'type' of plot
 
@@ -78,7 +78,7 @@ hist(x = ChickWeight$weight,
 
 There are different frameworks for doing plotting in R.
 
-The classic framework is known as `base R` plotting.
+The classic framework is known as &lt;b&gt;Base R&lt;/b&gt; plotting.
 
 In Base R plotting, there is a separate function for each 'type' of plot
 
@@ -117,7 +117,7 @@ boxplot(formula = cty ~ trans,
 
 There are different frameworks for doing plotting in R.
 
-The classic framework is known as `base R` plotting.
+The classic framework is known as &lt;b&gt;Base R&lt;/b&gt; plotting.
 
 In Base R plotting, there is a separate function for each 'type' of plot
 
@@ -393,9 +393,10 @@ Our goal is to build the following plot step by step:
 
 - To create a ggplot2 object, use the `ggplot()` function.
 
-- Start with the `data` argument.
-
-   - `data` should be a dataframe (or Tibble)
+| argument| description|
+|:------|:----|
+|     `data`|    A dataframe (or tibble)|
+|     `mapping`|A call to aes()|
 
 - Including only a `data` argument returns a blank plotting space, because we haven't specified any plotting *aesthetics* or *geometric objects*
 
@@ -405,16 +406,13 @@ Our goal is to build the following plot step by step:
 .pull-right5[
 
 
-
 ```r
 ggplot(data = mpg)
 ```
 
 &lt;img src="PlottingI_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
-
 ]
-
 
 ---
 ## ggplot(mapping = aes())
@@ -435,6 +433,8 @@ ggplot(data = mpg)
 |    `shape`|  Shape|
 
 - Add aesthetics with the `aes()` function
+- Arguments can be &lt;b&gt;columns&lt;/b&gt; in your dataframe, or in some cases &lt;b&gt;string&lt;/b&gt; values
+
 
 ]
 
