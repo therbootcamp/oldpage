@@ -1455,7 +1455,7 @@ ggsave(filename = "myplot.pdf",
 <font size 5>Check these links for more in depth ggplot2 guides</font>
 
 - ggplot2 main page: http://ggplot2.tidyverse.org/index.html
-- Wickham's data visualization guide: http://r4ds.had.co.nz/data-visualization.html
+- Wickham's data visualization guide: http://r4ds.had.co.nz/data-visualisation.html
 
 
 ```{r, echo = FALSE, out.width="80%", fig.align = 'center'}
