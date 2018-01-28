@@ -23,13 +23,13 @@ class: center, middle, inverse, title-slide
 
 
 
-
-
 # Tidying
 
 .pull-left4[
 In this introduction you will learn...
 
+&gt;&lt;font size = 5&gt;...more about R projects.
+&gt;&lt;br2&gt;
 &gt;&lt;font size = 5&gt;...how to write clean, documented code.
 &gt;&lt;br2&gt;
 &gt;&lt;font size = 5&gt;...to understand errors (and warnings).
@@ -41,6 +41,38 @@ In this introduction you will learn...
 &lt;img src="https://build2be.com/sites/build2be.com/files/shutterstock_232639537.jpg" width="500"&gt;
 &lt;p align="center"&gt;&lt;font size=3&gt;source&lt;a href="https://build2be.com/"&gt; https://build2be.com/&lt;/a&gt;
 ]
+
+---
+
+# Style
+
+Check out the [**Google's R style guide**](https://google.github.io/styleguide/Rguide.xml) &amp; [**Tidyverse style guide**](http://style.tidyverse.org/index.html)
+
+
+
+
+### Bad
+
+```r
+mean(subset((data.frame(c('a','b'),runif(1000,0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
+```
+
+
+
+### Good
+
+```r
+# create my data.frame
+my_data &lt;- data.frame('group' = c('a','b'), 
+                      'value' = runif(1000,0,1))
+
+# subset data
+my_data %&gt;% 
+  filter(group == 'a') %&gt;%
+  summarize(mean(value))
+```
+
+
 ---
 
 # Project structure
@@ -69,38 +101,6 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 | `'subsscript out of bounds'`|a &lt;- matrix(c(1,2)); a[2,2]| R tried to access an element (or variable) that does not exist |
 | package errors|| Occur when R is unable to install, compile, or load a package. Often this means that some software background is missing. |
 
-
----
-
-# Assignments &amp; Comments
-
-.pull-left45[
-&lt;font size=5&gt;For **assignments** use `&lt;-`, not `=`. However, to specify arguments in functions use `=`.
-
-```r
-# Good
-x &lt;- 24324
-
-# Bad
-x = 24324
-```
-]
-
-.pull-right45[
-&lt;font size=5&gt;**Comment each line** of your code. To break up your code in chunks use `-` or `=`.
-
-```r
-# Plot data ----------------------------
-
-this_is &lt;- "pseduo_code"
-my_function(arg1 = x,
-            arg2 = y)
-
-# Plot data ============================
-
-this_is &lt;- "pseduo_code"
-```
-]
 
 ---
 
@@ -177,7 +177,7 @@ ggplot(data = mpg,
   theme_bw()
 ```
 
-&lt;img src="Recap_III_files/figure-html/unnamed-chunk-6-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Recap_III_files/figure-html/unnamed-chunk-8-1.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## What is Shiny?

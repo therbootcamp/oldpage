@@ -190,9 +190,9 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##   expr    min     lq   mean median     uq    max neval cld
-##    web 434672 452661 492826 465712 523910 617425    10   b
-##  local   4384   4651   8964   5129   7069  35478    10  a 
-##  fread    862   1026   1290   1081   1237   3049    10  a
+##    web 484728 504917 530632 520314 523838 681569    10   b
+##  local   4782   5242   5870   5438   6306   7759    10  a 
+##  fread    993   1023   1476   1144   1275   4495    10  a
 ```
 ]
 
@@ -226,8 +226,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   774   790   954    822    962   1696    10  a 
-##     apply 14173 15149 48887  16769 125152 127490    10   b
+##  colMeans   804   806   970    896   1110   1264    10  a 
+##     apply 12820 15629 49347  17728 124226 130349    10   b
 ```
 ]
 
@@ -269,11 +269,11 @@ microbenchmark(
 
 ```
 ## Unit: nanoseconds
-##     expr   min    lq  mean median    uq     max neval cld
-##   loop10  2263  2716  2919   2889  3140    3702   100  a 
-##  loop100 32956 50506 78614  52128 55774 2619678   100   b
-##    vec10   121   158   214    196   219     557   100  a 
-##   vec100   307   346   902    401  1352    6070   100  a
+##     expr   min    lq   mean median    uq     max neval cld
+##   loop10  2974  3698   4553   4110  5442    8374   100  a 
+##  loop100 41030 68848 110942  71844 84136 3087037   100   b
+##    vec10   164   252    336    311   408     896   100  a 
+##   vec100   407   498   1264    692  1070    5156   100  a
 ```
 
 ]
@@ -302,9 +302,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq  mean median   uq   max neval cld
-##    my_fun(x, is.null) 7.59 8.06 18.73   8.43 8.86 993.3   100   a
-##  my_fun_c(x, is.null) 7.61 8.02  8.52   8.38 8.73  15.2   100   a
+##                  expr  min   lq mean median   uq    max neval cld
+##    my_fun(x, is.null) 7.94 8.71 22.9   9.18 9.61 1173.2   100   a
+##  my_fun_c(x, is.null) 8.02 8.64 11.0   9.06 9.63   74.5   100   a
 ```
 
 ```r
@@ -315,8 +315,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 8.72 9.57 10.7   9.95 10.7 58.3   100   a
-##  my_fun_c(x, is.null) 8.71 9.59 10.4  10.05 10.9 26.6   100   a
+##    my_fun(x, is.null) 7.91 9.02 10.3   9.46 10.1 64.6   100   a
+##  my_fun_c(x, is.null) 8.14 8.92 10.1   9.61 10.7 25.6   100   a
 ```
 ]
 ---
@@ -357,9 +357,9 @@ microbenchmark(vectorz = colMeans(data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq  max neval cld
-##  vectorz 7.67 7.98 8.42   8.18 8.60 11.5   100   b
-##  cluster 4.03 4.47 4.68   4.62 4.78  6.7   100  a
+##     expr  min   lq mean median    uq  max neval cld
+##  vectorz 7.88 8.27 9.42   8.91 10.14 14.3   100   b
+##  cluster 4.18 4.65 5.93   5.12  6.67 18.3   100  a
 ```
 
 
@@ -406,9 +406,9 @@ microbenchmark(vectorz = colMeans(as.data.frame(my_data)),
 
 ```
 ## Unit: milliseconds
-##     expr    min     lq   mean median     uq   max neval cld
-##  vectorz 129.34 228.97 234.02 234.33 239.35 269.9   100   b
-##     rcpp   7.65   8.27   9.03   8.74   9.35  13.1   100  a
+##     expr    min     lq   mean median  uq   max neval cld
+##  vectorz 217.83 229.97 237.01 234.90 241 277.6   100   b
+##     rcpp   7.54   8.27   9.33   8.98  10  13.9   100  a
 ```
 ]
 ---
@@ -459,20 +459,6 @@ library(  dplyr)
       b = syc[['mother']]
         t.test(a,b) 
 ```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  a and b
-## t = 50, df = 2000, p-value &lt;2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  4.93 5.37
-## sample estimates:
-## mean of x mean of y 
-##      69.2      64.1
-```
 ]
 
 .pull-right45[
@@ -484,7 +470,9 @@ library(magrittr)
 library(dplyr)
 
 # read galton data
-galton_data &lt;- read_csv('https://tinyurl.com/y8gqcht3')
+galton_data &lt;- read_csv(
+  'https://tinyurl.com/y8gqcht3'
+  )
 
 # transform to metric system
 galton_data = galton_data %&gt;% 
@@ -494,20 +482,6 @@ galton_data = galton_data %&gt;%
 father &lt;- galton_data$father
 mother &lt;- galton_data$father
 t.test(father, mother) 
-```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  father and mother
-## t = 0, df = 2000, p-value = 1
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -0.229  0.229
-## sample estimates:
-## mean of x mean of y 
-##      69.2      69.2
 ```
 ]
 
