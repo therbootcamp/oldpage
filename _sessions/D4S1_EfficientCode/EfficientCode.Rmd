@@ -1,5 +1,5 @@
 ---
-title: "Efficient code"
+title: "Efficient programming"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
 date: "January 2018"
@@ -346,8 +346,7 @@ Many functions are already implemented in C++ or Fortran. Thus, large benefits w
 my_data <- matrix(rnorm(10000000),ncol = 10)
 
 # define function
-my_Rcpp_fun = "
-NumericVector colMeans_c(NumericMatrix& mat) {
+my_Rcpp_fun = "NumericVector colMeans_c(NumericMatrix& mat) {
   int n_rows = mat.nrow(), n_cols= mat.ncol() ;
   NumericVector means(n_cols);
   for(int j = 0; j < n_cols; ++j) {
@@ -403,7 +402,7 @@ Sort of R's Matlab.
 A lot of time in programming is consumed by reading, understanding, debugging your own code and that of others, and this time often far outweighs the benefits of making code faster. 
 
 .pull-left45[
-```{r, message=F, warning=F, eval = T}
+```{r, message=F, warning=F, eval = F}
 
 library(readr   )
 library(      magrittr)
@@ -418,14 +417,16 @@ library(  dplyr)
 ]
 
 .pull-right45[
-```{r, message=F, warning=F, eval = T}
+```{r, message=F, warning=F, eval = F}
 # load packages
 library(readr)
 library(magrittr)
 library(dplyr)
 
 # read galton data
-galton_data <- read_csv('https://tinyurl.com/y8gqcht3')
+galton_data <- read_csv(
+  'https://tinyurl.com/y8gqcht3'
+  )
 
 # transform to metric system
 galton_data = galton_data %>% 
@@ -436,6 +437,7 @@ father <- galton_data$father
 mother <- galton_data$father
 t.test(father, mother) 
 ```
+]
 
 ---
 
