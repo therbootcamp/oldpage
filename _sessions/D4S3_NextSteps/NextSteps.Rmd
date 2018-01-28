@@ -232,7 +232,7 @@ ggmap(get_map(c(7.588576, 47.559601),zoom=16))
 
 .pull-right45[
 
-<p align="center"><br><br><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfAGQRft3YGz-urIVyFQ1s2o5B_63C2J92V7bowa-RJsNfinQ/viewform?embedded=true" width="430" height="550">Wird geladen...</iframe></p>
+<p align="center"><br><br><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeeuKLfKUi4_pR-Gz1L7uiWI8NAxtRMqsGJ8LCGh2DNA1kSug/viewform?usp=sf_link" width="430" height="550">Wird geladen...</iframe></p>
 
 ]
 
