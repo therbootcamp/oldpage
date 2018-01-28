@@ -46,11 +46,12 @@ class: center, middle, inverse, title-slide
 .pull-right45[
 &lt;font size = 5&gt;*Reasons for R being slow*&lt;br&gt;&lt;br&gt;
 **Extreme dynamism** - allows you to code flexibly.
-- copy-on-modify semantics
 - weak dynamic typing
+- copy-on-modify semantics
+- Pass-by-value
 
 &lt;br2&gt;
-**Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
+**Name lookup** (in environments/namespaces) - allows you to import packages and name your objects flexibly.
 ]
 
 ---
@@ -190,9 +191,9 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##   expr    min     lq   mean median     uq    max neval cld
-##    web 449920 466245 547799 520333 576598 742787    10   b
-##  local   4495   5335  21629   5491   7460 128330    10  a 
-##  fread    935   1119   1428   1252   1401   2751    10  a
+##    web 507059 511350 528154 522565 527258 584996    10   b
+##  local   4369   4642  16737   4987   5434 122567    10  a 
+##  fread    951    987   1242   1040   1253   2751    10  a
 ```
 ]
 
@@ -226,8 +227,8 @@ microbenchmark(
 ```
 ## Unit: microseconds
 ##      expr   min    lq  mean median     uq    max neval cld
-##  colMeans   813   832   905    855    929   1257    10  a 
-##     apply 12597 14792 42471  15925 103018 109673    10   b
+##  colMeans   776   816   877    853    882   1185    10  a 
+##     apply 13211 14684 46848  17957 116366 121531    10   b
 ```
 ]
 
@@ -270,10 +271,10 @@ microbenchmark(
 ```
 ## Unit: nanoseconds
 ##     expr   min    lq  mean median    uq     max neval cld
-##   loop10  2281  2812 32405   3048  3342 2929138   100  ab
-##  loop100 32788 53444 55687  56412 62608   94119   100   b
-##    vec10   126   186   257    209   270    1078   100  a 
-##   vec100   317   354   710    406   546    3747   100  a
+##   loop10  2732  3234  3553   3506  3802    4572   100  a 
+##  loop100 38152 56063 94253  61125 66352 3390715   100   b
+##    vec10   142   208   273    250   303     979   100  a 
+##   vec100   313   412  1200    476   694   26495   100  a
 ```
 
 ]
@@ -302,9 +303,9 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 
 ```
 ## Unit: microseconds
-##                  expr  min   lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 7.79 8.36 21.9   8.72 9.15 1209   100   a
-##  my_fun_c(x, is.null) 7.89 8.29 10.5   8.71 9.26   69   100   a
+##                  expr  min   lq  mean median   uq    max neval cld
+##    my_fun(x, is.null) 7.67 7.96 19.85   8.16 8.82 1109.2   100   a
+##  my_fun_c(x, is.null) 7.64 7.97  8.53   8.17 8.77   16.7   100   a
 ```
 
 ```r
@@ -315,8 +316,8 @@ microbenchmark(my_fun(x, is.null), my_fun_c(x, is.null), unit='us')
 ```
 ## Unit: microseconds
 ##                  expr  min   lq mean median   uq  max neval cld
-##    my_fun(x, is.null) 7.95 9.10 15.5   16.3 20.2 52.9   100   a
-##  my_fun_c(x, is.null) 8.01 9.44 16.0   13.6 20.5 82.1   100   a
+##    my_fun(x, is.null) 10.6 11.0 12.3   11.6 12.4 61.1   100   a
+##  my_fun_c(x, is.null) 10.8 11.2 12.3   11.8 12.9 19.9   100   a
 ```
 ]
 ---
@@ -357,9 +358,9 @@ microbenchmark(vectorz = colMeans(data),
 
 ```
 ## Unit: milliseconds
-##     expr  min   lq mean median   uq   max neval cld
-##  vectorz 7.86 8.18 8.57   8.41 8.87 11.58   100   b
-##  cluster 4.17 4.51 4.80   4.70 5.02  6.47   100  a
+##     expr  min   lq mean median   uq  max neval cld
+##  vectorz 7.67 8.01 8.37   8.14 8.45 11.2   100   b
+##  cluster 4.02 4.37 4.69   4.58 4.87  7.4   100  a
 ```
 
 
@@ -407,8 +408,8 @@ microbenchmark(vector_implementation = colMeans(my_data),
 ```
 ## Unit: milliseconds
 ##                   expr  min   lq mean median   uq  max neval cld
-##  vector_implementation 7.55 7.94 8.44   8.23 8.60 11.7   100  a 
-##    rcpp_implementation 7.65 8.06 8.85   8.42 9.51 11.9   100   b
+##  vector_implementation 7.63 7.93 8.44   8.16 8.53 11.1   100   a
+##    rcpp_implementation 7.55 7.89 8.51   8.14 8.71 11.4   100   a
 ```
 ]
 ---

@@ -51,11 +51,12 @@ options(digits = 4)
 .pull-right45[
 <font size = 5>*Reasons for R being slow*<br><br>
 **Extreme dynamism** - allows you to code flexibly.
-- copy-on-modify semantics
 - weak dynamic typing
+- copy-on-modify semantics
+- Pass-by-value
 
 <br2>
-**Name lookup** (in environments) - allows you to import packages and name your objects flexibly.
+**Name lookup** (in environments/namespaces) - allows you to import packages and name your objects flexibly.
 ]
 
 ---
