@@ -362,7 +362,7 @@ NumericVector col_means_cpp(DataFrame&amp; df) {
 <ol start="15" style="list-style-type: decimal">
 <li>Now, let’s try to load our C++ function. To do this, we use <code>sourceCpp()</code> from the <code>Rcpp</code> package. Provide to <code>sourceCpp</code> the file path to our function and execute it. If there is no error, this means that we can now use <code>col_means_cpp()</code>, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use <code>system.time()</code> to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to <code>colMeans()</code>, which is R’s own “high-performance” version of this function. Who wins?</li>
 </ol>
-<p>Why do the results of this comparison differ from those in the slides?</p>
+<p>Why does the result of this comparison differ from that in the slides?</p>
 <ol start="16" style="list-style-type: decimal">
 <li>Finally, I want to show you another example that illustrates that these tools can also be used to make statistical tests faster. Below is a piece of code that provides a faster implementation of the general linear model (aka regression). Follow the same steps as above to load it into R and then compare it to R’s own <code>lm</code> function. To see how, take a look at the R code below. Note: before you can load this function you must <code>install.packages(RcppArmadillo)</code>.</li>
 </ol>

@@ -580,7 +580,7 @@ NumericVector col_means_cpp(DataFrame& df) {
 
 15. Now, let's try to load our C++ function. To do this, we use `sourceCpp()` from the `Rcpp` package. Provide to `sourceCpp` the file path to our function and execute it. If there is no error, this means that we can now use `col_means_cpp()`, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use `system.time()` to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to `colMeans()`, which is R's own "high-performance" version of this function. Who wins?
 
-Why do the results of this comparison differ from those in the slides?
+Why does the result of this comparison differ from that in the slides?
 
 ```{r, eval=F, echo=F}
 
