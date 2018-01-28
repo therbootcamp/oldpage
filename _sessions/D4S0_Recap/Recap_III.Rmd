@@ -120,6 +120,29 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/ggplotgallery.png?raw=true")
 ```
 
+---
+## ggplot2
+
+.pull-left4[
+
+How do we make elegant, easy to program plots according to the grammar of graphics in R?
+
+###Answer: ggplot2
+
+By far one of the most popular R packages, used to generate the vast majority of plots from R.
+
+]
+
+
+.pull-right5[
+
+
+```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/wickham_portrait.png?raw=true")
+```
+
+]
+
 
 ---
 
@@ -150,28 +173,6 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 
 ]
 
----
-## ggplot2
-
-.pull-left4[
-
-How do we make elegant, easy to program plots according to the grammar of graphics in R?
-
-###Answer: ggplot2
-
-By far one of the most popular R packages, used to generate the vast majority of plots from R.
-
-]
-
-
-.pull-right5[
-
-
-```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/wickham_portrait.png?raw=true")
-```
-
-]
 
 ---
 
