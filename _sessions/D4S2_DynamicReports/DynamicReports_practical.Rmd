@@ -71,7 +71,7 @@ knitr::include_graphics("../_image/rmarkdown_ss_E.png")
 
 4. In the chunk options, include `echo = FALSE, message = FALSE, warning = FALSE`. 
 
-5. Inside of the chunk include the following code. The `knitr::opts_knit$set(dir = "../")` code will move your working directory one folder up to the project root, while `knitr::opts_chunk$set()` will set your global chunk options. Finally, `options(digits = 2)` makes sure that all of your numeric output is rounded to two decimal places.
+5. Inside of the chunk include the following code in the following chunk: The `knitr::opts_knit$set(dir = "../")` code will move your working directory one folder up to the project root, while `knitr::opts_chunk$set()` will set your global chunk options. Finally, `options(digits = 2)` makes sure that all of your numeric output is rounded to two decimal places.
 
 ```{r, eval = FALSE, echo = TRUE}
 # Move working directory one folder up
@@ -88,13 +88,13 @@ knitr::opts_chunk$set(fig.width = 6,        # Figure width (in)
 options(digits = 2)  # Round all output to 2 digits
 ```
 
-6. Now create another chunk. Inside this chunk, write the comment `# Loading Packages -------------`. Then, using the `library()` function, load the packages `tidyverse`, `knitr` and `speff2trial`. 
+6. Now let's load some packages. Inside your chunk, write the comment `# Loading Packages -------------`. Then, using the `library()` function, load the packages `tidyverse`, `knitr` and `speff2trial`. 
 
 7. Knit the document to make sure it worked! If you have any errors, try to figure out how to solve them!
 
-8. For this practical we'll use the `ACTG175` dataset. This dataset originally comes from the `speff2trial` package. However, I saved a copy of the dataset as a text file at `"https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG175.csv"`. Open this link in a web-browser, and then save the `ACTG175.csv` file to the `data` folder of your project.
+8. For this practical we'll use the `ACTG175` dataset. This dataset originally comes from the `speff2trial` package. However, I saved a copy of the dataset as a comma--separated text file at `"https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_data/ACTG175.csv"`. Open this link in a web-browser, and then save the `ACTG175.csv` file to the `data` folder of your project.
 
-9. Create a new code chunk and put it under the previous one. We will use this chunk to load the `ACTG175.csv`. In this chunk, read the csv data with `read_csv()` and assign the result to the object `ACTG175`. Write appropriate comments in the chunk!
+9. Create a new code chunk and put it under the previous one. We will use this chunk to load the `ACTG175.csv`. In this chunk, load csv file with `read_csv()` and assign the result to the object `ACTG175`.
 
 10. Knit the document! Diagnose and correct any errors!
 
@@ -173,11 +173,11 @@ cd4_cor_r <- cd4_cor$XX  # Get the correlation
 cd4_cor_p <- cd4_cor$XX   # Get the p-value
 ```
 
-20. In addition to the correlation test, include a relevant scatterplot showing the relationship between CDT4 T cell count at baseline and number of days until a major negative event.
+20. In addition to the correlation test, include a relevant scatterplot showing the relationship between CD4 T cell count at baseline (`cd40`) and number of days until a major negative event (`days`).
 
 21. Add a new section called "Conclusions". Write the main conclusions of your analyses in one or two sentences. Feel free to add some formatting and/or in-line chunks to your content!
 
-22. You can easily publish an HTML document online to Rpubs.com for free. To do this, Knit your document. Then, click the blue "Publish" button. Go through the process of signing up for a free Rpubs account and get your document online!
+22. (Optional) You can easily publish an HTML document online to Rpubs.com for free. To do this, Knit your document. Then, click the blue "Publish" button. Go through the process of signing up for a free Rpubs account and get your document online!
 
 ## Slideshow
 
@@ -185,9 +185,7 @@ cd4_cor_p <- cd4_cor$XX   # Get the p-value
 knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/xaringan_ss.png")
 ```
 
-
 23. Now it's time to create a slideshow! To do this, we'll use the Ninja template ([click here for a demo](https://slides.yihui.name/xaringan/#1)) from the `xaringan` package (that's what we use for all of our BaselRBootcamp slides). To install the `xaringan` package from GitHub, run the following code. 
-
 ```{r, eval = FALSE, echo = TRUE}
 # Install the xaringan package from github
 devtools::install_github("yihui/xaringan")
