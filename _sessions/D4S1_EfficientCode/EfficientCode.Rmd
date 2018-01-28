@@ -361,8 +361,8 @@ my_Rcpp_fun = "NumericVector colMeans_c(NumericMatrix& mat) {
 require(Rcpp) ; cppFunction(my_Rcpp_fun)
 
 # microbenchmark
-microbenchmark(vectorz = colMeans(as.data.frame(my_data)),
-               rcpp = colMeans_c(my_data))
+microbenchmark(vector_implementation = colMeans(my_data),
+               rcpp_implementation = colMeans_c(my_data))
 ```
 ]
 ---
