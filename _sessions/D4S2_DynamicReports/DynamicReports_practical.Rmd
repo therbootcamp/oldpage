@@ -175,7 +175,6 @@ cd4_cor_p <- cd4_cor$XX   # Get the p-value
 
 20. In addition to the correlation test, include a relevant scatterplot showing the relationship between CD4 T cell count at baseline (`cd40`) and number of days until a major negative event (`days`).
 
-
 21. Add a new section called "Conclusions". Write the main conclusions of your analyses in one or two sentences. Feel free to add some formatting and/or in-line chunks to your content!
 
 22. (Optional) You can easily publish an HTML document online to Rpubs.com for free. To do this, Knit your document. Then, click the blue "Publish" button. Go through the process of signing up for a free Rpubs account and get your document online!
