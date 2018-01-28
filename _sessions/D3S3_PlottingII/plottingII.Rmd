@@ -379,7 +379,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/therbootcamp/therboot
 
 ## Plotting II Pratical
 
-<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D2S3_PlottingII/PlottingII_practical.html">Link to Plotting II practical</a>
+<p><font size=6><b><a href="https://therbootcamp.github.io/_sessions/D3S3_PlottingII/PlottingII_practical.html">Link to Plotting II practical</a>
 
 ---
 
