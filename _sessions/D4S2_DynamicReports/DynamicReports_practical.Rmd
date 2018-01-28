@@ -126,13 +126,13 @@ Here is some code you might find helpful in creating this table!
 # Helpful code to create the summary table!
 
 trial_summary <- ACTG175 %>% 
-                 group_by(arms) %>% 
+                 group_by(XX) %>% 
                  summarise(
                           N = n(),
-                          Mean = mean(days),
-                          Median = median(days),
-                          SD = sd(days),
-                          Max = max(days))
+                          Mean = mean(XX),
+                          Median = median(XX),
+                          SD = sd(XX),
+                          Max = max(XX))
 ```
 
 16. Knit the document! Diagnose and correct any errors!
@@ -166,11 +166,11 @@ ggplot(data = XX,
 ```{r, eval = FALSE, echo = TRUE}
 # Correlation test between cd40 and days
 
-cd4_cor <- cor.test(formula = ~ cd40 + days,
-                    data = ACTG175)
+cd4_cor <- cor.test(formula = ~ XX + XX,
+                    data = XX)
 
-cd4_cor_r <- cd4_cor$estimate  # Get the correlation
-cd4_cor_p <- cd4_cor$p.value   # Get the p-value
+cd4_cor_r <- cd4_cor$XX  # Get the correlation
+cd4_cor_p <- cd4_cor$XX   # Get the p-value
 ```
 
 20. In addition to the correlation test, include a relevant scatterplot showing the relationship between CDT4 T cell count at baseline and number of days until a major negative event.

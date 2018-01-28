@@ -220,13 +220,13 @@ Write the necessary markdown to create this output!
 <pre class="r"><code># Helpful code to create the summary table!
 
 trial_summary &lt;- ACTG175 %&gt;% 
-                 group_by(arms) %&gt;% 
+                 group_by(XX) %&gt;% 
                  summarise(
                           N = n(),
-                          Mean = mean(days),
-                          Median = median(days),
-                          SD = sd(days),
-                          Max = max(days))</code></pre>
+                          Mean = mean(XX),
+                          Median = median(XX),
+                          SD = sd(XX),
+                          Max = max(XX))</code></pre>
 <ol start="16" style="list-style-type: decimal">
 <li><p>Knit the document! Diagnose and correct any errors!</p></li>
 <li><p>Add the appropriate combination of text, markdown, code chunks, and R code to add the following output to your document. Be sure to include the figure caption (you can do this with the <code>fig.cap</code> argument to the chunk)</p></li>
@@ -250,11 +250,11 @@ ggplot(data = XX,
 </ol>
 <pre class="r"><code># Correlation test between cd40 and days
 
-cd4_cor &lt;- cor.test(formula = ~ cd40 + days,
-                    data = ACTG175)
+cd4_cor &lt;- cor.test(formula = ~ XX + XX,
+                    data = XX)
 
-cd4_cor_r &lt;- cd4_cor$estimate  # Get the correlation
-cd4_cor_p &lt;- cd4_cor$p.value   # Get the p-value</code></pre>
+cd4_cor_r &lt;- cd4_cor$XX  # Get the correlation
+cd4_cor_p &lt;- cd4_cor$XX   # Get the p-value</code></pre>
 <ol start="20" style="list-style-type: decimal">
 <li><p>In addition to the correlation test, include a relevant scatterplot showing the relationship between CDT4 T cell count at baseline and number of days until a major negative event.</p></li>
 <li><p>Add a new section called “Conclusions”. Write the main conclusions of your analyses in one or two sentences. Feel free to add some formatting and/or in-line chunks to your content!</p></li>
