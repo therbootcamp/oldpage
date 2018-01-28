@@ -434,7 +434,7 @@ galton_data = galton_data %>%
 
 #conduct t-test
 father <- galton_data$father
-mother <- galton_data$father
+mother <- galton_data$mother
 t.test(father, mother) 
 ```
 ]
