@@ -553,11 +553,11 @@ Was the parallel version really faster than the non-parallel version? I would no
 
 Another option to speed up code is to implement essential code chunks in C++ using Rcpp. C++ is a compiled language, meaning that any C++ code will be translated into highly efficient machine code, before it is executed. For this reason, implementing R code in C++ and importing it using Rcpp can mean 10-100x faster code execution (if the original code wasn't C code in the first place; remember `primitives`). Using high performance libraries such as, e.g., [RcppArmadillo](http://dirk.eddelbuettel.com/code/rcpp.armadillo.html), and multi-threading, e.g., using [RcppParallel](https://rcppcore.github.io/RcppParallel/), further speed ups are possible. 
 
-Essentially, using C++, C++-libraries, and multi-threading allows you to tap into the full computing power of your computer. Unless you are a highly experienced programmer, who is specialized in optimizing code, you will not be able to ever write code that is faster than code that has been implemented using these tools, irrespective of what computer language you are using. To tap into this potentially, however, it is necessary to know at least a little bit of C++. As this is a course on R, I will provide the the necessary code below. The only thing you will have to do is to save the code in C++ (aka Cpp) scripts, load them into R, and compare the performance to R's own implementations. We begin again with the example of calculating column means of a data frame.        
+Essentially, using C++, C++-libraries, and multi-threading allows you to tap into the full computing power of your computer. Unless you are a highly experienced programmer, who is specialized in optimizing code, you will not be able to ever write code that is faster than code that has been implemented using these tools, irrespective of what programming language you are using. To tap into this potentially, however, it is necessary to know at least a little bit of C++. As this is a course on R, I will provide the the necessary code below. The only thing you will have to do is to save the code in C++ (aka Cpp) scripts, load them into R, and compare the performance to R's own implementations. We begin again with the example of calculating column means of a data frame.        
 
 14. Below you see a piece of C++ code. Your first task is to copy this code into a new C++ file. To do this, first select File/New File/C++ File from the RStudio menu, which will create a new script for C++ code. Next delete everything in that script and replace it by the code below. Finally, save the File on the hard drive inside your project. 
 
-```{r, eval=F, echo=F}
+```{r, eval=F, echo=T}
 #include <Rcpp.h>
 using namespace Rcpp;
 
