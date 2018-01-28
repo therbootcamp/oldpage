@@ -2,7 +2,7 @@
 title: "Next steps"
 subtitle: ""
 author: "The R Bootcamp<br/>Twitter: <a href='https://twitter.com/therbootcamp'>@therbootcamp</a>"
-date: "September 2017"
+date: "Janurary 2018"
 output:
   xaringan::moon_reader:
     css: ["default", "my-theme.css"]
@@ -82,6 +82,50 @@ A social graph of package Co-authors using `tidyverse` plus `ggraph`, an extensi
 <p align="center"><a href="http://www.swow.me">
   <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/semantic_space.png" width=720></a></p>
 
+
+---
+
+# Text analysis
+
+Another area were R has seen much development is **text analysis**. New packages provide access to lightning fast **C++ string libraries**, 'new' data formats such as **html**, **xml**, and **json**, and also to the API of social platforms, such as [**facebook.com**](www.facebook.com) and [**twitter.com**](www.twitter.com).
+<br><br>
+
+| Package| Description| 
+|:------|:------------|
+| `stringr`, `stringi`  | String operations and regular expressions. |
+| `rvest`, `XML`  | Scraping content of the internet|
+| `lsa`, `fast.svd` | Singular value decomposition and latent semantic analysis. |
+| `SentimentAnalysis`| Sentiment analysis.|
+| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
+| `Rfacebook`| Accessing the Facebook API. |
+
+---
+
+# Text analysis: Applications
+
+.pull-left4[
+<p align="center">
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/emojis.png" width=450><br>
+  <font size=1>source <a href="http://www.lrec-conf.org/proceedings/lrec2016/pdf/735_Paper.pdf/">Barbieri, F., Ronzano, F., & Saggion, H. (2016, May). What does this Emoji<br>Mean?A Vector Space Skip-Gram Model for Twitter Emojis. In LREC.</a><br>See also my <a href="https://dwulff.github.io/Naturallanguage/">natural language course page</a>.</p>
+]
+
+
+.pull-right5[
+<br><br2>
+<p align="center">
+  <img src="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413" width=500><br>
+  <font size=2><br>Alexander Nix, Cambridge Analytica<br><font size=1><br>source <a href="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413">spectator.imgix.net</a></p>
+
+]
+
+---
+
+# Text analysis: Applications - [**hedonometer.org**](http://hedonometer.org/books/v1/)
+<br2>
+<p align="center"><a href="http://hedonometer.org/books/v1/">
+  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/harry_potter.png" width=900></a><br>
+  <font size=3>Link to <a href="https://arxiv.org/pdf/1606.07772.pdf">Paper</a></font></p>
+
 ---
 
 # Stats packages
@@ -148,57 +192,12 @@ ttestBF(x, y)
 ```
 ]
 
----
-
-# Text analysis
-
-Another area were R has seen much development is **text analysis**. New packages provide access to lightning fast **C++ string libraries**, 'new' data formats such as **html**, **xml**, and **json**, and also to the API of social platforms, such as [**facebook.com**](www.facebook.com) and [**twitter.com**](www.twitter.com).
-<br><br>
-
-| Package| Description| 
-|:------|:------------|
-| `stringr`, `stringi`  | String operations and regular expressions. |
-| `rvest`, `XML`  | Scraping content of the internet|
-| `lsa`, `fast.svd` | Singular value decomposition and latent semantic analysis. |
-| `SentimentAnalysis`| Sentiment analysis.|
-| `twitteR`, `streamR`, `jsonlite`| Streaming and parsing tweets. |
-| `Rfacebook`| Accessing the Facebook API. |
-
----
-
-# Text analysis: Applications I
-
-.pull-left4[
-<p align="center">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/emojis.png" width=450><br>
-  <font size=1>source <a href="http://www.lrec-conf.org/proceedings/lrec2016/pdf/735_Paper.pdf/">Barbieri, F., Ronzano, F., & Saggion, H. (2016, May). What does this Emoji<br>Mean?A Vector Space Skip-Gram Model for Twitter Emojis. In LREC.</a><br>See also my <a href="https://dwulff.github.io/Naturallanguage/">natural language course page</a>.</p>
-]
-
-
-.pull-right5[
-<br><br2>
-<p align="center">
-  <img src="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413" width=500><br>
-  <font size=2><br>Alexander Nix, Cambridge Analytica<br><font size=1><br>source <a href="https://spectator.imgix.net/content/uploads/2016/12/GettyImages-607814904.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=620&h=413">spectator.imgix.net</a></p>
-
-]
-
----
-
-# Text analysis: Applications II
-
-
-### Shiny app: [**http://hedonometer.org/books/v1/**](http://hedonometer.org/books/v1/)
-### Paper: [**http://hedonometer.org/books/v1/**](https://arxiv.org/pdf/1606.07772.pdf)
-
-<p align="center"><a href="http://www.swow.me">
-  <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/harry_potter.png" width=720></a></p>
 
 ---
 
 # Rcpp
 
-By now one of the most referenced R packages is Rcpp - **R's interface to C++**. With often relatively little effort due to **Rcpp sugar**, Rcpp can provide vast speed improvements, which many packages today rely on Rcpp in the background for **swift code execution**. Rcpp becomes particularly powerful, when supplemented with `BH`, which makes avaialble a collection **free, peer-reviewed C++ libraries**, and `RcppArmdillo`, which available the high-performance *Armadillo* library for linear algebra methods. 
+By now one of the most referenced R packages is Rcpp - **R's interface to C++**. With often relatively little effort due to **Rcpp sugar**, Rcpp can provide vast speed improvements, which many packages today rely on Rcpp in the background for **swift code execution**. Rcpp becomes particularly powerful, when supplemented with `BH`, which makes avaialble a collection **free, peer-reviewed C++ libraries**, and [RcppArmdillo](http://arma.sourceforge.net/), which available the high-performance *Armadillo* library for linear algebra methods. 
 
 
 .pull-left4[

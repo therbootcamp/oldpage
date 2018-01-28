@@ -246,7 +246,7 @@ summary(pacific_model)
   
 # ---- profiling
 
-# profile using lineprof
+# profile using profvis
 profvis({
   
   # load data
@@ -339,12 +339,30 @@ profvis({
 <div id="rcpp" class="section level4">
 <h4>Rcpp</h4>
 <p>Another option to speed up code is to implement essential code chunks in C++ using Rcpp. C++ is a compiled language, meaning that any C++ code will be translated into highly efficient machine code, before it is executed. For this reason, implementing R code in C++ and importing it using Rcpp can mean 10-100x faster code execution (if the original code wasn’t C code in the first place; remember <code>primitives</code>). Using high performance libraries such as, e.g., <a href="http://dirk.eddelbuettel.com/code/rcpp.armadillo.html">RcppArmadillo</a>, and multi-threading, e.g., using <a href="https://rcppcore.github.io/RcppParallel/">RcppParallel</a>, further speed ups are possible.</p>
-<p>Essentially, using C++, C++-libraries, and multi-threading allows you to tap into the full computing power of your computer. Unless you are a highly experienced programmer, who is specialized in optimizing code, you will not be able to ever write code that is faster than code that has been implemented using these tools, irrespective of what computer language you are using. To tap into this potentially, however, it is necessary to know at least a little bit of C++. As this is a course on R, I will provide the the necessary code below. The only thing you will have to do is to save the code in C++ (aka Cpp) scripts, load them into R, and compare the performance to R’s own implementations. We begin again with the example of calculating column means of a data frame.</p>
+<p>Essentially, using C++, C++-libraries, and multi-threading allows you to tap into the full computing power of your computer. Unless you are a highly experienced programmer, who is specialized in optimizing code, you will not be able to ever write code that is faster than code that has been implemented using these tools, irrespective of what programming language you are using. To tap into this potentially, however, it is necessary to know at least a little bit of C++. As this is a course on R, I will provide the the necessary code below. The only thing you will have to do is to save the code in C++ (aka Cpp) scripts, load them into R, and compare the performance to R’s own implementations. We begin again with the example of calculating column means of a data frame.</p>
 <ol start="14" style="list-style-type: decimal">
-<li><p>Below you see a piece of C++ code. Your first task is to copy this code into a new C++ file. To do this, first select File/New File/C++ File from the RStudio menu, which will create a new script for C++ code. Next delete everything in that script and replace it by the code below. Finally, save the File on the hard drive inside your project.</p></li>
-<li><p>Now, let’s try to load our C++ function. To do this, we use <code>sourceCpp()</code> from the <code>Rcpp</code> package. Provide to <code>sourceCpp</code> the file path to our function and execute it. If there is no error, this means that we can now use <code>col_means_cpp()</code>, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use <code>system.time()</code> to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to <code>colMeans()</code>, which is R’s own “high-performance” version of this function. Who wins?</p></li>
+<li>Below you see a piece of C++ code. Your first task is to copy this code into a new C++ file. To do this, first select File/New File/C++ File from the RStudio menu, which will create a new script for C++ code. Next delete everything in that script and replace it by the code below. Finally, save the File on the hard drive inside your project.</li>
 </ol>
-<p>Why do the results of this comparison differ from those in the slides?</p>
+<pre class="r"><code>#include &lt;Rcpp.h&gt;
+using namespace Rcpp;
+
+NumericVector col_means_cpp(DataFrame&amp; df) {
+  int n_rows = df.nrows(), n_cols= df.size() ;
+  NumericVector means(n_cols);
+  for(int j = 0; j &lt; n_cols; ++j) {
+    NumericVector column = df[j];
+    double sum = 0;
+    for(int i = 0; i &lt; n_rows; ++i){
+      sum += column[i];
+      }
+    means[j] = sum / n_rows;  
+    }
+  return means;
+  }</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li>Now, let’s try to load our C++ function. To do this, we use <code>sourceCpp()</code> from the <code>Rcpp</code> package. Provide to <code>sourceCpp</code> the file path to our function and execute it. If there is no error, this means that we can now use <code>col_means_cpp()</code>, which is the name of the function, just as any other R function. As its only argument, it takes a data frame. Thus, we can easily compare it to our worker function that we defined above. Use <code>system.time()</code> to measure the speed of our new function and compare it to our worker. How much faster is the new function? Try also to compare it to <code>colMeans()</code>, which is R’s own “high-performance” version of this function. Who wins?</li>
+</ol>
+<p>Why does the result of this comparison differ from that in the slides?</p>
 <ol start="16" style="list-style-type: decimal">
 <li>Finally, I want to show you another example that illustrates that these tools can also be used to make statistical tests faster. Below is a piece of code that provides a faster implementation of the general linear model (aka regression). Follow the same steps as above to load it into R and then compare it to R’s own <code>lm</code> function. To see how, take a look at the R code below. Note: before you can load this function you must <code>install.packages(RcppArmadillo)</code>.</li>
 </ol>
@@ -387,7 +405,7 @@ microbenchmark(
 </div>
 <div id="microsoft-r-open" class="section level4">
 <h4>Microsoft R Open</h4>
-<p>Lastly, I want to touch upon yet another option to speed up code, namely to use a different implementations of R. One such implementation is Microsoft Open R. Open R features a high-performance, multi-threaded <a href="http://www.netlib.org/lapack/lug/node11.html">BLAS/LAPACK</a> linear algebra libraries plus several other features that aim to maximize reproducibility.</p>
+<p>Lastly, I want to touch upon yet another option to speed up code, namely to use a different implementations of R. One such implementation is Microsoft Open R. Open R features the high-performance, multi-threaded <a href="http://www.netlib.org/lapack/lug/node11.html">BLAS/LAPACK</a> linear algebra libraries plus several other features that aim to maximize reproducibility.</p>
 <p>In this exercise, you will be comparing to chunks of code in R and Open R to see where the performance benefits of Open R lie and where not. To do this first install <a href="https://mran.microsoft.com/open">Open R</a>. This will create a separate R instance called Open R. Start it and run the code examples below, once in Open R and once in your regular R. You can see that one of the examples runs dramatically faster, although it is already very efficiently implemented in regular R. However, the other one doesn’t. This implies that Open R provides not yet substantial benefits for regular users of R.</p>
 <p>WARNING: If you do install Open R, then it will become your default R version. As it is not yet compatible with the contents of the following sessions you will have to revert back to the original R. The easiest but unfortunately slightly time consuming way is to re-install the original R.</p>
 <pre class="r"><code># function that times functions

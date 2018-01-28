@@ -29,13 +29,13 @@ library(tidyverse)
 ```
 
 
-
-
 # Tidying
 
 .pull-left4[
 In this introduction you will learn...
 
+><font size = 5>...more about R projects.
+><br2>
 ><font size = 5>...how to write clean, documented code.
 ><br2>
 ><font size = 5>...to understand errors (and warnings).
@@ -47,6 +47,40 @@ In this introduction you will learn...
 <img src="https://build2be.com/sites/build2be.com/files/shutterstock_232639537.jpg" width="500">
 <p align="center"><font size=3>source<a href="https://build2be.com/"> https://build2be.com/</a>
 ]
+
+---
+
+# Style
+
+Check out the [**Google's R style guide**](https://google.github.io/styleguide/Rguide.xml) & [**Tidyverse style guide**](http://style.tidyverse.org/index.html)
+
+
+```{r, eval = T, echo = F}
+set.seed(1)
+```
+
+### Bad
+```{r, eval = F}
+mean(subset((data.frame(c('a','b'),runif(1000,0,1))),c..a....b..=='a')[,'runif.1000..0..1.'])
+```
+
+```{r, eval = T, echo = F}
+set.seed(1)
+```
+
+### Good
+```{r, eval = F}
+# create my data.frame
+my_data <- data.frame('group' = c('a','b'), 
+                      'value' = runif(1000,0,1))
+
+# subset data
+my_data %>% 
+  filter(group == 'a') %>%
+  summarize(mean(value))
+```
+
+
 ---
 
 # Project structure
@@ -78,36 +112,6 @@ According to [stackoverflow.com](http://www.stackoverflow.com)
 
 ---
 
-# Assignments & Comments
-
-.pull-left45[
-<font size=5>For **assignments** use `<-`, not `=`. However, to specify arguments in functions use `=`.
-```{r, eval = F}
-# Good
-x <- 24324
-
-# Bad
-x = 24324
-```
-]
-
-.pull-right45[
-<font size=5>**Comment each line** of your code. To break up your code in chunks use `-` or `=`.
-```{r, eval = F}
-# Plot data ----------------------------
-
-this_is <- "pseduo_code"
-my_function(arg1 = x,
-            arg2 = y)
-
-# Plot data ============================
-
-this_is <- "pseduo_code"
-```
-]
-
----
-
 # You can do amazing plots in R!
 
 - As good as R is for statistics, it's as good if not better for plots.
@@ -115,6 +119,29 @@ this_is <- "pseduo_code"
 ```{r, echo = FALSE, out.width="60%", fig.align = 'center'}
 knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/ggplotgallery.png?raw=true")
 ```
+
+---
+## ggplot2
+
+.pull-left4[
+
+How do we make elegant, easy to program plots according to the grammar of graphics in R?
+
+###Answer: ggplot2
+
+By far one of the most popular R packages, used to generate the vast majority of plots from R.
+
+]
+
+
+.pull-right5[
+
+
+```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
+knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/wickham_portrait.png?raw=true")
+```
+
+]
 
 
 ---
@@ -146,28 +173,6 @@ knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/
 
 ]
 
----
-## ggplot2
-
-.pull-left4[
-
-How do we make elegant, easy to program plots according to the grammar of graphics in R?
-
-###Answer: ggplot2
-
-By far one of the most popular R packages, used to generate the vast majority of plots from R.
-
-]
-
-
-.pull-right5[
-
-
-```{r, echo = FALSE, out.width="70%", fig.align = 'center'}
-knitr::include_graphics("https://github.com/therbootcamp/therbootcamp.github.io/blob/master/_sessions/_image/wickham_portrait.png?raw=true")
-```
-
-]
 
 ---
 
