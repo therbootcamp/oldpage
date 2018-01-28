@@ -34,8 +34,8 @@ options(digits = 4)
 <font size = 4><i>What we would have liked to cover</i><br>
 <font size = 6>
 1. Networks<br>
-2. Bayesian stats<br>
-3. Text analysis<br>
+2. Text analysis<br>
+3. Bayesian stats<br>
 4. Rcpp<br>
 5. Forms<br>
 6. Github<br>
@@ -131,7 +131,7 @@ Another area were R has seen much development is **text analysis**. New packages
 # Stats packages
 
 >"If there is a new statistical method, it is first implemented in R" <br>
-> -- duw
+> -- dw
 
 <br>
 
