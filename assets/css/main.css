@@ -32,6 +32,7 @@ body {
         top: -10px
     }
 }
+/*
 #particles-js {
     background: #1a222c;
     display: block;
@@ -46,6 +47,7 @@ body {
     width: 100vw!important;
     height: 100vh!important
 }
+*/
 .content {
     z-index: 1;
     text-align: center;
