@@ -8,11 +8,11 @@ Bootcamp_package_installation <- function() {
   installed_packages <- rownames(installed.packages())
 
   packages.to.install <- c("devtools", "tidyverse", "yarrr", "afex",
-                           "car", "markdown", "rmarkdown", "FFTrees",
+                           "car", "markdown", "rmarkdown", "FFTrees", "lmer",
                            "rpart", "randomForest", "e1071", "speff2trial",
                            "shiny", "shinyjs", "caret", "mlr", "parallel", "Rcpp",
                            "BayesFactor", "parfm", "lava", "rvest", "diagram", "ggjoy",
-                           "rmdformats", "ggRandomForests", "party")
+                           "rmdformats", "ggRandomForests", "party", "skimr")
 
   for(package.i in sort(packages.to.install)) {
 
