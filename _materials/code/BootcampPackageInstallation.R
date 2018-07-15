@@ -13,7 +13,7 @@ Bootcamp_package_installation <- function() {
                            "shiny", "shinyjs", "caret", "mlr", "parallel", "Rcpp",
                            "BayesFactor", "parfm", "lava", "rvest", "diagram",
                            "rmdformats", "ggRandomForests", "party", "skimr", "broom", "lubridate", 
-                           "rsq", "ggthemes", "partykit", "glmnet")
+                           "rsq", "ggthemes", "partykit", "glmnet", "DT")
 
   for(package.i in sort(packages.to.install)) {
 
