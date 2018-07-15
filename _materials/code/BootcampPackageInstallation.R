@@ -11,7 +11,7 @@ Bootcamp_package_installation <- function() {
                            "car", "markdown", "rmarkdown", "FFTrees", "lmer",
                            "rpart", "randomForest", "e1071", "speff2trial",
                            "shiny", "shinyjs", "caret", "mlr", "parallel", "Rcpp",
-                           "BayesFactor", "parfm", "lava", "rvest", "diagram", "ggjoy",
+                           "BayesFactor", "parfm", "lava", "rvest", "diagram",
                            "rmdformats", "ggRandomForests", "party", "skimr", "broom", "lubridate", 
                            "rsq", "ggthemes", "partykit", "glmnet")
 
