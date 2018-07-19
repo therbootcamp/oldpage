@@ -11,8 +11,9 @@ Bootcamp_package_installation <- function() {
                            "car", "markdown", "rmarkdown", "FFTrees", "lmer",
                            "rpart", "randomForest", "e1071", "speff2trial",
                            "shiny", "shinyjs", "caret", "mlr", "parallel", "Rcpp",
-                           "BayesFactor", "parfm", "lava", "rvest", "diagram", "ggjoy",
-                           "rmdformats", "ggRandomForests", "party", "skimr")
+                           "BayesFactor", "parfm", "lava", "rvest", "diagram",
+                           "rmdformats", "ggRandomForests", "party", "skimr", "broom", "lubridate", 
+                           "rsq", "ggthemes", "partykit", "glmnet", "DT")
 
   for(package.i in sort(packages.to.install)) {
 
@@ -37,7 +38,7 @@ Bootcamp_package_installation <- function() {
 
   }
   
-  devtools_packages_to_install <- c("kassambara/ggcorrplot")
+  devtools_packages_to_install <- c("kassambara/ggcorrplot", "therbootcamp/baselers")
   
     for(package.i in sort(devtools_packages_to_install)) {
 
