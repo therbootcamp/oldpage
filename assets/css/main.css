@@ -255,6 +255,11 @@ top: 270px;
 transition: all 0.2s ease-in 0s;//this is the key attribute
 z-index: 9999;
 cursor: pointer;
+transform:rotate(7deg);
+-ms-transform:rotate(90deg); /* IE 9 */
+-moz-transform:rotate(90deg); /* Firefox */
+-webkit-transform:rotate(90deg); /* Safari and Chrome */
+-o-transform:rotate(90deg); /* Opera */}
 }
 
 .float-button:hover {
