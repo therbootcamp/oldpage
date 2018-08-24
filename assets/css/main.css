@@ -253,6 +253,7 @@ position: fixed;
 right: -80px;
 top: 10%;
 width: 100px;
+height: 100px;
 color: #27394c;
 transition: all 0.2s ease-in 0s;//this is the key attribute
 z-index: 9999;
