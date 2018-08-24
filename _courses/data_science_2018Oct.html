@@ -3,12 +3,12 @@
   {% include head.html %}
   <body>
   <div class="float-button">
-   <a href="#upcoming">
+   <a href="{{ "/#upcoming" | prepend: site.baseurl }}">
    <button data-toggle="modal" data-target=".your-modal" class="contact-button">
    		Back.
    </button>
    </a>
-   <a href="#contact">
+   <a href="{{ "/#contact" | prepend: site.baseurl }}">
    <button data-toggle="modal" data-target=".your-modal" class="contact-button">
    		Contact us.
    </button>
