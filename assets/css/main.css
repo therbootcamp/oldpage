@@ -250,7 +250,7 @@ body {
 
 .float-button {
 position: fixed;
-right: -77px;
+right: -4%px;
 top: 10%;
 width: 5%;
 color: color=#27394c;
@@ -265,6 +265,6 @@ transform:rotate(7deg);
 }
 
 .float-button:hover {
-right: -7px;//hide it by pushing it off the screen
+right: 0%;//hide it by pushing it off the screen
 }
 
