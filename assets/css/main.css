@@ -252,9 +252,6 @@ body {
 position: fixed;
 right: -10px;
 top: 10%;
-width: 100px;
-height: 100px;
-color: #27394c;
 transition: all 0.2s ease-in 0s;//this is the key attribute
 z-index: 9999;
 cursor: pointer;
@@ -266,6 +263,13 @@ transform:rotate(7deg);
 }
 
 .float-button:hover {
-right: 0px;//hide it by pushing it off the screen
+right: 10px;//hide it by pushing it off the screen
 }
+
+.contact-button {
+width: 100px;
+height: 100px;
+color: #27394c;
+}
+
 
