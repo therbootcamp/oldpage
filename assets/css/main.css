@@ -268,7 +268,8 @@ right: -10px;//hide it by pushing it off the screen
 }
 
 .contact-button {
-padding: 20px 40px;
+width = 160px;
+height = 40px;
 color: #27394c;
 border: 4px #27394c;
 }
