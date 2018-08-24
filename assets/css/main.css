@@ -255,6 +255,7 @@ top: 10%;
 transition: all 0.2s ease-in 0s;//this is the key attribute
 z-index: 9999;
 cursor: pointer;
+border: #27394c;
 transform:rotate(7deg);
 -ms-transform:rotate(90deg); /* IE 9 */
 -moz-transform:rotate(90deg); /* Firefox */
