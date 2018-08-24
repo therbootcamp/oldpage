@@ -275,4 +275,7 @@ border: none;
 font-size: 14px;
 }
 
-
+@media screen and (max-width: 768px) {
+    .hide-div {
+        display: none;
+    }
