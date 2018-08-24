@@ -250,10 +250,10 @@ body {
 
 .float-button {
 position: fixed;
-right: -4%px;
+right: -4%;
 top: 10%;
 width: 5%;
-color: color=#27394c;
+color: #27394c;
 transition: all 0.2s ease-in 0s;//this is the key attribute
 z-index: 9999;
 cursor: pointer;
