@@ -279,8 +279,10 @@ font-size: 14px;
     .hide-div {
         display: none;
     }
+    }
 
 @media screen and (min-width: 921px) {
     .show-div {
         display: none;
+    }
     }
