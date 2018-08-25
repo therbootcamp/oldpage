@@ -1,10 +1,23 @@
-
+<html>
+<head>
+<script>
+  function myFunction() {
+    var x = document.getElementById("course-description");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    	} else {
+        x.style.display = "none";
+    	}
+	}
+</script>
+</head>
+<body>
 <div class="container">
   <div class="user-details">
     <br><br>
     <h2> Upcoming Bootcamps</h2>
   </div>
-  <div class="row">
+  <div class="row  user-projects">
     
     
 	<table width="100%" border="0">
@@ -14,17 +27,27 @@
   	<td valign="top">
   	<h5> Introduction to Data Science with R</h5> 
       <p align="left">
-       2-day course. 6/7 October 2018. At Advanced Studies. University of Basel. Maximum: 20 students. Registration Fees: 1,190CHF. <a href="_courses/data_science_2018Oct.html" align="center">Learn more.</a><br>
-       <font size = 4>18 spots left!</font><br>
+       2-day course. 6/7 October 2018. At Advanced Studies. University of Basel. Maximum: 20 students. Registration Fees: 1,190CHF.<br> 
+       <font size = 4>18 spots left! <a onclick="myFunction()" style="cursor: pointer;">Learn more.</a></font><br>
        <a class="project-link" href="https://advancedstudies.unibas.ch/courses/course/introduction-to-data-science-with-r-208287" align="center">Register here.</a>
-      </p>
+	   </p>
   	</td>
   	<td valign="top">
       <p align="right">
       <img alt="Basel" src="{{ "/assets/img/data_science.png" | prepend: site.baseurl }}" align="middle" height="150px" width="250px" style="border-radius:5px" >
       <a href="https://www.careeranna.com/articles/data-analytics-vs-data-science/5b7c0c_cefd4de2d5db4ef9a701c408a627b3aa_mv2/" class="new" title="User:Lucazzitto (page does not exist)" style="font-size:10px;text-decoration:none" align='top'>source: careeranna.com</a>
       </p>
-  	</tr>
+    </td>
+  	</table>
+  	
+  	<div id="course-description" style="display:none; padding-bottom: 50px;">
+  	{% include ds18Oct.html %}
+  	</div>
+  	
+  	
+	<table width="100%" border="0">
+    <col width="70%">
+  	<col width="30%">
   	<tr>    
   	<td valign="top">
   	<h5>Applied Machine Learning with R</h5> 
@@ -78,3 +101,5 @@
     --->
   </div>
 </div>
+</body>
+</html>
