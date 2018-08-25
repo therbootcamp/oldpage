@@ -275,4 +275,14 @@ border: none;
 font-size: 14px;
 }
 
+@media screen and (max-width: 840px) {
+    .hide-div {
+        display: none;
+    	}
+    }
 
+@media screen and (min-width: 841px) {
+    .show-div {
+        display: none;
+    	}
+    }
