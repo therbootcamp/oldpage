@@ -236,7 +236,15 @@ p.block{
 <head>
 <script>
   function myFunction() {
-    var x = document.getElementById("course-description");
+    var x = document.getElementById("course-description-ds");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    	} else {
+        x.style.display = "none";
+    	}
+	}
+ function myFunction2() {
+    var x = document.getElementById("course-description-ml");
     if (x.style.display === "none") {
         x.style.display = "block";
     	} else {
@@ -274,7 +282,7 @@ p.block{
     </td>
   	</table>
   	
-  	<div id="course-description" style="display:none; padding-bottom: 50px;">
+  	<div id="course-description-ds" style="display:none; padding-bottom: 50px;">
   	<!DOCTYPE html>
 <html lang="en">
 
@@ -474,7 +482,7 @@ p.block{
   	<h5>Applied Machine Learning with R</h5> 
       <p align="left">
        2-day course. 19/20 January 2019. At Advanced Studies. University of Basel. Maximum: 15 students. Registration Fees: 1,490CHF.<br>
-       <font size = 4>15 spots left!</font><br>
+       <font style="font-size:18px">15 spots left! </font><font style="font-size:18px;font-weight:900"><a onclick="myFunction2()" style="cursor: pointer;">Learn more.</a></font><br>
       <a class="project-link" href="https://advancedstudies.unibas.ch/courses/course/applied-machine-learning-with-r-208291" align="center">Register here!</a>
       <!---<a class="project-link" href="mailto:therbootcamp@gmail.com?subject=Preregistration for Applied Machine Learning with R&body=I would like to preregister for the R Bootcamp on 'Applied Machine Learning with R' on 19/20 January 2019 (tbc) in Basel, Switzerland." align="center">Preregister here!</a>--->
       </p>
@@ -485,7 +493,209 @@ p.block{
       <a href="https://towardsdatascience.com/selecting-the-best-machine-learning-algorithm-for-your-regression-problem-20c330bad4ef" class="new" title="User:Lucazzitto (page does not exist)" style="font-size:10px;text-decoration:none" align='top'>source: towardsdatascience.com</a>
       </p>
   	</tr>
-  	 <tr>    
+  	</table>
+  	
+  	<div id="course-description-ml" style="display:none; padding-bottom: 50px;">
+  	<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+.my-table {
+  font-size:16px;
+  font-family: 'Montserrat', sans-serif;
+  border-spacing:6px 4px;
+  line-height: 1.2;
+  }
+
+.my-table th {
+  font-size:12px;
+  font-weight:400;
+  width: 100;
+  text-align: right;
+  vertical-align: top;
+  padding: 4px 4px;
+  }
+
+.my-table td {
+  font-weight:400;
+  vertical-align: top;
+  padding: 4px 4px;
+}
+
+.td-special {
+  font-weight:400;
+  font-style: italic;
+}
+
+.cont {
+        font-weight:400;
+	font-size:10px;
+	line-height: 1.1;
+    margin-top: 4px;
+}
+
+.sub {
+        font-weight:400;
+}
+
+</style>
+  
+
+
+<table cellspacing=0 cellpadding=0 class="my-table">
+  <col width=45%>
+  <col width=5%>
+  <col width=5%>
+  <col width=22.5%>
+  <col width=22.5%>
+
+  <th style="text-align:left"><font style="font-size:20px;font-weight:800;">Course description</font></th>  
+  <th>&nbsp;</th>
+  <th colspan=3 style="text-align:left"><font style="font-size:20px;font-weight:800;">Schedule</font></th>
+
+<tr>
+
+   <td rowspan=0>
+
+  
+  Machine learning is one of the most important and disruptive technologies today, in industries ranging from pharma, to insurance, to marketing. In this course, you will learn how to apply machine learning techniques to data using the R statistical language. You will learn the basics of the machine learning process, from acquiring and exploring data, to selecting and implementing machine learning models, to evaluating their performance. We will cover the most common machine learning problems (regression, classification, and clustering), and introduce you to popular algorithms for solving these problems such as regression, decision trees, and deep learning. We will cover applied examples such as medical diagnoses, hiring decisions, demand forecasting and marketing campaigns.
+  <br><br>
+  Each day will contain a series of short lectures and examples to introduce you to new topics. The bulk of each day will be dedicated to hands-on exercises to help you ‘learn by doing’. Dedicated time will be given for 1:1 feedback. All course materials, tutorials, examples, exercises, and solutions will be available online for you to view at any time during, and after the course.
+  <br><br>
+  Participants are requested to bring their own laptop with software installation rights. We will provide a limited number of spare laptops for those that cannot bring their own.
+  <br><br>
+  The course begins with a very brief introduction to the R language to prepare participants for the content of the course. Prior experience with R, or any other programming language, as well as an introductory course in statistics, is helpful but not strictly necessary.
+   </td>
+   <td rowspan=0></td>
+  <th>&nbsp;</th>  
+  <th style="text-align:left">Day 1</th>
+  <th style="text-align:left">Day 2</th>
+   
+   
+ <tr>  
+   <th>9:00</th>
+   <td>Welcome</td>
+   <td>Recap</td>
+</tr>
+<tr>
+   <th align="right">9:30</th>
+   <td rowspan = 1 >What is ML<br>
+   <p class="cont">
+   Examples of machine learning & terminology.
+   </p>
+   </td>
+   <td rowspan = 5>Optimising prediction<br>
+   <font class="sub">+Practical</font><br>
+   <p class="cont">
+  How to tweak model settings to optimize performance?<br>
+  How to estimate future prediction accuracy?
+   </p>
+</td>
+</tr>
+<tr>
+   <th>10:00</th>
+   <td rowspan = 2>R for ML<br>
+   <font class="sub">+Practical</font><br>
+   <p class="cont">
+   Understanding the basics of working with R.
+   </p></tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th>&nbsp;</th>
+</tr>
+<tr>
+   <th>&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">12:00</th>
+   <td rowspan = 2 class="td-special">Lunch
+   <td rowspan = 2 class="td-special">Lunch
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">13:00</th>
+   <td rowspan = 5 >Fitting<br>
+   <font class="sub">+Practical</font><br>
+   <p class="cont">
+   Understanding the basics of statistical learning aka how to fit a model?<br>
+   How to quantify model performance?
+   </p>
+   <td rowspan = 5 >Choosing models<br>
+   <font class="sub">+Practical</font><br>
+   <p class="cont">
+   What model classes exist?<br>
+   Mapping models to questions.<br>
+   Assessing costs and benefits.<br>
+   </p>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th valign="top">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">15:30</th>
+   <td rowspan = 5 > Prediction<br>
+   <font class="sub">+Practical</font><br>
+   <p class="cont">
+   How to use fitted models to predict new data?<br>
+   How to evaluate prediction performance and compare models?
+   </p>
+   <td rowspan = 4 >Choosing features<br>
+   <p class="cont">
+   How to balance the number of cases and features?<br>
+   What are the right features?
+    </p>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">&nbsp;</th>
+</tr>
+<tr>
+   <th align="right">17:30</th>
+
+   <td valign="top"> Looking forward
+   <p class="cont">
+   Advances, ethical challenges, and next steps.
+   </p>
+</tr>
+<tr>
+   <th align="right">18:00</th>
+   <td class="td-special"> Wrap-up
+   <td class="td-special"> Wrap-up & Apero</tr>
+</tr>
+</table>
+
+</body>
+</html>
+
+  	</div>  	
+  	
+	<table width="100%" border="0">
+    <col width="70%">
+  	<col width="30%">
+  	<tr>        
   	<td valign="top">
   	<h5>Statistics with R</h5> 
       <p align="left">

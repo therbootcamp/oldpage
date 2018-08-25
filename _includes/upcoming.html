@@ -2,7 +2,15 @@
 <head>
 <script>
   function myFunction() {
-    var x = document.getElementById("course-description");
+    var x = document.getElementById("course-description-ds");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    	} else {
+        x.style.display = "none";
+    	}
+	}
+ function myFunction2() {
+    var x = document.getElementById("course-description-ml");
     if (x.style.display === "none") {
         x.style.display = "block";
     	} else {
@@ -40,7 +48,7 @@
     </td>
   	</table>
   	
-  	<div id="course-description" style="display:none; padding-bottom: 50px;">
+  	<div id="course-description-ds" style="display:none; padding-bottom: 50px;">
   	{% include ds18Oct.html %}
   	</div>
   	
@@ -53,7 +61,7 @@
   	<h5>Applied Machine Learning with R</h5> 
       <p align="left">
        2-day course. 19/20 January 2019. At Advanced Studies. University of Basel. Maximum: 15 students. Registration Fees: 1,490CHF.<br>
-       <font size = 4>15 spots left!</font><br>
+       <font style="font-size:18px">15 spots left! </font><font style="font-size:18px;font-weight:900"><a onclick="myFunction2()" style="cursor: pointer;">Learn more.</a></font><br>
       <a class="project-link" href="https://advancedstudies.unibas.ch/courses/course/applied-machine-learning-with-r-208291" align="center">Register here!</a>
       <!---<a class="project-link" href="mailto:therbootcamp@gmail.com?subject=Preregistration for Applied Machine Learning with R&body=I would like to preregister for the R Bootcamp on 'Applied Machine Learning with R' on 19/20 January 2019 (tbc) in Basel, Switzerland." align="center">Preregister here!</a>--->
       </p>
@@ -64,7 +72,16 @@
       <a href="https://towardsdatascience.com/selecting-the-best-machine-learning-algorithm-for-your-regression-problem-20c330bad4ef" class="new" title="User:Lucazzitto (page does not exist)" style="font-size:10px;text-decoration:none" align='top'>source: towardsdatascience.com</a>
       </p>
   	</tr>
-  	 <tr>    
+  	</table>
+  	
+  	<div id="course-description-ml" style="display:none; padding-bottom: 50px;">
+  	{% include ml19Jan.html %}
+  	</div>  	
+  	
+	<table width="100%" border="0">
+    <col width="70%">
+  	<col width="30%">
+  	<tr>        
   	<td valign="top">
   	<h5>Statistics with R</h5> 
       <p align="left">
