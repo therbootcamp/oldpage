@@ -1,53 +1,47 @@
-.cd-schedule .events .events-group > ul {
-  position: relative;
-  padding: 0 5%;
-  /* force its children to stay on one line */
-  display: flex;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-}
 
-.cd-schedule .events .single-event {
-  /* force them to stay on one line */
-  flex-shrink: 0;
-  float: left;
-  height: 150px;
-  width: 70%;
-  max-width: 300px;
-}
-
-.cd-schedule .event-modal {
-  position: fixed;
-  z-index: 3;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  visibility: hidden;
-  transform: translateX(100%);
-  transition: transform .4s, visibility .4s;
-}
-
-.cd-schedule.modal-is-open .event-modal {
-  /* .modal-is-open class is added as soon as an event is selected */
-  transform: translateX(0);
-  visibility: visible;
-}
-
-@media only screen and (min-width: 800px) {
-  .cd-schedule .events {
-    float: left;
-    width: 100%;
+.my-table {
+  font-size:16px;
+  font-family: 'Montserrat', sans-serif;
+  border-spacing:6px 4px;
+  line-height: 1.2;
   }
-  .cd-schedule .events .events-group {
-    width: 20%;
-    float: left;
+
+.my-table th {
+  font-size:12px;
+  font-weight:400;
+  width: 100;
+  text-align: right;
+  vertical-align: top;
+  padding: 4px 4px;
   }
-  .cd-schedule .events .single-event {
-    position: absolute;
-    z-index: 3;
-    /* top position and height will be set using js */
-    width: calc(100% + 2px);
-    left: -1px;
-  }
+
+.my-table td {
+  font-weight:300;
+  vertical-align: top;
+  padding: 4px 4px;
+}
+
+.td-special {
+  font-weight:300;
+  font-style: italic;
+}
+
+.cont {
+        font-weight:300;
+	font-size:10px;
+	line-height: 1.1;
+    margin-top: 4px;
+}
+
+.sub {
+        font-weight:400;
+}
+
+e {
+        font-weight: 900;
+}
+
+r {
+ /*       font-weight: 900; */
+        color: #FF3A2A;
 }
