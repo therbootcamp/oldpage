@@ -101,6 +101,12 @@ body {
     line-height: 1;
     margin: 10px 0 20px
 }
+
+.site-subtitle:hover {
+	color: #1EAEDB;
+}
+
+
 @media only screen and (min-width: 768px) {
     .site-subtitle {
     	color: #FF3A2A;
