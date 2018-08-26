@@ -98,12 +98,12 @@ body {
     font-size: 20px;
     display: block;
     line-height: 1;
-    margin: 10px 0 10px
+    margin: 5px 0 10px
 }
 @media only screen and (min-width: 768px) {
     .site-subtitle {
-        font-size: 40px
-        margin: 5px 0 5px 0
+        font-size: 40px;
+        margin: 10px 0 10px;
     }
 }
 
