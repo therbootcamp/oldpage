@@ -102,7 +102,7 @@ body {
     margin: 10px 0 20px
 }
 
-.site-subtitle:hover {
+span.site-subtitle:hover {
 	color: #1EAEDB;
 }
 
