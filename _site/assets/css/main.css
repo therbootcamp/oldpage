@@ -99,10 +99,11 @@ body {
     font-size: 20px;
     display: block;
     line-height: 1;
-    margin: 5px 0 10px
+    margin: 10px 0 10px
 }
 @media only screen and (min-width: 768px) {
     .site-subtitle {
+    	color: #FF3A2A;
         font-size: 40px;
         margin: 10px 0 10px;
     }
