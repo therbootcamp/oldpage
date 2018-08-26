@@ -95,7 +95,6 @@ body {
 }
 
 .site-subtitle {
-    color: #FF3A2A;
     font-size: 20px;
     display: block;
     line-height: 1;
@@ -103,8 +102,8 @@ body {
 }
 @media only screen and (min-width: 768px) {
     .site-subtitle {
-        color: #FF3A2A;
         font-size: 40px
+        margin: 5px 0 5px 0
     }
 }
 
