@@ -32,7 +32,7 @@ Bootcamp_package_installation <- function() {
     
     # Stats --------------
     
-    "lmer",
+    "lme4",
     "afex",
     "car",
     "BayesFactor",
@@ -103,9 +103,12 @@ Bootcamp_package_installation <- function() {
       }
     }
 
-
-  message("Finished! See you at the bootcamp!")
-  
+  message("--------------------------------")
+  message("Package installation Finished!!!")
+  message("See you soon at the bootcamp :)")
+  message("therbootcamp@gmail.com")
+  message("www.therbootcamp.com")
+  message("--------------------------------")
   
   }
   
