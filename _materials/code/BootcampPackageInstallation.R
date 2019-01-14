@@ -51,6 +51,9 @@ Bootcamp_package_installation <- function() {
     "party", 
     "partykit", 
     "glmnet",
+    "earth",
+    "tensorflow",
+    "boruta",
     
     # Plotting --------------
     "yarrr", 
@@ -61,7 +64,8 @@ Bootcamp_package_installation <- function() {
     
     # Datasets --------------
     "speff2trial",
-    "ISLR")
+    "ISLR",
+    "mlbench")
 
   
   message("Welcome to the BaselRBootcamp!")
