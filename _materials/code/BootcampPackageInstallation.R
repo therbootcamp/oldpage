@@ -23,12 +23,13 @@ Bootcamp_package_installation <- function() {
     
     # Markdown / Shiny --------------
     
-    "shiny", 
-    "shinyjs",
-    "markdown", 
-    "rmarkdown",
-    "rmdformats",
-    "DT",
+    # "shiny", 
+    # "shinyjs",
+    # "markdown", 
+    # "rmarkdown",
+    # "rmdformats",
+    # "DT",
+    
     
     # Stats --------------
     
@@ -53,7 +54,7 @@ Bootcamp_package_installation <- function() {
     "glmnet",
     "earth",
     "tensorflow",
-    "boruta",
+    "Boruta",
     
     # Plotting --------------
     "yarrr", 
