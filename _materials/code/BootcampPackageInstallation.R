@@ -7,14 +7,71 @@ Bootcamp_package_installation <- function() {
 
   installed_packages <- rownames(installed.packages())
 
-  packages.to.install <- c("devtools", "tidyverse", "yarrr", "afex",
-                           "car", "markdown", "rmarkdown", "FFTrees", "lmer",
-                           "rpart", "randomForest", "e1071", "speff2trial",
-                           "shiny", "shinyjs", "caret", "mlr", "parallel", "Rcpp",
-                           "BayesFactor", "parfm", "lava", "rvest", "diagram",
-                           "rmdformats", "ggRandomForests", "party", "skimr", "broom", "lubridate", 
-                           "rsq", "ggthemes", "partykit", "glmnet", "DT")
+  packages.to.install <- c(
+    
+    # Tidyverse --------------
+    
+    "tidyverse",
+    
+    # Utilities --------------
+    
+    "devtools",
+    "Rcpp",
+    "rvest",
+    "lubridate", 
+    "skimr",
+    
+    # Markdown / Shiny --------------
+    
+    # "shiny", 
+    # "shinyjs",
+    # "markdown", 
+    # "rmarkdown",
+    # "rmdformats",
+    # "DT",
+    
+    
+    # Stats --------------
+    
+    "lme4",
+    "afex",
+    "car",
+    "BayesFactor",
+    "parfm", 
+    "lava",
+    "rsq",
+    "broom", 
+    
+    # ML --------------
+    
+    "caret",                       
+    "FFTrees",
+    "rpart", 
+    "randomForest", 
+    "e1071", 
+    "party", 
+    "partykit", 
+    "glmnet",
+    "earth",
+    "tensorflow",
+    "Boruta",
+    
+    # Plotting --------------
+    "yarrr", 
+    "diagram",
+    "ggRandomForests",
+    "ggthemes", 
+    "ggpubr",
+    
+    # Datasets --------------
+    "speff2trial",
+    "ISLR",
+    "mlbench")
 
+  
+  message("Welcome to the BaselRBootcamp!")
+  message("I'm going to install many packages for you now, this may take a few minutes...")
+  
   for(package.i in sort(packages.to.install)) {
 
     if((package.i %in% installed_packages) == FALSE) {
@@ -51,10 +108,16 @@ Bootcamp_package_installation <- function() {
       }
     }
 
-
+  message("--------------------------------")
+  message("Package installation Finished!!!")
+  message("See you soon at the bootcamp :)")
+  message("therbootcamp@gmail.com")
+  message("www.therbootcamp.com")
+  message("--------------------------------")
+  
   }
   
   
-
+# Run code!
 Bootcamp_package_installation()
 
