@@ -28,9 +28,9 @@ baselrbootcamp_palettes <- list(
   
   `two`  = baselrbootcamp_cols("magenta", "grey"),
   
-  `two`  = baselrbootcamp_cols("magenta", "grey", "green"),
+  `three`  = baselrbootcamp_cols("magenta", "grey", "green"),
   
-  `three`  = baselrbootcamp_cols("magenta", "grey", "green", "yellow")
+  `four`  = baselrbootcamp_cols("magenta", "grey", "green", "yellow")
 )
 
 #' Return function to interpolate a baselrbootcamp color palette
