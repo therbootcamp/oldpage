@@ -5,12 +5,10 @@
 
 
 baselrbootcamp_colors <- c(
-  `blue`        = "#235A97",
   `magenta`     = "#EA4B68",
   `grey`        = "#606060",
   `green`       = "#6ABA9A",
   `yellow`      = "#EACC48")
-
 
 #' Function to extract baselrbootcamp colors as hex codes
 #'
@@ -27,9 +25,10 @@ baselrbootcamp_cols <- function(...) {
 
 
 baselrbootcamp_palettes <- list(
-  `main`  = baselrbootcamp_cols("blue", "magenta", "yellow"),
   
-  `cool`  = baselrbootcamp_cols("blue", "gray", "yellow"),
+  `main`  = baselrbootcamp_cols("magenta", "gray", "green", "yellow"),
+  
+  `two`  = baselrbootcamp_cols("magenta", "gray"),
   
   `all` =  baselrbootcamp_cols()
 )
