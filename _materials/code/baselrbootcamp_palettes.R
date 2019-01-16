@@ -26,9 +26,9 @@ baselrbootcamp_cols <- function(...) {
 
 baselrbootcamp_palettes <- list(
   
-  `main`  = baselrbootcamp_cols("magenta", "gray", "green", "yellow"),
+  `main`  = baselrbootcamp_cols("magenta", "grey", "green", "yellow"),
   
-  `two`  = baselrbootcamp_cols("magenta", "gray"),
+  `two`  = baselrbootcamp_cols("magenta", "grey"),
   
   `all` =  baselrbootcamp_cols()
 )
