@@ -26,11 +26,11 @@ baselrbootcamp_cols <- function(...) {
 
 baselrbootcamp_palettes <- list(
   
-  `main`  = baselrbootcamp_cols("magenta", "grey", "green", "yellow"),
-  
   `two`  = baselrbootcamp_cols("magenta", "grey"),
   
-  `all` =  baselrbootcamp_cols()
+  `two`  = baselrbootcamp_cols("magenta", "grey", "green"),
+  
+  `three`  = baselrbootcamp_cols("magenta", "grey", "green", "yellow")
 )
 
 #' Return function to interpolate a baselrbootcamp color palette
@@ -39,7 +39,7 @@ baselrbootcamp_palettes <- list(
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments to pass to colorRampPalette()
 #'
-baselrbootcamp_pal <- function(palette = "main", reverse = FALSE, ...) {
+baselrbootcamp_pal <- function(palette = "three", reverse = FALSE, ...) {
   pal <- baselrbootcamp_palettes[[palette]]
   
   if (reverse) pal <- rev(pal)
@@ -55,7 +55,7 @@ baselrbootcamp_pal <- function(palette = "main", reverse = FALSE, ...) {
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE
 #'
-scale_color_baselrbootcamp <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_color_baselrbootcamp <- function(palette = "three", discrete = TRUE, reverse = FALSE, ...) {
   pal <- baselrbootcamp_pal(palette = palette, reverse = reverse)
   
   if (discrete) {
@@ -73,7 +73,7 @@ scale_color_baselrbootcamp <- function(palette = "main", discrete = TRUE, revers
 #' @param ... Additional arguments passed to discrete_scale() or
 #'            scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE
 #'
-scale_fill_baselrbootcamp <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill_baselrbootcamp <- function(palette = "three", discrete = TRUE, reverse = FALSE, ...) {
   pal <- baselrbootcamp_pal(palette = palette, reverse = reverse)
   
   if (discrete) {
