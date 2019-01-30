@@ -48,6 +48,52 @@ td.course {
    padding: 4px;
  }
 
+ /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+ .flip-card {
+   background-color: transparent;
+   width: 300px;
+   height: 200px;
+   border: 1px solid #f1f1f1;
+   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+ }
+
+ /* This container is needed to position the front and back side */
+ .flip-card-inner {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+   transition: transform 0.8s;
+   transform-style: preserve-3d;
+ }
+
+ /* Do an horizontal flip when you move the mouse over the flip box container */
+ .flip-card:hover .flip-card-inner {
+   transform: rotateY(180deg);
+ }
+
+ /* Position the front and back side */
+ .flip-card-front, .flip-card-back {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   backface-visibility: hidden;
+ }
+
+ /* Style the front side (fallback if image is missing) */
+ .flip-card-front {
+   background-color: #bbb;
+   color: black;
+ }
+
+ /* Style the back side */
+ .flip-card-back {
+   background-color: dodgerblue;
+   color: white;
+   transform: rotateY(180deg);
+ }
+
+
 </style>
 
 <div class="container hide-div">
@@ -121,8 +167,21 @@ td.course {
       </p><p style="padding:0;margin:0">
         Currently, we offer three standalone, complementary courses. For beginners with no R or other programming experience we recommend to first complete <b>R for Data Science</b>. For detailed course description see <a href="https://therbootcamp.github.io/#upcoming"><b><u>Upcoming Bootcamps</u></b></a>.<br><br>
 
-      </p><p style="align:center;padding:0;margin:0">
+      </p>
 
+        <div class="flip-card" style="align:center;padding:0;margin:0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <lrgred>R for Data Science</lrgred>
+            </div>
+            <div class="flip-card-back">
+              <p>Learn the basics of R and how to use it to explore, manipulate, and visualize data.</p> 
+            </div>
+          </div>
+        </div>
+
+
+<!---
       <table style="width:96%;margin:0px auto;cellspacing:10px;text-align:center;border-collapse:separate">
         <tr style="vertical-align:top">
           <td class="course" width="32%">
@@ -141,7 +200,9 @@ td.course {
         </tr>
       </table>
 
-      </p><p style="padding:0;margin:0">
+--->
+
+      <p style="padding:0;margin:0">
 
       Our courses are composed of short, interactive presentations and longer hands-on practicals, during which you will work through step-by-step exercises designed to make you an active user of R. For every 5 participants there will be 1 instructor to ensure personalized support catering to your specific level and needs. Feel free to explore the open materials of our <a href="https://therbootcamp.github.io/appliedML_2019Jan/"><b><u>latest</u></b></a> and <a href="https://therbootcamp.github.io/#previous"><b><u>previous</u></b></a> courses. If you have any questions don't hesitate to send us a <a href="https://therbootcamp.github.io/#contact"><b><u>message</u></b></a>. To learn about the latest courses, sign up for our <a href="https://therbootcamp.github.io/#contact"><b><u>mailing list</u></b></a>.
     </p>
