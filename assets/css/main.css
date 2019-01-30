@@ -34,7 +34,7 @@ body {
 }
 
 #particles-js {
-    background: #235A97; /*#27394C;*/
+    background: #265b95; /*#235A97; #27394C;*/
     display: block;
     vertical-align: bottom;
     width: 100vw;
@@ -95,7 +95,7 @@ body {
 }
 
 .site-subtitle {
-	  color: #EA4B68; /*#FF3A2A;*/
+	  color: #6ABA9A; /*#FF3A2A;*/
     font-size: 20px;
     display: block;
     line-height: 1;
@@ -103,7 +103,7 @@ body {
 }
 
 span.site-subtitle:hover {
-	color: #6ABA9A /*#1EAEDB;*/
+	color: #EA4B68; /*#1EAEDB;*/
 }
 
 
