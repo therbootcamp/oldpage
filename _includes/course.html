@@ -22,7 +22,7 @@ lrgred {
 
   font-size:1.4em;
   weight:900;
-  color:#EA4B68;
+  color: white;
 
 }
 
@@ -53,6 +53,14 @@ td.course {
    background-color: transparent;
    width: 300px;
    height: 200px;
+   border: 1px solid #f1f1f1;
+   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+ }
+
+ .flip-card-wide {
+   background-color: transparent;
+   width: 90%;
+   height: 100px;
    border: 1px solid #f1f1f1;
    perspective: 1000px; /* Remove this if you don't want the 3D effect */
  }
@@ -88,7 +96,7 @@ td.course {
 
  /* Style the back side */
  .flip-card-back {
-   background-color: dodgerblue;
+   background-color: white;
    color: white;
    transform: rotateY(180deg);
  }
@@ -175,7 +183,7 @@ td.course {
               <lrgred>R for Data Science</lrgred>
             </div>
             <div class="flip-card-back">
-              <p>Learn the basics of R and how to use it to explore, manipulate, and visualize data.</p> 
+              <p>Learn the basics of R and how to use it to explore, manipulate, and visualize data.</p>
             </div>
           </div>
         </div>
