@@ -242,7 +242,7 @@ body {
     border: 1px solid #1a222c;
     border-radius: 10px;
     text-align: center;
-    outline: none;
+    /*outline: none;*/
     text-decoration: none;
     cursor: pointer;
     transition: color .3s ease-out, background-color .3s ease-out, border-color .3s ease-out
