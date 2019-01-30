@@ -56,10 +56,11 @@ td.course {
    padding: 4px;
  }
 
-
+/*
 .flip-parent{
   display: table;
 }
+*/
 
  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
  .flip-card {
@@ -72,18 +73,17 @@ td.course {
  }
 
  .flip-card-wide {
-   display: table-row;
    background-color: transparent;
    width: 90%;
    height: 60px;
    border: 1px solid black;
    border-radius: 10px;
-   vertical-align: middle;
    perspective: 1000px; /* Remove this if you don't want the 3D effect */
  }
 
  /* This container is needed to position the front and back side */
  .flip-card-inner {
+   display: table;
    position: relative;
    width: 100%;
    height: 100%;
@@ -104,6 +104,7 @@ td.course {
 
  /* Position the front and back side */
  .flip-card-front, .flip-card-back {
+   display: table-cell;
    position: absolute;
    width: 100%;
    height: 100%;
@@ -201,7 +202,6 @@ td.course {
 
       </p>
 
-      <div class="flip-parent">
       <div class="flip-card-wide" style="align:center;padding:0;margin:2px">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -212,7 +212,6 @@ td.course {
           </div>
         </div>
       </div>
-      <br>
 
       <div class="flip-card-wide" style="align:center;padding:1px;margin:2px">
         <div class="flip-card-inner">
@@ -223,7 +222,7 @@ td.course {
             <p>Learn to derive actionable analytics from data using statistical inference in R.</p>
           </div>
         </div>
-      </div><br>
+      </div>
 
       <div class="flip-card-wide" style="align:center;padding:1px;margin:2px">
         <div class="flip-card-inner">
@@ -234,8 +233,6 @@ td.course {
             <p>Learn about the power of Machine Learning and how to employ it with R.</p>
           </div>
         </div>
-      </div>
-
       </div>
         <br>
 
