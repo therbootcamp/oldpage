@@ -56,6 +56,11 @@ td.course {
    padding: 4px;
  }
 
+
+.flip-parent{
+  display: table;
+}
+
  /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
  .flip-card {
    background-color: transparent;
@@ -67,7 +72,7 @@ td.course {
  }
 
  .flip-card-wide {
-   dispy: table-cell;
+   display: table-cell;
    background-color: transparent;
    width: 90%;
    height: 60px;
@@ -195,6 +200,7 @@ td.course {
 
       </p>
 
+      <div class="flip-parent">
       <div class="flip-card-wide" style="align:center;padding:0;margin:2px">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -228,6 +234,7 @@ td.course {
         </div>
       </div>
 
+      </div>
         <br>
 
 <!---
