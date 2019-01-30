@@ -34,7 +34,7 @@ body {
 }
 
 #particles-js {
-    background: #27394C;
+    background: #235A97; /*#27394C;*/
     display: block;
     vertical-align: bottom;
     width: 100vw;
