@@ -257,7 +257,7 @@ body {
 }
 
 .footer {
-    background: #27394C;
+    background: 265b95; /*#27394C;*/
     padding: 10px 0;
     margin-top: 100px;
     text-align: center;
@@ -294,7 +294,7 @@ right: -10px;//hide it by pushing it off the screen
 .contact-button {
 width: 160px;
 height: 40px;
-color: #27394c;
+color: #265b95; /*#27394c;*/
 border: none;
 font-size: 18px;
 }
