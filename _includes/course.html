@@ -98,6 +98,7 @@ td.course {
  /* Position the front and back side */
  .flip-card-front, .flip-card-back {
    position: absolute;
+   top: 50%;
    width: 100%;
    height: 100%;
    backface-visibility: hidden;
@@ -107,14 +108,14 @@ td.course {
 
  /* Style the front side (fallback if image is missing) */
  .flip-card-front {
-   background-color: #606060 ;
-   color: black;
+   background-color: white ;
+   color: #EA4B68;
  }
 
  /* Style the back side */
  .flip-card-back {
-   background-color: white;
-   color: black;
+   background-color: #606060;
+   color: white;
    transform: rotateY(180deg);
  }
 
