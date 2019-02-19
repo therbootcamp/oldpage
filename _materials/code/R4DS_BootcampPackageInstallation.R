@@ -11,6 +11,9 @@ Bootcamp_package_installation <- function() {
   # Critical packages 
   critical <- c(
     
+     # Utilities --------------
+    "devtools",
+    
     # Tidyverse --------------
     
     "tidyverse"
