@@ -27,7 +27,7 @@ Bootcamp_package_installation <- function() {
     # 
     # "Rcpp",
     # "rvest",
-    # "lubridate", 
+     "lubridate", 
     # "skimr",
     
     # Markdown / Shiny --------------
@@ -48,8 +48,8 @@ Bootcamp_package_installation <- function() {
     # "BayesFactor",
     # "parfm", 
     # "lava",
-    # "rsq",
-    # "broom", 
+     "rsq",
+     "broom", 
     
     # ML --------------
     
@@ -69,8 +69,8 @@ Bootcamp_package_installation <- function() {
     "yarrr", 
     # "diagram",
     # "ggRandomForests",
-    # "ggthemes", 
-    # "ggpubr",
+     "ggthemes", 
+     "ggpubr",
     
     # Datasets --------------
     "speff2trial",
