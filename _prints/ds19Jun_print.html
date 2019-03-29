@@ -1,43 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <style>
+  body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+  }
+  th {
+     font-weight: 400;
+     font-size: 12px;
+  }
 
+  td {
+      font-weight: 700;
+      padding-right: 4px;
+  }
+
+  td.td-special {
+    font-weight:300;
+    font-style: italic;
+  }
+
+  font.sub{
+    font-weight:400;
+  }
+  p.cont{
+    font-weight:400;
+     font-size: 12px;
+    }
+
+  e {
+          font-weight: 900;
+  }
+
+  r {
+   /*       font-weight: 900; */
+          color: #00000;
+          /*color: #FF3A2A;*/
+  }
+
+  </style>
+</head>
 <body>
 
+<h1>R for Data Science</h1>
+<h2>
+  The R Bootcamp (<a href = "https://therbootcamp.github.io/">therbootcamp.com</a>)<br>
+  Basel. 1/2 June 2019.
+</h2>
 
-<table cellspacing=0 cellpadding=0 class="my-table">
-  <col width=45%>
-  <col width=5%>
-  <col width=5%>
-  <col width=22.5%>
-  <col width=22.5%>
-
-  <th style="text-align:left"><font style="font-size:20px;font-weight:800;">Course description</font></th>
-  <th>&nbsp;</th>
-  <th colspan=3 style="text-align:left"><font style="font-size:20px;font-weight:800;">Schedule</font></th>
-
-<tr>
-
-   <td rowspan=0>
+<div>
+<h3>Course description</h3>
 
   Data science is one of the most exciting fields around, and the <r>R statistical language</r> is one of the best ways to learn and practice it. In this packed weekend, you will learn how to do data science using R <r>from the ground-up</r>. You will start by learning the basics of the R language and the <r>RStudio programming environment</r>. You will then cover topics ranging from loading data from external files, to cleaning and organising data, to conducting <r>basic statistical analyses</r> and creating <r>striking visualisations</r>.
   <br><br>
   Each day will contain a series of <r>short lectures</r> and examples to introduce you to new topics. The bulk of each day will be dedicated to <r>hands-on exercises</r> to help you ‘learn by doing’. Dedicated time will be given for <r>1:1 feedback</r>. All course materials, tutorials, examples, exercises, and solutions will be <r>available online</r> for you to view at any time during, and after the course.
   <br><br>
   Participants are requested to <r>bring their own laptop</r> with software installation rights. We will provide a limited number of spare laptops for those that cannot bring their own. There are no strict knowledge prerequisites for this course. Prior experience with a programming language (e.g.; SAS, R, STATA), as well as an introductory course in statistics, is helpful but not necessary.
-   </td>
-   <td rowspan=0></td>
-  <th>&nbsp;</th>
-  <th style="text-align:left">Day 1</th>
-  <th style="text-align:left">Day 2</th>
+</div>
+<div>
+  <h3>Schedule</h3>
+<table cellspacing=0 cellpadding=0 class="my-table">
+  <col width=10%>
+  <col width=45%>
+  <col width=45%>
 
+  <th>&nbsp;</th>
+  <th style="text-align:left;padding-bottom: 12px;">Day 1</th>
+  <th style="text-align:left;padding-bottom: 12px;">Day 2</th>
 
  <tr>
    <th>9:00</th>
    <td><e>Welcome</e></td>
    <td><e>Recap</e></td>
-</tr>
-<tr>
-   <th align="right">9:30</th>
+ </tr>
+
+ <tr>
+   <th>9:30</th>
    <td rowspan = 5 ><e>Introduction</e><br>
    <font class="sub">+Tutorial</font><br>
    <p class="cont">
@@ -46,12 +85,12 @@
    </p>
    </td>
    <td rowspan = 5><e>Analysing</e><br>
-   <font class="sub">+Practical</font><br>
-   <p class="cont">
-   How to calculate descriptive statistics?<br>
-   How to aggregate data?
-   </p>
-</td>
+     <font class="sub">+Practical</font><br>
+     <p class="cont">
+     How to calculate descriptive statistics?<br>
+     How to aggregate data?
+     </p>
+   </td>
 </tr>
 <tr>
    <th>&nbsp;</th>
@@ -67,7 +106,7 @@
    <th>&nbsp;</th>
 </tr>
 <tr>
-   <th align="right">12:00</th>
+   <th>12:00</th>
    <td rowspan = 2 class="td-special">Lunch
    <td rowspan = 2 class="td-special">Lunch
 </tr>
@@ -75,7 +114,7 @@
    <th align="right">&nbsp;</th>
 </tr>
 <tr>
-   <th align="right">13:00</th>
+   <th>13:00</th>
    <td rowspan = 5 ><e>Data</e><br>
    <font class="sub">+Practical</font><br>
    <p class="cont">
@@ -102,7 +141,7 @@
    <th align="right">&nbsp;</th>
 </tr>
 <tr>
-   <th align="right">15:30</th>
+   <th>15:30</th>
    <td rowspan = 5 ><e>Wrangling</e><br>
    <font class="sub">+Practical</font><br>
    <p class="cont">
@@ -124,7 +163,7 @@
    <th align="right">&nbsp;</th>
 </tr>
 <tr>
-   <th align="right">17:30</th>
+   <th>17:30</th>
 
    <td valign="top"><e>Next steps<e>
    <p class="cont">
@@ -132,13 +171,12 @@
    </p>
 </tr>
 <tr>
-   <th align="right">18:00</th>
+   <th>18:00</th>
    <td class="td-special"> Wrap-up
    <td class="td-special"> Wrap-up & Apero</tr>
 </tr>
 </table>
-
-<p align="center"><font style="font-size=16px"><a href="https://therbootcamp.github.io/_prints/ds19Jun_print.html">&#8594; Print view</a></font></p>
+</div>
 
 </body>
 </html>
