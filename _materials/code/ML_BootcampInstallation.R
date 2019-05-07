@@ -1,4 +1,4 @@
-# 18 February 2019
+# 7 May 2019
 # http://therbootcamp.github.io
 
 # Script to install any packages necessary for the BaselRBootcamp
@@ -25,7 +25,7 @@ Bootcamp_package_installation <- function() {
     # 
     # # Utilities --------------
     # 
-    # "Rcpp",
+     "Rcpp",
     # "rvest",
     "lubridate", 
     # "skimr",
@@ -48,29 +48,29 @@ Bootcamp_package_installation <- function() {
     # "BayesFactor",
     # "parfm", 
     # "lava",
-    "rsq",
+    # "rsq",
     "broom", 
     
     # ML --------------
     
-    # "caret",                       
+     "caret",                       
     # "FFTrees",
-    # "rpart", 
-    # "randomForest", 
-    # "e1071", 
-    # "party", 
-    # "partykit", 
-    # "glmnet",
+     "rpart", 
+     "randomForest", 
+     "e1071", 
+     "party", 
+     "partykit", 
+     "glmnet",
     # "earth",
     # "tensorflow",
     # "Boruta",
     
     # Plotting --------------
-    "yarrr", 
+   # "yarrr", 
     # "diagram",
     # "ggRandomForests",
-    "ggthemes", 
-    "ggpubr",
+  #  "ggthemes", 
+   # "ggpubr",
     
     # Datasets --------------
     "speff2trial",
