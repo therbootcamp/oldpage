@@ -137,16 +137,16 @@ Bootcamp_package_installation <- function() {
     
   }
   
-  devtools_packages_to_install <- c("kassambara/ggcorrplot", "therbootcamp/baselers")
-  
-  for(package.i in sort(devtools_packages_to_install)) {
-    
-    if((strsplit(package.i, split = "/")[[1]][2] %in% installed_packages) == FALSE) {
-      
-      devtools::install_github(package.i)
-    }
-  }
-  
+  # devtools_packages_to_install <- c("kassambara/ggcorrplot", "therbootcamp/baselers")
+  # 
+  # for(package.i in sort(devtools_packages_to_install)) {
+  #   
+  #   if((strsplit(package.i, split = "/")[[1]][2] %in% installed_packages) == FALSE) {
+  #     
+  #     devtools::install_github(package.i)
+  #   }
+  # }
+  # 
   if(length(critical_not_installed) > 0 | length(optional_not_installed) > 0) {
     
     message("Final report:")
